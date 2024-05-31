@@ -1,0 +1,17 @@
+1/on ne touche rien dans index.php
+
+2/dossier asset meme niveau que application et system
+
+3/dossier scriptSQL contient table et data creé
+
+4/dans application->config->config.php
+configurer sa base URL selon le chemin de ton projet
+
+
+5/ dans application->config->database.php
+inserer les information de la base username,password ect.. 
+
+5/ mettre le dossier font et le fichier FPDF.php dans le dossier librairie
+
+5/dans application->config->autoload.php 
+$autoload['libraries'] = array('database','FPDF','session');
