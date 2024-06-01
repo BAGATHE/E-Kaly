@@ -14,17 +14,17 @@ class  RestoModel extends CI_Model {
       if (!empty($data)) {
           $this->errors = array_fill(0, 3, "");
          try {
-            $this->set_id($data['id']);
+            $this->setId($data['id']);
          } catch (Exception $e) {
             $this->errors[] = $e->getMessage();
          }
          try {
-            $this->set_email($data['email']);
+            $this->setEmail($data['email']);
          } catch (Exception $e) {
             $this->errors[] = $e->getMessage();
          }
          try {
-            $this->set_mot_de_pass($data['mot_de_pass']);
+            $this->setMotDePass($data['mot_de_pass']);
          } catch (Exception $e) {
             $this->errors[] = $e->getMessage();
          }
@@ -35,27 +35,27 @@ class  RestoModel extends CI_Model {
       return !empty(array_filter($this->errors));
    }
 
-   public function get_id(){
+   public function getId(){
       return $this->id;
    }
 
-   public function get_email(){
+   public function getEmail(){
       return $this->email;
    }
 
-   public function get_mot_de_pass(){
+   public function getMotDePass(){
       return $this->mot_de_pass;
    }
 
-   public function set_id($id){
+   public function setId($id){
       $this->id = $id ;
    }
 
-   public function set_email($email){
+   public function setEmail($email){
       $this->email = $email ;
    }
 
-   public function set_mot_de_pass($mot_de_pass){
+   public function setMotDePass($mot_de_pass){
       $this->mot_de_pass = $mot_de_pass ;
    }
 
