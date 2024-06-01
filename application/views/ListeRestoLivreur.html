@@ -58,73 +58,54 @@
 
         <!-- Main Content -->
         <main>
-            <!-- New Users Section -->
-            <div class="new-users">
-                <h2>Listes des admins</h2>
-                <div class="user-list">
-                    <div class="user">
-                        <img src="./assets/images/profile-2.jpg">
-                        <h2>Admin1</h2>
-                    </div>
-                    <div class="user">
-                        <img src="./assets/images/profile-3.jpg">
-                        <h2>Admin2</h2>
-                    </div>
-                    <div class="user">
-                        <img src="./assets/images/profile-4.jpg">
-                        <h2>Admin3</h2>
-                    </div>
-                    <div class="user">
-                        <a href="Ajout.html"><img src="./assets/images/plus.png"></a>
-                        <h2>Ajouter</h2>
-                    </div>
-                </div>
-
-                <div class="recent-orders">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Email</th>
-                                <th>Numero</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                        <tr>
-                            <td>nom_admin</td>
-                            <td>mail_admin</td>
-                            <td>numero_admin</td>
-                            <td><a href="" style="color: red;">Supprimer</a></td>
-                            <td><a href="ModifAdmin.html">Modifier</a></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <!-- End of New Users Section -->
-
-            <!-- End of Recent Orders -->
+            <!-- Recent Orders Table -->
             <div class="recent-orders">
-                <h2>Listes des clients</h2>
+                <h2>Listes des restaurants <a href="Ajout.html" style="color: #085696;">+ Ajouter</a></h2>
                 <table>
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th>Email</th>
-                            <th>Numero</th>
+                            <th>Adresse</th>
+                            <th>Description</th>
+                            <th>Horaire</th>
+                            <th>Statuts</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                     <tr>
-                        <td>nom_client</td>
-                        <td>mail_client</td>
-                        <td>numero_client</td>
+                        <td>nom_resto</td>
+                        <td>adresse_resto</td>
+                        <td>description_resto</td>
+                        <td>ouverture - fermeture</td>
                         <td><a href="" style="color: red;">Supprimer</a></td>
+                        <td><a href="ModifResto.html">Modifier</a></td>
                     </tr>
                 </table>
             </div>
-            <!-- End of Recent Orders -->
+
+            <div class="recent-orders">
+                <h2>Listes des livreurs <a href="Ajout.html" style="color: #085696;">+ Ajouter</a></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Contact</th>
+                            <th>Horaire</th>
+                            <th>Statuts</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tr>
+                        <td>nom_livreur</td>
+                        <td>contact_livreur</td>
+                        <td>horaire_travail</td>
+                        <td><a href="" style="color: red;">Supprimer</a></td>
+                        <td><a href="ModifLivreur.html">Modifier</a></td>
+                    </tr>
+                </table>
+            </div>
 
         </main>
         <!-- End of Main Content -->
@@ -157,7 +138,6 @@
                 </div>
 
             </div>
-            <!-- End of Nav -->
 
             <div class="reminders">
                 <div class="header">

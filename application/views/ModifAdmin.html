@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/modif.css">
+    <link rel="icon" href="./assets/images/Logo.png">
+    <title>E-Kaly | Admin</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Sidebar Section -->
+        <aside>
+            <div class="toggle">
+                <div class="logo">
+                    <img src="./assets/images/logo.png">
+                    <h2>E-<span class="kaly">KALY</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">
+                        close
+                    </span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="index.html">
+                    <span class="material-icons-sharp">
+                        dashboard
+                    </span>
+                    <h3>Accueil</h3>
+                </a>
+                <a href="ListeRestoLivreur.html">
+                    <span class="material-icons-sharp">
+                        inventory
+                    </span>
+                    <h3>Restaurant & Livreur</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        settings
+                    </span>
+                    <h3>Settings</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        logout
+                    </span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <!-- End of Sidebar Section -->
+
+        <!-- Main Content -->
+        <main>
+            <div class="ajout">
+                <form action="">
+                    <h2>Modifier Admin</h2>
+                    <div class="form-input">
+                        <label for="">Nom</label>
+                        <input type="text" placeholder="Nom Admin" value="nom_admin">
+                    </div>
+                    <div class="form-input">
+                        <label for="">Status</label>
+                        <input type="text" placeholder="statut_admin" value="statut_admin">
+                    </div>
+                    <div class="form-input">
+                        <label for="">Categorie</label>
+                        <select name="" id="">
+                            <option value="">Data Categorie</option>
+                        </select>
+                    </div>
+                    <div class="form-input">
+                        <label for="">Fichier</label>
+                        <input type="file" name="" id="">
+                    </div>
+                    <button type="submit">Modifier</button>
+                </form>
+            </div>
+        </main>
+        <!-- End of Main Content -->
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">
+                        menu
+                    </span>
+                </button>
+                <div class="dark-mode">
+                    <span class="material-icons-sharp active">
+                        light_mode
+                    </span>
+                    <span class="material-icons-sharp">
+                        dark_mode
+                    </span>
+                </div>
+
+                <div class="profile">
+                    <div class="info">
+                        <p><b>nom_admin</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="./assets/images/profile-1.jpg">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script src="./assets/js/orders.js"></script>
+    <script src="./assets/js/index.js"></script>
+</body>
+
+</html>
