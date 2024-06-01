@@ -1,0 +1,77 @@
+:root {
+    --white-clr: #fff;
+    --green-clr:#1cb45b;
+    --beige-clr:#f7eac8;
+    --black-clr:#212121;
+}
+
+.ajout{
+    margin-top: 5em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5em;
+}
+
+.ajout form {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5em;
+    align-items: center;
+}
+
+.ajout form .form-input{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.ajout form .form-input label {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.ajout form .form-input input,select {
+    width: 20em;
+    height: 3em;
+    padding-left: 2em;
+    border-radius: 5px;
+}
+
+.ajout form .form-input input[type="file"] {
+    font-size: 16px;
+    background: white;
+    border-radius: 5px;
+    width: 17em;
+    height: 2.5em;
+    outline: none;
+}
+
+::-webkit-file-upload-button {
+    color: white;
+    background: #858585;
+    padding: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    height: 2.5em;
+    padding: unset;
+}
+
+.ajout form .form-input select {
+    cursor: pointer;
+}
+
+.ajout form button {
+    width: 5em;
+    height: 3em;
+    color: var(--white-clr);
+    border-radius: 5px;
+    background: var(--green-clr);
+    cursor: pointer;
+}
