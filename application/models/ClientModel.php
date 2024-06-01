@@ -2,7 +2,7 @@
 
 if (!defined('BASEPATH')) exit('No direct access allowed');
 
-class  AdmisModel extends CI_Model {
+class  ClientModel extends CI_Model {
    protected $id;
    protected $nom;
    protected $prenom;
@@ -90,7 +90,7 @@ class  AdmisModel extends CI_Model {
    public function checkLogin($email,$mot_de_pass) {
       $this->db->where('email', $email);
       $this->db->where('mot_de_pass', $mot_de_pass);
-      $query = $this->db->get('Admis');
+      $query = $this->db->get('Client');
 
       if ($query->num_rows() === 1) {
           $row = $query->row_array();
@@ -109,49 +109,49 @@ class  AdmisModel extends CI_Model {
          'mot_de_pass' => $this->mot_de_pass,
       ];
 
-      $this->db->insert('Admis', $data);
+      $this->db->insert('Client', $data);
    }
 
    public function getById($id) {
       $this->db->where('id',$id);
-      $query = $this->db->get('Admis');
+      $query = $this->db->get('Client');
       return $query->row_array();
    }
 
    public function getAll() {
-      $query = $this->db->get('Admis');
+      $query = $this->db->get('Client');
       return $query->result_array();
    }
 
    public function edit($id,$data) {
       $this->db->where('id',$id);
-      return $this->db->update('Admis', $data);
+      return $this->db->update('Client', $data);
    }
 
    public function delete($id) {
       $this->db->where('id',$id);
-      return $this->db->delete('Admis');
+      return $this->db->delete('Client');
    }
 
    public function search($criteria = []) {
-      $this->db->select('Admis.id,Admis.nom,Admis.prenom,Admis.email,Admis.mot_de_pass');
-      $this->db->from('Admis');
+      $this->db->select('Client.id,Client.nom,Client.prenom,Client.email,Client.mot_de_pass');
+      $this->db->from('Client');
       if (!empty($criteria['id'])) {
-            $this->db->like('Admis.id', $criteria['id']);
+            $this->db->like('Client.id', $criteria['id']);
       }
       if (!empty($criteria['nom'])) {
-            $this->db->like('Admis.nom', $criteria['nom']);
+            $this->db->like('Client.nom', $criteria['nom']);
       }
       if (!empty($criteria['prenom'])) {
-            $this->db->like('Admis.prenom', $criteria['prenom']);
+            $this->db->like('Client.prenom', $criteria['prenom']);
       }
       if (!empty($criteria['email'])) {
-            $this->db->like('Admis.email', $criteria['email']);
+            $this->db->like('Client.email', $criteria['email']);
       }
       if (!empty($criteria['mot_de_pass'])) {
-            $this->db->like('Admis.mot_de_pass', $criteria['mot_de_pass']);
+            $this->db->like('Client.mot_de_pass', $criteria['mot_de_pass']);
       }
-      $query = $this->db->get('Admis');
+      $query = $this->db->get('Client');
       return $query->result_array();
    }
 }
