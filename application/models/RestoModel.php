@@ -61,7 +61,6 @@ class  RestoModel extends CI_Model {
 
    public function save() {
       $data = [
-         'id' => $this->id,
          'email' => $this->email,
          'mot_de_pass' => $this->mot_de_pass,
       ];

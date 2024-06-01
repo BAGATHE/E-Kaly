@@ -102,7 +102,6 @@ class  AdmisModel extends CI_Model {
 
    public function save() {
       $data = [
-         'id' => $this->id,
          'nom' => $this->nom,
          'prenom' => $this->prenom,
          'email' => $this->email,
