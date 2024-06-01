@@ -118,6 +118,42 @@ class  AdmisModel extends CI_Model {
       return $query->row_array();
    }
 
+   public function getAll() {
+      $query = $this->db->get('admis');
+      return $query->result_array();
+   }
+
+   public function edit($id,$data) {
+      $this->db->where('id',$id);
+      return $this->db->update('admis', $data);
+   }
+
+   public function delete($id) {
+      $this->db->where('id',$id);
+      return $this->db->delete('admis');
+   }
+
+   public function search($criteria = []) {
+      $this->db->select('admis.id,admis.nom,admis.prenom,admis.email,admis.mot_de_pass');
+      $this->db->from('admis');
+      if (!empty($criteria['id'])) {
+            $this->db->like('admis.id', $criteria['id']);
+      }
+      if (!empty($criteria['nom'])) {
+            $this->db->like('admis.nom', $criteria['nom']);
+      }
+      if (!empty($criteria['prenom'])) {
+            $this->db->like('admis.prenom', $criteria['prenom']);
+      }
+      if (!empty($criteria['email'])) {
+            $this->db->like('admis.email', $criteria['email']);
+      }
+      if (!empty($criteria['mot_de_pass'])) {
+            $this->db->like('admis.mot_de_pass', $criteria['mot_de_pass']);
+      }
+      $query = $this->db->get('admis');
+      return $query->result_array();
+   }
 }
 
 ?>
