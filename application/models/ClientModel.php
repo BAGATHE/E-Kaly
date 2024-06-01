@@ -16,27 +16,32 @@ class  ClientModel extends CI_Model {
       if (!empty($data)) {
           $this->errors = array_fill(0, 5, "");
          try {
-            $this->setId($data['id']);
+            if(isset($data['id']))
+               $this->setId($data['id']);
          } catch (Exception $e) {
             $this->errors[] = $e->getMessage();
          }
          try {
-            $this->setNom($data['nom']);
+            if(isset($data['nom']))
+               $this->setNom($data['nom']);
          } catch (Exception $e) {
             $this->errors[] = $e->getMessage();
          }
          try {
-            $this->setPrenom($data['prenom']);
+            if(isset($data['prenom']))
+               $this->setPrenom($data['prenom']);
          } catch (Exception $e) {
             $this->errors[] = $e->getMessage();
          }
          try {
-            $this->setEmail($data['email']);
+            if(isset($data['email']))
+               $this->setEmail($data['email']);
          } catch (Exception $e) {
             $this->errors[] = $e->getMessage();
          }
          try {
-            $this->setMotDePass($data['mot_de_pass']);
+            if(isset($data['mot_de_pass']))
+               $this->setMotDePass($data['mot_de_pass']);
          } catch (Exception $e) {
             $this->errors[] = $e->getMessage();
          }
@@ -94,7 +99,7 @@ class  ClientModel extends CI_Model {
 
       if ($query->num_rows() === 1) {
           $row = $query->row_array();
-          return new AdmisModel($row);
+          return new ClientModel($row);
       } else {
           return null;
       }
