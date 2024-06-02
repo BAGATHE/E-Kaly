@@ -1,0 +1,126 @@
+        <!-- Main Content -->
+        <main>
+            <!-- Recent Orders Table -->
+            <div class="recent-orders resto_div">
+                <h2>Listes des restaurants <a href="<?= site_url('RouteController/insertionRestoLivreurPage') ?>" style="color: #085696;">+ Ajouter</a></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>identifiant</th>
+                            <th>Nom</th>
+                            <th>Adresse</th>
+                            <th>Description</th>
+                            <th>Heure ouverture</th>
+                            <th>Heure fermeture</th>
+                            <th>email</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($restaurants as $resto){?>
+                    <tr>
+                        <td><?=$resto['id'] ?></td>
+                        <td><?=$resto['nom'] ?></td>
+                        <td><?=$resto['adresse'] ?></td>
+                        <td><?=$resto['description'] ?></td>
+                        <td><?=$resto['heure_ouverture'] ?></td>
+                        <td><?=$resto['heure_fermeture'] ?></td>
+                        <td><?=$resto['email'] ?></td>
+                        <td><a href="" style="color: red;">Supprimer</a></td>
+                        <td><a href="<?= site_url('RestoController/loadForm/'.$resto['id']) ?>">Modifier</a></td>
+                    </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="recent-orders livreur_div">
+                <h2>Listes des livreurs <a href="<?= site_url('RouteController/insertionRestoLivreurPage') ?>" style="color: #085696;">+ Ajouter</a></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>identifiant</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Adress</th>
+                            
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <?php foreach( $livreurs as $livreur ){?>  
+                    <tr> 
+                        <td><?=$livreur['id'] ?></td>
+                        <td><?=$livreur['nom_complet'] ?></td>
+                        <td><?=$livreur['email'] ?></td>
+                        <td><?=$livreur['adresse'] ?></td>
+                        <td><a href="" style="color: red;">Supprimer</a></td>
+                        <td><a href="<?= site_url('LivreurController/loadForm/'.$livreur['id']) ?>">Modifier</a></td>
+                    </tr>
+                    <?php } ?>
+                </table>
+            </div>
+
+        </main>
+        <!-- End of Main Content -->
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">
+                        menu
+                    </span>
+                </button>
+                <div class="dark-mode">
+                    <span class="material-icons-sharp active">
+                        light_mode
+                    </span>
+                    <span class="material-icons-sharp">
+                        dark_mode
+                    </span>
+                </div>
+
+                <div class="profile">
+                    <div class="info">
+                        <p><?php echo $current_administrator["nom"]; ?></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="<?php echo base_url()?>assets/images/profile-1.jpg">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="reminders">
+                <div class="header">
+                    <h2>Notifications</h2>
+                    <span class="material-icons-sharp">
+                        notifications_none
+                    </span>
+                </div>
+
+                <div class="notification">
+                    <div class="icon">
+                        <span class="material-icons-sharp">
+                            autorenew
+                        </span>
+                    </div>
+                    <div class="content">
+                        <div class="info">
+                            <h3>Livraison (nom_livreur)</h3>
+                            <small class="text_muted">
+                                nom_resto
+                            </small>
+                        </div>
+                        <span class="material-icons-sharp">
+                            more_vert
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+

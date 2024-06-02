@@ -99,18 +99,18 @@ class  AdmisModel extends CI_Model {
 
       if ($query->num_rows() === 1) {
           $row = $query->row_array();
-          return new AdmisModel($row);
+          return $row;
       } else {
           return null;
       }
   }
 
-   public function save() {
+   public function save($datas) {
       $data = [
-         'nom' => $this->nom,
-         'prenom' => $this->prenom,
-         'email' => $this->email,
-         'mot_de_pass' => $this->mot_de_pass,
+         'nom' => $datas["nom"],
+         'prenom' => $datas["prenom"],
+         'email' => $datas["email"],
+         'mot_de_pass' => $datas["mot_de_pass"],
       ];
 
       $this->db->insert('Admis', $data);
