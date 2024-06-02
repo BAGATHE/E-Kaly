@@ -62,24 +62,43 @@ class  RestoModel extends CI_Model {
       $this->mot_de_pass = $mot_de_pass ;
    }
 
-   public function save() {
-      $data = [
-         'email' => $this->email,
-         'mot_de_pass' => $this->mot_de_pass,
+   public function save($data) {
+      $data_resto = [
+         'email' => $data['email'],
+         'mot_de_pass' => $data['mot_de_pass'],
       ];
+      
+      $this->db->insert('Resto', $data_resto);
+      $id_dernier_insertion = $this->RestoModel->getLastRestoId();
 
-      $this->db->insert('Resto', $data);
+      $data_resto_info = [
+         'id_resto' => $id_dernier_insertion,
+         'nom' => $data['nom'],
+         'adresse' => $data['adresse'],
+         'description' => $data['description'],
+         'heure_ouverture' => $data['heure_ouverture'],
+         'heure_fermeture' => $data['heure_fermeture'],
+      ];
+      $this->db->insert('Info_resto', $data_resto_info);
    }
 
    public function getAll() {
       $query = $this->db->get('Resto');
       return $query->result_array();
    }
+   public function getAllWithInfo() {
+      $this->db->select('resto.id, resto.email, info_resto.nom, info_resto.adresse, info_resto.description, info_resto.heure_ouverture, info_resto.heure_fermeture');
+      $this->db->from('Resto resto');
+      $this->db->join('Info_resto info_resto', 'resto.id = info_resto.id_resto');
+      $query = $this->db->get();
+      return $query->result_array();
+  }
+  
 
-   public function edit($id,$data) {
-      $this->db->where('id',$id);
-      return $this->db->update('Resto', $data);
-   }
+  public function edit($nom_table,$condition,$id,$data) {
+   $this->db->where($condition,$id);
+   return $this->db->update($nom_table, $data);
+}
 
    public function delete($id) {
       $this->db->where('id',$id);
@@ -87,8 +106,11 @@ class  RestoModel extends CI_Model {
    }
 
    public function getById($id) {
-      $this->db->where('id',$id);
-      $query = $this->db->get('Resto');
+      $this->db->select('resto.id, resto.email, info_resto.nom, info_resto.adresse,info_resto.description,info_resto.heure_ouverture,info_resto.heure_fermeture');
+      $this->db->from('Resto resto');
+      $this->db->join('Info_resto info_resto', 'resto.id = info_resto.id_resto');
+      $this->db->where('resto.id',$id);
+      $query = $this->db->get();
       return $query->row_array();
    }
 
@@ -107,6 +129,15 @@ class  RestoModel extends CI_Model {
       $query = $this->db->get('Resto');
       return $query->result_array();
    }
+
+
+   public function getLastRestoId() {
+      $this->db->select('id');
+      $this->db->order_by('id', 'DESC');
+      $query = $this->db->get('Resto', 1);
+      $result = $query->row_array();
+      return $result ? $result['id'] : null;
+  }
 
 }
 

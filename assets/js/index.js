@@ -32,3 +32,27 @@ darkMode.addEventListener('click', () => {
 //     tr.innerHTML = trContent;
 //     document.querySelector('table tbody').appendChild(tr);
 // });
+
+
+function showForm(formId) {
+    // Hide all forms
+    document.querySelectorAll('.ajout form').forEach(form => {
+        form.style.display = 'none';
+    });
+
+    // Show the selected form
+    document.getElementById(formId).style.display = 'block';
+}
+
+// Add event listeners to buttons
+document.getElementById('livreurBtn').addEventListener('click', function() {
+    showForm('livreurForm');
+});
+
+document.getElementById('restaurantBtn').addEventListener('click', function() {
+    showForm('restaurantForm');
+});
+
+document.getElementById('adminBtn').addEventListener('click', function() {
+    showForm('adminForm');
+});

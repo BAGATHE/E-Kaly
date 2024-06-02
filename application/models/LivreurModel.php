@@ -6,13 +6,15 @@ class  LivreurModel extends CI_Model {
    protected $id;
    protected $email;
    protected $mot_de_pass;
+   protected $adresse;
+   protected $nom_complet;
    protected $errors = [];
 
    public function __construct($data = []) {
       parent::__construct();
 
       if (!empty($data)) {
-          $this->errors = array_fill(0, 3, "");
+          $this->errors = array_fill(0, 5, "");
          try {
             if(isset($data['id']))
                $this->setId($data['id']);
@@ -28,6 +30,18 @@ class  LivreurModel extends CI_Model {
          try {
             if(isset($data['mot_de_pass']))
                $this->setMotDePass($data['mot_de_pass']);
+         } catch (Exception $e) {
+            $this->errors[] = $e->getMessage();
+         }
+         try {
+            if(isset($data['adresse']))
+               $this->setAdresse($data['adresse']);
+         } catch (Exception $e) {
+            $this->errors[] = $e->getMessage();
+         }
+         try {
+            if(isset($data['nom_complet']))
+               $this->setNomComplet($data['nom_complet']);
          } catch (Exception $e) {
             $this->errors[] = $e->getMessage();
          }
@@ -49,6 +63,12 @@ class  LivreurModel extends CI_Model {
    public function getMotDePass(){
       return $this->mot_de_pass;
    }
+   public function getAdresse(){
+      return $this->adresse;
+   }
+   public function getNomComplet(){
+      return $this->nom_complet;
+   }
 
    public function setId($id){
       $this->id = $id ;
@@ -62,13 +82,33 @@ class  LivreurModel extends CI_Model {
       $this->mot_de_pass = $mot_de_pass ;
    }
 
-   public function save() {
-      $data = [
-         'email' => $this->email,
-         'mot_de_pass' => $this->mot_de_pass,
-      ];
+   public function setAdresse($adresse){
+      $this->adresse = $adresse;
+   }
+   public function setNomComplet($nom_complet){
+      $this->nom_complet = $nom_complet;
+   }
 
-      $this->db->insert('Livreur', $data);
+   public function save($data) {
+      $data_livreur = [
+         'email' => $data['email'],
+         'mot_de_pass' => $data['mot_de_pass'],
+      ];
+      
+      $this->db->insert('Livreur', $data_livreur);
+      $id_dernier_insertion = $this->LivreurModel->getLastLivreurId();
+
+      $data_livreur_info = [
+         'id_livreur' => $id_dernier_insertion,
+         'nom_complet' => $data['nom_complet'],
+         'adresse' => $data['adresse'],
+      ];
+      $this->db->insert('Info_livreur', $data_livreur_info);
+      $data_status = [
+         'id_livreur' => $id_dernier_insertion,
+         'status' => 'en attente',
+      ];
+      $this->db->insert('Status',$data_status);
    }
 
    public function getAll() {
@@ -76,9 +116,18 @@ class  LivreurModel extends CI_Model {
       return $query->result_array();
    }
 
-   public function edit($id,$data) {
-      $this->db->where('id',$id);
-      return $this->db->update('Livreur', $data);
+   public function getAllWithInfo() {
+      $this->db->select('livreur.id, livreur.email, info_livreur.nom_complet, info_livreur.adresse');
+      $this->db->from('Livreur livreur');
+      $this->db->join('Info_livreur info_livreur', 'livreur.id = info_livreur.id_livreur');
+      $query = $this->db->get();
+      return $query->result_array();
+  }
+  
+
+   public function edit($nom_table,$condition,$id,$data) {
+      $this->db->where($condition,$id);
+      return $this->db->update($nom_table, $data);
    }
 
    public function delete($id) {
@@ -87,10 +136,22 @@ class  LivreurModel extends CI_Model {
    }
 
    public function getById($id) {
-      $this->db->where('id',$id);
-      $query = $this->db->get('Livreur');
+      $this->db->select('livreur.id, livreur.email, info_livreur.nom_complet, info_livreur.adresse');
+      $this->db->from('Livreur livreur');
+      $this->db->join('Info_livreur info_livreur', 'livreur.id = info_livreur.id_livreur');
+      $this->db->where('livreur.id',$id);
+      $query = $this->db->get();
       return $query->row_array();
    }
+
+   public function getLastLivreurId() {
+      $this->db->select('id');
+      $this->db->order_by('id', 'DESC');
+      $query = $this->db->get('Livreur', 1);
+      $result = $query->row_array();
+      return $result ? $result['id'] : null;
+  }
+  
 
    public function search($criteria = []) {
       $this->db->select('Livreur.id,Livreur.email,Livreur.mot_de_pass');

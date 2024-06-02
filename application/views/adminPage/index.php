@@ -1,60 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/index.css">
-    <link rel="icon" href="./assets/images/Logo.png">
-    <title>E-Kaly | Admin</title>
-</head>
-
-<body>
-
-    <div class="container">
-        <!-- Sidebar Section -->
-        <aside>
-            <div class="toggle">
-                <div class="logo">
-                    <img src="./assets/images/logo.png">
-                    <h2>E-<span class="kaly">KALY</span></h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">
-                        close
-                    </span>
-                </div>
-            </div>
-
-            <div class="sidebar">
-                <a href="index.html">
-                    <span class="material-icons-sharp">
-                        dashboard
-                    </span>
-                    <h3>Accueil</h3>
-                </a>
-                <a href="ListeRestoLivreur.html">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                    <h3>Restaurant & Livreur</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        settings
-                    </span>
-                    <h3>Settings</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        logout
-                    </span>
-                    <h3>Logout</h3>
-                </a>
-            </div>
-        </aside>
-        <!-- End of Sidebar Section -->
 
         <!-- Main Content -->
         <main>
@@ -62,66 +5,67 @@
             <div class="new-users">
                 <h2>Listes des admins</h2>
                 <div class="user-list">
+                <?php foreach( $administrators as $administrator ){ ?>
                     <div class="user">
-                        <img src="./assets/images/profile-2.jpg">
-                        <h2>Admin1</h2>
+                        <img src="<?php echo base_url()?>assets/images/profile-2.jpg">
+                        <h2><?= $administrator['nom']  ?></h2>
                     </div>
+                <?php } ?>
                     <div class="user">
-                        <img src="./assets/images/profile-3.jpg">
-                        <h2>Admin2</h2>
-                    </div>
-                    <div class="user">
-                        <img src="./assets/images/profile-4.jpg">
-                        <h2>Admin3</h2>
-                    </div>
-                    <div class="user">
-                        <a href="Ajout.html"><img src="./assets/images/plus.png"></a>
+                        <a href="<?= site_url('AdmisController/insertionPage')?>"><img src="<?php echo base_url()?>assets/images/plus.png"></a>
                         <h2>Ajouter</h2>
                     </div>
                 </div>
-
+            
                 <div class="recent-orders">
                     <table>
                         <thead>
                             <tr>
+                                <th>identifiant</th>
                                 <th>Nom</th>
+                                <th>Prenom</th>
                                 <th>Email</th>
-                                <th>Numero</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody></tbody>
+                        <?php foreach( $administrators as $administrator ){ ?>
                         <tr>
-                            <td>nom_admin</td>
-                            <td>mail_admin</td>
-                            <td>numero_admin</td>
-                            <td><a href="" style="color: red;">Supprimer</a></td>
-                            <td><a href="ModifAdmin.html">Modifier</a></td>
+                            <td><?= $administrator['id'] ?></td>
+                            <td><?= $administrator['nom'] ?></td>
+                            <td><?= $administrator['prenom'] ?></td>
+                            <td><?= $administrator['email'] ?></td>
+                            <td><a href="<?= site_url('AdmisController/delete/'.$administrator['id']) ?>"style="color: red;">Supprimer</a></td>
+                            <td><a href="<?= site_url('AdmisController/loadForm/'.$administrator['id']) ?>">Modifier</a></td>
                         </tr>
+                       <?php  }?>
                     </table>
                 </div>
             </div>
             <!-- End of New Users Section -->
 
             <!-- End of Recent Orders -->
-            <div class="recent-orders">
+            <div class="recent-orders client_div" >
                 <h2>Listes des clients</h2>
                 <table>
                     <thead>
                         <tr>
                             <th>Nom</th>
+                            <th>Prenom</th>
                             <th>Email</th>
-                            <th>Numero</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                    <?php foreach($clients as $client){ ?>
                     <tr>
-                        <td>nom_client</td>
-                        <td>mail_client</td>
-                        <td>numero_client</td>
+                        <td><?= $client["nom"]?></td>
+                        <td><?= $client["prenom"]?></td>
+                        <td><?= $client["email"]?></td>
                         <td><a href="" style="color: red;">Supprimer</a></td>
                     </tr>
+                    <?php } ?>
+                    </tbody>
                 </table>
             </div>
             <!-- End of Recent Orders -->
@@ -148,11 +92,11 @@
 
                 <div class="profile">
                     <div class="info">
-                        <p><b>nom_admin</b></p>
+                        <p><?php echo $current_administrator["nom"]; ?></p>
                         <small class="text-muted">Admin</small>
                     </div>
                     <div class="profile-photo">
-                        <img src="./assets/images/profile-1.jpg">
+                        <img src="<?php echo base_url()?>assets/images/profile-1.jpg">
                     </div>
                 </div>
 
@@ -189,12 +133,5 @@
             </div>
 
         </div>
+  
 
-
-    </div>
-
-    <script src="./assets/js/orders.js"></script>
-    <script src="./assets/js/index.js"></script>
-</body>
-
-</html>
