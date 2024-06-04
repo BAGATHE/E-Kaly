@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./assets/css/modif.css">
     <link rel="icon" href="./assets/images/Logo.png">
     <title>E-Kaly | Admin</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -43,7 +44,6 @@
                 </a>
                 <a href="Revenu.html">
                     <span class="material-icons-sharp">
-                        <!-- charts -->
                     </span>
                     <h3>Revenue Mensuel</h3>
                 </a>
@@ -65,30 +65,8 @@
 
         <!-- Main Content -->
         <main>
-            <div class="ajout">
-                <form action="">
-                    <h2>Modifier Restaurant</h2>
-                    <div class="form-input">
-                        <label for="">Nom</label>
-                        <input type="text" placeholder="Nom Admin" value="nom_resto">
-                    </div>
-                    <div class="form-input">
-                        <label for="">Status</label>
-                        <input type="text" placeholder="statut" value="statut_resto">
-                    </div>
-                    <div class="form-input">
-                        <label for="">Categorie</label>
-                        <select name="" id="">
-                            <option value="">Data Categorie</option>
-                        </select>
-                    </div>
-                    <div class="form-input">
-                        <label for="">Fichier</label>
-                        <input type="file" name="" id="">
-                    </div>
-                    <button type="submit">Modifier</button>
-                </form>
-            </div>
+            <h1>Revenue Mensuel</h1>
+            <canvas id="myChart" width="400" height="200"></canvas>
         </main>
         <!-- End of Main Content -->
 
@@ -123,11 +101,11 @@
 
         </div>
 
-
     </div>
 
     <script src="./assets/js/orders.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/chart.js"></script>
 </body>
 
 </html>
