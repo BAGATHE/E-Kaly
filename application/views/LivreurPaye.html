@@ -71,74 +71,32 @@
 
         <!-- Main Content -->
         <main>
-            <div class="ajout">
-                <form action="">
-                    <h2>Ajouter Admin</h2>
-                    <div class="form-input">
-                        <label for="">Nom</label>
-                        <input type="text" placeholder="Nom Admin">
-                    </div>
-                    <div class="form-input">
-                        <label for="">Status</label>
-                        <input type="text" placeholder="Nom Admin">
-                    </div>
-                    <div class="form-input">
-                        <label for="">Categorie</label>
-                        <select name="" id="">
-                            <option value="">Data Categorie</option>
-                        </select>
-                    </div>
-                    <div class="form-input">
-                        <label for="">Fichier</label>
-                        <input type="file" name="" id="">
-                    </div>
-                    <button type="submit">Ajouter</button>
-                </form>
-                <form action="">
-                    <h2>Ajouter Livreur</h2>
-                    <div class="form-input">
-                        <label for="">Nom</label>
-                        <input type="text" placeholder="Nom Admin">
-                    </div>
-                    <div class="form-input">
-                        <label for="">Status</label>
-                        <input type="text" placeholder="Nom Admin">
-                    </div>
-                    <div class="form-input">
-                        <label for="">Categorie</label>
-                        <select name="" id="">
-                            <option value="">Data Categorie</option>
-                        </select>
-                    </div>
-                    <div class="form-input">
-                        <label for="">Fichier</label>
-                        <input type="file" name="" id="">
-                    </div>
-                    <button type="submit">Ajouter</button>
-                </form>
-                <form action="">
-                    <h2>Ajouter Restaurant</h2>
-                    <div class="form-input">
-                        <label for="">Nom</label>
-                        <input type="text" placeholder="Nom Admin">
-                    </div>
-                    <div class="form-input">
-                        <label for="">Status</label>
-                        <input type="text" placeholder="Nom Admin">
-                    </div>
-                    <div class="form-input">
-                        <label for="">Categorie</label>
-                        <select name="" id="">
-                            <option value="">Data Categorie</option>
-                        </select>
-                    </div>
-                    <div class="form-input">
-                        <label for="">Fichier</label>
-                        <input type="file" name="" id="">
-                    </div>
-                    <button type="submit">Ajouter</button>
-                </form>
+            <!-- Recent Orders Table -->
+
+            <div class="recent-orders">
+                <h2>Listes des livreurs Payés</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Contact</th>
+                            <th>Horaire</th>
+                            <th>Chiffre obtenu</th>
+                            <th>Statuts</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tr>
+                        <td>nom_livreur</td>
+                        <td>contact_livreur</td>
+                        <td>horaire_travail</td>
+                        <td>100000</td>
+                        <td style="color: #085696;">Payé</td>
+
+                    </tr>
+                </table>
             </div>
+
         </main>
         <!-- End of Main Content -->
 
@@ -166,6 +124,35 @@
                     </div>
                     <div class="profile-photo">
                         <img src="./assets/images/profile-1.jpg">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="reminders">
+                <div class="header">
+                    <h2>Notifications</h2>
+                    <span class="material-icons-sharp">
+                        notifications_none
+                    </span>
+                </div>
+
+                <div class="notification">
+                    <div class="icon">
+                        <span class="material-icons-sharp">
+                            autorenew
+                        </span>
+                    </div>
+                    <div class="content">
+                        <div class="info">
+                            <h3>Livraison (nom_livreur)</h3>
+                            <small class="text_muted">
+                                nom_resto
+                            </small>
+                        </div>
+                        <span class="material-icons-sharp">
+                            more_vert
+                        </span>
                     </div>
                 </div>
 
