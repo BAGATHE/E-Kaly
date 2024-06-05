@@ -74,3 +74,12 @@ from
     v_revenu_par_jour_resto_jour
 group by
     month,year;   
+
+create or replace VIEW v_mise_en_avant_with_expiration AS
+SELECT 
+    id AS id_mise_en_avant,
+    id_resto,
+    date AS date_debut,
+    duree,
+    DATE_ADD(Mise_en_avant.date, INTERVAL Mise_en_avant.duree MONTH) AS date_expiration
+FROM Mise_en_avant

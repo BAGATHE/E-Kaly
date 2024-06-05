@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class StatistiqueController extends CI_Controller{
     public function __construct(){
         parent::__construct();
-        $this->load->model('StatistiqueModel'); 
+        $this->load->model('StatRestoModel'); 
         $this->load->model('ClientModel'); 
     }
 
@@ -14,9 +14,9 @@ class StatistiqueController extends CI_Controller{
         $data = null;
         
         if($mois != 0 && $anner != 0){
-            $data = $this->StatistiqueModel->getStatRestoJour($mois, $anner);
+            $data = $this->StatRestoModel->getStatRestoJour($mois, $anner);
         } else {
-            $data = $this->StatistiqueModel->getStatRestoMois($anner);
+            $data = $this->StatRestoModel->getStatRestoMois($anner);
         }
         if($data==null){
             $data[] = array("day"=>'0',"month"=>'0',"year"=>'0',"revenue"=>'0');

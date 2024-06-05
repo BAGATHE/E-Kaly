@@ -170,7 +170,6 @@ class CommandeModel extends CI_Model {
     
         // Récupérer le tarif de livraison en fonction de la distance
         $tarifLivraison = $this->calculerTarifSelonDistance($distance);
-    
         return $tarifLivraison;
     }
     

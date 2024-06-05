@@ -15,7 +15,7 @@ CREATE TABLE Adresse (
     nom VARCHAR(255)
 );
 
-CREATE TABLE lienAdresse (
+CREATE TABLE lien_adresse (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_adresse1 INT,
     id_adresse2 INT,
@@ -181,8 +181,24 @@ CREATE TABLE Payement (
 
 
 
----modif
 create table Commission_admin(
     id INT PRIMARY KEY AUTO_INCREMENT,
     commission_resto decimal(10,2)
+);
+
+
+
+
+CREATE TABLE `Tarif_livraison` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `distance_min` DECIMAL(5,2) NOT NULL,
+  `distance_max` DECIMAL(5,2) NOT NULL,
+  `tarif` INT NOT NULL
+);
+
+CREATE TABLE `Config` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `nom` VARCHAR(100) NOT NULL,
+  `valeur` DECIMAL(10,2) NOT NULL,
+  `unite` VARCHAR(50) NOT NULL
 );

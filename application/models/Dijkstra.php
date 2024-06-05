@@ -26,7 +26,6 @@ class Dijkstra extends CI_Model {
         foreach ($adresses as $adresse) {
             $distances[$adresse['id']] = INF;
             $precedents[$adresse['id']] = null;
-            $file_attente->insert($adresse['id'], INF);
         }
 
         $distances[$id_depart] = 0;
@@ -55,11 +54,11 @@ class Dijkstra extends CI_Model {
      */
     private function relaxerNoeud($id_courant, &$distances, &$precedents, &$file_attente) {
         $liens = $this->LienAdresseModel->getByAddressId($id_courant);
-
+        
         foreach ($liens as $lien) {
-            $id_voisin = ($lien['id_adresse_1'] == $id_courant) ? $lien['id_adresse_2'] : $lien['id_adresse_1'];
+            $id_voisin = ($lien['id_adresse1'] == $id_courant) ? $lien['id_adresse2'] : $lien['id_adresse1'];
             $alt = $distances[$id_courant] + $lien['distance'];
-
+            
             if ($alt < $distances[$id_voisin]) {
                 $distances[$id_voisin] = $alt;
                 $precedents[$id_voisin] = $id_courant;
@@ -94,4 +93,3 @@ class Dijkstra extends CI_Model {
     }
 }
 ?>
-

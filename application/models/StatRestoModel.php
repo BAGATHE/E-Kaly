@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct access allowed');
 
-class  StatistiqueModel extends CI_Model {
+class  StatRestoModel extends CI_Model {
 
     public function getStatRestoMois($annee) {
         $this->db->where('year',$annee);
