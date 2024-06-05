@@ -25,6 +25,18 @@
                     </span>
                     <h3>Restaurant & Livreur</h3>
                 </a>
+                <a href="<?= site_url('AdmisController/livreurPaye') ?>">
+                    <span class="material-icons-sharp">
+                        delivery_dining
+                    </span>
+                    <h3>Livreurs Payés</h3>
+                </a>
+                <a href="<?= site_url('AdmisController/revenue') ?>">
+                    <span class="material-icons-sharp">
+                        assessment
+                    </span>
+                    <h3>Revenue Mensuel</h3>
+                </a>
                 <a href="#">
                     <span class="material-icons-sharp">
                         settings

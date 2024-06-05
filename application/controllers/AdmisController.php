@@ -141,6 +141,18 @@ class AdmisController extends CI_Controller {
         $this->load->view('templates/template', $data);
     }
 
+    /**page de revenue*/
+    public function revenue(){
+        $data['contents'] = "adminPage/Revenu";
+        $this->load->view('templates/template', $data);
+        
+    }
+
+    public function livreurPaye(){
+        $data['contents'] = "adminPage/LivreurPaye";
+        $this->load->view('templates/template',$data);
+    }
+
 
 }
 ?>

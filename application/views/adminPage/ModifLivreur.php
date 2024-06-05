@@ -15,9 +15,18 @@
                     </div>
                     
                     <div class="form-input">
-                        <label for="">adresse</label>
-                        <input type="text" placeholder="Adresse" name="adresse" value="<?=$livreur['adresse'] ?>" >
+                    <label for="">Adresse</label>
+                    <select name="adresse" id="options" multiple>
+                    <?php foreach( $adresses as $adresse ){?>  
+                        <?php if( $adresse['id'] == $livreur['adresse'] ){?>
+                    <option selected value="<?=$adresse['id'] ?>"><?=$adresse['nom']?></option>
+                     <?php }else{?>
+                        <option  value="<?=$adresse['id'] ?>"><?=$adresse['nom']?></option>
+                    <?php } } ?>
+                    </select>
                     </div>
+
+                    
                     <button type="submit">Ajouter</button>
             </form>
             </div>

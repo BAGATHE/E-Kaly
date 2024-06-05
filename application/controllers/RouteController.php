@@ -7,6 +7,7 @@ class RouteController extends CI_Controller {
         parent::__construct();
         $this->load->model('LivreurModel');
         $this->load->model('RestoModel');
+        $this->load->model('AdresseModel');
     }
 
     public function index(){
@@ -31,6 +32,7 @@ class RouteController extends CI_Controller {
         if ($this->session->userdata('admin_session')) {
             $current_administrator = $this->session->userdata('admin_session');
         }
+        $data["adresses"] = $this->AdresseModel->getAll();
         $data['current_administrator'] = $current_administrator; 
         $data['contents'] = "adminPage/Ajout";
         $this->load->view('templates/template', $data);

@@ -45,14 +45,15 @@ function showForm(formId) {
 }
 
 // Add event listeners to buttons
-document.getElementById('livreurBtn').addEventListener('click', function() {
+document.querySelector('#livreurBtn').addEventListener('click', function() {
     showForm('livreurForm');
 });
 
-document.getElementById('restaurantBtn').addEventListener('click', function() {
+document.querySelector('#restaurantBtn').addEventListener('click', function() {
     showForm('restaurantForm');
 });
 
-document.getElementById('adminBtn').addEventListener('click', function() {
+document.querySelector('#adminBtn').addEventListener('click', function() {
     showForm('adminForm');
 });
+
