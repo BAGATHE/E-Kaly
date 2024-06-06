@@ -1,8 +1,45 @@
+
+-- Insertion dans la table Admis
+INSERT INTO Admis (nom, prenom, email, mot_de_pass) VALUES
+('admin1', 'admin1', 'admin1@gmail.com', 'admin1'),
+('admin2', 'admin2', 'admin2@gmail.com', 'admin2');
+
+
+--Insertion dans la table CLient
+INSERT INTO `Client` (`id`,`nom`, `prenom`, `email`, `mot_de_pass`) VALUES
+(1,'Bernard', 'Alice', 'alice@gmail.com', 'alice'),
+(2,'Durand', 'Louis', 'louis@gmail.com', 'louis'),
+(3,'Moreau', 'Claire', 'claire@gmail.com', 'claire'),
+(4,'Petit', 'Henri', 'henri@gmail.com', 'henri'),
+(5,'Robert', 'Emma', 'emma@gmail.com', 'emma'),
+(6,'Richard', 'Paul', 'paul@gmail.com', 'paul'),
+(7,'Garcia', 'Marie', 'marie@gmail.com', 'marie'),
+(8,'Martinez', 'Luc', 'luc@gmail.com', 'luc'),
+(9,'Lefevre', 'Julie', 'julie@gmail.com', 'julie'),
+(10,'Thomas', 'Pierre', 'pierre@gmail.com', 'pierre');
+
+-- Insertion dans la table Livreur
+INSERT INTO Livreur (id,email, mot_de_pass) VALUES (1,'livreur1@gmail.com', 'livreur1');
+INSERT INTO Livreur (id,email, mot_de_pass) VALUES (2,'livreur3@gmail.com', 'livreur2');
+INSERT INTO Livreur (id,email, mot_de_pass) VALUES (3,'livreur2@gmail.com', 'livreur3');
+
+-- Insertion dans la table Info_livreur
+INSERT INTO Info_livreur (id,id_livreur, nom_complet, adresse) VALUES (1,1, 'livreur1', '123 Main Street');
+INSERT INTO Info_livreur (id,id_livreur, nom_complet, adresse) VALUES (2,2, 'livreur2', '456 Oak Avenue');
+INSERT INTO Info_livreur (id,id_livreur, nom_complet, adresse) VALUES (3,3, 'livreur3', '789 Pine Road');
+
+
 -- Insérer des données dans la table Resto
 INSERT INTO Resto (id, email, mot_de_pass) VALUES
 (1, 'resto1@example.com', 'mdp1'),
 (2, 'resto2@example.com', 'mdp2'),
 (3, 'resto3@example.com', 'mdp3');
+
+-- Insertion des données dans la table Info_resto
+INSERT INTO Info_resto (id, id_resto, nom, adresse, description, heure_ouverture, heure_fermeture) VALUES
+(1, 1, 'Resto A', 2, 'Description Resto A', '08:00:00', '22:00:00'),
+(2, 2, 'Resto B', 3, 'Description Resto B', '09:00:00', '23:00:00'),
+(3, 3, 'Resto C', 4, 'Description Resto C', '10:00:00', '21:00:00');
 
 -- Insérer des données dans la table Plat
 INSERT INTO Plat (id, id_resto, description, prix) VALUES
@@ -13,16 +50,35 @@ INSERT INTO Plat (id, id_resto, description, prix) VALUES
 (5, 3, 'Sushi Assorti', 15.99),
 (6, 3, 'Ramen au Poulet', 11.49);
 
--- Insérer des données dans la table Client
-INSERT INTO Client (id, nom) VALUES 
-(1, 'koto');
-
 -- Insérer des données dans la table Adresse
-INSERT INTO Adresse (id, nom) VALUES
-(1, 'Andoranofotsy'),
-(2, 'Ambohimanarina'),
-(3, 'Analakely'),
-(4, 'Tanjombato');
+INSERT INTO `Adresse` (`id`,`nom`) VALUES
+(1,'Analakely'),
+(2,'Ankadifotsy'),
+(3,'Ankadilalana'),
+(4,'Ankatso'),
+(5,'Anosibe'),
+(6,'Anosipatrana'),
+(7,'Antanimena'),
+(8,'Antaninandro'),
+(9,'Antananarivo Renivohitra'),
+(10,'Antohomadinika'),
+(11,'Antohomadinika Avaratra'),
+(12,'Antohomadinika Atsimo'),
+(13,'Antsakaviro'),
+(14,'Anjanahary'),
+(15,'Behoririka'),
+(16,'Besarety'),
+(17,'Betongolo'),
+(18,'Faravohitra'),
+(19,'Isoraka'),
+(20,'Isotry'),
+(21,'Mahamasina'),
+(22,'Mandrosoa'),
+(23,'Manjakaray'),
+(24,'Manarintsoa'),
+(25,'Tsaralalàna'),
+(26,'Tsimbazaza');
+
 
 -- Insérer des données dans la table Commande
 INSERT INTO Commande (id, adresse, id_client, date) VALUES
@@ -66,11 +122,7 @@ INSERT INTO Livraison_payement_commande (id, id_commande, id_livreur, paye) VALU
 (2, 20, 1, TRUE),
 (3, 21, 1, TRUE);
 
--- Insérer des données dans la table Info_resto
-INSERT INTO Info_resto (id, id_resto, nom, adresse, description, heure_ouverture, heure_fermeture) VALUES
-(1, 1, 'Resto A', 2, 'Description Resto A', '08:00:00', '22:00:00'),
-(2, 2, 'Resto B', 3, 'Description Resto B', '09:00:00', '23:00:00'),
-(3, 3, 'Resto C', 4, 'Description Resto C', '10:00:00', '21:00:00');
+
 
 -- Insérer des données dans la table LienAdresse
 INSERT INTO Lien_adresse (id, id_adresse1, id_adresse2, distance) VALUES
