@@ -18,37 +18,6 @@ INSERT INTO `Client` (`id`,`nom`, `prenom`, `email`, `mot_de_pass`) VALUES
 (9,'Lefevre', 'Julie', 'julie@gmail.com', 'julie'),
 (10,'Thomas', 'Pierre', 'pierre@gmail.com', 'pierre');
 
--- Insertion dans la table Livreur
-INSERT INTO Livreur (id,email, mot_de_pass) VALUES (1,'livreur1@gmail.com', 'livreur1');
-INSERT INTO Livreur (id,email, mot_de_pass) VALUES (2,'livreur3@gmail.com', 'livreur2');
-INSERT INTO Livreur (id,email, mot_de_pass) VALUES (3,'livreur2@gmail.com', 'livreur3');
-
--- Insertion dans la table Info_livreur
-INSERT INTO Info_livreur (id,id_livreur, nom_complet, adresse) VALUES (1,1, 'livreur1', '123 Main Street');
-INSERT INTO Info_livreur (id,id_livreur, nom_complet, adresse) VALUES (2,2, 'livreur2', '456 Oak Avenue');
-INSERT INTO Info_livreur (id,id_livreur, nom_complet, adresse) VALUES (3,3, 'livreur3', '789 Pine Road');
-
-
--- Insérer des données dans la table Resto
-INSERT INTO Resto (id, email, mot_de_pass) VALUES
-(1, 'resto1@example.com', 'mdp1'),
-(2, 'resto2@example.com', 'mdp2'),
-(3, 'resto3@example.com', 'mdp3');
-
--- Insertion des données dans la table Info_resto
-INSERT INTO Info_resto (id, id_resto, nom, adresse, description, heure_ouverture, heure_fermeture) VALUES
-(1, 1, 'Resto A', 2, 'Description Resto A', '08:00:00', '22:00:00'),
-(2, 2, 'Resto B', 3, 'Description Resto B', '09:00:00', '23:00:00'),
-(3, 3, 'Resto C', 4, 'Description Resto C', '10:00:00', '21:00:00');
-
--- Insérer des données dans la table Plat
-INSERT INTO Plat (id, id_resto, description, prix) VALUES
-(1, 1, 'Pizza Margherita', 10.99),
-(2, 1, 'Spaghetti Carbonara', 12.99),
-(3, 2, 'Burger Cheese', 8.99),
-(4, 2, 'Salade César', 7.49),
-(5, 3, 'Sushi Assorti', 15.99),
-(6, 3, 'Ramen au Poulet', 11.49);
 
 -- Insérer des données dans la table Adresse
 INSERT INTO `Adresse` (`id`,`nom`) VALUES
@@ -80,6 +49,41 @@ INSERT INTO `Adresse` (`id`,`nom`) VALUES
 (26,'Tsimbazaza');
 
 
+
+-- Insertion dans la table Livreur
+INSERT INTO Livreur (id,email, mot_de_pass) VALUES (1,'livreur1@gmail.com', 'livreur1');
+INSERT INTO Livreur (id,email, mot_de_pass) VALUES (2,'livreur3@gmail.com', 'livreur2');
+INSERT INTO Livreur (id,email, mot_de_pass) VALUES (3,'livreur2@gmail.com', 'livreur3');
+
+-- Insertion dans la table Info_livreur
+INSERT INTO Info_livreur (id,id_livreur, nom_complet, adresse) VALUES (1,1,'livreur1',4);
+INSERT INTO Info_livreur (id,id_livreur, nom_complet, adresse) VALUES (2,2,'livreur2',6);
+INSERT INTO Info_livreur (id,id_livreur, nom_complet, adresse) VALUES (3,3,'livreur3',12);
+
+
+-- Insérer des données dans la table Resto
+INSERT INTO Resto (id, email, mot_de_pass) VALUES
+(1, 'resto1@example.com', 'mdp1'),
+(2, 'resto2@example.com', 'mdp2'),
+(3, 'resto3@example.com', 'mdp3');
+
+-- Insertion des données dans la table Info_resto
+INSERT INTO Info_resto (id, id_resto, nom, adresse, description, heure_ouverture, heure_fermeture) VALUES
+(1, 1, 'Resto A', 2, 'Description Resto A', '08:00:00', '22:00:00'),
+(2, 2, 'Resto B', 3, 'Description Resto B', '09:00:00', '23:00:00'),
+(3, 3, 'Resto C', 4, 'Description Resto C', '10:00:00', '21:00:00');
+
+-- Insérer des données dans la table Plat
+INSERT INTO Plat (id, id_resto, description, prix) VALUES
+(1, 1, 'Pizza Margherita', 10.99),
+(2, 1, 'Spaghetti Carbonara', 12.99),
+(3, 2, 'Burger Cheese', 8.99),
+(4, 2, 'Salade César', 7.49),
+(5, 3, 'Sushi Assorti', 15.99),
+(6, 3, 'Ramen au Poulet', 11.49);
+
+
+
 -- Insérer des données dans la table Commande
 INSERT INTO Commande (id, adresse, id_client, date) VALUES
 (19, 1, 1, '2024-06-03 10:00:00'),
@@ -108,13 +112,6 @@ INSERT INTO Commission_admin (id, commission_resto) VALUES
 INSERT INTO Config (id, nom, valeur, unite) VALUES
 (1, 'benefice_frais_livraison', 30, '%');
 
--- Insérer des données dans la table Livreur
-INSERT INTO Livreur (id, email, mot_de_pass) VALUES
-(1, 'livreur1@example.com', 'mdp1');
-
--- Insérer des données dans la table Info_livreur
-INSERT INTO Info_livreur (id, id_livreur, nom_complet, adresse) VALUES
-(1, 1, 'Livreur 1', 1);
 
 -- Insérer des données dans la table Livraison_payement_commande
 INSERT INTO Livraison_payement_commande (id, id_commande, id_livreur, paye) VALUES
@@ -134,4 +131,5 @@ INSERT INTO Lien_adresse (id, id_adresse1, id_adresse2, distance) VALUES
 INSERT INTO Tarif_livraison (id, distance_min, distance_max, tarif) VALUES
 (1, 0, 2, 2000),
 (2, 2, 6, 4500),
-(3, 6, NULL, 6000);
+(3, 6, 10, 6000);
+

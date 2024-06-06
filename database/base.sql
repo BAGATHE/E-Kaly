@@ -15,7 +15,7 @@ CREATE TABLE Adresse (
     nom VARCHAR(255)
 );
 
-CREATE TABLE lien_adresse (
+CREATE TABLE Lien_adresse (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_adresse1 INT,
     id_adresse2 INT,
