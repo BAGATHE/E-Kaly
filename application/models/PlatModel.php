@@ -87,8 +87,9 @@ class PlatModel extends CI_Model {
       $this->db->insert('Plat', $data);
    }
 
-   public function getAll() {
-      $query = $this->db->get('Plat');
+   public function getAllInfo($idResto) {
+      $this->db->where('id_resto', $idResto);
+      $query = $this->db->get('v_info_global_plat_resto');
       return $query->result_array();
    }
 
