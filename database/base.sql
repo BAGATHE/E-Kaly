@@ -32,9 +32,11 @@ CREATE TABLE Lien_adresse (
 
 CREATE TABLE Resto (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(255),
     email VARCHAR(255),
     mot_de_pass VARCHAR(255)
 );
+
 
 CREATE TABLE Livreur (
     id INT PRIMARY KEY AUTO_INCREMENT,

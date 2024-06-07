@@ -1,5 +1,6 @@
 create or replace view  v_resto_plat AS
 select 
+    r.nom as nom_resto,
     r.id as id_resto,
     p.id as id_plat,
     p.description ,
@@ -10,7 +11,6 @@ join
     Plat AS p
 ON
     r.id = p.id_resto;
-
 
 create or replace view v_resto_plat_Commande_plat AS
 select 
@@ -28,13 +28,27 @@ on
 create or replace view v_resto_plat_Commande_plat_Commande AS
 select 
     vrpcp.*,
-    c.date
+    c.date,
+    c.id_client
 from 
     v_resto_plat_Commande_plat as vrpcp
 join 
     Commande as c 
 on 
     c.id = vrpcp.id_commande;
+
+
+create or replace view v_details_commande AS
+select 
+    vrpcpc.*,
+    c.nom,
+    c.prenom
+from 
+    v_resto_plat_Commande_plat_Commande as vrpcpc
+join  
+    Client as c 
+on 
+    vrpcpc.id_client = c.id;
 
 
 create or replace view v_commission_par_Commande_par_resto_par_jour as
