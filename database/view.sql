@@ -1,5 +1,6 @@
 create or replace view  v_resto_plat AS
 select 
+    r.nom as nom_resto,
     r.id as id_resto,
     p.id as id_plat,
     p.description ,
@@ -10,7 +11,6 @@ join
     Plat AS p
 ON
     r.id = p.id_resto;
-
 
 create or replace view v_resto_plat_Commande_plat AS
 select 
@@ -28,13 +28,27 @@ on
 create or replace view v_resto_plat_Commande_plat_Commande AS
 select 
     vrpcp.*,
-    c.date
+    c.date,
+    c.id_client
 from 
     v_resto_plat_Commande_plat as vrpcp
 join 
     Commande as c 
 on 
     c.id = vrpcp.id_commande;
+
+
+create or replace view v_details_commande AS
+select 
+    vrpcpc.*,
+    c.nom,
+    c.prenom
+from 
+    v_resto_plat_Commande_plat_Commande as vrpcpc
+join  
+    Client as c 
+on 
+    vrpcpc.id_client = c.id;
 
 
 create or replace view v_commission_par_Commande_par_resto_par_jour as
@@ -73,7 +87,9 @@ select
 from 
     v_revenu_par_jour_resto_jour
 group by
+
     month,year;   
+ 
 
 create or replace VIEW v_mise_en_avant_with_expiration AS
 SELECT 
@@ -85,10 +101,7 @@ SELECT
 FROM Mise_en_avant;
 
 
-
-
-
---stat livreur
+-- stat livreur
 create or replace VIEW v_frais_livraison_par_commande_livreur_Commande as
 select 
     vrpcpc.*,
@@ -137,7 +150,7 @@ from
 group by
     month,year;  
 
---------------revenu total
+-- revenu total
 create or replace view v_revenu_par_mois as
 select 
     year,
@@ -191,3 +204,57 @@ group by
     mois, annee
 order by
     annee, mois;
+
+
+---------------------------------------------------------------------------Historique Commande Resto
+create or replace view v_historique_commande_restaurant as
+select  
+    cpc.id_commande,
+    cpc.id_resto,
+    c.id_client,
+    cpc.commission,
+    cpc.prix_commande as total,
+    a.nom as adresse
+from v_commission_par_Commande_par_resto_par_jour as cpc 
+join Commande c 
+on cpc.id_commande=c.id
+join adresse a 
+on a.id= c.adresse;
+
+create or replace view v_details_commande as
+select 
+    id_commande,
+    id_plat,
+    quantite,
+    prix as prix_unitaire,
+    (quantite*prix) as total
+from Commande_plat;
+-- INFO GLOBAL PLAT
+
+create or replace view v_changement_quantite_plat  AS
+select 
+    vrp.*,
+    cqp.date as date_changement,
+    cqp.production
+from 
+    v_resto_plat as  vrp
+join 
+    Change_quantite_plat as cqp
+on 
+    vrp.id_plat = cqp.id_plat
+GROUP BY
+    vrp.id_plat,vrp.id_resto,DAY(cqp.date),MONTH(cqp.date),YEAR(cqp.date);
+
+
+create or replace view v_info_global_plat_resto as 
+select 
+    vcqp.*,
+    avg(note) as note
+FROM   
+    v_changement_quantite_plat as vcqp
+join 
+    Note_plat as np
+on 
+    np.id_plat = vcqp.id_plat
+GROUP BY
+    vcqp.id_plat,vcqp.id_resto,DAY(vcqp.date_changement),MONTH(vcqp.date_changement),YEAR(vcqp.date_changement);
