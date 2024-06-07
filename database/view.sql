@@ -191,3 +191,28 @@ group by
     mois, annee
 order by
     annee, mois;
+
+
+---------------------------------------------------------------------------Historique Commande Resto
+create or replace view v_historique_commande_restaurant as
+select  
+    cpc.id_commande,
+    cpc.id_resto,
+    c.id_client,
+    cpc.commission,
+    cpc.prix_commande as total,
+    a.nom as adresse
+from v_commission_par_Commande_par_resto_par_jour as cpc 
+join Commande c 
+on cpc.id_commande=c.id
+join adresse a 
+on a.id= c.adresse;
+
+create or replace view v_details_commande as
+select 
+    id_commande,
+    id_plat,
+    quantite,
+    prix as prix_unitaire,
+    (quantite*prix) as total
+from Commande_plat;
