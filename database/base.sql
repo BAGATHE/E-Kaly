@@ -1,3 +1,8 @@
+
+drop database Ekaly;
+create database Ekaly;
+use Ekaly;
+
 drop database ekaly;
 create database ekaly;
 use ekaly;
@@ -104,7 +109,7 @@ CREATE TABLE Note_plat (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_client INT,
     id_plat INT,
-    note INT,
+    note decimal(10,2),
     FOREIGN KEY (id_client) REFERENCES Client(id),
     FOREIGN KEY (id_plat) REFERENCES Plat(id)
 );
@@ -181,14 +186,13 @@ CREATE TABLE Payement (
 
 
 
+---modif
+
 create table Commission_admin(
     id INT PRIMARY KEY AUTO_INCREMENT,
     commission_resto decimal(10,2),
     commission_livreur decimal(10,2)
 );
-
-
-
 
 
 CREATE TABLE `Tarif_livraison` (
