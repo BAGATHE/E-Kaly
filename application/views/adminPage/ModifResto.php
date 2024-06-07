@@ -17,8 +17,15 @@
                         <input type="email" placeholder="email" name="email" value="<?=$resto["email"] ?>">
                     </div>
                     <div class="form-input">
-                        <label for="">Adresse</label>
-                        <input type="text" placeholder="Adresse" name="adresse" value="<?=$resto["adresse"] ?>">
+                    <label for="">Adresse</label>
+                    <select name="adresse" id="options" multiple>
+                    <?php foreach( $adresses as $adresse ){?>  
+                        <?php if( $adresse['id'] == $resto['adresse'] ){?>
+                    <option selected value="<?=$adresse['id'] ?>"><?=$adresse['nom']?></option>
+                     <?php }else{?>
+                        <option  value="<?=$adresse['id'] ?>"><?=$adresse['nom']?></option>
+                    <?php } } ?>
+                    </select>
                     </div>
                     <div class="form-input">
                         <label for="">Heure ouverture</label>

@@ -117,9 +117,10 @@ class  LivreurModel extends CI_Model {
    }
 
    public function getAllWithInfo() {
-      $this->db->select('livreur.id, livreur.email, info_livreur.nom_complet, info_livreur.adresse');
+      $this->db->select('livreur.id, livreur.email, info_livreur.nom_complet, info_livreur.adresse as id_adresse,adresse.nom as adresse');
       $this->db->from('Livreur livreur');
       $this->db->join('Info_livreur info_livreur', 'livreur.id = info_livreur.id_livreur');
+      $this->db->join('Adresse adresse', 'info_livreur.adresse = adresse.id');
       $query = $this->db->get();
       return $query->result_array();
   }
@@ -168,6 +169,184 @@ class  LivreurModel extends CI_Model {
       $query = $this->db->get('Livreur');
       return $query->result_array();
    }
+   public function getCommandesPayeesByLivreurTotal($idLivreur) {
+      $this->db->select('c.*'); // Sélectionne toutes les colonnes de la table Commande
+      $this->db->from('Livraison_payement_commande lpc');
+      $this->db->join('Commande c', 'lpc.id_commande = c.id');
+      $this->db->where('lpc.id_livreur', $idLivreur);
+      $this->db->where('lpc.paye', true); // Ajoute la condition où la commande est payée
+
+      $query = $this->db->get();
+      return $query->result_array();
+  }
+  public function getCommandesPayeesByLivreur($idLivreur, $mois, $annee) {
+      // Déterminer la date de début et de fin du mois spécifié
+      $premiereJourMois = date("Y-m-d", strtotime("$annee-$mois-01"));
+      $derniereJourMois = date("Y-m-t", strtotime("$annee-$mois-01"));
+
+      $this->db->select('c.*, DATE_FORMAT(c.date, "%Y-%m-%d") AS date_commande_format');
+      $this->db->from('Livraison_payement_commande lpc');
+      $this->db->join('Commande c', 'lpc.id_commande = c.id');
+      $this->db->where('lpc.id_livreur', $idLivreur);
+      $this->db->where('lpc.paye', true); // Ajoute la condition où la commande est payée
+      $this->db->where('c.date >=', $premiereJourMois);
+      $this->db->where('c.date <=', $derniereJourMois);
+      $this->db->order_by('c.date', 'ASC');
+
+      $query = $this->db->get();
+      $result = $query->result_array();
+
+      // Regrouper les commandes par jour
+      $commandesParJour = [];
+      foreach ($result as $commande) {
+         $dateCommande = $commande['date_commande_format'];
+         if (!isset($commandesParJour[$dateCommande])) {
+               $commandesParJour[$dateCommande] = [];
+         }
+         $commandesParJour[$dateCommande][] = $commande;
+      }
+
+      return $commandesParJour;
+   }
+   public function detailsLivreurMois($idLivreur, $mois, $annee) {
+      $this->load->model("CommandeModel");
+      // Récupérer les commandes payées du livreur pour le mois spécifié
+      $commandesParJour = $this->getCommandesPayeesByLivreur($idLivreur, $mois, $annee);
+  
+      // Initialiser les variables pour le rapport
+      $rapport = [];
+      // Requête pour récupérer la valeur de 'benefice_frais_livraison'
+      $this->db->where('nom', 'benefice_frais_livraison');
+      $query = $this->db->get('Config');
+      $configBeneficeLivraison = 0;
+      // Vérifier s'il y a des résultats
+      if ($query->num_rows() > 0) {
+         $config = $query->row_array();
+         $configBeneficeLivraison = $config['valeur'];  // Récupérer la valeur
+      } else {
+         // Gérer le cas où la configuration n'est pas trouvée
+         return $rapport; // Par exemple, retourner une valeur par défaut ou gérer une erreur
+      }
+
+      // Pour chaque jour du mois, calculer les détails des commandes et les tarifs de livraison
+      foreach ($commandesParJour as $date => $commandes) {
+          $detailsJour = [
+              'date' => $date,
+              'commandes' => [],
+              'totalTarifLivraison' => 0,
+              'totalBenefice' => 0,
+              'totalSalaire' => 0
+          ];
+  
+          foreach ($commandes as $commande) {
+              // Calculer le tarif de livraison pour chaque commande
+              $tarifLivraison = $this->CommandeModel->getTarifLivraison($commande['id']);
+  
+              // Calculer le bénéfice de la livraison (en pourcentage de la config)
+              $beneficeLivraison = $tarifLivraison * ($configBeneficeLivraison / 100);
+  
+              // Ajouter les détails de la commande au rapport
+              $detailsCommande = [
+                  'id_commande' => $commande['id'],
+                  'tarif_livraison' => $tarifLivraison,
+                  'benefice_livraison' => $beneficeLivraison,
+                  'salaire' => $tarifLivraison - $beneficeLivraison
+              ];
+  
+              $detailsJour['commandes'][] = $detailsCommande;
+  
+              // Mettre à jour les totaux du rapport
+              $detailsJour['totalTarifLivraison'] += $tarifLivraison;
+              $detailsJour['totalBenefice'] += $beneficeLivraison;
+              $detailsJour['totalSalaire'] += $detailsCommande['salaire'];
+          }
+  
+          // Ajouter les détails du jour au rapport général
+          $rapport[$date] = $detailsJour;
+      }
+  
+      return $rapport;
+  }
+  public function detailsLivreurAnnee($idLivreur, $annee) {
+      // Initialiser le rapport
+      $rapport = [];
+      $this->db->where('nom', 'benefice_frais_livraison');
+      $query = $this->db->get('Config');
+      $configBeneficeLivraison = 0;
+      // Vérifier s'il y a des résultats
+      if ($query->num_rows() > 0) {
+         $config = $query->row_array();
+         $configBeneficeLivraison = $config['valeur'];  // Récupérer la valeur
+      } else {
+         // Gérer le cas où la configuration n'est pas trouvée
+         return $rapport; // Par exemple, retourner une valeur par défaut ou gérer une erreur
+      }
+      // Boucler sur tous les mois de l'année
+      for ($mois = 1; $mois <= 12; $mois++) {
+         // Récupérer les commandes payées du livreur pour le mois et l'année spécifiés
+         $commandesParJour = $this->getCommandesPayeesByLivreur($idLivreur, $mois, $annee);
+
+         // Initialiser les variables pour le mois
+         $detailsMois = [
+            'mois' => $mois,
+            'nombreLivraisons' => 0,
+            'totalTarifLivraison' => 0,
+            'totalBenefice' => 0,
+            'totalSalaire' => 0,
+            'detailsJours' => []
+         ];
+
+         // Traiter chaque jour du mois
+         foreach ($commandesParJour as $date => $commandes) {
+            $detailsJour = [
+                  'date' => $date,
+                  'commandes' => [],
+                  'totalTarifLivraison' => 0,
+                  'totalBenefice' => 0,
+                  'totalSalaire' => 0
+            ];
+
+            foreach ($commandes as $commande) {
+                  // Calculer le tarif de livraison pour chaque commande
+                  $tarifLivraison = $this->CommandeModel->getTarifCommande($commande['id']);
+
+                  // Calculer le bénéfice de la livraison (en pourcentage de la config)
+                  $beneficeLivraison = $tarifLivraison * ($configBeneficeLivraison / 100);
+
+                  // Ajouter les détails de la commande au rapport
+                  $detailsCommande = [
+                     'id_commande' => $commande['id'],
+                     'tarif_livraison' => $tarifLivraison,
+                     'benefice_livraison' => $beneficeLivraison,
+                     'salaire' => $tarifLivraison - $beneficeLivraison
+                  ];
+
+                  $detailsJour['commandes'][] = $detailsCommande;
+
+                  // Mettre a jour les totaux du jour
+                  $detailsJour['totalTarifLivraison'] += $tarifLivraison;
+                  $detailsJour['totalBenefice'] += $beneficeLivraison;
+                  $detailsJour['totalSalaire'] += $detailsCommande['salaire'];
+
+                  // Mettre a jour les totaux du mois
+                  $detailsMois['totalTarifLivraison'] += $tarifLivraison;
+                  $detailsMois['totalBenefice'] += $beneficeLivraison;
+                  $detailsMois['totalSalaire'] += $detailsCommande['salaire'];
+            }
+
+            // Ajouter les détails du jour au mois
+            $detailsMois['detailsJours'][] = $detailsJour;
+            $detailsMois['nombreLivraisons'] += count($commandes);
+         }
+
+         // Ajouter les détails du mois au rapport général
+         $rapport[$mois] = $detailsMois;
+      }
+
+      return $rapport;
+   }
+
+
 
 }
 

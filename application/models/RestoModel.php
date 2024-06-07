@@ -87,9 +87,10 @@ class  RestoModel extends CI_Model {
       return $query->result_array();
    }
    public function getAllWithInfo() {
-      $this->db->select('resto.id, resto.email, info_resto.nom, info_resto.adresse, info_resto.description, info_resto.heure_ouverture, info_resto.heure_fermeture');
+      $this->db->select('resto.id, resto.email, info_resto.nom, info_resto.adresse as id_adresse,adresse.nom as adresse, info_resto.description, info_resto.heure_ouverture, info_resto.heure_fermeture');
       $this->db->from('Resto resto');
       $this->db->join('Info_resto info_resto', 'resto.id = info_resto.id_resto');
+      $this->db->join('Adresse adresse', 'info_resto.adresse = adresse.id');
       $query = $this->db->get();
       return $query->result_array();
   }

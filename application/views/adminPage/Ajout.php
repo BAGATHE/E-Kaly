@@ -44,8 +44,12 @@
                     </div>
                     
                     <div class="form-input">
-                        <label for="">adresse</label>
-                        <input type="text" placeholder="Adresse" name="adresse">
+                    <label for="">Adresse</label>
+                    <select name="adresse" id="options" multiple>
+                    <?php foreach( $adresses as $adresse ){?>  
+                    <option value="<?=$adresse['id'] ?>"><?=$adresse['nom']?></option>
+                    <?php } ?>
+                    </select>
                     </div>
 
                     <div class="form-input">
@@ -72,8 +76,12 @@
                         <input type="email" placeholder="email" name="email">
                     </div>
                     <div class="form-input">
-                        <label for="">Adresse</label>
-                        <input type="text" placeholder="Adresse" name="adresse">
+                    <label for="">Adresse</label>
+                    <select name="adresse" id="options" multiple>
+                    <?php foreach( $adresses as $adresse ){?>  
+                    <option value="<?=$adresse['id'] ?>"><?=$adresse['nom']?></option>
+                    <?php } ?>
+                    </select>
                     </div>
                     <div class="form-input">
                         <label for="">Heure ouverture</label>

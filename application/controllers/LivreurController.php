@@ -6,6 +6,7 @@ class LivreurController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('LivreurModel');
+        $this->load->model('AdresseModel');
     }
 
     public function index() {
@@ -40,6 +41,7 @@ class LivreurController extends CI_Controller {
         if ($this->session->userdata('admin_session')) {
             $current_administrator = $this->session->userdata('admin_session');
         }
+        $data["adresses"] = $this->AdresseModel->getAll();
         $data['current_administrator'] = $current_administrator; 
         $data['livreur'] = $this->LivreurModel->getById($id_livreur);
         $data['contents'] = "adminPage/ModifLivreur";
