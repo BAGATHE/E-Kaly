@@ -105,9 +105,8 @@ INSERT INTO Commande_plat (id, id_commande, id_plat, quantite, prix) VALUES
 -- La commande 21 ne contient que des plats du Resto 3
 
 -- Insérer des données dans la table Commission_admin
-INSERT INTO Commission_admin (id, commission_resto) VALUES 
-(1, 5);
-
+INSERT INTO Commission_admin (id, commission_resto,commission_livreur) VALUES 
+(1, 5,30);
 -- Insérer des données dans la table Config
 INSERT INTO Config (id, nom, valeur, unite) VALUES
 (1, 'benefice_frais_livraison', 30, '%');

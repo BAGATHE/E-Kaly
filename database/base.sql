@@ -183,8 +183,10 @@ CREATE TABLE Payement (
 
 create table Commission_admin(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    commission_resto decimal(10,2)
+    commission_resto decimal(10,2),
+    commission_livreur decimal(10,2)
 );
+
 
 
 

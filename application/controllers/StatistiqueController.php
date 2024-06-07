@@ -6,8 +6,11 @@ class StatistiqueController extends CI_Controller{
         parent::__construct();
         $this->load->model('StatRestoModel'); 
         $this->load->model('ClientModel'); 
+        $this->load->model('StatGeneralModel');
     }
 
+
+    /*statitique general resto flux chiffre*/
     public function checkStatisiqueGeneral(){
         $mois = $this->input->post('mois');
         $anner = $this->input->post('anner');
@@ -24,5 +27,16 @@ class StatistiqueController extends CI_Controller{
         
         echo json_encode($data);
     }
+
+    public function RevenuParMois(){
+        $idlivreur  = $this->input->get("idlivreur");
+        $mois = $this->input->get("mois");
+        $anner = $this->input->get("anner");
+        $data = $this->StatRestoModel->RevenuParMois(1,'2','2024');
+        var_dump($data);
+    }
+
+
+
     
 }

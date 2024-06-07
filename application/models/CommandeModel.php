@@ -126,6 +126,7 @@ class CommandeModel extends CI_Model {
       $query = $this->db->get('Commande');
       return $query->result_array();
    }
+   
    public function getRestoByCommandeId($commandeId) {
         $this->db->select('Resto.*');
         $this->db->from('Commande');

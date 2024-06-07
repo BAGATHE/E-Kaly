@@ -1,5 +1,19 @@
         <!-- Main Content -->
         <main>
+
+        <div class="d-sm-flex justify-content-between align-items-center mb-4">
+            <form  id='statistique'  method="POST" action="<?php echo site_url('StatistiqueController/RevenuParMois');?>">
+            
+            
+
+              <select class="form-select  d-sm-inline-block" aria-label="Default select example" id="anner" style="width: 12vw;" name="anner">
+                <option value="0">choisir  année</option>
+                <option value="2024">2024</option>
+              </select>
+              <button class="btn btn-primary" type="submit">Ajouter</button>
+            </form>
+        </div>
+
             <!-- Recent Orders Table -->
             <div class="recent-orders">
                 <h2>Listes des livreurs Payés</h2>
