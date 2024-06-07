@@ -1,0 +1,98 @@
+@import url('../font/font-family.css');
+
+:root {
+    --white-clr: #fff;
+    --green-clr:#1cb45b;
+    --beige-clr:#f7eac8;
+    --black-clr:#212121;
+    --yellow-clr:#fc800c;
+
+    --danger: #D32F2F;
+    --success: #388E3C;
+}
+
+.delete {
+    color: var(--danger);
+}
+
+.update {
+    color: var(--success);
+}
+
+.content main {
+    display: flex;
+    flex-direction: column;
+}
+
+.content main .titre {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.content main .ajouter{
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.content main .ajouter span{
+    color: var(--green-clr);   
+}
+
+.content main .container{
+    display: flex;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 3em;
+    flex-wrap: wrap;
+    height: 100%;
+    gap: 4em;
+}
+
+.content main .card{
+    border-radius: 18px;
+    width: 35em;
+    height: 20em;
+    box-shadow:  5px 5px 17px #929292,
+    -5px -5px 17px #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    gap: 1em;
+}
+
+.content main .card img {
+    width: 250px;
+    height: 250px;
+}
+
+.content main .card .right{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.content main .card .right .info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content main .card .right .info h2 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.content main .card .right .info .price,.qtt {
+    color: var(--green-clr);
+}
+
+.content main .card .right .info .qtt {
+    color: var(--yellow-clr);
+}
