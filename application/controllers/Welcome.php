@@ -9,7 +9,9 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-    $this->load->view('login');
+    $data['contents'] = "restoPage/Accueil";
+    $this->load->view('templates_resto/template', $data);
+    //$this->load->view('login');
 }
 }
 ?>

@@ -10,9 +10,11 @@ class RestoController extends CI_Controller {
     }
 
     public function index() {
-        
+        $data['contents'] = "restoPage/Accueil";
+        $this->load->view('templates_resto/template', $data);
     }
 
+    /**Fontion insertion dans la base */
     public function create() {
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -76,11 +78,13 @@ class RestoController extends CI_Controller {
         redirect('RouteController/listRestoLivreur');
     }
 
+/* fonction insertion dans la base*/
     public function delete($id) {
         $this->RestoModel->delete($id);
         redirect('RestoController');
     }
 
+    /*fonction recherche */
     public function search() {
         $criteria = [
             'id' => $this->input->post('id'),
@@ -91,7 +95,7 @@ class RestoController extends CI_Controller {
         $this->load->view('resto/index', $data);
     }
 
-      /***redirection vers une page ajout*/
+      /***redirection vers une page ajout Restaurant*/
       public function insertionPage(){
         $current_administrator  = null;
         if ($this->session->userdata('admin_session')) {
@@ -99,8 +103,61 @@ class RestoController extends CI_Controller {
         }
         $data['current_administrator'] = $current_administrator; 
         $data['contents'] = "adminPage/Ajout";
-        $this->load->view('templates/template', $data);
-        
+        $this->load->view('templates/template', $data);        
     }
+    
+    /** redirection vers une page ajout de plat */
+    public function ajouterPlat(){
+        $current_resto  = null;
+        if ($this->session->userdata('resto_session')) {
+            $current_resto = $this->session->userdata('resto_session');
+        }
+        $data['current_resto'] = $current_resto; 
+        $data['contents'] = "restoPage/AjoutResto";
+        $this->load->view('templates_resto/template', $data);        
+    }
+    
+    /**redirection page historique commande */
+
+    public function historiqueCommande(){
+        $current_resto  = null;
+        if ($this->session->userdata('resto_session')) {
+            $current_resto = $this->session->userdata('resto_session');
+        }
+        $data['current_resto'] = $current_resto;
+        $data['contents'] = "restoPage/HistoriqueCommande";
+        $this->load->view('templates_resto/template', $data);
+
+}
+   public function getDetailCommandeByid(){
+    $id_commande = $this->input->post('id_commande');
+    $data["contents"] = "restoPage/DetailCommande";
+    $this->load->view('templates_resto/template', $data);
+   }
+
+   /**redirection vers la page  modification plat*/
+   public function loadFormPlat(){
+    $current_resto  = null;
+    if ($this->session->userdata('resto_session')) {
+        $current_resto = $this->session->userdata('resto_session');
+        }
+        $data['current_resto'] = $current_resto;
+        //$data['id_plat'] = $id_plat;
+        $data['contents'] = "restoPage/ModifPlat";
+        $this->load->view('templates_resto/template', $data);
+        }
+  
+    /**redirection page modification quantiter production plat journaliere*/
+    public function loadFormModifQuantiteProduction(){
+        $current_resto  = null;
+        if ($this->session->userdata('resto_session')) {
+            $current_resto = $this->session->userdata('resto_session');
+            }
+            $data['current_resto'] = $current_resto;
+            //$data['id_plat'] = $id_plat;
+            $data['contents'] = "restoPage/ModifQuantitePlat";
+            $this->load->view('templates_resto/template', $data);
+    }
+
 }
 ?>

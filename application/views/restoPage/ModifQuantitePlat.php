@@ -1,55 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='./assets/font/font.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./assets/css/resto.css">
-    <link rel="stylesheet" href="./assets/css/modif.css">
-    <link rel="icon" href="./assets/images/Logo.png">
-    <script src="./assets/js/resto.js"></script>
-    <title>E-Kaly | Restaurant</title>
-</head>
-
-<body>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <img src="./assets/images/logo.png">
-            <h2>E-<span class="kaly">KALY</span></h2>
-        </div>
-        <ul class="side-menu">
-            <li>
-                <a href="Accueil.html">
-                    <span class="material-icons-sharp">
-                        home
-                    </span>
-                    Accueil
-                </a>
-            </li>
-            <li>
-                <a href="HistoriqueCommande.html">
-                    <span class="material-icons-sharp">
-                        article
-                    </span>
-                    Historique commande
-                </a>
-            </li>
-        </ul>
-        <ul class="side-menu">
-            <li>
-                <a href="#" class="logout">
-                    <span class="material-icons-sharp">
-                        logout
-                    </span>
-                    Logout
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Sidebar -->
-
     <!-- Main Content -->
     <div class="content">
         <!-- Navbar -->
@@ -74,7 +22,7 @@
             </a>
             <a href="#" class="profile">
                 <p>resto_nom</p>
-                <img src="./assets/images/logo.png">
+                <img src="<?php echo base_url()?>assets/images/Logo.png">
             </a>
         </nav>
 
@@ -113,6 +61,3 @@
 
     </div>
 
-</body>
-
-</html>

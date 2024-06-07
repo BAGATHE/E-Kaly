@@ -1,55 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='./assets/font/font.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./assets/css/resto.css">
-    <link rel="stylesheet" href="./assets/css/plat.css">
-    <link rel="icon" href="./assets/images/Logo.png">
-    <script src="./assets/js/resto.js"></script>
-    <title>E-Kaly | Restaurant</title>
-</head>
-
-<body>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <img src="./assets/images/logo.png">
-            <h2>E-<span class="kaly">KALY</span></h2>
-        </div>
-        <ul class="side-menu">
-            <li  class="active">
-                <a href="Accueil.html">
-                    <span class="material-icons-sharp">
-                        home
-                    </span>
-                    Accueil
-                </a>
-            </li>
-            <li>
-                <a href="HistoriqueCommande.html">
-                    <span class="material-icons-sharp">
-                        article
-                    </span>
-                    Historique commande
-                </a>
-            </li>
-        </ul>
-        <ul class="side-menu">
-            <li>
-                <a href="#" class="logout">
-                    <span class="material-icons-sharp">
-                        logout
-                    </span>
-                    Logout
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- End of Sidebar -->
-
     <!-- Main Content -->
     <div class="content">
         <!-- Navbar -->
@@ -74,17 +22,18 @@
             </a>
             <a href="#" class="profile">
                 <p>resto_nom</p>
-                <img src="./assets/images/logo.png">
+                <img src="<?php echo base_url()?>assets/images/Logo.png">
             </a>
         </nav>
 
         <!-- End of Navbar -->
 
         <main>
-            <h1 class="ajouter"><a href="AjoutResto.html">+ Ajouter</a></h1>
+            <h1 class="ajouter"><a href="<?=site_url('RestoController/ajouterPlat')?>">+ Ajouter</a></h1>
+            <h1 class="ajouter"><a href="<?=site_url('RestoController/loadFormModifQuantiteProduction')?>">+ Modifier Quantité Plat</a></h1>
             <div class="container">
                 <div class="card">
-                    <img src="./assets/images/plat.png" alt="">
+                    <img src="<?php echo base_url()?>assets/images/plat.png" alt="">
                     <div class="info">
                         <h2>Riz cantonais</h2>
                         <p class="price">22000Ar</p>
@@ -104,12 +53,12 @@
                         <p>Quantite : <span class="qtt">10</span></p>
                     </div>
                     <div class="button">
-                        <a href="ModifPlat.html" class="update">Modifier</a>
+                        <a href="<?=site_url('RestoController/loadFormPlat') ?>" class="update">Modifier</a>
                         <a href="" class="delete">Supprimer</a>
                     </div>
                 </div>
                 <div class="card">
-                    <img src="./assets/images/plat.png" alt="">
+                    <img src="<?php echo base_url()?>assets/images/plat.png" alt="">
                     <div class="info">
                         <h2>Riz cantonais</h2>
                         <p class="price">22000Ar</p>
@@ -138,7 +87,3 @@
         </main>
 
     </div>
-
-</body>
-
-</html>
