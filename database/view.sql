@@ -73,7 +73,9 @@ select
 from 
     v_revenu_par_jour_resto_jour
 group by
+
     month,year;   
+ 
 
 create or replace VIEW v_mise_en_avant_with_expiration AS
 SELECT 
@@ -85,10 +87,7 @@ SELECT
 FROM Mise_en_avant;
 
 
-
-
-
---stat livreur
+-- stat livreur
 create or replace VIEW v_frais_livraison_par_commande_livreur_Commande as
 select 
     vrpcpc.*,
@@ -137,7 +136,7 @@ from
 group by
     month,year;  
 
---------------revenu total
+-- revenu total
 create or replace view v_revenu_par_mois as
 select 
     year,
@@ -191,3 +190,33 @@ group by
     mois, annee
 order by
     annee, mois;
+
+-- INFO GLOBAL PLAT
+
+create or replace view v_changement_quantite_plat  AS
+select 
+    vrp.*,
+    cqp.date as date_changement,
+    cqp.production
+from 
+    v_resto_plat as  vrp
+join 
+    Change_quantite_plat as cqp
+on 
+    vrp.id_plat = cqp.id_plat
+GROUP BY
+    vrp.id_plat,vrp.id_resto,DAY(cqp.date),MONTH(cqp.date),YEAR(cqp.date);
+
+
+create or replace view v_info_global_plat_resto as 
+select 
+    vcqp.*,
+    avg(note) as note
+FROM   
+    v_changement_quantite_plat as vcqp
+join 
+    Note_plat as np
+on 
+    np.id_plat = vcqp.id_plat
+GROUP BY
+    vcqp.id_plat,vcqp.id_resto,DAY(vcqp.date_changement),MONTH(vcqp.date_changement),YEAR(vcqp.date_changement);
