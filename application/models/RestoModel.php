@@ -139,12 +139,14 @@ class  RestoModel extends CI_Model {
       $result = $query->row_array();
       return $result ? $result['id'] : null;
    }
-   public function getStatForRestoMois($annee) {
+   public function getStatForRestoMois($annee,$id) {
+      $this->db->where('id_resto',$id);
       $this->db->where('year',$annee);
       $query = $this->db->get('v_revenu_depense_chiffre_mois_for_resto');
       return $query->result_array();
    }
-   public function getStatForRestoJour($mois,$annee) {
+   public function getStatForRestoJour($mois,$annee,$id) {
+      $this->db->where('id_resto',$id);
       $this->db->where('month',$mois);
       $this->db->where('year',$annee);
       $query = $this->db->get('v_revenu_depense_chiffre_jour_for_resto');
