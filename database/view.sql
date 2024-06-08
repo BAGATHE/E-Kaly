@@ -57,6 +57,7 @@ select
     id_resto,
     sum(prix * quantite) as prix_commande,
     date,
+    sum(prix * quantite) as chiffreDAffaireResto,
     (sum(prix * quantite) * (select commission_resto from Commission_admin))/100 as commission
 from 
     v_resto_plat_Commande_plat_Commande
@@ -205,8 +206,7 @@ group by
 order by
     annee, mois;
 
-
----------------------------------------------------------------------------Historique Commande Resto
+-- Historique Commande Resto
 create or replace view v_historique_commande_restaurant as
 select  
     cpc.id_commande,
@@ -258,3 +258,33 @@ on
     np.id_plat = vcqp.id_plat
 GROUP BY
     vcqp.id_plat,vcqp.id_resto,DAY(vcqp.date_changement),MONTH(vcqp.date_changement),YEAR(vcqp.date_changement);
+
+
+-- revenu depense chiffre d affaire for resto 
+
+create or replace view v_revenu_depense_chiffre_jour_for_resto as
+select 
+    DAY(date) as day,
+    MONTH(date) as month,
+    YEAR(date) as year,
+    sum(chiffreDAffaireResto) as chiffreDAffaireResto,
+    sum(commission) as depense,
+    sum(chiffreDAffaireResto) - sum(commission) as revenue
+from 
+    v_commission_par_Commande_par_resto_par_jour
+group by
+    day,month,year;  
+
+
+create or replace view v_revenu_depense_chiffre_mois_for_resto as
+select 
+    month,
+    year,
+    sum(chiffreDAffaireResto) as chiffreDAffaireResto,
+    sum(depense) as depense,
+    sum(revenue) as revenue
+from 
+    v_revenu_depense_chiffre_jour_for_resto
+group by
+
+    month,year;   
