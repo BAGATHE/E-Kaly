@@ -33,26 +33,36 @@
             <div class="bottom-data">
                 <div class="orders">
                     <div class="ajout">
-                        <form action="">
+                        <form action="<?=site_url('RestoController/modifierPlat') ?>">
                             <h2>Modifier Plat</h2>
-                            <div class="form-input">
-                                <label for="">Resto</label>
-                                <select name="" id="">
-                                    <option value="id_resto">nom_resto</option>
-                                    <option value="id_resto">nom_resto</option>
-                                </select>
-                            </div>
+                            <input type="hidden" name="id_plat" value="<?=$plat["id"] ?>">
+                            <input type="hidden" name="id_resto" value="<?=$plat["id_resto"] ?>">
                             <div class="form-input">
                                 <label for="">Description</label>
-                                <input type="text" placeholder="description_plat" value="description_plat">
+                                <input type="text" placeholder="description_plat" value="<?=$plat["description"] ?>">
                             </div>
                             <div class="form-input">
                                 <label for="">Prix</label>
-                                <input type="number" placeholder="prix_plat" value="50000">
+                                <input type="number" placeholder="prix_plat" value="<?=$plat["prix"] ?>">
                             </div>
                             <div class="form-input">
                                 <label for="">Image</label>
                                 <input type="file">
+                            </div>
+                            <button type="submit">Modifier</button>
+                        </form>
+
+                        <form action="<?=site_url('RestoController/modifierQuantitePlat') ?>">
+                            <h2>Modifier Quantite_Plat</h2>
+                            <input type="hidden" name="id" value="<?=$change_quantiter_plat['id'] ?>">
+                            <input type="hidden" name="id_plat" value="<?=$change_quantiter_plat["id_plat"] ?>">
+                            <div class="form-input">
+                                <label for="">Date</label>
+                                <input type="datetime-local" placeholder="date" value="<?=$change_quantiter_plat['date'] ?>">
+                            </div>
+                            <div class="form-input">
+                                <label for="">Production</label>
+                                <input type="number" placeholder="production" value="<?=$change_quantiter_plat['production'] ?>">
                             </div>
                             <button type="submit">Modifier</button>
                         </form>

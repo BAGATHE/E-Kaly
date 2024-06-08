@@ -7,6 +7,8 @@ class RestoController extends CI_Controller {
         parent::__construct();
         $this->load->model('RestoModel');
         $this->load->model('AdresseModel');
+        $this->load->model('PlatModel');
+        $this->load->model('ChangeQuantitePlatModel');
     }
 
     /**redirectioon page acceuil resto apres success authnetification de la fonction login  */
@@ -15,6 +17,7 @@ class RestoController extends CI_Controller {
         if ($this->session->userdata('resto_session')) {
             $current_resto = $this->session->userdata('resto_session');
             }
+        $data['list_plat_resto'] = $this->PlatModel->getAllInfo($current_resto['id']);
         $data['current_resto'] = $current_resto;
         $data['contents'] = "restoPage/Accueil";
         $this->load->view('templates_resto/template', $data);
@@ -141,7 +144,7 @@ class RestoController extends CI_Controller {
     }
     
     /** redirection vers une page ajout de plat */
-    public function ajouterPlat(){
+    public function ajouterPlatPage(){
         $current_resto  = null;
         if ($this->session->userdata('resto_session')) {
             $current_resto = $this->session->userdata('resto_session');
@@ -151,8 +154,14 @@ class RestoController extends CI_Controller {
         $this->load->view('templates_resto/template', $data);        
     }
     
-    /**redirection page historique commande */
+    /**fonction insertion plat et quantiter plat **/
+    public function insertionPlat_etQuantiteProduction(){
 
+    }
+
+
+
+    /**redirection page historique commande */
     public function historiqueCommande(){
         $current_resto  = null;
         if ($this->session->userdata('resto_session')) {
@@ -171,13 +180,14 @@ class RestoController extends CI_Controller {
    }
 
    /**redirection vers la page  modification plat*/
-   public function loadFormPlat(){
+   public function loadFormPlat($id_plat){
     $current_resto  = null;
     if ($this->session->userdata('resto_session')) {
         $current_resto = $this->session->userdata('resto_session');
         }
         $data['current_resto'] = $current_resto;
-        //$data['id_plat'] = $id_plat;
+        $data['plat'] = $this->PlatModel->getById($id_plat);
+        $data['change_quantiter_plat'] = $this->ChangeQuantitePlatModel->getByIdPlat($id_plat);
         $data['contents'] = "restoPage/ModifPlat";
         $this->load->view('templates_resto/template', $data);
         }
@@ -192,6 +202,18 @@ class RestoController extends CI_Controller {
             //$data['id_plat'] = $id_plat;
             $data['contents'] = "restoPage/ModifQuantitePlat";
             $this->load->view('templates_resto/template', $data);
+    }
+
+
+    /****fonction modifier quantiter production plat */
+
+    public function modifierQuantitePlat(){
+
+    }
+
+    /**fonction modifier plat */
+    public function modifierPlat(){
+
     }
 
 }

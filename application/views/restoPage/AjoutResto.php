@@ -31,46 +31,28 @@
             <div class="bottom-data">
                 <div class="orders">
                     <div class="ajout">
-                        <form action="">
+                        <form action="<?=site_url('RestoController/insertionPlat_etQuantiteProduction')?>">
                             <h2>Ajouter Plat</h2>
                             <div class="form-input">
-                                <label for="">Resto</label>
-                                <select name="" id="">
-                                    <option value="id_resto">nom_resto</option>
-                                    <option value="id_resto">nom_resto</option>
-                                </select>
-                            </div>
-                            <div class="form-input">
                                 <label for="">Description</label>
-                                <input type="text" placeholder="description_plat">
+                                <input type="text" placeholder="description_plat" required>
                             </div>
                             <div class="form-input">
                                 <label for="">Prix</label>
-                                <input type="number" placeholder="prix_plat">
+                                <input type="number" placeholder="prix_plat" required>
                             </div>
                             <div class="form-input">
                                 <label for="">Image</label>
                                 <input type="file">
                             </div>
-                            <button type="submit">Ajouter</button>
-                        </form>
 
-
-                        <form action="">
                             <h2>Ajouter Quantite_Plat</h2>
                             <div class="form-input">
-                                <label for="">Plat</label>
-                                <select name="" id="">
-                                    <option value="id_plat">nom_plat</option>
-                                    <option value="id_plat">nom_plat</option>
-                                </select>
-                            </div>
-                            <div class="form-input">
                                 <label for="">Date</label>
-                                <input type="date">
+                                <input type="datetime-local" required>
                             </div>
                             <div class="form-input">
-                                <label for="">Production</label>
+                                <label for="">Production Journalière fixe</label>
                                 <input type="number" placeholder="production">
                             </div>
                             <button type="submit">Ajouter</button>

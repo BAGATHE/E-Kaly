@@ -29,59 +29,37 @@
         <!-- End of Navbar -->
 
         <main>
-            <h1 class="ajouter"><a href="<?=site_url('RestoController/ajouterPlat')?>">+ Ajouter</a></h1>
-            <h1 class="ajouter"><a href="<?=site_url('RestoController/loadFormModifQuantiteProduction')?>">+ Modifier Quantité Plat</a></h1>
+            <h1 class="ajouter"><a href="<?=site_url('RestoController/ajouterPlatPage')?>">+ Ajouter</a></h1>
             <div class="container">
-                <div class="card">
+            
+            <?php foreach($list_plat_resto as $plat){ ?>
+            <div class="card">
                     <img src="<?php echo base_url()?>assets/images/plat.png" alt="">
                     <div class="info">
-                        <h2>Riz cantonais</h2>
-                        <p class="price">22000Ar</p>
+                        <h2><?=$plat["description"] ?></h2>
+                        <p class="price"><?=$plat["prix"] ?></p>
                     </div>
                     <div class="info">
                         <div class="note">
                             <p>
                                 Note : 
                                 <span class="etoile">
-                                    5 
+                                <?=$plat["note"] ?>
                                     <span class="material-icons-sharp">
                                         star
                                     </span>
                                 </span>
                             </p>
                         </div>
-                        <p>Quantite : <span class="qtt">10</span></p>
+                        <p>Quantite : <span class="qtt"><?=$plat["production"] ?></span></p>
                     </div>
                     <div class="button">
-                        <a href="<?=site_url('RestoController/loadFormPlat') ?>" class="update">Modifier</a>
+                        <a href="<?=site_url('RestoController/loadFormPlat/'.$plat["id_plat"]) ?>" class="update">Modifier</a>
                         <a href="" class="delete">Supprimer</a>
                     </div>
                 </div>
-                <div class="card">
-                    <img src="<?php echo base_url()?>assets/images/plat.png" alt="">
-                    <div class="info">
-                        <h2>Riz cantonais</h2>
-                        <p class="price">22000Ar</p>
-                    </div>
-                    <div class="info">
-                        <div class="note">
-                            <p>
-                                Note : 
-                                <span class="etoile">
-                                    5 
-                                    <span class="material-icons-sharp">
-                                        star
-                                    </span>
-                                </span>
-                            </p>
-                        </div>
-                        <p>Quantite : <span class="qtt">10</span></p>
-                    </div>
-                    <div class="button">
-                        <a href="ModifPlat.html" class="update">Modifier</a>
-                        <a href="" class="delete">Supprimer</a>
-                    </div>
-                </div>
+         <?php }?>
+                
             </div>
             
         </main>
