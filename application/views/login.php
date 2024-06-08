@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-<form action="<?php echo site_url('AdmisController/login');?>" method="post">
+<form action="<?php echo site_url('RestoController/login');?>" method="post">
 							<input type="email" name="email" required>
 							<input type="password" name="mot_de_pass" max="35" required>
 							<input type="submit" value="se connecter">

@@ -9,7 +9,13 @@ class RestoController extends CI_Controller {
         $this->load->model('AdresseModel');
     }
 
+    /**redirectioon page acceuil resto apres success authnetification de la fonction login  */
     public function index() {
+        $current_resto  = null;
+        if ($this->session->userdata('resto_session')) {
+            $current_resto = $this->session->userdata('resto_session');
+            }
+        $data['current_resto'] = $current_resto;
         $data['contents'] = "restoPage/Accueil";
         $this->load->view('templates_resto/template', $data);
     }
@@ -78,6 +84,34 @@ class RestoController extends CI_Controller {
         redirect('RouteController/listRestoLivreur');
     }
 
+
+    /*login authentification */
+    /**login */
+    public function login() {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('mot_de_pass', 'Mot de passe', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('login');
+        } else {
+            $email = $this->input->post('email');
+            $mot_de_pass = $this->input->post('mot_de_pass');
+            $user = $this->RestoModel->checkLogin($email, $mot_de_pass);
+            if ($user !== null) {
+                $this->session->set_userdata('resto_session', $user);
+                redirect('RestoController');
+            } else {
+                $data['error'] = "Invalid email or password";
+                $this->load->view('login', $data);
+            }
+        }
+    }
+
+
+
 /* fonction insertion dans la base*/
     public function delete($id) {
         $this->RestoModel->delete($id);
@@ -129,6 +163,7 @@ class RestoController extends CI_Controller {
         $this->load->view('templates_resto/template', $data);
 
 }
+/*redirection page detail commande*/
    public function getDetailCommandeByid(){
     $id_commande = $this->input->post('id_commande');
     $data["contents"] = "restoPage/DetailCommande";

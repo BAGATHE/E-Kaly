@@ -151,6 +151,19 @@ class  RestoModel extends CI_Model {
       return $query->result_array();
    }
 
+   public function checkLogin($email,$mot_de_pass) {
+      $this->db->where('email', $email);
+      $this->db->where('mot_de_pass', $mot_de_pass);
+      $query = $this->db->get('Resto');
+
+      if ($query->num_rows() === 1) {
+          $row = $query->row_array();
+          return $row;
+      } else {
+          return null;
+      }
+  }
+
 }
 
 ?>
