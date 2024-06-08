@@ -187,9 +187,6 @@ CREATE TABLE Payement (
 );
 
 
-
----modif
-
 create table Commission_admin(
     id INT PRIMARY KEY AUTO_INCREMENT,
     commission_resto decimal(10,2),
@@ -260,6 +257,6 @@ ALTER TABLE `Status` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);
 
 ALTER TABLE `Payement` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);
 
-ALTER TABLE `Adresse` ADD FOREIGN KEY (`id`) REFERENCES `lien_adresse` (`id_adresse_1`);
+ALTER TABLE `lien_adresse` ADD FOREIGN KEY (`id_adresse1`) REFERENCES `Adresse` (`id`);
 
-ALTER TABLE `Adresse` ADD FOREIGN KEY (`id`) REFERENCES `lien_adresse` (`id_adresse_2`);
+ALTER TABLE `lien_adresse` ADD FOREIGN KEY (`id_adresse2`) REFERENCES `Adresse` (`id`);

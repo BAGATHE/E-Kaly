@@ -9,6 +9,7 @@ class RestoController extends CI_Controller {
         $this->load->model('AdresseModel');
         $this->load->model('PlatModel');
         $this->load->model('ChangeQuantitePlatModel');
+        $this->load->model('HistoriqueCommande');
     }
 
     /**redirectioon page acceuil resto apres success authnetification de la fonction login  */
@@ -168,16 +169,34 @@ class RestoController extends CI_Controller {
             $current_resto = $this->session->userdata('resto_session');
         }
         $data['current_resto'] = $current_resto;
+        
+        $date=$this->input->post('date');
+        $mois=$this->input->post('mois');
+        $annee=$this->input->post('annee');
+
+        if($date){
+            $data['historique_commande'] = $this->HistoriqueCommande->historiqueCommandeJour ($date,$current_resto['id']);    
+        }elseif ($mois && $annee) {
+            $data['historique_commande'] = $this->HistoriqueCommande->historiqueCommandeMois($mois, $annee,$current_resto['id']);
+        }else{
+            $data['date'] = date('Y-m-d');
+            $data['historique_commande'] = $this->HistoriqueCommande->historiqueCommandeJour ($data['date'],$current_resto['id']);
+        }
         $data['contents'] = "restoPage/HistoriqueCommande";
         $this->load->view('templates_resto/template', $data);
 
-}
+    }
+
 /*redirection page detail commande*/
-   public function getDetailCommandeByid(){
-    $id_commande = $this->input->post('id_commande');
-    $data["contents"] = "restoPage/DetailCommande";
-    $this->load->view('templates_resto/template', $data);
-   }
+
+   public function getDetailCommandeByid($id_commande) {
+        // Récupérer les détails de la commande à partir du modèle
+        $data['details_commande'] = $this->HistoriqueCommande->detailsCommmande($id_commande);
+        $data['commande'] = $this->HistoriqueCommande->detailsCommandeHistorique($id_commande)[0];
+        // Charger la vue avec les données de la commande
+        $data["contents"] = "restoPage/DetailCommande";
+        $this->load->view('templates_resto/template', $data);
+    }
 
    /**redirection vers la page  modification plat*/
    public function loadFormPlat($id_plat){
