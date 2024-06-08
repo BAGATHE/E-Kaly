@@ -267,19 +267,21 @@ select
     DAY(date) as day,
     MONTH(date) as month,
     YEAR(date) as year,
+    id_resto,
     sum(chiffreDAffaireResto) as chiffreDAffaireResto,
     sum(commission) as depense,
     sum(chiffreDAffaireResto) - sum(commission) as revenue
 from 
     v_commission_par_Commande_par_resto_par_jour
 group by
-    day,month,year;  
+    id_resto,day,month,year;  
 
 
 create or replace view v_revenu_depense_chiffre_mois_for_resto as
 select 
     month,
     year,
+    id_resto,
     sum(chiffreDAffaireResto) as chiffreDAffaireResto,
     sum(depense) as depense,
     sum(revenue) as revenue
@@ -287,4 +289,4 @@ from
     v_revenu_depense_chiffre_jour_for_resto
 group by
 
-    month,year;   
+    id_resto,month,year;   
