@@ -165,7 +165,35 @@ class  RestoModel extends CI_Model {
           return null;
       }
   }
+  public function getNombrePlatVenduMois($mois,$annee,$id){
+      $this->db->where('id_resto',$id);
+      $this->db->where('month',$mois);
+      $this->db->where('year',$annee);
+      $query = $this->db->get('v_nombre_plat_vendu_resto_mois');
+      return $query->result_array();
+   }
 
+   public function getNombrePlatVenduAnnee($annee,$id){
+      $this->db->where('id_resto',$id);
+      $this->db->where('year',$annee);
+      $query = $this->db->get('v_nombre_plat_vendu_resto_annee');
+      return $query->result_array();
+   }
+
+   public function getTop5RendableMois($limit,$mois,$annee,$id){
+      $this->db->where('id_resto',$id);
+      $this->db->where('month',$mois);
+      $this->db->where('year',$annee);
+      $this->db->limit(0,$limit);
+      $query = $this->db->get('v_nombre_plat_vendu_resto_mois');
+   }
+
+   public function getTop5RendableAnnee($limit,$annee,$id){
+      $this->db->where('id_resto',$id);
+      $this->db->where('year',$annee);
+      $this->db->limit(0,$limit);
+      $query = $this->db->get('v_nombre_plat_vendu_resto_annee');
+   }
 }
 
 ?>
