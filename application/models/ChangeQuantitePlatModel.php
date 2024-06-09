@@ -77,14 +77,8 @@ class  ChangeQuantitePlatModel extends CI_Model {
       $this->production = $production ;
    }
 
-   public function save() {
-      $data = [
-         'id_plat' => $this->id_plat,
-         'date' => $this->date,
-         'production' => $this->production,
-      ];
-
-      $this->db->insert('change_quantite_plat', $data);
+   public function save($data) {
+      $this->db->insert('Change_quantite_plat',$data);
    }
 
    public function getAll() {

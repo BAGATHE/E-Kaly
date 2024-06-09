@@ -157,6 +157,25 @@ class RestoController extends CI_Controller {
     
     /**fonction insertion plat et quantiter plat **/
     public function insertionPlat_etQuantiteProduction(){
+        $id_resto = $this->input->post('id_resto');
+        $description = $this->input->post('description');
+        $prix = $this->input->post('prix');
+        $quantite_production = $this->input->post('production');
+        $date = $this->input->post('date');
+        $info_plat = [
+            'id_resto'=>$id_resto,
+            'description'=>$description,
+            'prix'=>$prix
+        ];
+        $this->PlatModel->save($info_plat);
+        $id_last_idPlat = $this->PlatModel-> getLastPLatId();
+        $info_quantiter_production = [
+            'id_plat'=>$id_last_idPlat,
+            'date'=>$date,
+            'production'=>$quantite_production
+        ];
+        $this->ChangeQuantitePlatModel->save($info_quantiter_production);
+        redirect('RestoController');
 
     }
 
@@ -176,13 +195,14 @@ class RestoController extends CI_Controller {
 
         if($date){
             $data['historique_commande'] = $this->HistoriqueCommande->historiqueCommandeJour ($date,$current_resto['id']);    
-        }elseif ($mois && $annee) {
+        }else if ($mois && $annee) {
             $data['historique_commande'] = $this->HistoriqueCommande->historiqueCommandeMois($mois, $annee,$current_resto['id']);
         }else{
             $data['date'] = date('Y-m-d');
             $data['historique_commande'] = $this->HistoriqueCommande->historiqueCommandeJour ($data['date'],$current_resto['id']);
         }
         $data['contents'] = "restoPage/HistoriqueCommande";
+        
         $this->load->view('templates_resto/template', $data);
 
     }
@@ -224,16 +244,40 @@ class RestoController extends CI_Controller {
     }
 
 
-    /****fonction modifier quantiter production plat */
+  
+  /****fonction modifier quantiter production plat */
 
-    public function modifierQuantitePlat(){
 
-    }
+  public function modifierQuantitePlat(){
+    $id_quantiter = $this->input->post('id'); 
+    $id_plat = $this->input->post('id_plat');
+    $quantite_production = $this->input->post('production');
+    $date = $this->input->post('date');
+    $donner = [
+        'id'=>$id_quantiter,
+        'id_plat'=>$id_plat,
+        'date'=>$date,
+        'production'=>$quantite_production
+    ];
+    $this->ChangeQuantitePlatModel->edit($id_quantiter,$donner);
+    redirect('RestoController');
+}
 
-    /**fonction modifier plat */
-    public function modifierPlat(){
-
-    }
+/**fonction modifier plat */
+public function modifierPlat(){
+    $id_plat= $this->input->post('id_plat'); 
+    $id_resto = $this->input->post('id_resto');
+    $description = $this->input->post('description_plat');
+    $prix = $this->input->post('prix_plat');
+    $donner = [
+        'id'=>$id_plat,
+        'id_resto'=>$id_resto,
+        'description'=>$description,
+        'prix'=>$prix
+    ];
+    $this->PlatModel->edit($id_plat,$donner);
+    redirect('RestoController');
+}
 
 }
 ?>

@@ -21,7 +21,7 @@
                 <span class="count">12</span>
             </a>
             <a href="#" class="profile">
-                <p><?=$current_resto["nom"] ?></p>
+                <p></p>
                 <img src="<?php echo base_url()?>assets/images/Logo.png">
             </a>
         </nav>
@@ -91,8 +91,8 @@
                                         <td><?php echo $commande['date']; ?></td>
                                         <td><?php echo $commande['adresse']; ?></td>
                                         <td>Commande <?php echo $commande['id_commande']; ?></td>
-                                        <td><?php echo number_format($commande['total'], 0, ',', ' '); ?> Ar</td>
-                                        <td><?php echo number_format($commande['commission'], 0, ',', ' '); ?> Ar</td>
+                                        <td><?php echo $commande['total']; ?> </td>
+                                        <td><?php echo $commande['commission']; ?> </td>
                                         <td><span class="status process"><a href="<?= site_url('RestoController/getDetailCommandeByid/' . $commande['id_commande']); ?>">Detail</a></span></td>
                                     </tr>
                                 <?php endforeach; ?>

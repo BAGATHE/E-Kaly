@@ -77,13 +77,7 @@ class PlatModel extends CI_Model {
       $this->prix = $prix ;
    }
 
-   public function save() {
-      $data = [
-         'id_resto' => $this->id_resto,
-         'description' => $this->description,
-         'prix' => $this->prix,
-      ];
-
+   public function save($data) {
       $this->db->insert('Plat', $data);
    }
 
@@ -107,6 +101,14 @@ class PlatModel extends CI_Model {
       $this->db->where('id', $id);
       $query = $this->db->get('Plat');
       return $query->row_array();
+   }
+   
+   public function getLastPLatId() {
+      $this->db->select('id');
+      $this->db->order_by('id', 'DESC');
+      $query = $this->db->get('Plat', 1);
+      $result = $query->row_array();
+      return $result ? $result['id'] : null;
    }
 
    public function search($criteria = []) {

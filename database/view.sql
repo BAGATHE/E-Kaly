@@ -219,7 +219,7 @@ select
 from v_commission_par_Commande_par_resto_par_jour as cpc 
 join Commande c 
 on cpc.id_commande=c.id
-join adresse a 
+join Adresse a 
 on a.id= c.adresse;
 
 create or replace view v_historique_commande_restaurant_avec_nom_client as 
@@ -243,10 +243,10 @@ create or replace view v_details_commande_avec_nom_plat as
 select 
     id_commande,
     id_plat,
-    nom,
     quantite,
-    prix as prix_unitaire,
-    (quantite*prix) as total
+    Plat.description,
+    Plat.prix as prix_unitaire,
+    (quantite*Plat.prix) as total
 from Commande_plat
 join Plat 
 on Plat.id=Commande_plat.id_plat;
@@ -272,10 +272,10 @@ GROUP BY
 create or replace view v_info_global_plat_resto as 
 select 
     vcqp.*,
-    avg(note) as note
+    coalesce(avg(note),0) as note
 FROM   
     v_changement_quantite_plat as vcqp
-join 
+left join 
     Note_plat as np
 on 
     np.id_plat = vcqp.id_plat
