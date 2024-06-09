@@ -22,6 +22,30 @@
                     Historique commande
                 </a>
             </li>
+            <li>
+                <a href="<?= site_url('RestoController/loadMiseEnAvantPage')?>">
+                    <span class="material-icons-sharp">
+                        star
+                    </span>
+                    Mise en avant
+                </a>
+            </li>
+            <li>
+                <a href="<?= site_url('RestoController/loadRevenuPage')?>">
+                    <span class="material-icons-sharp">
+                        insert_chart
+                    </span>
+                    Revenu
+                </a>
+            </li>
+            <li   class="active">
+                <a href="<?= site_url('RestoController/loadComissionPage')?>">
+                    <span class="material-icons-sharp">
+                        auto_graph
+                    </span>
+                    Commission payer
+                </a>
+            </li>
         </ul>
         <ul class="side-menu">
             <li>
@@ -35,3 +59,4 @@
         </ul>
     </div>
     <!-- End of Sidebar -->
+

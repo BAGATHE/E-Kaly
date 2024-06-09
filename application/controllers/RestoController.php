@@ -279,5 +279,23 @@ public function modifierPlat(){
     redirect('RestoController');
 }
 
+/**fonction load page mise en avant */
+public function loadMiseEnAvantPage(){
+    $data['contents'] = "restoPage/MiseEnAvant";
+    $this->load->view('templates_resto/template', $data);
+}
+
+/*fonction load page revenu*/ 
+public function loadRevenuPage(){
+    $data['contents'] = "restoPage/RevenuResto";
+    $this->load->view('templates_resto/template', $data);
+}
+
+/*function load page Commission*/ 
+public function loadComissionPage(){
+    $data['contents'] = "restoPage/CommissionResto";
+    $this->load->view('templates_resto/template', $data);
+}
+
 }
 ?>
