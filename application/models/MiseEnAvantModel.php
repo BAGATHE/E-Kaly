@@ -164,7 +164,6 @@ class  MiseEnAvantModel extends CI_Model {
       $query = $this->db->get('Prix');
       return $query->row_array();
   }
-
   public function save() {
       $prix_in_prix = $this->getPrixInPrix($this->id_prix);
       if ($prix_in_prix) {

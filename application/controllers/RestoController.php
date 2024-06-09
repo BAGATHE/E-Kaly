@@ -285,15 +285,9 @@ public function loadMiseEnAvantPage(){
     $this->load->view('templates_resto/template', $data);
 }
 
-/*fonction load page revenu*/ 
-public function loadRevenuPage(){
-    $data['contents'] = "restoPage/RevenuResto";
-    $this->load->view('templates_resto/template', $data);
-}
-
-/*function load page Commission*/ 
-public function loadComissionPage(){
-    $data['contents'] = "restoPage/CommissionResto";
+/*function load page Statistique*/ 
+public function loadStatistiquePage(){
+    $data['contents'] = "restoPage/GlobalStatResto";
     $this->load->view('templates_resto/template', $data);
 }
 

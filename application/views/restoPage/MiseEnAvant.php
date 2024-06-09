@@ -33,7 +33,7 @@
             <div class="bottom-data">
                 <div class="orders">
                     <div class="ajout">
-                        <form action="">
+                        <form action="<?=base_url()?>/">
                             <h2>Mise en avant</h2>
                             <div class="form-input">
                                 <input type="hidden" placeholder="id_resto" value="id_resto">

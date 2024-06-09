@@ -30,20 +30,12 @@
                     Mise en avant
                 </a>
             </li>
-            <li>
-                <a href="<?= site_url('RestoController/loadRevenuPage')?>">
-                    <span class="material-icons-sharp">
-                        insert_chart
-                    </span>
-                    Revenu
-                </a>
-            </li>
             <li   class="active">
-                <a href="<?= site_url('RestoController/loadComissionPage')?>">
+                <a href="<?= site_url('RestoController/loadStatistiquePage')?>">
                     <span class="material-icons-sharp">
-                        auto_graph
+                    insert_chart
                     </span>
-                    Commission payer
+                    Global statistique
                 </a>
             </li>
         </ul>

@@ -30,8 +30,10 @@
         <!-- End of Navbar -->
 
         <main>
-            <h1>Commission Mensuel</h1>
-            <canvas id="commissionChart" width="400" height="200"></canvas>
+            <h1>statistique Annuel</h1>
+            <canvas id="chartannuel" width="400" height="150"></canvas>
+            <h1>statistique Mensuel</h1>
+            <canvas id="chartmensuel" width="400" height="150"></canvas>
         </main>
 
     </div>
