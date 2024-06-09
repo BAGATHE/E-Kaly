@@ -313,3 +313,35 @@ from
 group by
 
     id_resto,month,year;   
+
+-- nombre plat vendu
+create or replace view v_nombre_plat_vendu_resto_mois as 
+select 
+	*,
+	month(date) as month,
+    year(date) as year,
+	count(id_plat) as vendu
+from 
+	v_resto_plat_Commande_plat_Commande 
+group by
+	id_plat,id_resto,month,year
+order by 
+	vendu DESC;
+
+create or replace view v_nombre_plat_vendu_resto_annee as 
+select 
+	nom_resto,
+    id_resto,
+    id_plat,
+    description,
+    prix,
+    quantite,
+    id_commande,
+    year,
+    sum(vendu) as vendu
+from 
+	v_nombre_plat_vendu_resto_mois 
+group by
+	id_plat,id_resto,year
+order by 
+	vendu DESC;
