@@ -29,26 +29,32 @@
         <!-- End of Navbar -->
 
         <main>
+            <div>
+                <h1>abonnement actuelle</h1>
+                <h2>date debut: <span></span></h2>
+                <h2>date fin: <span></span></h2>
+            </div>
 
             <div class="bottom-data">
                 <div class="orders">
                     <div class="ajout">
-                        <form action="<?=base_url()?>/">
+                        <form action="<?php echo site_url('RestoController/ajout_abonnement'); ?>" method="POST">
                             <h2>Mise en avant</h2>
                             <div class="form-input">
-                                <input type="hidden" placeholder="id_resto" value="id_resto">
+                                <input type="hidden" name="id_resto" value="<?=$current_resto["id"] ?>">
+                                <input type="hidden" name="id_prix" value="<?=$prix_mise_en_avant["id"] ?>">
                             </div>
                             <div class="form-input">
                                 <label for="">Prix</label>
-                                <input type="number" placeholder="prix" value="45000" readonly>
+                                <input type="number" placeholder="prix" name="prix" value="<?=$prix_mise_en_avant["prix"] ?>" readonly>
                             </div>
                             <div class="form-input">
                                 <label for="">Date</label>
-                                <input type="date" placeholder="date" value="date">
+                                <input type="date" placeholder="date"  name="date">
                             </div>
                             <div class="form-input">
                                 <label for="">Durée</label>
-                                <input type="number" placeholder="duree" value="3">
+                                <input type="number" placeholder="duree" name="duree" value="3">
                             </div>
                             <button type="submit">Modifier</button>
                         </form>

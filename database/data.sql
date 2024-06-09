@@ -188,3 +188,5 @@ INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (8, 4, 3),
 (9, 5, 4),
 (10,5, 5);
+
+INSERT INTO Prix_mise_en_avant(prix) VALUES(100);

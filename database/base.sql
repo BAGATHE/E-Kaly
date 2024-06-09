@@ -155,7 +155,7 @@ CREATE TABLE Info_resto (
     FOREIGN KEY (adresse) REFERENCES Adresse(id)
 );
 
-CREATE TABLE Prix (
+CREATE TABLE Prix_mise_en_avant(
     id INT PRIMARY KEY AUTO_INCREMENT,
     prix DECIMAL(10, 2)
 );
@@ -165,10 +165,10 @@ CREATE TABLE Mise_en_avant (
     id_resto INT,
     id_prix INT,
     prix DECIMAL(10, 2),
-    date DATETIME,
+    date DATE,
     duree INT,
     FOREIGN KEY (id_resto) REFERENCES Resto(id),
-    FOREIGN KEY (id_prix) REFERENCES Prix(id)
+    FOREIGN KEY (id_prix) REFERENCES Prix_mise_en_avant(id)
 );
 
 CREATE TABLE Status (

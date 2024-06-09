@@ -186,6 +186,7 @@ class  RestoModel extends CI_Model {
       $this->db->where('year',$annee);
       $this->db->limit(0,$limit);
       $query = $this->db->get('v_nombre_plat_vendu_resto_mois');
+      return $query->result_array();
    }
 
    public function getTop5RendableAnnee($limit,$annee,$id){
@@ -193,6 +194,15 @@ class  RestoModel extends CI_Model {
       $this->db->where('year',$annee);
       $this->db->limit(0,$limit);
       $query = $this->db->get('v_nombre_plat_vendu_resto_annee');
+      return $query->result_array();
+   }
+
+   public function getPrixMiseEnAvant(){
+      $this->db->select('*');
+      $this->db->order_by('id','DESC');
+      $this->db->limit(1);
+      $query = $this->db->get('Prix_mise_en_avant');
+      return $query->row_array();
    }
 }
 

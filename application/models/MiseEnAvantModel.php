@@ -108,13 +108,14 @@ class  MiseEnAvantModel extends CI_Model {
    }
 
    public function getAll() {
-      $this->db->select('mise_en_avant.id,mise_en_avant.id_resto,mise_en_avant.id_prix,mise_en_avant.prix,mise_en_avant.date,mise_en_avant.duree,resto.email,prix.prix');
+      $this->db->select('mise_en_avant.id, mise_en_avant.id_resto, mise_en_avant.id_prix, mise_en_avant.prix, mise_en_avant.date, mise_en_avant.duree, resto.email, Prix_mise_en_avant.prix');
       $this->db->from('mise_en_avant');
       $this->db->join('resto', 'mise_en_avant.id_resto = resto.id');
-      $this->db->join('prix', 'mise_en_avant.id_prix = prix.id');
+      $this->db->join('Prix_mise_en_avant', 'mise_en_avant.id_prix = Prix_mise_en_avant.id');
       $query = $this->db->get();
       return $query->result_array();
-   }
+  }
+  
 
    public function edit($id,$data) {
       $this->db->where('id',$id);
@@ -133,10 +134,10 @@ class  MiseEnAvantModel extends CI_Model {
    }
 
    public function search($criteria = []) {
-      $this->db->select('mise_en_avant.id,mise_en_avant.id_resto,mise_en_avant.id_prix,mise_en_avant.prix,mise_en_avant.date,mise_en_avant.duree,resto.email,prix.prix');
+      $this->db->select('mise_en_avant.id,mise_en_avant.id_resto,mise_en_avant.id_prix,mise_en_avant.prix,mise_en_avant.date,mise_en_avant.duree,resto.email,Prix_mise_en_avant.prix');
       $this->db->from('mise_en_avant');
       $this->db->join('resto', 'mise_en_avant.id_resto = resto.id');
-      $this->db->join('prix', 'mise_en_avant.id_prix = prix.id');
+      $this->db->join('Prix_mise_en_avant', 'mise_en_avant.id_prix = Prix_mise_en_avant.id');
       if (!empty($criteria['id'])) {
             $this->db->like('mise_en_avant.id', $criteria['id']);
       }
@@ -161,24 +162,12 @@ class  MiseEnAvantModel extends CI_Model {
 
    public function getPrixInPrix($id) {
       $this->db->where('id', $id);
-      $query = $this->db->get('Prix');
+      $query = $this->db->get('Prix_mise_en_avant');
       return $query->row_array();
   }
-  public function save() {
-      $prix_in_prix = $this->getPrixInPrix($this->id_prix);
-      if ($prix_in_prix) {
-          $final_prix = $prix_in_prix['prix'] * $this->duree;
-          $data = array(
-              'id_resto' => $this->id_resto,
-              'id_prix' => $this->id_prix,
-              'prix' => $final_prix,
-              'date' => $this->date,
-              'duree' => $this->duree
-          );
-          return $this->db->insert('Mise_en_avant', $data);
-      } else {
-          throw new Exception('Prix in prix not found');
-      }
+  
+  public function save($data) {
+     return $this->db->insert('Mise_en_avant', $data);
   }
 
   public function getValidRestoMiseEnAvantByDate($date) {

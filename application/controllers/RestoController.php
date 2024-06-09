@@ -10,6 +10,8 @@ class RestoController extends CI_Controller {
         $this->load->model('PlatModel');
         $this->load->model('ChangeQuantitePlatModel');
         $this->load->model('HistoriqueCommande');
+        $this->load->model('MiseEnAvantModel');
+       
     }
 
     /**redirectioon page acceuil resto apres success authnetification de la fonction login  */
@@ -285,6 +287,7 @@ public function loadMiseEnAvantPage(){
         if ($this->session->userdata('resto_session')) {
             $current_resto = $this->session->userdata('resto_session');
         }
+    $data["prix_mise_en_avant"] = $this->RestoModel->getPrixMiseEnAvant();
     $data['current_resto'] = $current_resto; 
     $data['contents'] = "restoPage/MiseEnAvant";
     $this->load->view('templates_resto/template', $data);
@@ -318,6 +321,19 @@ public function globalStatResto(){
     }
     echo json_encode($data);
    
+}
+
+/**fonction insertion dans la table mise_en_avant */
+public function ajout_abonnement(){
+    $data = [
+        'id_resto' =>  $this->input->post("id_resto"),
+        'id_prix' => $this->input->post("id_prix"),
+        'prix' => $this->input->post("prix"),
+        'date' => $this->input->post("date"),
+        'duree' => $this->input->post("duree")
+    ];
+    $this->MiseEnAvantModel->save($data);
+    redirect("RestoController/loadMiseEnAvantPage");
 }
 
 }
