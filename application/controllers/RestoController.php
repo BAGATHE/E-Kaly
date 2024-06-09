@@ -281,14 +281,43 @@ public function modifierPlat(){
 
 /**fonction load page mise en avant */
 public function loadMiseEnAvantPage(){
+    $current_resto  = null;
+        if ($this->session->userdata('resto_session')) {
+            $current_resto = $this->session->userdata('resto_session');
+        }
+    $data['current_resto'] = $current_resto; 
     $data['contents'] = "restoPage/MiseEnAvant";
     $this->load->view('templates_resto/template', $data);
 }
 
 /*function load page Statistique*/ 
 public function loadStatistiquePage(){
+    $current_resto  = null;
+        if ($this->session->userdata('resto_session')) {
+            $current_resto = $this->session->userdata('resto_session');
+        }
+    $data['current_resto'] = $current_resto; 
     $data['contents'] = "restoPage/GlobalStatResto";
     $this->load->view('templates_resto/template', $data);
+}
+
+/*function qui recupere statistique global resto du mois ou en anner*/
+public function globalStatResto(){
+    $mois = $this->input->post('mois');
+    $anner = $this->input->post('annee');
+    $id_resto = $this->input->post("id_resto");
+    $data = null;
+    
+    if($mois != 0 && $anner != 0){
+        $data = $this->RestoModel->getStatForRestoJour($mois,$anner,$id_resto);
+    } else {
+        $data = $this->RestoModel->getStatForRestoMois($anner,$id_resto);
+    }
+    if($data==null){
+        $data[] = array("day"=>'0',"month"=>'0',"year"=>'0',"revenue"=>'0');
+    }
+    echo json_encode($data);
+   
 }
 
 }

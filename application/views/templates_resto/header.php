@@ -10,6 +10,23 @@
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/modif.css">
     <link rel="icon" href="<?php echo base_url()?>assets/images/Logo.png">
     <title>E-Kaly | Restaurant</title>
+
+    <style>
+     #containerchart_1{
+        width: 65vw;
+        height: 60vh;
+        margin:auto;
+     }
+    #containerchart_2{
+        width: 65vw;
+        height: 60vh;
+        margin:auto;
+    }
+     #stat_annuel, #stat_mensuel{
+        text-align:center;
+     }
+    </style>
+
 </head>
 
 <body>

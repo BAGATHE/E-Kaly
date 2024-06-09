@@ -1,4 +1,87 @@
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function(){
+$('#statistiqueResto').submit(function(event){
+    event.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+     //Récupérer les données du formulaire
+     var formData = $(this).serialize();
+       $.ajax({
+        type: 'POST',
+        url: url ,
+        data: formData,
+        success: function(response) {
+           // Traiter la réponse pour obtenir les revenus mensuels
+           console.log(response);
+           var jsonResponse = JSON.parse(response);
+           console.log(jsonResponse);
+           
+           if('day' in jsonResponse[0]){
+            // Initialise tous les jours du mois à 0
+            var dailyChiffreAffaire = Array(31).fill(0);
+            var dailyRevenu = Array(31).fill(0);
+            var dailyDepense = Array(31).fill(0);
+
+            jsonResponse.forEach(function(item) {
+                var day = parseInt(item.day, 10); // Jour de 1 à 31
+                dailyChiffreAffaire[day - 1] = parseFloat(item.chiffreDAffaireResto);
+                dailyRevenu[day - 1] = parseFloat(item.revenue);
+                dailyDepense[day - 1] = parseFloat(item.depense);
+            });
+            // Mettre à jour le graphique mensuel
+            updateChart(monthlyRevenueChart, dailyChiffreAffaire, dailyRevenu, dailyDepense);
+            $("#chartmensuel").show();
+            $("#stat_mensuel").show();
+            $("#chartannuel").hide();
+            $("#stat_annuel").hide();
+            }else{
+              // Initialise tous les mois de l'année à 0
+            var monthlyChiffreAffaire = Array(12).fill(0);
+            var monthlyRevenu = Array(12).fill(0);
+            var monthlyDepense = Array(12).fill(0);
+
+            // Supposons que jsonResponse contient les données mensuelles
+            jsonResponse.forEach(function(item) {
+            var month = parseInt(item.month, 10); // Mois de 1 à 12
+            monthlyChiffreAffaire[month - 1] += parseFloat(item.chiffreDAffaireResto);
+            monthlyRevenu[month - 1] += parseFloat(item.revenue);
+            monthlyDepense[month - 1] += parseFloat(item.depense);
+        });
+        // Mettre à jour le graphique annuel
+        updateChart(annualRevenueChart, monthlyChiffreAffaire, monthlyRevenu, monthlyDepense);
+        $("#chartannuel").show();
+        $("#stat_annuel").show();
+        $("#chartmensuel").hide();
+        $("#stat_mensuel").hide();
+         }
+     
+        },
+        /*error: function(xhr, status, error) {
+            // Gérer les erreurs de requête AJAX
+            alert('Une erreur s\'est produite lors de la validation: ' + error);
+        }*/
+    });
+ });
+
+
+
+ function updateChart(chart, dataChiffreAFaire, dataRevenu, dataDepense) {
+    chart.data.datasets[0].data = dataChiffreAFaire;
+    chart.data.datasets[1].data = dataRevenu;
+    chart.data.datasets[2].data = dataDepense;
+    chart.update();
+}
+
+
+
+
+
+
+
+
+
+
+
+/**graphique mensuelle*/
     var monthlyRevenueCtx = document.getElementById('chartmensuel').getContext('2d');
     var monthlyRevenueChart = new Chart(monthlyRevenueCtx, {
         type: 'bar',
@@ -7,21 +90,21 @@ document.addEventListener('DOMContentLoaded', function () {
             datasets: [
                 {
                     label: 'Chiffre à faire',
-                    data: [1200, 1500, 1000, 2000, 1700, 1300, 1900, 2100, 1800, 1600, 1400, 2000, 1500, 1700, 1800, 1900, 1600, 1700, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3600, 3800, 4000],
+                    data:  Array(31).fill(0),
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 },
                 {
                     label: 'Revenu',
-                    data: [1100, 1400, 900, 1900, 1600, 1200, 1800, 2000, 1700, 1500, 1300, 1900, 1400, 1600, 1700, 1800, 1500, 1600, 1700, 1900, 2100, 2300, 2500, 2700, 2900, 3100, 3300, 3500, 3700, 3900],
+                    data: Array(31).fill(0),
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 },
                 {
                     label: 'Commission',
-                    data: [900, 1300, 800, 1800, 1500, 1100, 1700, 1900, 1600, 1400, 1200, 1800, 1300, 1500, 1600, 1700, 1400, 1500, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3600, 3800],
+                    data:  Array(31).fill(0),
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
@@ -38,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
 
-
+/*graphique annuelle*/
     var annualRevenueCtx = document.getElementById('chartannuel').getContext('2d');
     var annualRevenueChart = new Chart(annualRevenueCtx, {
     type: 'bar',
@@ -47,21 +130,21 @@ document.addEventListener('DOMContentLoaded', function () {
         datasets: [
             {
                 label: 'Chiffre à faire',
-                data: [42000, 54000, 63000, 75000, 89000, 96000, 102000, 115000, 123000, 135000, 145000, 150000],
+                data: Array(12).fill(0), // Initialement tous les mois à 0
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
             },
             {
                 label: 'Revenu',
-                data: [40000, 52000, 60000, 72000, 85000, 91000, 98000, 110000, 118000, 130000, 140000, 145000],
+                data: Array(12).fill(0), // Initialement tous les mois à 0
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             },
             {
                 label: 'Commission',
-                data: [35000, 48000, 55000, 67000, 79000, 86000, 92000, 105000, 113000, 125000, 135000, 140000],
+                data: Array(12).fill(0), // Initialement tous les mois à 0
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1
@@ -76,12 +159,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
-
-
-
-
-
-
-
 
 });
