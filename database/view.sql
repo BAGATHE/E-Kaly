@@ -343,3 +343,5 @@ from
 	v_nombre_plat_vendu_resto_mois 
 group by
 	id_plat,id_resto,year
+order by 
+	vendu DESC;
