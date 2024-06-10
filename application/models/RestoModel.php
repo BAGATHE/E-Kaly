@@ -204,6 +204,17 @@ class  RestoModel extends CI_Model {
       $query = $this->db->get('Prix_mise_en_avant');
       return $query->row_array();
    }
+
+   public function getMiseEnAvant(){
+      $this->db->where('id_resto', $idResto);
+      $query = $this->db->get('v_mise_en_avant_dates');
+   }
+
+   public function getMiseEnAvantParResto ($idResto) {
+      $this->db->where('id_resto', $idResto);
+      $query = $this->db->get('v_mise_en_avant_dates');
+      return $query->row_array();
+   }
 }
 
 ?>

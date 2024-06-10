@@ -345,3 +345,15 @@ group by
 	id_plat,id_resto,year
 order by 
 	vendu DESC;
+
+    -----------------------------------------------------------------------------Mise en avant + date_debut & date fin
+CREATE OR REPLACE VIEW v_mise_en_avant_dates AS
+select 
+    id,
+    id_resto, 
+    date as date_debut,
+    DATE_ADD(date, INTERVAL duree MONTH) as date_fin,
+    duree,
+    prix as prix_par_mois, 
+    id_prix
+from Mise_en_avant;

@@ -31,8 +31,8 @@
         <main>
             <div>
                 <h1>abonnement actuelle</h1>
-                <h2>date debut: <span></span></h2>
-                <h2>date fin: <span></span></h2>
+                <h2>date debut: <span><?=$mise_en_avant_info['date_debut'] ?></span></h2>
+                <h2>date fin: <span><?=$mise_en_avant_info['date_fin'] ?></span></h2>
             </div>
 
             <div class="bottom-data">

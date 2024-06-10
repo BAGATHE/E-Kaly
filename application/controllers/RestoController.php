@@ -287,6 +287,7 @@ public function loadMiseEnAvantPage(){
         if ($this->session->userdata('resto_session')) {
             $current_resto = $this->session->userdata('resto_session');
         }
+    $data["mise_en_avant_info"] = $this->RestoModel->getMiseEnAvantParResto($current_resto['id']);
     $data["prix_mise_en_avant"] = $this->RestoModel->getPrixMiseEnAvant();
     $data['current_resto'] = $current_resto; 
     $data['contents'] = "restoPage/MiseEnAvant";
