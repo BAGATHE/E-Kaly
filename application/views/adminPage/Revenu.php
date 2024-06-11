@@ -2,7 +2,7 @@
       <!-- Main Content -->
         <main>
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
-            <form  id='statistique'  method="POST" action="<?php echo site_url('StatistiqueController/checkStatisiqueGeneral');?>">
+            <form  id='statistique'  method="POST" action="<?php echo site_url('AdmisController/checkStatisiqueGeneral');?>">
             <select class="form-select  d-sm-inline-block" aria-label="Default select example" id="mois" style="width: 12vw;" name="mois">
                 <option value="0" selected>choisir  mois</option>
                 <option value="1">Janvier</option>

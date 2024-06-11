@@ -82,7 +82,7 @@ $(document).ready(function(){
           labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'], // Les 30 jours du mois
           datasets: [{
               label: 'Revenue Journalier',
-              data: Array(30).fill(0), // Initialement tous les jours à 0
+              data: Array(31).fill(0), // Initialement tous les jours à 0
               backgroundColor: 'rgba(28, 180, 91, 0.5)',
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 1

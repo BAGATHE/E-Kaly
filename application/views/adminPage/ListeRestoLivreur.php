@@ -2,7 +2,7 @@
         <main>
             <!-- Recent Orders Table -->
             <div class="recent-orders resto_div">
-                <h2>Listes des restaurants <a href="<?= site_url('RouteController/insertionRestoLivreurPage') ?>" style="color: #085696;">+ Ajouter</a></h2>
+                <h2>Listes des restaurants <a href="<?= site_url('AdmisController/insertionRestoLivreurPage') ?>" style="color: #085696;">+ Ajouter</a></h2>
                 <table>
                     <thead>
                         <tr>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="recent-orders livreur_div">
-                <h2>Listes des livreurs <a href="<?= site_url('RouteController/insertionRestoLivreurPage') ?>" style="color: #085696;">+ Ajouter</a></h2>
+                <h2>Listes des livreurs <a href="<?= site_url('AdmisController/insertionRestoLivreurPage') ?>" style="color: #085696;">+ Ajouter</a></h2>
                 <table>
                     <thead>
                         <tr>

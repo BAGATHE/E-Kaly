@@ -108,6 +108,12 @@ class CommandeModel extends CI_Model {
       return $query->row_array();
    }
 
+   public function getDetailsCommandeById($id) {
+      $this->db->where('id_commande', $id);
+      $query = $this->db->get('v_details_commande');
+      return $query->result_array();
+   }
+
    public function search($criteria = []) {
       $this->db->select('Commande.id, Commande.id_client, Commande.adresse, Commande.date_commande');
       $this->db->from('Commande');

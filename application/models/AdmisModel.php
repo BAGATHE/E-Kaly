@@ -158,6 +158,34 @@ class  AdmisModel extends CI_Model {
       $query = $this->db->get('Admis');
       return $query->result_array();
    }
+
+
+
+public function revenuParMoisPlateForm ($mois,$annee){
+      $this->db->where('month',$mois);
+      $this->db->where('year',$annee);
+      $query = $this->db->get('v_revenu_par_mois');
+      return $query->result_array();
+  }
+
+  public function revenuParAnPlateForm ($annee) {
+      $this->db->where('year',$annee);
+      $query = $this->db->get('v_revenu_par_an');
+      return $query->result_array();
+  }
+
+
+public function getStatRestoMois($annee) {
+   $this->db->where('year',$annee);
+   $query = $this->db->get('v_revenu_par_jour_resto_mois');
+   return $query->result_array();
+}
+public function getStatRestoJour($mois,$annee) {
+   $this->db->where('month',$mois);
+   $this->db->where('year',$annee);
+   $query = $this->db->get('v_revenu_par_jour_resto_jour');
+   return $query->result_array();
+}
 }
 
 ?>

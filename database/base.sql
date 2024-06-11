@@ -1,3 +1,8 @@
+
+drop database Ekaly;
+create database Ekaly;
+use Ekaly;
+
 drop database ekaly;
 create database ekaly;
 use ekaly;
@@ -15,11 +20,10 @@ CREATE TABLE Adresse (
     nom VARCHAR(255)
 );
 
-CREATE TABLE Lien_adresse (
+CREATE TABLE Voisin (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_adresse1 INT,
     id_adresse2 INT,
-    distance Decimal(10,6),
     FOREIGN KEY (id_adresse1) REFERENCES Adresse(id),
     FOREIGN KEY (id_adresse2) REFERENCES Adresse(id)
 
@@ -27,9 +31,11 @@ CREATE TABLE Lien_adresse (
 
 CREATE TABLE Resto (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(255),
     email VARCHAR(255),
     mot_de_pass VARCHAR(255)
 );
+
 
 CREATE TABLE Livreur (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -75,6 +81,7 @@ CREATE TABLE Commande (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_client INT,
     adresse INT,
+    repere VARCHAR(250),
     date DATETIME,
     FOREIGN KEY (id_client) REFERENCES Client(id),
     FOREIGN KEY (adresse) REFERENCES Adresse(id)
@@ -104,7 +111,7 @@ CREATE TABLE Note_plat (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_client INT,
     id_plat INT,
-    note INT,
+    note decimal(10,2),
     FOREIGN KEY (id_client) REFERENCES Client(id),
     FOREIGN KEY (id_plat) REFERENCES Plat(id)
 );
@@ -148,7 +155,7 @@ CREATE TABLE Info_resto (
     FOREIGN KEY (adresse) REFERENCES Adresse(id)
 );
 
-CREATE TABLE Prix (
+CREATE TABLE Prix_mise_en_avant(
     id INT PRIMARY KEY AUTO_INCREMENT,
     prix DECIMAL(10, 2)
 );
@@ -158,10 +165,10 @@ CREATE TABLE Mise_en_avant (
     id_resto INT,
     id_prix INT,
     prix DECIMAL(10, 2),
-    date DATETIME,
+    date DATE,
     duree INT,
     FOREIGN KEY (id_resto) REFERENCES Resto(id),
-    FOREIGN KEY (id_prix) REFERENCES Prix(id)
+    FOREIGN KEY (id_prix) REFERENCES Prix_mise_en_avant(id)
 );
 
 CREATE TABLE Status (
@@ -180,15 +187,11 @@ CREATE TABLE Payement (
 );
 
 
-
 create table Commission_admin(
     id INT PRIMARY KEY AUTO_INCREMENT,
     commission_resto decimal(10,2),
     commission_livreur decimal(10,2)
 );
-
-
-
 
 
 CREATE TABLE `Tarif_livraison` (
@@ -198,12 +201,7 @@ CREATE TABLE `Tarif_livraison` (
   `tarif` INT NOT NULL
 );
 
-CREATE TABLE `Config` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `nom` VARCHAR(100) NOT NULL,
-  `valeur` DECIMAL(10,2) NOT NULL,
-  `unite` VARCHAR(50) NOT NULL
-);
+
 
 
 ALTER TABLE `Info_livreur` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);
@@ -254,6 +252,6 @@ ALTER TABLE `Status` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);
 
 ALTER TABLE `Payement` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);
 
-ALTER TABLE `Adresse` ADD FOREIGN KEY (`id`) REFERENCES `lien_adresse` (`id_adresse_1`);
+ALTER TABLE `lien_adresse` ADD FOREIGN KEY (`id_adresse1`) REFERENCES `Adresse` (`id`);
 
-ALTER TABLE `Adresse` ADD FOREIGN KEY (`id`) REFERENCES `lien_adresse` (`id_adresse_2`);
+ALTER TABLE `lien_adresse` ADD FOREIGN KEY (`id_adresse2`) REFERENCES `Adresse` (`id`);
