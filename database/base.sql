@@ -12,6 +12,7 @@ CREATE TABLE Client (
     nom VARCHAR(255),
     prenom VARCHAR(255),
     email VARCHAR(255),
+    telephone VARCHAR(255),
     mot_de_pass VARCHAR(255)
 );
 
@@ -48,6 +49,7 @@ CREATE TABLE Info_livreur (
     id_livreur INT,
     nom_complet VARCHAR(255),
     adresse INT,
+    telephone VARCHAR(255),
     FOREIGN KEY (id_livreur) REFERENCES Livreur(id) ,
     FOREIGN KEY (adresse) REFERENCES Adresse(id)
     
@@ -149,6 +151,7 @@ CREATE TABLE Info_resto (
     nom VARCHAR(255),
     adresse INT,
     description VARCHAR(255),
+     telephone VARCHAR(255),
     heure_ouverture TIME,
     heure_fermeture TIME,
     FOREIGN KEY (id_resto) REFERENCES Resto(id),
