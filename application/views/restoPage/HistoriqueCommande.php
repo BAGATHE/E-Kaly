@@ -14,14 +14,14 @@
             </form>
             <input type="checkbox" id="theme-toggle" hidden>
             <label for="theme-toggle" class="theme-toggle"></label>
-            <a href="#" class="notif">
+            <a href="<?=site_url('RestoController/notificationPage')?>" class="notif">
                 <span class="material-icons-sharp">
                     notifications_none
                 </span>
-                <span class="count">12</span>
+                <span class="count">0</span>
             </a>
             <a href="#" class="profile">
-                <p></p>
+                <p><?=$current_resto["nom"]?></p>
                 <img src="<?php echo base_url()?>assets/images/Logo.png">
             </a>
         </nav>
@@ -93,7 +93,7 @@
                                         <td>Commande <?php echo $commande['id_commande']; ?></td>
                                         <td><?php echo $commande['total']; ?> </td>
                                         <td><?php echo $commande['commission']; ?> </td>
-                                        <td><span class="status process"><a href="<?= site_url('RestoController/getDetailCommandeByid/' . $commande['id_commande']); ?>">Detail</a></span></td>
+                                        <td><span class="status process"><a href="<?= site_url('RestoController/getDetailCommandeByid/'.$commande['id_commande']); ?>">Detail</a></span></td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else : ?>

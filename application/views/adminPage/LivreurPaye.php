@@ -2,7 +2,7 @@
         <main>
 
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
-            <form  id='statistique'  method="POST" action="<?php echo site_url('StatistiqueController/RevenuParMois');?>">
+            <form  id='statistique'  method="POST" action="<?php echo site_url('AdmisController/RevenuParMoisLivreur');?>">
             
             
 

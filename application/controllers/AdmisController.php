@@ -7,6 +7,9 @@ class AdmisController extends CI_Controller {
         parent::__construct();
         $this->load->model('AdmisModel');
         $this->load->model('ClientModel');
+        $this->load->model('LivreurModel');
+        $this->load->model('RestoModel');
+        $this->load->model('AdresseModel');
     }
 
     
@@ -130,6 +133,14 @@ class AdmisController extends CI_Controller {
             }
         }
     }
+/*login out**/
+public function adminLogout() {
+    $this->session->unset_userdata('admin_session');
+    $this->session->sess_destroy();
+    $this->load->view('login');
+}
+
+
     /*redirection vers page insertion**/
     public function insertionPage(){
         $current_administrator  = null;
@@ -153,6 +164,48 @@ class AdmisController extends CI_Controller {
         $this->load->view('templates/template',$data);
     }
 
+
+    public function listRestoLivreur(){
+        $data = array();
+        $current_administrator  = null;
+        if ($this->session->userdata('admin_session')) {
+            $current_administrator = $this->session->userdata('admin_session');
+        }
+        $data["restaurants"] = $this->RestoModel->getAllWithInfo();
+        $data["livreurs"] = $this->LivreurModel->getAllWithInfo();
+        $data['current_administrator'] = $current_administrator; 
+        $data['contents'] = "adminPage/ListeRestoLivreur";
+        $this->load->view('templates/template', $data);
+    }
+
+    public function insertionRestoLivreurPage(){
+        $current_administrator  = null;
+        if ($this->session->userdata('admin_session')) {
+            $current_administrator = $this->session->userdata('admin_session');
+        }
+        $data["adresses"] = $this->AdresseModel->getAll();
+        $data['current_administrator'] = $current_administrator; 
+        $data['contents'] = "adminPage/Ajout";
+        $this->load->view('templates/template', $data);
+    }
+
+
+     /*statitique general commission gagner par la plateforme commission restaurant + livreur*/
+     public function checkStatisiqueGeneral(){
+        $mois = $this->input->post('mois');
+        $anner = $this->input->post('anner');
+        $data = null;
+        
+        if($mois != 0 && $anner != 0){
+        } else {
+        
+        }
+        if($data==null){
+            $data[] = array("day"=>'0',"month"=>'0',"year"=>'0',"revenue"=>'0');
+        }
+        
+        echo json_encode($data);
+    }
 
 }
 ?>

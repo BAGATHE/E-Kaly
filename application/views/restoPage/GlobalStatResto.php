@@ -15,15 +15,15 @@
             </form>
             <input type="checkbox" id="theme-toggle" hidden>
             <label for="theme-toggle" class="theme-toggle"></label>
-            <a href="#" class="notif">
+            <a href="<?=site_url('RestoController/notificationPage')?>" class="notif">
                 <span class="material-icons-sharp">
                     notifications_none
                 </span>
-                <span class="count">12</span>
+                <span class="count">0</span>
             </a>
             <a href="#" class="profile">
-                <p>resto_nom</p>
-                <img src="<?=base_url()?>assets/images/logo.png">
+                <p><?=$current_resto["nom"]?></p>
+                <img src="<?php echo base_url()?>assets/images/Logo.png">
             </a>
         </nav>
 
@@ -57,20 +57,54 @@
                         </form>
                     </div>
             
-            
+        
             <div id="containerchart_1">
                 <h1 id="stat_annuel">statistique Annuel</h1>
                 <canvas id="chartannuel" width="400" height="150"></canvas>
             </div>
-            
-               
-           
+
             <div id="containerchart_2" >
                 <h1 id="stat_mensuel" >statistique Mensuel</h1>
                 <canvas id="chartmensuel" width="400" height="150"></canvas> 
             </div>
             
+            <!-- Ajout du pie chart pour le revenu mensuel -->
+            <!--
+            <div id="containerPiechart">
+            <h1 id="top_5">Top 5 vente</h1>
+            <canvas id="monthlyRevenuePieChart" width="400" height="200"></canvas>
+            </div>
+            -->
+            <!-- Tableau ajouter -->
+            <div class="bottom-data">
+                <div class="orders">
+                    <div class="header">
+                        <i class='bx bx-receipt'></i>
+                        <h3 style="text-align: center;">nombre de vente par plat</h3>
+                        <i class='bx bx-filter'></i>
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <table id="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Plat</th>
+                                <th>Prix Unitaire</th>
+                                <th>Quantite</th>
+                                <th>Prix total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
         </main>
 
     </div>
-
+<script src="<?=base_url()?>assets/js/Chart2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script src="<?=base_url()?>assets/jquery/jquery.min.js"></script>
+<script src="<?=base_url()?>assets/jquery/jquery-3.7.1.js"></script>
+<script src="<?=base_url()?>assets/js/globalStatistiqueChart.js"></script>

@@ -20,11 +20,10 @@ CREATE TABLE Adresse (
     nom VARCHAR(255)
 );
 
-CREATE TABLE Lien_adresse (
+CREATE TABLE Voisin (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_adresse1 INT,
     id_adresse2 INT,
-    distance Decimal(10,6),
     FOREIGN KEY (id_adresse1) REFERENCES Adresse(id),
     FOREIGN KEY (id_adresse2) REFERENCES Adresse(id)
 
@@ -82,6 +81,7 @@ CREATE TABLE Commande (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_client INT,
     adresse INT,
+    repere VARCHAR(250),
     date DATETIME,
     FOREIGN KEY (id_client) REFERENCES Client(id),
     FOREIGN KEY (adresse) REFERENCES Adresse(id)
@@ -201,12 +201,7 @@ CREATE TABLE `Tarif_livraison` (
   `tarif` INT NOT NULL
 );
 
-CREATE TABLE `Config` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `nom` VARCHAR(100) NOT NULL,
-  `valeur` DECIMAL(10,2) NOT NULL,
-  `unite` VARCHAR(50) NOT NULL
-);
+
 
 
 ALTER TABLE `Info_livreur` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);

@@ -14,14 +14,15 @@ $('#statistiqueResto').submit(function(event){
            console.log(response);
            var jsonResponse = JSON.parse(response);
            console.log(jsonResponse);
+           console.log(jsonResponse.stat_chiffre[0]);
            
-           if('day' in jsonResponse[0]){
+           if('day' in jsonResponse.stat_chiffre[0]){
             // Initialise tous les jours du mois à 0
             var dailyChiffreAffaire = Array(31).fill(0);
             var dailyRevenu = Array(31).fill(0);
             var dailyDepense = Array(31).fill(0);
 
-            jsonResponse.forEach(function(item) {
+            jsonResponse.stat_chiffre.forEach(function(item) {
                 var day = parseInt(item.day, 10); // Jour de 1 à 31
                 dailyChiffreAffaire[day - 1] = parseFloat(item.chiffreDAffaireResto);
                 dailyRevenu[day - 1] = parseFloat(item.revenue);
@@ -39,8 +40,8 @@ $('#statistiqueResto').submit(function(event){
             var monthlyRevenu = Array(12).fill(0);
             var monthlyDepense = Array(12).fill(0);
 
-            // Supposons que jsonResponse contient les données mensuelles
-            jsonResponse.forEach(function(item) {
+            // Supposons que jsonResponse.stat_chiffre contient les données mensuelles
+            jsonResponse.stat_chiffre.forEach(function(item) {
             var month = parseInt(item.month, 10); // Mois de 1 à 12
             monthlyChiffreAffaire[month - 1] += parseFloat(item.chiffreDAffaireResto);
             monthlyRevenu[month - 1] += parseFloat(item.revenue);
@@ -53,7 +54,8 @@ $('#statistiqueResto').submit(function(event){
         $("#chartmensuel").hide();
         $("#stat_mensuel").hide();
          }
-     
+        
+        updateOrdersTable(jsonResponse.stat_vente_plat);
         },
         /*error: function(xhr, status, error) {
             // Gérer les erreurs de requête AJAX
@@ -71,12 +73,14 @@ $('#statistiqueResto').submit(function(event){
     chart.update();
 }
 
-
-
-
-
-
-
+/*function mise  jour table de historique vente par plat*/
+function updateOrdersTable(data) {
+    let ordersTable = $('#orders-table tbody');
+    ordersTable.empty();
+    $.each(data, function(index, order) {
+        ordersTable.append('<tr><td>' + order.description + '</td><td>' + order.prix  + '</td><td>' + order.quantite + '</td><td>'+order.quantite * order.prix   +'</td></tr>');
+    });
+}
 
 
 
@@ -161,3 +165,37 @@ $('#statistiqueResto').submit(function(event){
 });
 
 });
+
+
+
+
+/*
+
+// PICHART
+
+// PiChart Option
+// Options du graphique circulaire
+const pieChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+        position: 'right',
+    },
+};
+
+// PiChart Mensuel
+// Initialisation du graphique circulaire pour le revenu mensuel
+const monthlyRevenuePieChart = new Chart(document.getElementById('monthlyRevenuePieChart'), {
+    type: 'pie',
+    data: {
+        labels: ['Semaine 1', 'Semaine 2', 'Semaine 3', 'Semaine 4'],
+        datasets: [{
+            label: 'Top 5 des vente',
+            data: [800, 900, 1000, 1100],
+            backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#8e5ea2']
+        }]
+    },
+    options: pieChartOptions
+});
+
+*/

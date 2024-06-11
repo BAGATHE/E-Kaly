@@ -14,15 +14,15 @@
             </form>
             <input type="checkbox" id="theme-toggle" hidden>
             <label for="theme-toggle" class="theme-toggle"></label>
-            <a href="#" class="notif">
+            <a href="<?=site_url('RestoController/notificationPage')?>" class="notif">
                 <span class="material-icons-sharp">
                     notifications_none
                 </span>
-                <span class="count">12</span>
+                <span class="count">0</span>
             </a>
             <a href="#" class="profile">
-                <p>resto_nom</p>
-                <img src="./assets/images/logo.png">
+                <p><?=$current_resto["nom"]?></p>
+                <img src="<?php echo base_url()?>assets/images/Logo.png">
             </a>
         </nav>
 
@@ -31,8 +31,8 @@
         <main>
             <div>
                 <h1>abonnement actuelle</h1>
-                <h2>date debut: <span><?=$mise_en_avant_info['date_debut'] ?></span></h2>
-                <h2>date fin: <span><?=$mise_en_avant_info['date_fin'] ?></span></h2>
+                <h2>date debut: <span><?php if($mise_en_avant_info !=  null ) echo $mise_en_avant_info['date_debut'] ; ?></span></h2>
+                <h2>date fin: <span><?php if($mise_en_avant_info != null ) echo  $mise_en_avant_info['date_fin']  ;?></span></h2>
             </div>
 
             <div class="bottom-data">

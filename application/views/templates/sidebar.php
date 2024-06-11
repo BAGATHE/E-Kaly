@@ -43,7 +43,7 @@
                     </span>
                     <h3>Settings</h3>
                 </a>
-                <a href="<?= site_url('AuthentificationController/adminLogout') ?>">
+                <a href="<?=site_url('AdminController/adminLogout') ?>">
                     <span class="material-icons-sharp">
                         logout
                     </span>

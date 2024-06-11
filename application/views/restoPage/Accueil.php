@@ -14,14 +14,14 @@
             </form>
             <input type="checkbox" id="theme-toggle" hidden>
             <label for="theme-toggle" class="theme-toggle"></label>
-            <a href="#" class="notif">
+            <a href="<?=site_url('RestoController/notificationPage')?>" class="notif">
                 <span class="material-icons-sharp">
                     notifications_none
                 </span>
-                <span class="count">12</span>
+                <span class="count">0</span>
             </a>
-            <a href="#" class="profile">
-                <p>resto_nom</p>
+            <a href="" class="profile">
+                <p><?=$current_resto["nom"]?></p>
                 <img src="<?php echo base_url()?>assets/images/Logo.png">
             </a>
         </nav>

@@ -22,11 +22,17 @@
         height: 60vh;
         margin:auto;
     }
-     #stat_annuel, #stat_mensuel{
+    #containerPiechart{
+        width: 50vw;
+        height: 50vh;
+        margin:auto;
+        margin-bottom:10vh;
+    }
+     #stat_annuel, #stat_mensuel, #top_5{
         text-align:center;
      }
     </style>
-
 </head>
-
+<input type="hidden" value="<?=site_url('RestoController/getTodayOrders')?>" id="url_controller">
+<input type="hidden" value="<?=site_url('RestoController/DetailCommandeByid')?>" id="detailCommandeUrl">
 <body>

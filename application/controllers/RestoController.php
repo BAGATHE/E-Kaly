@@ -9,7 +9,6 @@ class RestoController extends CI_Controller {
         $this->load->model('AdresseModel');
         $this->load->model('PlatModel');
         $this->load->model('ChangeQuantitePlatModel');
-        $this->load->model('HistoriqueCommande');
         $this->load->model('MiseEnAvantModel');
        
     }
@@ -115,7 +114,11 @@ class RestoController extends CI_Controller {
             }
         }
     }
-
+public function logOut(){
+    $this->session->unset_userdata('resto_session');
+    $this->session->sess_destroy();
+    $this->load->view('login');
+}
 
 
 /* fonction insertion dans la base*/
@@ -196,12 +199,9 @@ class RestoController extends CI_Controller {
         $annee=$this->input->post('annee');
 
         if($date){
-            $data['historique_commande'] = $this->HistoriqueCommande->historiqueCommandeJour ($date,$current_resto['id']);    
+            $data['historique_commande'] = $this->RestoModel->historiqueCommandeJour ($date,$current_resto['id']);    
         }else if ($mois && $annee) {
-            $data['historique_commande'] = $this->HistoriqueCommande->historiqueCommandeMois($mois, $annee,$current_resto['id']);
-        }else{
-            $data['date'] = date('Y-m-d');
-            $data['historique_commande'] = $this->HistoriqueCommande->historiqueCommandeJour ($data['date'],$current_resto['id']);
+            $data['historique_commande'] = $this->RestoModel->historiqueCommandeMois($mois, $annee,$current_resto['id']);
         }
         $data['contents'] = "restoPage/HistoriqueCommande";
         
@@ -209,18 +209,35 @@ class RestoController extends CI_Controller {
 
     }
 
-/*redirection page detail commande*/
-
+/*redirection page detail commande coté historique*/
    public function getDetailCommandeByid($id_commande) {
+    $current_resto  = null;
+    if ($this->session->userdata('resto_session')) {
+        $current_resto = $this->session->userdata('resto_session');
+    }
+    $data['current_resto'] = $current_resto;
         // Récupérer les détails de la commande à partir du modèle
-        $data['details_commande'] = $this->HistoriqueCommande->detailsCommmande($id_commande);
-        $data['commande'] = $this->HistoriqueCommande->detailsCommandeHistorique($id_commande)[0];
+        $data['details_commande'] = $this->RestoModel->detailsCommmande($id_commande);
+        $data['commande'] = $this->RestoModel->detailsCommandeHistorique($id_commande)[0];
         // Charger la vue avec les données de la commande
         $data["contents"] = "restoPage/DetailCommande";
         $this->load->view('templates_resto/template', $data);
     }
 
-   /**redirection vers la page  modification plat*/
+/*redirection page detail commande cote commande actuelle recu */
+public function DetailCommandeByid($id_commande) {
+    $current_resto  = null;
+        if ($this->session->userdata('resto_session')) {
+            $current_resto = $this->session->userdata('resto_session');
+        }
+        $data['current_resto'] = $current_resto;
+        $data['details_commande'] = $this->RestoModel->detailsCommmande($id_commande);
+        $data['commande'] = $this->RestoModel->detailsCommandeHistorique($id_commande)[0];
+        $data["contents"] = "restoPage/DetailNotification";
+        $this->load->view('templates_resto/template', $data);
+}
+
+/**redirection vers la page  modification plat*/
    public function loadFormPlat($id_plat){
     $current_resto  = null;
     if ($this->session->userdata('resto_session')) {
@@ -233,7 +250,7 @@ class RestoController extends CI_Controller {
         $this->load->view('templates_resto/template', $data);
         }
   
-    /**redirection page modification quantiter production plat journaliere*/
+/**redirection page modification quantiter production plat journaliere*/
     public function loadFormModifQuantiteProduction(){
         $current_resto  = null;
         if ($this->session->userdata('resto_session')) {
@@ -310,15 +327,19 @@ public function globalStatResto(){
     $mois = $this->input->post('mois');
     $anner = $this->input->post('annee');
     $id_resto = $this->input->post("id_resto");
-    $data = null;
+    $data = array();
     
     if($mois != 0 && $anner != 0){
-        $data = $this->RestoModel->getStatForRestoJour($mois,$anner,$id_resto);
+        $data["stat_chiffre"] = $this->RestoModel->getStatForRestoJour($mois,$anner,$id_resto);
+        $data["stat_vente_plat"] = $this->RestoModel->getNombrePlatVenduMois($mois,$anner,$id_resto);
+    
     } else {
-        $data = $this->RestoModel->getStatForRestoMois($anner,$id_resto);
+        $data["stat_chiffre"] = $this->RestoModel->getStatForRestoMois($anner,$id_resto);
+        $data["stat_vente_plat"] = $this->RestoModel->getNombrePlatVenduAnnee($anner,$id_resto);
     }
     if($data==null){
-        $data[] = array("day"=>'0',"month"=>'0',"year"=>'0',"revenue"=>'0');
+        $data["stat_chiffre"] = array("day"=>'0',"month"=>'0',"year"=>'0',"revenue"=>'0');
+        $data["stat_vente_plat"] = array("month"=>0,"year"=>0);
     }
     echo json_encode($data);
    
@@ -335,6 +356,28 @@ public function ajout_abonnement(){
     ];
     $this->MiseEnAvantModel->save($data);
     redirect("RestoController/loadMiseEnAvantPage");
+}
+
+/**function load page notification*/
+public function notificationPage(){
+    $current_resto  = null;
+    if ($this->session->userdata('resto_session')) {
+        $current_resto = $this->session->userdata('resto_session');
+    }
+$data['current_resto'] = $current_resto; 
+$data['contents'] = "restoPage/NotificationResto";
+$this->load->view('templates_resto/template', $data);
+}
+
+/***fonction qui recupere la liste de commande du jour*/
+public function getTodayOrders(){
+    $current_resto  = null;
+    if ($this->session->userdata('resto_session')) {
+        $current_resto = $this->session->userdata('resto_session');
+    }
+    $data['date'] = date('Y-m-d');
+    $data = $this->RestoModel->historiqueCommandeJour($data['date'],$current_resto["id"]);
+     echo json_encode($data);
 }
 
 }

@@ -82,7 +82,16 @@ INSERT INTO `Adresse` (`nom`) VALUES
 ('Manjakaray'),
 ('Manarintsoa'),
 ('Tsaralalàna'),
-('Tsimbazaza');
+('Tsimbazaza'),
+('Tsarasaotra'),
+('Tanjombato'),
+('Anosy'),
+('Ampefiloha'),
+('67ha'),
+('Andoharanofotsy'),
+('Ankadimbahoaka'),
+('Soanierana'),
+('');
 
 
 
@@ -125,6 +134,9 @@ INSERT INTO Commande (adresse, id_client, date) VALUES
 (1, 1, '2024-06-03 10:00:00'),
 (1, 1, '2024-06-03 11:30:00'),
 (1, 1, '2024-06-03 12:45:00');
+INSERT INTO Commande (adresse, id_client, date) VALUES (1, 1, '2024-06-11 08:00:00');
+INSERT INTO Commande (adresse, id_client, date) VALUES (1, 1, '2024-06-11 10:00:00');
+
 
 -- Insérer des données dans la table Commande_plat
 INSERT INTO Commande_plat ( id_commande, id_plat, quantite, prix) VALUES
@@ -140,12 +152,15 @@ INSERT INTO Commande_plat ( id_commande, id_plat, quantite, prix) VALUES
 ( 3, 6, 1, 11.49); -- Plat 6 (Ramen au Poulet) appartient à Resto 3
 -- La commande 21 ne contient que des plats du Resto 3
 
+INSERT INTO Commande_plat ( id_commande, id_plat, quantite, prix) VALUES
+(22, 1, 2, 21.98);
+INSERT INTO Commande_plat ( id_commande, id_plat, quantite, prix) VALUES
+(23, 1, 2, 21.98);
 -- Insérer des données dans la table Commission_admin
 INSERT INTO Commission_admin (commission_resto,commission_livreur) VALUES 
 (5,30);
--- Insérer des données dans la table Config
-INSERT INTO Config ( nom, valeur, unite) VALUES
-('benefice_frais_livraison', 30, '%');
+
+
 
 
 -- Insérer des données dans la table Livraison_payement_commande
