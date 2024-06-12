@@ -33,7 +33,7 @@ select
     vrpcp.*,
     c.date,
     c.id_client,
-    c.adresse
+    c.adresse as destination
 from 
     v_resto_plat_Commande_plat as vrpcp
 join 
@@ -212,7 +212,7 @@ on
 GROUP BY
     vrp.id_plat,vrp.id_resto,DAY(cqp.date),MONTH(cqp.date),YEAR(cqp.date);
 
---info avec note du plat
+-- info avec note du plat
 create or replace view v_info_global_plat_resto as 
 select 
     vcqp.*,
@@ -288,7 +288,7 @@ group by
 order by 
 	vendu DESC;
 
-    -----------------------------------------------------------------------------Mise en avant + date_debut & date fin
+-- Mise en avant + date_debut & date fin
 CREATE OR REPLACE VIEW v_mise_en_avant_dates AS
 select 
     id,
@@ -416,8 +416,7 @@ SELECT
     ) AS frais_livraison
 FROM 
     v_resto_plat_Commande_plat_Commande
-GROUP BY 
-    id_commande;
+GROUP BY id_commande;
 
 
 create or replace view v_frais_livraison_commission as
@@ -484,3 +483,32 @@ LEFT JOIN
     Payement g ON vlllj.id_commande  = g.id_commande
 GROUP BY
     vlllj.id_commande;
+-- Statistique livreur
+
+CREATE OR REPLACE VIEW v_commande_payes AS 
+SELECT* FROM Livraison_payement_commande WHERE paye=1; 
+
+CREATE OR REPLACE VIEW v_somme_frais_livraison_par_jour AS
+SELECT
+    DATE(date) as date,
+    SUM(frais_livraison) AS somme_frais_livraison
+FROM
+    v_frais_livraison fl
+JOIN v_commande_payes cp 
+    ON fl.id_commande= cp.id_commande
+GROUP BY
+    DATE(date);
+
+CREATE OR REPLACE VIEW v_somme_commission_par_jour AS
+    SELECT
+    DATE(date) as date,
+    SUM(commission) AS somme_commission
+FROM
+    v_frais_livraison_commission flc
+JOIN v_commande_payes cp 
+    ON flc.id_commande= cp.id_commande
+GROUP BY
+    DATE(date);
+ 
+
+    
