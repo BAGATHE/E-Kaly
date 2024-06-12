@@ -150,8 +150,9 @@ CREATE TABLE Info_resto (
     id_resto INT,
     nom VARCHAR(255),
     adresse INT,
+    repere VARCHAR(255),
     description VARCHAR(255),
-     telephone VARCHAR(255),
+    telephone VARCHAR(255),
     heure_ouverture TIME,
     heure_fermeture TIME,
     FOREIGN KEY (id_resto) REFERENCES Resto(id),
@@ -184,6 +185,7 @@ CREATE TABLE Status (
 CREATE TABLE Payement (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_livreur INT,
+    id_commande INT,
     date DATETIME,
     montant DECIMAL(10, 2),
     FOREIGN KEY (id_livreur) REFERENCES Livreur(id)
