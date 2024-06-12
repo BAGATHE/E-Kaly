@@ -359,10 +359,18 @@ class  LivreurModel extends CI_Model {
       $query = $this->db->get('v_livraison_livreur_avec_gain');
       return $query->result_array();
    }
-  
 
+   public function algoCommandeLivreur($id) {
+      $this->db->where('id_livreur', $id);
+      $query = $this->db->get('v_livreur_commande');
+      return $query->result_array();
+   }
 
-
+   public function getCommandeLivreur($id) {
+      $this->db->where('id_commande', $id);
+      $query = $this->db->get('v_frais_livraison_commission_detail');
+      return $query->result_array();
+   }
 }
 
 ?>
