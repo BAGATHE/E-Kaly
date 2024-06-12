@@ -184,6 +184,7 @@ CREATE TABLE Status (
 CREATE TABLE Payement (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_livreur INT,
+    id_commande INT,
     date DATETIME,
     montant DECIMAL(10, 2),
     FOREIGN KEY (id_livreur) REFERENCES Livreur(id)
