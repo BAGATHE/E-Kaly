@@ -93,6 +93,13 @@ INSERT INTO `Adresse` (`nom`) VALUES
 ('Soanierana'),
 ('');
 
+INSERT INTO Status(id_livreur,status) VALUES (1,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (2,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (3,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (4,'non-dispo');
+INSERT INTO Status(id_livreur,status) VALUES (5,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (6,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (7,'dispo');
 
 
 -- Insertion dans la table Livreur
@@ -100,11 +107,20 @@ INSERT INTO Livreur (id,email, mot_de_pass) VALUES (1,'livreur1@gmail.com', 'liv
 INSERT INTO Livreur (id,email, mot_de_pass) VALUES (2,'livreur3@gmail.com', 'livreur2');
 INSERT INTO Livreur (id,email, mot_de_pass) VALUES (3,'livreur2@gmail.com', 'livreur3');
 
+INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur4@gmail.com', 'livreur4');
+INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur5@gmail.com', 'livreur5');
+INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur6@gmail.com', 'livreur6');
+INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur7@gmail.com', 'livreur7');
+
 -- Insertion dans la table Info_livreur
 INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (1,'livreur1',4);
 INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (2,'livreur2',6);
 INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (3,'livreur3',12);
 
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (4,'livreur4',34);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (5,'livreur5',35);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (6,'livreur6',30);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (7,'livreur7',22);
 
 -- Insérer des données dans la table Resto
 INSERT INTO Resto (email, mot_de_pass) VALUES
@@ -177,11 +193,6 @@ INSERT INTO Lien_adresse (id_adresse1, id_adresse2, distance) VALUES
 (1, 3, 5.0),
 ( 1, 4, 10.0);
 
--- Insérer des données dans la table Tarif_livraison
-INSERT INTO Tarif_livraison (distance_min, distance_max, tarif) VALUES
-(0, 2, 2000),
-( 2, 6, 4500),
-(6, 10, 6000);
 
 INSERT INTO Change_quantite_plat (id_plat, date, production) VALUES
 (1, '2024-06-01 08:00:00', 50),
@@ -205,3 +216,8 @@ INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (10,5, 5);
 
 INSERT INTO Prix_mise_en_avant(prix) VALUES(100);
+
+
+
+INSERT INTO Tarif_livraison (tarif_min,tarif_moyen,tarif_max)
+VALUES (1500,3000,5000);

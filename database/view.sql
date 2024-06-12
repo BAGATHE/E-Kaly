@@ -3,6 +3,7 @@ create or replace view  v_resto_plat AS
 select 
     r.id as id_resto,
     p.id as id_plat,
+    r.id_adresse,
     p.description ,
     p.prix
 from 
@@ -298,3 +299,141 @@ select
     prix as prix_par_mois, 
     id_prix
 from Mise_en_avant;
+
+
+-- I-fonction getLivraison Disponible
+
+-- 1-fonction algorithme qui choisi quelle livreur peut voir la commande 
+-- a-algo
+create or replace view v_voisin_details as 
+select 
+	v.*,
+    a.nom as adresse1,
+    a1.nom as adresse2
+from	
+	Voisin as v
+join 
+	Adresse as a
+on
+	v.id_adresse1 = a.id
+join 
+	Adresse as a1
+on 
+	v.id_adresse2 = a1.id;
+
+create or replace view v_voisin_livreur as 
+select 
+    vvd.*,
+    il.id_livreur,
+    il.nom_complet
+from 
+    v_voisin_details as vvd
+join 
+    Info_livreur as il
+on 
+    il.adresse = vvd.id_adresse1;
+
+
+create or replace view v_voisin_livreur_Commande AS
+select 
+    vvl.*,
+    c.id as id_commande,
+    c.id_client,
+    c.repere
+from 
+    v_voisin_livreur as vvl
+join 
+    Commande as c 
+on 
+    vvl.id_adresse2 = c.adresse;
+
+create or replace view v_voisin_livreur_Commande_Status AS
+select
+    vvlcs.*
+from 
+    v_voisin_livreur_Commande as vvlcs
+join 
+    Status as s
+on 
+    s.id_livreur = vvlcs.id_livreur and s.status = 'dispo';
+
+create or replace view v_cross_livreur_commande as
+select 
+	livreur.id as id_livreur,
+	commande.id as id_commande,
+    date
+from 
+    Commande,Livreur;
+
+create or replace view v_livreur_commande as 
+SELECT 
+    COALESCE(clc.id_livreur, vlcs.id_livreur) AS id_livreur,
+    COALESCE(clc.id_commande, vlcs.id_commande) AS id_commande
+from 
+	v_cross_livreur_commande as vlcs
+left join 
+	v_voisin_livreur_Commande_Status as clc
+on 
+	clc.id_commande = vlcs.id_commande
+group by 
+	id_livreur,id_commande
+order by 
+	id_livreur,id_commande ASC ;
+
+-- 2-affichage
+create or replace view v_frais_livraison as
+SELECT 
+    id_resto,
+    id_adresse AS recuperation,
+    id_commande,
+    date,
+    id_client,
+    destination,
+    (
+        CASE 
+            WHEN id_adresse = destination THEN (SELECT tarif_min FROM Tarif_livraison)
+            WHEN (
+                    SELECT 
+                        COUNT(*)
+                    FROM 
+                        Voisin 
+                    WHERE 
+                        (id_adresse1 = id_adresse AND id_adresse2 = destination) OR
+                        (id_adresse1 = destination AND id_adresse2 = id_adresse) 
+                ) > 0  
+            THEN
+                (SELECT tarif_moyen FROM Tarif_livraison)
+        ELSE
+            (SELECT tarif_max FROM Tarif_livraison) 
+    END
+    ) AS frais_livraison
+FROM 
+    v_resto_plat_Commande_plat_Commande
+GROUP BY 
+    id_commande;
+
+
+create or replace view v_frais_livraison_commission as
+select 
+    *, 
+    frais_livraison * (select commission_livreur from Commission_admin)/100 as commission 
+from
+    v_frais_livraison;
+
+create or replace view v_frais_livraison_commission_detail AS
+select 
+    vfl.id_commande,
+    r.nom as nom_resto,
+    a1.nom as recuperation,
+    c.nom as client,
+    c.telephone,
+    a2.nom as destination,
+    vfl.frais_livraison,
+    vfl.commission,
+    date
+from
+    v_frais_livraison_commission as vfl
+join Resto as r on r.id = vfl.id_resto
+join Client as c on c.id = vfl.id_client
+join Adresse as a1 on a1.id = vfl.recuperation
+join Adresse as a2 on a2.id = vfl.destination;
