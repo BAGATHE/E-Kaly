@@ -358,13 +358,20 @@ on
     s.id_livreur = vvlcs.id_livreur and s.status = 'dispo';
 
 create or replace view v_cross_livreur_commande as
-select 
-	livreur.id as id_livreur,
-	commande.id as id_commande,
-    date
-from 
-    Commande,Livreur;
+SELECT 
+    Livreur.id AS id_livreur,
+    Commande.id AS id_commande,
+    Commande.date
+FROM 
+    Commande
+CROSS JOIN 
+    Livreur
+LEFT JOIN 
+    Livraison_payement_commande ON Commande.id = Livraison_payement_commande.id_commande
+WHERE 
+    Livraison_payement_commande.id IS NULL;
 
+    
 create or replace view v_livreur_commande as 
 SELECT 
     COALESCE(clc.id_livreur, vlcs.id_livreur) AS id_livreur,
