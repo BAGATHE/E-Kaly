@@ -346,6 +346,21 @@ class  LivreurModel extends CI_Model {
       return $rapport;
    }
 
+   public function getLivraisonLivreurEnUneJourne($idLivreur, $dateRechercher){ 
+      $this->db->where('id_livreur', $idLivreur);
+      $this->db->where('DATE(date_commande)', $dateRechercher);
+      $query = $this->db->get('v_liste_livraison_livreur_jour');
+      return $query->result_array();
+   }
+  
+  public function getLivraisonLivreurEnUneJourneAvecGain($idLivreur, $dateRechercher){ 
+      $this->db->where('id_livreur', $idLivreur);
+      $this->db->where('DATE(date_commande)', $dateRechercher);
+      $query = $this->db->get('v_livraison_livreur_avec_gain');
+      return $query->result_array();
+   }
+  
+
 
 
 }

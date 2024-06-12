@@ -298,3 +298,45 @@ select
     prix as prix_par_mois, 
     id_prix
 from Mise_en_avant;
+
+
+CREATE OR REPLACE VIEW v_liste_livraison_livreur_jour AS
+SELECT
+    c.id AS id_commande,
+    l.id AS id_livreur,
+    a.nom AS adresse,
+    r.nom AS resto,
+    c.date AS date_commande,
+    lp.paye AS status_livraison
+FROM
+    Commande c
+JOIN
+    Livraison_payement_commande lp ON c.id = lp.id_commande
+JOIN
+    Livreur l ON lp.id_livreur = l.id
+JOIN
+    Commande_plat cp ON c.id = cp.id_commande
+JOIN
+    Plat p ON cp.id_plat = p.id
+JOIN
+    Resto r ON p.id_resto = r.id
+JOIN
+    Adresse a ON c.adresse = a.id
+GROUP BY
+    id_commande, id_livreur, adresse, resto, date_commande, status_livraison;
+
+
+CREATE OR REPLACE VIEW v_livraison_livreur_avec_gain AS
+SELECT
+    vlllj.id_commande,
+    vlllj.id_livreur,
+    vlllj.date_commande,
+    vlllj.status_livraison,
+    COALESCE(g.montant, 0) AS gain
+FROM 
+    v_liste_livraison_livreur_jour vlllj
+LEFT JOIN
+    Payement g ON vlllj.id_commande  = g.id_commande
+GROUP BY
+    vlllj.id_commande;
+
