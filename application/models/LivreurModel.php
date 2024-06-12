@@ -380,39 +380,13 @@ class  LivreurModel extends CI_Model {
       return $query->result_array();
    }
 
-   // public function getTotalFraisLivraisonMois ($idLivreur, $annee, $mois)
-   // {
-   //    $sql= 'select* from v_somme_frais_livraison_par_jour WHERE YEAR(date)='.$annee.' AND MONTH(date)='.$mois.' AND id_livreur='.$idLivreur;
-   //    $query= $this->db->query($sql);
-   //    return $query->result_array();
-   // }
-   // public function getTotalFraisLivraisonAnnee ($idLivreur, $annee)
-   // {
-   //    $sql= 'select* from v_somme_frais_livraison_par_jour WHERE YEAR(date)='.$annee.' AND id_livreur='.$idLivreur;
-   //    $query= $this->db->query($sql);
-   //    return $query->result_array();
-   // }
-
    public function getTotalCommissionJour ($idLivreur, $annee, $mois, $jour)
    {
       $sql= 'select* from v_somme_commission_par_jour WHERE YEAR(date)='.$annee.' AND MONTH(date)='.$mois.' AND DAY(date)='.$jour.' AND id_livreur='.$idLivreur;
       $query= $this->db->query($sql);
       return $query->result_array();
    }
-
-   // public function getTotalCommissionMois ($idLivreur, $annee, $mois)
-   // {
-   //    $sql= 'select* from v_somme_commission_par_jour WHERE YEAR(date)='.$annee.' AND MONTH(date)='.$mois.' AND id_livreur='.$idLivreur;
-   //    $query= $this->db->query($sql);
-   //    return $query->result_array();
-   // }
-   // public function getTotalCommissionAnne ($idLivreur, $annee)
-   // {
-   //    $sql= 'select* from v_somme_commission_par_jour WHERE YEAR(date)='.$annee.' AND id_livreur='.$idLivreur;
-   //    $query= $this->db->query($sql);
-   //    return $query->result_array();
-   // }
-
+   
    public function getCommandesPayes()
    {
       $query = $this->db->get('v_commande_payes');
