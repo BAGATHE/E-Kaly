@@ -224,7 +224,7 @@ public function getLivraisonLivreurEnUneJourneAvecGain($idLivreur, $dateRecherch
 
 // STATISTIQUE LIVREUR
 
-   public function getStatistiqueJour ($idLivreur,$annee,$mois)
+   public function getStatistiqueJour($idLivreur,$annee,$mois)
    {
       $sql= 'select* from v_total_commission_frais_livraison_par_jour WHERE YEAR(date)='.$annee.' AND MONTH(date)='.$mois.' AND id_livreur='.$idLivreur;
       $query= $this->db->query($sql);

@@ -134,7 +134,7 @@ class LivreurController extends CI_Controller {
             $current_livreur = $this->session->userdata('livreur_session');
             }
         $data['current_livreur'] = $current_livreur;
-        
+
         $data['contents'] = "livreurPage/LivraisonJournalier";
         $this->load->view('templates_livreur/template', $data);
 
@@ -148,9 +148,21 @@ class LivreurController extends CI_Controller {
         $data['current_livreur'] = $current_livreur;
         $data['contents'] = "livreurPage/StatistiqueLivreur";
         $this->load->view('templates_livreur/template', $data);
-
     }
-
+/**fonction qui recupere donner du mois du livreur */
+    public function statistiqueLivreur(){
+        $mois = $this->input->post('mois');
+        $anner = $this->input->post('annee');
+        $idLivreur = $this->input->post("id_livreur");
+        $data = array();
+        if($mois != 0 && $anner != 0){
+            $data =  $this->LivreurModel->getStatistiqueJour ($idLivreur,$anner,$mois);
+        } 
+        if($data==null){
+            $data = array("day"=>'0',"month"=>'0',"year"=>'0',"revenue"=>'0');
+        }
+        echo json_encode($data);
+    }
 
 
 

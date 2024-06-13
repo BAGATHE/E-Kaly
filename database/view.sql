@@ -500,11 +500,14 @@ SELECT* FROM Livraison_payement_commande WHERE paye=1;
 CREATE OR REPLACE VIEW v_total_commission_frais_livraison_par_jour AS
     SELECT
     cp.id_livreur,
+    DAY(date) as day,
+    MONTH(date) as month,
+    YEAR(date) as year,
     DATE(date) as date,
     SUM(commission) AS somme_commission,
     SUM(frais_livraison) as somme_frais_livraison
 FROM
-    v_frais_livraison_commission flc
+    v_frais_livraison_commission_detail flc
 JOIN v_commande_payes cp 
     ON flc.id_commande= cp.id_commande
 GROUP BY
