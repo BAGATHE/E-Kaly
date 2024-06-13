@@ -373,16 +373,10 @@ class  LivreurModel extends CI_Model {
    }
 
 // STATISTIQUE LIVREUR
-   public function getTotalFraisLivraisonJour ($idLivreur, $annee, $mois, $jour)
-   {
-      $sql= 'select* from v_somme_frais_livraison_par_jour WHERE YEAR(date)='.$annee.' AND MONTH(date)='.$mois.' AND DAY(date)='.$jour.' AND id_livreur='.$idLivreur;
-      $query= $this->db->query($sql);
-      return $query->result_array();
-   }
 
-   public function getTotalCommissionJour ($idLivreur, $annee, $mois, $jour)
+   public function getStatistiqueJour ($idLivreur, $annee, $mois, $jour)
    {
-      $sql= 'select* from v_somme_commission_par_jour WHERE YEAR(date)='.$annee.' AND MONTH(date)='.$mois.' AND DAY(date)='.$jour.' AND id_livreur='.$idLivreur;
+      $sql= 'select* from v_somme_commission_frais_livraison_par_jour WHERE YEAR(date)='.$annee.' AND MONTH(date)='.$mois.' AND DAY(date)='.$jour.' AND id_livreur='.$idLivreur;
       $query= $this->db->query($sql);
       return $query->result_array();
    }

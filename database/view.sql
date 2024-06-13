@@ -488,27 +488,18 @@ GROUP BY
 CREATE OR REPLACE VIEW v_commande_payes AS 
 SELECT* FROM Livraison_payement_commande WHERE paye=1; 
 
-CREATE OR REPLACE VIEW v_somme_frais_livraison_par_jour AS
-SELECT
-    DATE(date) as date,
-    SUM(frais_livraison) AS somme_frais_livraison
-FROM
-    v_frais_livraison fl
-JOIN v_commande_payes cp 
-    ON fl.id_commande= cp.id_commande
-GROUP BY
-    DATE(date);
-
-CREATE OR REPLACE VIEW v_somme_commission_par_jour AS
+CREATE OR REPLACE VIEW v_total_commission_frais_livraison_par_jour AS
     SELECT
     DATE(date) as date,
-    SUM(commission) AS somme_commission
+    SUM(commission) AS somme_commission,
+    SUM(frais_livraison) as somme_frais_livraison
 FROM
     v_frais_livraison_commission flc
 JOIN v_commande_payes cp 
     ON flc.id_commande= cp.id_commande
 GROUP BY
     DATE(date);
+
  
 
     
