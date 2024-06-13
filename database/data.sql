@@ -1,58 +1,8 @@
-
--- Insérer des données dans la table Resto
-INSERT INTO Resto (nom,email, mot_de_pass) VALUES
-('Fong Mei','resto1@example.com', 'mdp1'),
-('EURASIE','resto2@example.com', 'mdp2'),
-('Selesy','resto3@example.com', 'mdp3');
-
--- Insérer des données dans la table Plat
-INSERT INTO Plat (id_resto, description, prix) VALUES
-(1, 'Pizza Margherita', 10.99),
-(1, 'Spaghetti Carbonara', 12.99),
-(2, 'Burger Cheese', 8.99),
-(2, 'Salade César', 7.49),
-(3, 'Sushi Assorti', 15.99),
-(3, 'Ramen au Poulet', 11.49);
--- Insérer des données dans la table Commande
-
-insert into client (nom) values ('koto');
-
-insert into Adresse (nom) values('Andoranofotsy');
-
-INSERT INTO Commande (adresse,id_client, date) VALUES
-(1, 1, '2024-06-03 10:00:00'),
-(1, 1, '2024-06-03 11:30:00'),
-(1, 1, '2024-06-03 12:45:00');
-
--- Insérer des données dans la table Commande_plat
--- (Assumant que vous avez une table Commande déjà créée)
-INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES
-(1, 1, 2, 21.98),
-(1, 4, 1, 7.49),
-(2, 3, 1, 8.99),
-(2, 6, 2, 22.98),
-(3, 2, 1, 8.99),
-(3, 5, 2, 22.98);
-
-
--- Insertion dans la table Admis
-INSERT INTO Admis (nom, prenom, email, mot_de_pass) VALUES
-('admin1', 'admin1', 'admin1@gmail.com', 'admin1'),
-('admin2', 'admin2', 'admin2@gmail.com', 'admin2');
-
-
 -- Insertion dans la table CLient
-INSERT INTO `Client` (`nom`, `prenom`, `email`, `mot_de_pass`) VALUES
-('Bernard', 'Alice', 'alice@gmail.com', 'alice'),
-('Durand', 'Louis', 'louis@gmail.com', 'louis'),
-('Moreau', 'Claire', 'claire@gmail.com', 'claire'),
-('Petit', 'Henri', 'henri@gmail.com', 'henri'),
-('Robert', 'Emma', 'emma@gmail.com', 'emma'),
-('Richard', 'Paul', 'paul@gmail.com', 'paul'),
-('Garcia', 'Marie', 'marie@gmail.com', 'marie'),
-('Martinez', 'Luc', 'luc@gmail.com', 'luc'),
-('Lefevre', 'Julie', 'julie@gmail.com', 'julie'),
-('Thomas', 'Pierre', 'pierre@gmail.com', 'pierre');
+INSERT INTO `Client` (`nom`, `prenom`, `email`,`telephone`,`mot_de_pass`) VALUES
+('Bernard', 'Alice', 'alice@gmail.com','0326257346' ,'alice'),
+('Durand', 'Louis', 'louis@gmail.com', '0348965471','louis'),
+('Moreau', 'Claire', 'claire@gmail.com','0339624875' ,'claire');
 
 
 -- Insérer des données dans la table Adresse
@@ -90,8 +40,82 @@ INSERT INTO `Adresse` (`nom`) VALUES
 ('67ha'),
 ('Andoharanofotsy'),
 ('Ankadimbahoaka'),
-('Soanierana'),
-('');
+('Soanierana');
+
+--inserer voisin de l'adresse
+INSERT INTO `Voisin` (`id_adresse1`,`id_adresse2`) VALUES
+('32','28'),
+('32','35');
+
+
+-- Insérer des données dans la table Resto
+INSERT INTO Resto (nom,id_adresse, email,mot_de_pass) VALUES
+('Fong Mei',32,'resto1@example.com', 'mdp1'),
+('EURASIE',28,'resto2@example.com','mdp2'),
+('Selesy',15,'resto3@example.com','mdp3');
+
+
+-- Insertion des données dans la table Info_resto
+INSERT INTO Info_resto (id_resto, nom, adresse, repere,description, heure_ouverture, heure_fermeture) VALUES
+( 1, 'Resto A', 32,'pharmacie', 'Description Resto A', '08:00:00', '22:00:00'),
+( 2, 'Resto B', 28,'magasin M','Description Resto B', '09:00:00', '23:00:00'),
+( 3, 'Resto C', 15,'jazz club','Description Resto C', '10:00:00', '21:00:00');
+
+
+-- Insérer des données dans la table Plat
+INSERT INTO Plat (id_resto, description, prix) VALUES
+(1, 'Pizza Margherita', 10.99),
+(1, 'Spaghetti Carbonara', 12.99),
+(2, 'Burger Cheese', 8.99),
+(2, 'Salade César', 7.49),
+(3, 'Sushi Assorti', 15.99),
+(3, 'Ramen au Poulet', 11.49);
+
+
+INSERT INTO Change_quantite_plat (id_plat, date, production) VALUES
+(1, '2024-06-01 08:00:00', 50),
+(2, '2024-06-01 08:00:00', 40),
+(3, '2024-06-01 08:00:00', 30),
+(4, '2024-06-01 08:00:00', 20),
+(5, '2024-06-01 08:00:00', 15),
+(6, '2024-06-01 08:00:00', 25);
+
+
+-- Insérer des données dans la table Commande
+INSERT INTO Commande (id_client,adresse,repere,date) VALUES
+(1,32,'itu','2024-06-03 10:00:00'),
+(1,28,'forello','2024-06-03 11:30:00'),
+(1,15,'black jack','2024-06-03 12:45:00'),
+(1,35,'maison blanche','2024-06-11 08:00:00'),
+(1,35,'maison blanche','2024-06-11 10:00:00');
+
+-- Insérer des données dans la table Commande_plat
+-- (Assumant que vous avez une table Commande déjà créée)
+INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES
+(1, 1, 2, 21.98),
+(1, 4, 1, 7.49),
+(2, 3, 1, 8.99),
+(2, 6, 2, 22.98),
+(3, 2, 1, 8.99),
+(3, 5, 2, 31.98),
+(4, 1, 2, 21.98),
+(5, 1, 2, 21.98);
+
+-- Insérer des données dans la table Commission_admin
+INSERT INTO Commission_admin (commission_resto,commission_livreur) VALUES 
+(5,30);
+
+
+
+--Insertion dans la table Admis
+INSERT INTO Admis (nom, prenom, email, mot_de_pass) VALUES
+('admin1', 'admin1', 'admin1@gmail.com', 'admin1'),
+('admin2', 'admin2', 'admin2@gmail.com', 'admin2');
+
+
+
+
+
 
 INSERT INTO Status(id_livreur,status) VALUES (1,'dispo');
 INSERT INTO Status(id_livreur,status) VALUES (2,'dispo');
@@ -113,68 +137,14 @@ INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur6@gmail.com', 'livreur6
 INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur7@gmail.com', 'livreur7');
 
 -- Insertion dans la table Info_livreur
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (1,'livreur1',4);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (2,'livreur2',6);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (3,'livreur3',12);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (1,'livreur1',15);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (2,'livreur2',20);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (3,'livreur3',28);
 
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (4,'livreur4',34);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (4,'livreur4',32);
 INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (5,'livreur5',35);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (6,'livreur6',30);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (6,'livreur6',32);
 INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (7,'livreur7',22);
-
--- Insérer des données dans la table Resto
-INSERT INTO Resto (email, mot_de_pass) VALUES
-('resto1@example.com', 'mdp1'),
-('resto2@example.com', 'mdp2'),
-('resto3@example.com', 'mdp3');
-
--- Insertion des données dans la table Info_resto
-INSERT INTO Info_resto (id_resto, nom, adresse, description, heure_ouverture, heure_fermeture) VALUES
-( 1, 'Resto A', 2, 'Description Resto A', '08:00:00', '22:00:00'),
-( 2, 'Resto B', 3, 'Description Resto B', '09:00:00', '23:00:00'),
-( 3, 'Resto C', 4, 'Description Resto C', '10:00:00', '21:00:00');
-
--- Insérer des données dans la table Plat
-INSERT INTO Plat (id_resto, description, prix) VALUES
-( 1, 'Pizza Margherita', 10.99),
-( 1, 'Spaghetti Carbonara', 12.99),
-( 2, 'Burger Cheese', 8.99),
-( 2, 'Salade César', 7.49),
-( 3, 'Sushi Assorti', 15.99),
-(3, 'Ramen au Poulet', 11.49);
-
-
-
--- Insérer des données dans la table Commande
-INSERT INTO Commande (adresse, id_client, date) VALUES
-(1, 1, '2024-06-03 10:00:00'),
-(1, 1, '2024-06-03 11:30:00'),
-(1, 1, '2024-06-03 12:45:00');
-INSERT INTO Commande (adresse, id_client, date) VALUES (1, 1, '2024-06-11 08:00:00');
-INSERT INTO Commande (adresse, id_client, date) VALUES (1, 1, '2024-06-11 10:00:00');
-
-
--- Insérer des données dans la table Commande_plat
-INSERT INTO Commande_plat ( id_commande, id_plat, quantite, prix) VALUES
-(1, 1, 2, 21.98), -- Plat 1 (Pizza Margherita) appartient à Resto 1
-( 1, 2, 1, 12.99), -- Plat 2 (Spaghetti Carbonara) appartient à Resto 1
--- La commande 19 ne contient que des plats du Resto 1
-
-( 2, 3, 1, 8.99), -- Plat 3 (Burger Cheese) appartient à Resto 2
-( 2, 4, 2, 14.98), -- Plat 4 (Salade César) appartient à Resto 2
--- La commande 20 ne contient que des plats du Resto 2
-
-( 3, 5, 2, 31.98), -- Plat 5 (Sushi Assorti) appartient à Resto 3
-( 3, 6, 1, 11.49); -- Plat 6 (Ramen au Poulet) appartient à Resto 3
--- La commande 21 ne contient que des plats du Resto 3
-
-INSERT INTO Commande_plat ( id_commande, id_plat, quantite, prix) VALUES
-(22, 1, 2, 21.98);
-INSERT INTO Commande_plat ( id_commande, id_plat, quantite, prix) VALUES
-(23, 1, 2, 21.98);
--- Insérer des données dans la table Commission_admin
-INSERT INTO Commission_admin (commission_resto,commission_livreur) VALUES 
-(5,30);
 
 
 
@@ -187,20 +157,9 @@ INSERT INTO Livraison_payement_commande ( id_commande, id_livreur, paye) VALUES
 
 
 
--- Insérer des données dans la table LienAdresse
-INSERT INTO Lien_adresse (id_adresse1, id_adresse2, distance) VALUES
-( 1, 2, 1.5),
-(1, 3, 5.0),
-( 1, 4, 10.0);
 
 
-INSERT INTO Change_quantite_plat (id_plat, date, production) VALUES
-(1, '2024-06-01 08:00:00', 50),
-(2, '2024-06-01 08:00:00', 40),
-(3, '2024-06-01 08:00:00', 30),
-(4, '2024-06-01 08:00:00', 20),
-(5, '2024-06-01 08:00:00', 15),
-(6, '2024-06-01 08:00:00', 25);
+
 
 
 INSERT INTO Note_plat (id_client, id_plat, note) VALUES

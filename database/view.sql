@@ -301,6 +301,10 @@ select
 from Mise_en_avant;
 
 
+
+
+
+
 -- I-fonction getLivraison Disponible
 
 -- 1-fonction algorithme qui choisi quelle livreur peut voir la commande 
