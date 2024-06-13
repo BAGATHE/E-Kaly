@@ -346,6 +346,46 @@ class  LivreurModel extends CI_Model {
       return $rapport;
    }
 
+   public function getLivraisonLivreurEnUneJourne($idLivreur, $dateRechercher){ 
+      $this->db->where('id_livreur', $idLivreur);
+      $this->db->where('DATE(date_commande)', $dateRechercher);
+      $query = $this->db->get('v_liste_livraison_livreur_jour');
+      return $query->result_array();
+   }
+  
+  public function getLivraisonLivreurEnUneJourneAvecGain($idLivreur, $dateRechercher){ 
+      $this->db->where('id_livreur', $idLivreur);
+      $this->db->where('DATE(date_commande)', $dateRechercher);
+      $query = $this->db->get('v_livraison_livreur_avec_gain');
+      return $query->result_array();
+   }
+
+   public function algoCommandeLivreur($id) {
+      $this->db->where('id_livreur', $id);
+      $query = $this->db->get('v_livreur_commande');
+      return $query->result_array();
+   }
+
+   public function getCommandeLivreur($id) {
+      $this->db->where('id_commande', $id);
+      $query = $this->db->get('v_frais_livraison_commission_detail');
+      return $query->result_array();
+   }
+
+// STATISTIQUE LIVREUR
+
+   public function getStatistiqueJour ($idLivreur, $annee, $mois, $jour)
+   {
+      $sql= 'select* from v_somme_commission_frais_livraison_par_jour WHERE YEAR(date)='.$annee.' AND MONTH(date)='.$mois.' AND DAY(date)='.$jour.' AND id_livreur='.$idLivreur;
+      $query= $this->db->query($sql);
+      return $query->result_array();
+   }
+   
+   public function getCommandesPayes()
+   {
+      $query = $this->db->get('v_commande_payes');
+      return $query->result_array();
+   }
 
 
 }

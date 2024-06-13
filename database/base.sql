@@ -33,8 +33,10 @@ CREATE TABLE Voisin (
 CREATE TABLE Resto (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255),
+    id_adresse INT,
     email VARCHAR(255),
-    mot_de_pass VARCHAR(255)
+    mot_de_pass VARCHAR(255),
+    FOREIGN KEY (id_adresse) REFERENCES Adresse(id)
 );
 
 
@@ -199,14 +201,11 @@ create table Commission_admin(
 );
 
 
-CREATE TABLE `Tarif_livraison` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `distance_min` DECIMAL(5,2) NOT NULL,
-  `distance_max` DECIMAL(5,2) NOT NULL,
-  `tarif` INT NOT NULL
+CREATE TABLE Tarif_livraison (
+    tarif_min decimal(10,2),
+    tarif_moyen decimal(10,2),
+    tarif_max decimal(10,2)
 );
-
-
 
 
 ALTER TABLE `Info_livreur` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);

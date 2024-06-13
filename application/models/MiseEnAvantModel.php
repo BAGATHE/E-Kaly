@@ -172,7 +172,7 @@ class  MiseEnAvantModel extends CI_Model {
 
   public function getValidRestoMiseEnAvantByDate($date) {
       $this->db->where('date_expiration >=', $date);
-      $query = $this->db->get('v_mise_en_avant_with_expiration');
+      $query = $this->db->get('v_mise_en_avant_dates');
       return $query->result_array();
   }
 
