@@ -165,14 +165,7 @@ INSERT INTO Livraison_payement_commande ( id_commande, id_livreur, paye) VALUES
 INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (1, 1, 4),
 (2, 1, 5),
-(3, 2, 3),
-(4, 2, 4),
-(5, 3, 5),
-(6, 3, 4),
-(7, 4, 2),
-(8, 4, 3),
-(9, 5, 4),
-(10,5, 5);
+(3, 2, 3);
 
 INSERT INTO Prix_mise_en_avant(prix) VALUES(100);
 
