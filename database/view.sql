@@ -448,6 +448,9 @@ join Client as c on c.id = vfl.id_client
 join Adresse as a1 on a1.id = vfl.recuperation
 join Adresse as a2 on a2.id = vfl.destination;
 
+
+
+
 CREATE OR REPLACE VIEW v_liste_livraison_livreur_jour AS
 SELECT
     c.id AS id_commande,
@@ -487,6 +490,8 @@ LEFT JOIN
     Payement g ON vlllj.id_commande  = g.id_commande
 GROUP BY
     vlllj.id_commande;
+
+
 -- Statistique livreur
 
 CREATE OR REPLACE VIEW v_commande_payes AS 
@@ -494,6 +499,7 @@ SELECT* FROM Livraison_payement_commande WHERE paye=1;
 
 CREATE OR REPLACE VIEW v_total_commission_frais_livraison_par_jour AS
     SELECT
+    cp.id_livreur,
     DATE(date) as date,
     SUM(commission) AS somme_commission,
     SUM(frais_livraison) as somme_frais_livraison

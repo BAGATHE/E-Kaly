@@ -134,6 +134,7 @@ class LivreurController extends CI_Controller {
             $current_livreur = $this->session->userdata('livreur_session');
             }
         $data['current_livreur'] = $current_livreur;
+        
         $data['contents'] = "livreurPage/LivraisonJournalier";
         $this->load->view('templates_livreur/template', $data);
 
