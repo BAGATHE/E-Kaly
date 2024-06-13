@@ -180,3 +180,5 @@ INSERT INTO Prix_mise_en_avant(prix) VALUES(100);
 
 INSERT INTO Tarif_livraison (tarif_min,tarif_moyen,tarif_max)
 VALUES (1500,3000,5000);
+
+--teste
