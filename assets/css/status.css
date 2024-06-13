@@ -1,0 +1,35 @@
+select#status {
+    width: 100%; /* Largeur complète */
+    padding: 10px; /* Espacement intérieur */
+    margin-bottom: 20px; /* Espacement en bas */
+    border: 1px solid #ccc; /* Bordure */
+    border-radius: 4px; /* Bords arrondis */
+    background-color: #fff; /* Couleur de fond */
+    color: #333; /* Couleur du texte */
+    font-size: 16px; /* Taille de la police */
+    box-sizing: border-box; /* Inclure les bordures et le padding dans la largeur totale */
+    appearance: none; /* Supprime l'apparence par défaut des navigateurs */
+    -webkit-appearance: none; /* Supprime l'apparence par défaut des navigateurs WebKit */
+    -moz-appearance: none; /* Supprime l'apparence par défaut des navigateurs Firefox */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><polygon points="0,0 10,0 5,5" style="fill:%23333;"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    cursor: pointer;
+}
+
+/* Style pour le bouton */
+button[type="submit"] {
+    background-color: #0f8aa0; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+    border-radius: 4px; /* Bords arrondis */
+    padding: 10px 20px; /* Espacement intérieur */
+    cursor: pointer; /* Curseur pointeur */
+    font-size: 16px; /* Taille de la police */
+    transition: background-color 0.3s ease; /* Transition de couleur */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Couleur de fond au survol */
+}

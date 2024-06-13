@@ -30,11 +30,65 @@ CREATE TABLE Voisin (
 
 );
 
+
 CREATE TABLE Resto (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255),
+    id_adresse INT,
     email VARCHAR(255),
-    mot_de_pass VARCHAR(255)
+    mot_de_pass VARCHAR(255),
+    FOREIGN KEY (id_adresse) REFERENCES Adresse(id)
+);
+
+CREATE TABLE Info_resto (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_resto INT,
+    nom VARCHAR(255),
+    adresse INT,
+    repere VARCHAR(255),
+    description VARCHAR(255),
+    telephone VARCHAR(255),
+    heure_ouverture TIME,
+    heure_fermeture TIME,
+    FOREIGN KEY (id_resto) REFERENCES Resto(id),
+    FOREIGN KEY (adresse) REFERENCES Adresse(id)
+);
+
+
+CREATE TABLE Plat (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_resto INT,
+    description VARCHAR(255),
+    prix DECIMAL(10, 2),
+    FOREIGN KEY (id_resto) REFERENCES Resto(id)
+);
+
+CREATE TABLE Change_quantite_plat (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_plat INT,
+    date DATETIME,
+    production INT,
+    FOREIGN KEY (id_plat) REFERENCES Plat(id)
+);
+
+CREATE TABLE Commande (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_client INT,
+    adresse INT,
+    repere VARCHAR(250),
+    date DATETIME,
+    FOREIGN KEY (id_client) REFERENCES Client(id),
+    FOREIGN KEY (adresse) REFERENCES Adresse(id)
+);
+
+CREATE TABLE Commande_plat (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_commande INT,
+    id_plat INT,
+    quantite INT,
+    prix DECIMAL(10, 2),
+    FOREIGN KEY (id_commande) REFERENCES Commande(id),
+    FOREIGN KEY (id_plat) REFERENCES Plat(id)
 );
 
 
@@ -63,42 +117,13 @@ CREATE TABLE Admis (
     mot_de_pass VARCHAR(255)
 );
 
-CREATE TABLE Plat (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_resto INT,
-    description VARCHAR(255),
-    prix DECIMAL(10, 2),
-    FOREIGN KEY (id_resto) REFERENCES Resto(id)
-);
 
-CREATE TABLE Change_quantite_plat (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_plat INT,
-    date DATETIME,
-    production INT,
-    FOREIGN KEY (id_plat) REFERENCES Plat(id)
-);
 
-CREATE TABLE Commande (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_client INT,
-    adresse INT,
-    repere VARCHAR(250),
-    date DATETIME,
-    FOREIGN KEY (id_client) REFERENCES Client(id),
-    FOREIGN KEY (adresse) REFERENCES Adresse(id)
 
-);
 
-CREATE TABLE Commande_plat (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_commande INT,
-    id_plat INT,
-    quantite INT,
-    prix DECIMAL(10, 2),
-    FOREIGN KEY (id_commande) REFERENCES Commande(id),
-    FOREIGN KEY (id_plat) REFERENCES Plat(id)
-);
+
+
+
 
 CREATE TABLE Livraison_payement_commande (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -135,29 +160,8 @@ CREATE TABLE Favori_client (
     FOREIGN KEY (id_client) REFERENCES Client(id)
 );
 
-CREATE TABLE Commission (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_resto INT,
-    id_commande INT,
-    date DATETIME,
-    prix DECIMAL(10, 2),
-    FOREIGN KEY (id_resto) REFERENCES Resto(id),
-    FOREIGN KEY (id_commande) REFERENCES Commande(id)
-);
 
-CREATE TABLE Info_resto (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_resto INT,
-    nom VARCHAR(255),
-    adresse INT,
-    repere VARCHAR(255),
-    description VARCHAR(255),
-    telephone VARCHAR(255),
-    heure_ouverture TIME,
-    heure_fermeture TIME,
-    FOREIGN KEY (id_resto) REFERENCES Resto(id),
-    FOREIGN KEY (adresse) REFERENCES Adresse(id)
-);
+
 
 CREATE TABLE Prix_mise_en_avant(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -199,14 +203,11 @@ create table Commission_admin(
 );
 
 
-CREATE TABLE `Tarif_livraison` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `distance_min` DECIMAL(5,2) NOT NULL,
-  `distance_max` DECIMAL(5,2) NOT NULL,
-  `tarif` INT NOT NULL
+CREATE TABLE Tarif_livraison (
+    tarif_min decimal(10,2),
+    tarif_moyen decimal(10,2),
+    tarif_max decimal(10,2)
 );
-
-
 
 
 ALTER TABLE `Info_livreur` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);

@@ -10,7 +10,13 @@ class LivreurController extends CI_Controller {
     }
 
     public function index() {
-       
+        $current_livreur  = null;
+        if ($this->session->userdata('livreur_session')) {
+            $current_livreur = $this->session->userdata('livreur_session');
+            }
+        $data['current_livreur'] = $current_livreur;
+        $data['contents'] = "livreurPage/LivreurAccueil";
+        $this->load->view('templates_livreur/template', $data);
     }
 
     /*insertion dans la base**/
@@ -87,7 +93,7 @@ class LivreurController extends CI_Controller {
         
     }
 
-    /***redirection vers une page ajout*/
+    /***redirection vers une page ajout livreur cote administrateur */
     public function insertionPage(){
         $current_administrator  = null;
         if ($this->session->userdata('admin_session')) {
@@ -96,6 +102,52 @@ class LivreurController extends CI_Controller {
         $data['current_administrator'] = $current_administrator; 
         $data['contents'] = "adminPage/Ajout";
         $this->load->view('templates/template', $data);
+    }
+
+      /*login authentification */
+    /**login */
+    public function login() {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('mot_de_pass', 'Mot de passe', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('login');
+        } else {
+            $email = $this->input->post('email');
+            $mot_de_pass = $this->input->post('mot_de_pass');
+            $user = $this->LivreurModel->checkLogin($email, $mot_de_pass);
+            if ($user !== null) {
+                $this->session->set_userdata('livreur_session', $user);
+                redirect('LivreurController');
+            } else {
+                $data['error'] = "Invalid email or password";
+                $this->load->view('login', $data);
+            }
+        }
+    }
+/****redirection vers la page du livraison du jour  */
+    public function LoadLivraisonPage(){
+        if ($this->session->userdata('livreur_session')) {
+            $current_livreur = $this->session->userdata('livreur_session');
+            }
+        $data['current_livreur'] = $current_livreur;
+        $data['contents'] = "livreurPage/LivraisonJournalier";
+        $this->load->view('templates_livreur/template', $data);
+
+    }
+
+    /*redirection vers la page  statistique*/ 
+    public function LoadPerformancePage(){
+        if ($this->session->userdata('livreur_session')) {
+            $current_livreur = $this->session->userdata('livreur_session');
+            }
+        $data['current_livreur'] = $current_livreur;
+        $data['contents'] = "livreurPage/StatistiqueLivreur";
+        $this->load->view('templates_livreur/template', $data);
+
     }
 
 
