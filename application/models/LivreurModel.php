@@ -145,6 +145,20 @@ class  LivreurModel extends CI_Model {
       return $query->row_array();
    }
 
+/*fontion authentification pour se connecter*/
+public function checkLogin($email,$mot_de_pass) {
+   $this->db->where('email', $email);
+   $this->db->where('mot_de_pass', $mot_de_pass);
+   $query = $this->db->get('Livreur');
+
+   if ($query->num_rows() === 1) {
+      $row = $query->row_array();
+      return $this->LivreurModel->getById($row["id"]);
+   } else {
+       return null;
+   }
+}
+
    public function getLastLivreurId() {
       $this->db->select('id');
       $this->db->order_by('id', 'DESC');

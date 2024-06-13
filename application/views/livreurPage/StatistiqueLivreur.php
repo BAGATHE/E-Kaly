@@ -1,50 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link href="./assets/font/font2.css" rel="stylesheet" />
-   <link rel="stylesheet" href="assets/css/livreur.css">
-   <link rel="icon" href="./assets/images/logo.png">
-   <title>E-Kaly - Livreur</title>
-</head>
-
-<body>
-   <div class="container">
-      <aside>
-         <div class="top">
-            <div class="logo">
-               <img src="assets/images/logo.png" alt="logotipo">
-               <h2>E<span class="ekaly">-KALY</span></h2>
-            </div>
-            <div class="close" id="close-btn">
-               <span class="material-symbols-sharp">close</span>
-            </div>
-         </div>
-
-         <div class="sidebar">
-            <a href="#">
-               <span class="material-symbols-sharp">home</span>
-               <h3>Accueil</h3>
-            </a>
-            <a href="#">
-               <span class="material-symbols-sharp">electric_moped</span>
-               <h3>Livraison du jour</h3>
-            </a>
-            <a href="#" class="active">
-               <span class="material-symbols-sharp">bar_chart</span>
-               <h3>Statistique</h3>
-            </a>
-            <a href="#">
-               <span class="material-symbols-sharp">logout</span>
-               <h3>Logout</h3>
-            </a>
-         </div>
-      </aside>
-      <!-- END ASIDE -->
-      <main>
+<main>
          <h1>Statistique livreur</h1>
          <form action="">
              <div class="liste">
@@ -105,10 +59,3 @@
          </div>
       </main>
       <!-- END MAIN -->
-   </div>
-   <script type="text/javascript" src="assets/js/main.js"></script>
-   <script type="text/javascript" src="assets/js/loader.js"></script>
-   <script type="text/javascript" src="assets/js/LivreurChart.js"></script>
-</body>
-
-</html>
