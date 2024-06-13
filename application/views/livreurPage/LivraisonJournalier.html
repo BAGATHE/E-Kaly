@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./assets/font/font2.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/livreur.css">
+    <link rel="stylesheet" href="assets/css/status.css">
+    <link rel="icon" href="./assets/images/logo.png">
+    <title>E-Kaly - Livreur</title>
+</head>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="logotipo">
+                    <h2>E<span class="ekaly">-KALY</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-symbols-sharp">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="LivreurAccueil.html">
+                    <span class="material-symbols-sharp">home</span>
+                    <h3>Accueil</h3>
+                </a>
+                <a href="#" class="active">
+                    <span class="material-symbols-sharp">electric_moped</span>
+                    <h3>Livraison du jour</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">insights</span>
+                    <h3>Performance</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <main>
+            <h1>Livraison du Jour</h1>
+            <div class="insights">
+                <div class="sales">
+                    <span class="material-symbols-sharp">payments</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Argent du jour</h3>
+                            <h1 class="ekaly">15 000 Ar</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recent-orders">
+                <h2>Livraisons du Jour</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Commande</th>
+                            <th>Adresse de recuperation</th>
+                            <th>Adresse de livraison</th>
+                            <th>Prix du livraison</th>
+                            <th>Commission</th>
+                            <th>Status</th>
+                            <th>Date de reception</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sushi</td>
+                            <td>Itaosy</td>
+                            <td>67 ha</td>
+                            <td>25000 Ar</td>
+                            <td>5000 Ar</td>
+                            <td>Livré</td>
+                            <td>12/06/2024</td>
+                            <td><a href="">Accepter</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-symbols-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-symbols-sharp active">light_mode</span>
+                    <span class="material-symbols-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Bonjour, <b>John Doe</b></p>
+                        <small class="text-muted">Livreur</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="assets/images/profile.jpg" alt="profile photo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+
+</html>
