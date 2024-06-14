@@ -15,6 +15,8 @@ class LivreurController extends CI_Controller {
             $current_livreur = $this->session->userdata('livreur_session');
             }
         $data['current_livreur'] = $current_livreur;
+        $data['solde']=$this->LivreurModel->getCommissionDuJour($current_livreur['id'],date("Y-m-d"));
+        $data['livraison']=$this->LivreurModel->algoCommandeLivreur($current_livreur['id'],date("Y-m-d"));
         $data['contents'] = "livreurPage/LivreurAccueil";
         $this->load->view('templates_livreur/template', $data);
     }
@@ -166,23 +168,31 @@ class LivreurController extends CI_Controller {
         echo json_encode($data);
     }
 
-/***fonction update livraison payement */
+    /***fonction update livraison payement */
 
-public function updateLivraison($id_commande){
-    
-    if ($this->session->userdata('livreur_session')) {
-        $current_livreur = $this->session->userdata('livreur_session');
+    public function updateLivraison($id_commande){
+        
+        if ($this->session->userdata('livreur_session')) {
+            $current_livreur = $this->session->userdata('livreur_session');
+            }
+        $this->LivreurModel->updateLivraisonPayementCommande($id_commande,1);
+        $data['current_livreur'] = $current_livreur;
+        //$data['date'] = date('Y-m-d');
+        $data['date'] = '2024-06-03';
+        $data["livraison_du_jours"] = $this->LivreurModel->getLivraisonLivreurEnUneJourneAvecGain($current_livreur["id"],$data['date']);
+        $data['contents'] = "livreurPage/LivraisonJournalier";
+        $this->load->view('templates_livreur/template', $data);
+    }
+
+    public function accepterLivreur($id_commande){
+        if ($this->session->userdata('livreur_session')) {
+            $current_livreur = $this->session->userdata('livreur_session');
         }
-    $this->LivreurModel->updateLivraisonPayementCommande($id_commande,1);
-    $data['current_livreur'] = $current_livreur;
-    //$data['date'] = date('Y-m-d');
-    $data['date'] = '2024-06-03';
-    $data["livraison_du_jours"] = $this->LivreurModel->getLivraisonLivreurEnUneJourneAvecGain($current_livreur["id"],$data['date']);
-    $data['contents'] = "livreurPage/LivraisonJournalier";
-    $this->load->view('templates_livreur/template', $data);
-}
+        
+        $this->LivreurModel->insert_livraison_payement_commande($id_commande, $current_livreur['id']);
 
-
+        redirect('LivreurController');
+    }
 
 
 }

@@ -1,4 +1,4 @@
---liste de tout les plat  jointure entre les resto et plat affiche tout les plat sans exxception
+-- liste de tout les plat  jointure entre les resto et plat affiche tout les plat sans exxception
 create or replace view  v_resto_plat AS
 select 
     r.id as id_resto,
@@ -14,7 +14,7 @@ ON
     r.id = p.id_resto;
 
 
---liste de tout les commande effectuer sur la plateforme de  tout les  resto 
+-- liste de tout les commande effectuer sur la plateforme de  tout les  resto 
 create or replace view v_resto_plat_Commande_plat AS
 select 
     vrp.*,
@@ -27,7 +27,7 @@ join
 on
     vrp.id_plat =  cp.id_plat;
 
---liste de tout les commande effectuer sur la plateform avec nom client et la date 
+-- liste de tout les commande effectuer sur la plateform avec nom client et la date 
 create or replace view v_resto_plat_Commande_plat_Commande AS
 select 
     vrpcp.*,
@@ -41,7 +41,7 @@ join
 on 
     c.id = vrpcp.id_commande;
 
---liste de details de tout les commande effetuer sur la plateforme de tout les resto 
+-- liste de details de tout les commande effetuer sur la plateforme de tout les resto 
 create or replace view v_details_commande AS
 select 
     vrpcpc.*,
@@ -55,7 +55,7 @@ on
     vrpcpc.id_client = c.id;
 
 
---affichage commission par commande de tout les commande exisant    avec date commande 
+-- affichage commission par commande de tout les commande exisant    avec date commande 
 create or replace view v_commission_par_Commande_par_resto_par_jour as
 select
     id_commande,
@@ -301,10 +301,6 @@ select
 from Mise_en_avant;
 
 
-
-
-
-
 -- I-fonction getLivraison Disponible
 
 -- 1-fonction algorithme qui choisi quelle livreur peut voir la commande 
@@ -379,7 +375,8 @@ WHERE
 create or replace view v_livreur_commande as 
 SELECT 
     COALESCE(clc.id_livreur, vlcs.id_livreur) AS id_livreur,
-    COALESCE(clc.id_commande, vlcs.id_commande) AS id_commande
+    COALESCE(clc.id_commande, vlcs.id_commande) AS id_commande,
+    vlcs.date
 from 
 	v_cross_livreur_commande as vlcs
 left join 
@@ -449,6 +446,26 @@ join Adresse as a1 on a1.id = vfl.recuperation
 join Adresse as a2 on a2.id = vfl.destination;
 
 
+create or replace view v_livreur_commande_frais_commission as
+select 
+    vlc.id_livreur,
+    vlc.id_commande,
+    vlc.date,
+    flcd.nom_resto,
+    flcd.recuperation,
+    flcd.client,
+    flcd.telephone,
+    flcd.destination,
+    flcd.frais_livraison,
+    flcd.commission
+from 
+    v_livreur_commande as vlc
+join 
+    v_frais_livraison_commission_detail as flcd
+on 
+    vlc.id_commande = flcd.id_commande
+order by 
+    vlc.id_livreur, vlc.id_commande;
 
 
 CREATE OR REPLACE VIEW v_liste_livraison_livreur_jour AS
@@ -515,6 +532,26 @@ JOIN v_commande_payes cp
 GROUP BY
     DATE(date);
 
- 
+create or replace view v_livreur_commande_frais_commission_payement as
+select 
+    lcfc.id_livreur,
+    lcfc.id_commande,
+    lcfc.date,
+    lcfc.nom_resto,
+    lcfc.recuperation,
+    lcfc.client,
+    lcfc.telephone,
+    lcfc.destination,
+    lcfc.frais_livraison,
+    lcfc.commission,
+    case when lpc.id_livreur is null then false else true end as livree
+from 
+    v_livreur_commande_frais_commission as lcfc
+left join 
+    Livraison_payement_commande as lpc
+on 
+    lcfc.id_commande = lpc.id_commande
+order by 
+    lcfc.id_livreur, lcfc.id_commande;
 
     

@@ -201,9 +201,10 @@ public function checkLogin($email,$mot_de_pass) {
   }
 
 //commande disponible avec details
-public function algoCommandeLivreur($id) {
+public function algoCommandeLivreur($id,$dateRechercher) {
       $this->db->where('id_livreur', $id);
-      $query = $this->db->get('v_livreur_commande');
+      $this->db->where('DATE(date)', $dateRechercher);
+      $query = $this->db->get('v_livreur_commande_frais_commission_payement');
       return $query->result_array();
    }
 
@@ -232,18 +233,38 @@ public function getLivraisonLivreurEnUneJourneAvecGain($idLivreur, $dateRecherch
 
    public function getStatistiqueJour($idLivreur,$annee,$mois)
    {
-      $sql= 'select* from v_total_commission_frais_livraison_par_jour WHERE YEAR(date)='.$annee.' AND MONTH(date)='.$mois.' AND id_livreur='.$idLivreur;
+      $sql= 'select * from v_total_commission_frais_livraison_par_jour WHERE YEAR(date)='.$annee.' AND MONTH(date)='.$mois.' AND id_livreur='.$idLivreur;
       $query= $this->db->query($sql);
       return $query->result_array();
    }
-   
+   public function getCommissionDuJour($idLivreur,$dateRechercher)
+   {
+      $sql= 'select * from v_total_commission_frais_livraison_par_jour WHERE DATE(date)="'.$dateRechercher.'" AND id_livreur='.$idLivreur;
+      $query= $this->db->query($sql);
+      $solde=$query->row_array();
+      if($solde==null){
+         $solde['somme_commission']=0;
+      }
+      return $solde;
+   }
    public function getCommandesPayes()
    {
       $query = $this->db->get('v_commande_payes');
       return $query->result_array();
    }
 
-  
+   // Fonction pour insérer une livraison et un paiement de commande
+   public function insert_livraison_payement_commande($id_commande, $id_livreur) {
+      // Préparer les données à insérer
+      $data = array(
+         'id_commande' => $id_commande,
+         'id_livreur' => $id_livreur,
+         'paye' => true // Initialement, la commande n'est pas payée
+      );
+
+      // Insérer les données dans la table
+      return $this->db->insert('Livraison_payement_commande', $data);
+   }
 }
 
 ?>
