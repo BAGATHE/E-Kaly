@@ -184,6 +184,11 @@ class LivreurController extends CI_Controller {
         $this->load->view('templates_livreur/template', $data);
     }
 
+    /**update status livreur */
+    public function updateStatus($id_livreur){
+        
+    }
+
     public function accepterLivreur($id_commande){
         if ($this->session->userdata('livreur_session')) {
             $current_livreur = $this->session->userdata('livreur_session');
