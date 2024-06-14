@@ -131,6 +131,12 @@ class  LivreurModel extends CI_Model {
       return $this->db->update($nom_table, $data);
    }
 
+   public function updateLivraisonPayementCommande($id, $paye) {
+      $data = array('paye' => $paye);
+      $this->db->where("id_commande", $id);
+      return $this->db->update("Livraison_payement_commande", $data);
+  }
+  
    public function delete($id) {
       $this->db->where('id',$id);
       return $this->db->delete('Livreur');

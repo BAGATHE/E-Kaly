@@ -134,7 +134,9 @@ class LivreurController extends CI_Controller {
             $current_livreur = $this->session->userdata('livreur_session');
             }
         $data['current_livreur'] = $current_livreur;
-
+        //$data['date'] = date('Y-m-d');
+        $data['date'] = '2024-06-03';
+        $data["livraison_du_jours"] = $this->LivreurModel->getLivraisonLivreurEnUneJourneAvecGain($current_livreur["id"],$data['date']);
         $data['contents'] = "livreurPage/LivraisonJournalier";
         $this->load->view('templates_livreur/template', $data);
 
@@ -156,13 +158,29 @@ class LivreurController extends CI_Controller {
         $idLivreur = $this->input->post("id_livreur");
         $data = array();
         if($mois != 0 && $anner != 0){
-            $data =  $this->LivreurModel->getStatistiqueJour ($idLivreur,$anner,$mois);
+            $data =  $this->LivreurModel->getStatistiqueJour($idLivreur,$anner,$mois);
         } 
         if($data==null){
             $data = array("day"=>'0',"month"=>'0',"year"=>'0',"revenue"=>'0');
         }
         echo json_encode($data);
     }
+
+/***fonction update livraison payement */
+
+public function updateLivraison($id_commande){
+    
+    if ($this->session->userdata('livreur_session')) {
+        $current_livreur = $this->session->userdata('livreur_session');
+        }
+    $this->LivreurModel->updateLivraisonPayementCommande($id_commande,1);
+    $data['current_livreur'] = $current_livreur;
+    //$data['date'] = date('Y-m-d');
+    $data['date'] = '2024-06-03';
+    $data["livraison_du_jours"] = $this->LivreurModel->getLivraisonLivreurEnUneJourneAvecGain($current_livreur["id"],$data['date']);
+    $data['contents'] = "livreurPage/LivraisonJournalier";
+    $this->load->view('templates_livreur/template', $data);
+}
 
 
 

@@ -482,6 +482,8 @@ SELECT
     vlllj.id_commande,
     vlllj.id_livreur,
     vlllj.date_commande,
+    vlllj.resto,
+    vlllj.adresse,
     vlllj.status_livraison,
     COALESCE(g.montant, 0) AS gain
 FROM 
