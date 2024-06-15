@@ -124,7 +124,19 @@ class  LivreurModel extends CI_Model {
       $query = $this->db->get();
       return $query->result_array();
   }
-  
+  public function getStatusLivreur($id_livreur) {
+   $this->db->select('status');
+   $this->db->from('Status');
+   $this->db->where('id_livreur', $id_livreur);
+   
+   $query = $this->db->get();
+   if ($query->num_rows() > 0) {
+       $row = $query->row();
+       return $row->status;
+   } else {
+       return null;
+   }
+}
 
    public function edit($nom_table,$condition,$id,$data) {
       $this->db->where($condition,$id);

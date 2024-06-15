@@ -6,11 +6,11 @@
                   <div class="middle">
                       <div class="left">
                           <h3>Status</h3>
-                           <form action="<?=site_url("LivreurController/updateStatus/".$current_livreur["id"]) ?>">
-                              <select name="status" id="status">
-                                 <option value="dispo">Actif</option>
-                                 <option value="non dispo">Inactif</option>
-                              </select>
+                           <form action="<?=site_url("LivreurController/updateStatus")?>" method="post">
+                        <select name="status" id="status">
+                            <option value="dispo" <?= $status == "dispo" ? "selected" : "" ?>>Actif</option>
+                            <option value="non dispo" <?= $status == "non dispo" ? "selected" : "" ?>>Inactif</option>
+                        </select>
                               <button type="submit">Valider</button>
                            </form>
                       </div>

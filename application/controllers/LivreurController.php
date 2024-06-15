@@ -14,6 +14,7 @@ class LivreurController extends CI_Controller {
         if ($this->session->userdata('livreur_session')) {
             $current_livreur = $this->session->userdata('livreur_session');
             }
+        $data['status'] = $this->LivreurModel->getStatusLivreur($current_livreur['id']);
         $data['current_livreur'] = $current_livreur;
         $data['solde']=$this->LivreurModel->getCommissionDuJour($current_livreur['id'],date("Y-m-d"));
         $data['livraison']=$this->LivreurModel->algoCommandeLivreur($current_livreur['id'],date("Y-m-d"));
@@ -185,8 +186,13 @@ class LivreurController extends CI_Controller {
     }
 
     /**update status livreur */
-    public function updateStatus($id_livreur){
-        
+    public function updateStatus(){
+        if ($this->session->userdata('livreur_session')) {
+            $current_livreur = $this->session->userdata('livreur_session');
+        }
+        $status = $this->input->post('status');
+        $this->LivreurModel->updateStatus($current_livreur["id"],$status);
+        redirect('LivreurController');
     }
 
     public function accepterLivreur($id_commande){
