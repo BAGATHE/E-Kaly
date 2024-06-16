@@ -6,7 +6,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Argent du jour</h3>
-                            <h1 class="ekaly">15 000 Ar</h1>
+                            <h1 class="ekaly">Ar</h1>
                         </div>
                     </div>
                 </div>
