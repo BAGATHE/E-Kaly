@@ -19,7 +19,7 @@
                     <tbody>
                     <?php foreach($restaurants as $resto){?>
                     <tr>
-                        <td><?=$resto['id'] ?></td>
+                        <td><img src="<?php echo base_url()?>assets/images/<?=$resto['image']?>" style="width: 40px;"></td>
                         <td><?=$resto['nom'] ?></td>
                         <td><?=$resto['adresse'] ?></td>
                         <td><?=$resto['description'] ?></td>
@@ -88,35 +88,6 @@
                     </div>
                     <div class="profile-photo">
                         <img src="<?php echo base_url()?>assets/images/profile-1.jpg">
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="reminders">
-                <div class="header">
-                    <h2>Notifications</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            autorenew
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Livraison (nom_livreur)</h3>
-                            <small class="text_muted">
-                                nom_resto
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
                     </div>
                 </div>
 

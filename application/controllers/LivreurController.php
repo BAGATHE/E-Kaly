@@ -22,27 +22,7 @@ class LivreurController extends CI_Controller {
         $this->load->view('templates_livreur/template', $data);
     }
 
-    /*insertion dans la base**/
-    public function create() {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('mot_de_pass', 'Mot de passe', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            redirect('LivreurController/insertionPage');
-        } else {
-            $data = [
-                'email' => $this->input->post('email'),
-                'mot_de_pass' => $this->input->post('mot_de_pass'),
-                'nom_complet' => $this->input->post('nom_complet'),
-                'adresse' => $this->input->post('adresse')
-            ];
-            $this->LivreurModel->save($data);
-            redirect('LivreurController/insertionPage');
-        }
-    }
+ 
 
     /**recupere donné livreur par id*/
     public function loadForm($id_livreur){
@@ -94,17 +74,6 @@ class LivreurController extends CI_Controller {
         $data['livreurs'] = $this->LivreurModel->search($criteria);
         $this->load->view('livreur/index', $data);
         
-    }
-
-    /***redirection vers une page ajout livreur cote administrateur */
-    public function insertionPage(){
-        $current_administrator  = null;
-        if ($this->session->userdata('admin_session')) {
-            $current_administrator = $this->session->userdata('admin_session');
-        }
-        $data['current_administrator'] = $current_administrator; 
-        $data['contents'] = "adminPage/Ajout";
-        $this->load->view('templates/template', $data);
     }
 
       /*login authentification */

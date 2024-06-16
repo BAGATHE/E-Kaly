@@ -7,7 +7,7 @@
                 <div class="user-list">
                 <?php foreach( $administrators as $administrator ){ ?>
                     <div class="user">
-                        <img src="<?php echo base_url()?>assets/images/profile-2.jpg">
+                        <img src="<?php echo base_url()?>assets/images/manager.svg">
                         <h2><?= $administrator['nom']  ?></h2>
                     </div>
                 <?php } ?>
@@ -96,42 +96,12 @@
                         <small class="text-muted">Admin</small>
                     </div>
                     <div class="profile-photo">
-                        <img src="<?php echo base_url()?>assets/images/profile-1.jpg">
+                        <img src="<?php echo base_url()?>assets/images/manager.svg">
                     </div>
                 </div>
 
             </div>
             <!-- End of Nav -->
-
-            <div class="reminders">
-                <div class="header">
-                    <h2>Notifications</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            autorenew
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Livraison (nom_livreur)</h3>
-                            <small class="text_muted">
-                                nom_resto
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-            </div>
-
         </div>
   
 

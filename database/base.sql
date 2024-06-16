@@ -50,6 +50,7 @@ CREATE TABLE Info_resto (
     telephone VARCHAR(255),
     heure_ouverture TIME,
     heure_fermeture TIME,
+    image VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (id_resto) REFERENCES Resto(id),
     FOREIGN KEY (adresse) REFERENCES Adresse(id)
 );

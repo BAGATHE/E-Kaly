@@ -70,33 +70,4 @@
 
             </div>
 
-            <div class="reminders">
-                <div class="header">
-                    <h2>Notifications</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            autorenew
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Livraison (nom_livreur)</h3>
-                            <small class="text_muted">
-                                nom_resto
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-            </div>
-
         </div>

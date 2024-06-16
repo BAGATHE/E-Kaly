@@ -30,7 +30,7 @@
                 </form>
 
 
-                <form  method="post" id="livreurForm" action="<?php echo site_url('LivreurController/create');?>" style="display:none;">
+                <form  method="post" id="livreurForm" action="<?php echo site_url('AdmisController/createLivreur');?>" style="display:none;">
                     <h2>Ajouter Livreur</h2>
                     
                     <div class="form-input">
@@ -61,7 +61,7 @@
 
 
 
-                <form method="post" id="restaurantForm" action="<?php echo site_url('RestoController/create');?>" style="display:none;">
+                <form method="post" id="restaurantForm" action="<?php echo site_url('AdmisController/createResto');?>" style="display:none;"  enctype="multipart/form-data">
                     <h2>Ajouter Restaurant</h2>
                     <div class="form-input">
                         <label for="">Nom</label>
@@ -93,7 +93,11 @@
                     </div>
                     <div class="form-input">
                         <label for="">mot de passe</label>
-                        <input type="text" placeholder="mot de passe" name="mot_de_pass">
+                        <input type="password" placeholder="mot de passe" name="mot_de_pass">
+                    </div>
+                    <div class="form-input">
+                        <label for="">Image</label>
+                        <input type="file" placeholder="importer" name="image">
                     </div>
                     <button type="submit">Ajouter</button>
                 </form>
@@ -124,7 +128,7 @@
                         <small class="text-muted">Admin</small>
                     </div>
                     <div class="profile-photo">
-                        <img src="<?php echo base_url()?>assets/images/profile-1.jpg">
+                        <img src="<?php echo base_url()?>assets/images/manager.svg">
                     </div>
                 </div>
 

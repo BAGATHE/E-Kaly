@@ -40,7 +40,7 @@
             <label id="login">Connexion</label>
         </div>
         <div class="form-container" id="login-container">
-            <form action="<?php echo site_url('LivreurController/login');?>" method="post">
+            <form action="<?php echo site_url('AdmisController/login');?>" method="post">
                 <h1>Connexion.</h1>
                 <div class="input-group">
                     <input type="email" name="email" class="input" required>

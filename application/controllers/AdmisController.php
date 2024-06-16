@@ -10,6 +10,7 @@ class AdmisController extends CI_Controller {
         $this->load->model('LivreurModel');
         $this->load->model('RestoModel');
         $this->load->model('AdresseModel');
+        $this->load->library('upload');
     }
 
     
@@ -62,6 +63,77 @@ class AdmisController extends CI_Controller {
             $this->AdmisModel->save($data);
             redirect('AdmisController');
         }
+    }
+
+    /*insertion livreur dans la base**/
+    public function createLivreur() {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('mot_de_pass', 'Mot de passe', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            redirect('AdmisController/insertionPage');
+        } else {
+            $data = [
+                'email' => $this->input->post('email'),
+                'mot_de_pass' => $this->input->post('mot_de_pass'),
+                'nom_complet' => $this->input->post('nom_complet'),
+                'adresse' => $this->input->post('adresse')
+            ];
+            $this->LivreurModel->save($data);
+            redirect('AdmisController/insertionPage');
+        }
+    }
+
+    /**Fontion insertion de resto dans la base */
+    public function createResto() {
+                //$config['upload_path'] = './assets/images/';
+                $config = array(
+                'file_name'=>time(),
+                 'upload_path'=>FCPATH . 'assets/images/',
+                 'allowed_types'=>'jpg|jpeg|png|gif',
+                 'max_size'=>5000,
+                 'encrypt_name'=>TRUE
+                );
+                $this->upload->initialize($config);
+                
+              
+                if($this->upload->do_upload('image')){
+                    $data_resto = $this->upload->data();
+                    $image_path = $data_resto['file_name'];
+                    
+                    $data = [
+                        'email' => $this->input->post('email'),
+                        'mot_de_pass' => $this->input->post('mot_de_pass'),
+                        'nom' => $this->input->post('nom'),
+                        'adresse' => $this->input->post('adresse'),
+                        'description' =>$this->input->post('description'),
+                        'heure_ouverture'=>$this->input->post('heure_ouverture'),
+                        'heure_fermeture'=>$this->input->post('heure_fermeture'),
+                        'image' => $image_path
+                    ];
+                    $this->RestoModel->save($data);
+                    redirect('AdmisController/insertionPage');
+                }else{
+                    // Si le téléchargement échoue
+                   $error = array('error' => $this->upload->display_errors());
+                   echo $error['error'];
+                }
+                
+        }
+
+      /***redirection vers une page ajout cote administrateur */
+      public function insertionPage(){
+        $current_administrator  = null;
+        if ($this->session->userdata('admin_session')) {
+            $current_administrator = $this->session->userdata('admin_session');
+        }
+        $data["adresses"] = $this->AdresseModel->getAll();
+        $data['current_administrator'] = $current_administrator; 
+        $data['contents'] = "adminPage/Ajout";
+        $this->load->view('templates/template', $data);
     }
 
     /*modifier les renesignement de l'admin**/
@@ -139,18 +211,10 @@ public function adminLogout() {
     $this->session->sess_destroy();
     $this->load->view('login');
 }
+public function miseEnAvant(){
+    echo "mbola ts vita";
+}
 
-
-    /*redirection vers page insertion**/
-    public function insertionPage(){
-        $current_administrator  = null;
-        if ($this->session->userdata('admin_session')) {
-            $current_administrator = $this->session->userdata('admin_session');
-        }
-        $data['current_administrator'] = $current_administrator; 
-        $data['contents'] = "adminPage/Ajout";
-        $this->load->view('templates/template', $data);
-    }
 
     /**page de revenue*/
     public function revenue(){
