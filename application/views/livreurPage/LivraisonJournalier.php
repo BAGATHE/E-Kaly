@@ -16,27 +16,26 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Commande</th>
-                            <th>Adresse de recuperation</th>
-                            <th>Adresse de livraison</th>
-                            <th>Prix du livraison</th>
+
+                            <th>Date commande</th>
+                            <th>Restaurant</th>
+                            <th>adresse de livraison</th>
                             <th>Commission</th>
                             <th>Status</th>
-                            <th>Date de reception</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($livraison_du_jours as $livraison){?>
                         <tr>
-                            <td>Sushi</td>
-                            <td>Itaosy</td>
-                            <td>67 ha</td>
-                            <td>25000 Ar</td>
-                            <td>5000 Ar</td>
-                            <td>Livré</td>
-                            <td>12/06/2024</td>
-                            <td><a href="">Accepter</a></td>
+                            <td><?=$livraison["date_commande"]; ?></td>
+                            <td><?=$livraison["resto"] ?></td>
+                            <td><?=$livraison["adresse"] ?></td>
+                            <td><?=$livraison["gain"] ?></td>
+                            <td><?php echo ($livraison["status_livraison"] == 1) ? "Livré" : "non livré"; ?></td>
+                            <td><a href="<?=site_url("LivreurController/updateLivraison/".$livraison['id_commande']); ?>"><?php echo ($livraison["status_livraison"] == 0) ? "livraison effectuer" : ""; ?></a></td>
                         </tr>
+                        <?php }?>
                     </tbody>
                 </table>
             </div>

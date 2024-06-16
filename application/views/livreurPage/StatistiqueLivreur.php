@@ -1,16 +1,27 @@
 <main>
          <h1>Statistique livreur</h1>
-         <form action="">
-             <div class="liste">
+         <form id='statistiqueLivreur'  method="POST" action="<?php echo site_url('LivreurController\statistiqueLivreur');?>">
+         <input type="hidden" name="id_livreur" value="<?=$current_livreur['id'] ?>"/>    
+         <div class="liste">
             <div class="form-input">
-                <select name="" id="">
-                    <option value="">Mois</option>
-                    <option value="">Janvier</option>
-                    <option value="">Fevrier</option>
+                <select name="mois" id="">
+                <option value="0" selected>choisir  mois</option>
+                            <option value="1">Janvier</option>
+                            <option value="2">Fevrier</option>
+                            <option value="3">Mars</option>
+                            <option value="4">Avril</option>
+                            <option value="5">Mai</option>
+                            <option value="6">Juin</option>
+                            <option value="7">Juillet</option>
+                            <option value="8">Aout</option>
+                            <option value="9">Septembre</option>
+                            <option value="10">Octobre</option>
+                            <option value="11">Novembre</option>
+                            <option value="12">Decembre</option>
                 </select>
-                <select name="" id="">
-                   <option value="">Année</option>
-                   <option value="">2024</option>
+                <select name="annee" id="">
+                   <option value="0">Année</option>
+                   <option value="2024">2024</option>
                </select>
                 <button type="submit">Valider</button>
             </div>
@@ -23,7 +34,7 @@
                <div class="middle">
                   <div class="left">
                      <h3>Solde reçu</h3>
-                     <h1 class="ekaly">AR 20000,00</h1>
+                     <h1 class="ekaly" id="solde_total"></h1>
                   </div>
                </div>
             </div>
@@ -31,29 +42,27 @@
          </div>
          <!-- END INSIGHTS -->
          
-         <div class="chart chart-container">
+        
             <div class="middle">
                <div class="left">
-                  <div id="columnchart_material"></div>
+                  <canvas id="myChartmensuelle" width="400" height="200"></canvas>
                </div>
             </div>
-         </div>
+      
          <!-- END CHART -->
          
-         <div class="recent-orders">
+         <div class="recent-orders" id="orders-table">
             <h2>Tableau récapitulatif</h2>
             <table>
                <thead>
                   <tr>
-                     <th>Commande</th>
-                     <th>Gain</th>
-                     <th>Commission Resto</th>
+                     <th>date</th>
+                     <th>Somme Frais livraison</th>
+                     <th>Commission</th>
                   </tr>
                </thead>
                <tbody>
-                  <td>Ravitoto</td>
-                  <td>AR 20000</td>
-                  <td>3000</td>
+               
                </tbody>
             </table>
          </div>

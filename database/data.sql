@@ -150,10 +150,10 @@ INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (7,'livreur7'
 
 
 -- Insérer des données dans la table Livraison_payement_commande
-INSERT INTO Livraison_payement_commande ( id_commande, id_livreur, paye) VALUES
-(1,  1, TRUE),
-(2, 1, TRUE),
-(3,  1, TRUE);
+INSERT INTO Livraison_payement_commande ( id_commande, id_livreur,paye) VALUES
+(1,  1, 1),
+(2, 1, 1),
+(3,  1, 0);
 
 
 

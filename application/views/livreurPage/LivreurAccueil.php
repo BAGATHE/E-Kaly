@@ -6,11 +6,11 @@
                   <div class="middle">
                       <div class="left">
                           <h3>Status</h3>
-                           <form action="">
-                              <select name="status" id="status">
-                                 <option value="">Actif</option>
-                                 <option value="">Inactif</option>
-                              </select>
+                           <form action="<?=site_url("LivreurController/updateStatus")?>" method="post">
+                        <select name="status" id="status">
+                            <option value="dispo" <?= $status == "dispo" ? "selected" : "" ?>>Actif</option>
+                            <option value="non dispo" <?= $status == "non dispo" ? "selected" : "" ?>>Inactif</option>
+                        </select>
                               <button type="submit">Valider</button>
                            </form>
                       </div>
@@ -21,7 +21,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Argent du jour</h3>
-                            <h1 class="ekaly">15 000 Ar</h1>
+                            <h1 class="ekaly"><?= number_format($solde['somme_commission'])?> Ar</h1>
                         </div>
                     </div>
                 </div>
@@ -32,22 +32,37 @@
                     <thead>
                         <tr>
                             <th>Commande</th>
-                            <th>Adresse de recuperation</th>
+                            <th>Adresse de récupération</th>
                             <th>Adresse de livraison</th>
-                            <th>Prix du livraison</th>
+                            <th>Prix de la livraison</th>
                             <th>Commission</th>
+                            <th>Livrée</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Sushi</td>
-                            <td>Itaosy</td>
-                            <td>67 ha</td>
-                            <td>25000 Ar</td>
-                            <td>5000 Ar</td>
-                            <td><a href="">Accepter</a></td>
-                        </tr>
+                        <?php if (!empty($livraison)) : ?>
+                            <?php foreach ($livraison as $commande) : ?>
+                                <tr>
+                                    <td>Commande <?= htmlspecialchars($commande['id_commande']) ?></td>
+                                    <td><?= htmlspecialchars($commande['recuperation']) ?></td>
+                                    <td><?= htmlspecialchars($commande['destination']) ?></td>
+                                    <td><?= htmlspecialchars(number_format($commande['frais_livraison'], 2)) ?> Ar</td>
+                                    <td><?= htmlspecialchars(number_format($commande['commission'] ,2)) ?> Ar</td>
+                                    <td>
+                                        <?php if ($commande['livree']) : ?>
+                                            deja Accepte
+                                        <?php else : ?>
+                                            <a href="<?php echo site_url('LivreurController/accepterLivreur/'.$commande['id_commande']);?>">Accepter</a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="7">Aucune commande à livrer pour aujourd'hui.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>

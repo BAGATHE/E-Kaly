@@ -14,7 +14,10 @@ class LivreurController extends CI_Controller {
         if ($this->session->userdata('livreur_session')) {
             $current_livreur = $this->session->userdata('livreur_session');
             }
+        $data['status'] = $this->LivreurModel->getStatusLivreur($current_livreur['id']);
         $data['current_livreur'] = $current_livreur;
+        $data['solde']=$this->LivreurModel->getCommissionDuJour($current_livreur['id'],date("Y-m-d"));
+        $data['livraison']=$this->LivreurModel->algoCommandeLivreur($current_livreur['id'],date("Y-m-d"));
         $data['contents'] = "livreurPage/LivreurAccueil";
         $this->load->view('templates_livreur/template', $data);
     }
@@ -134,6 +137,9 @@ class LivreurController extends CI_Controller {
             $current_livreur = $this->session->userdata('livreur_session');
             }
         $data['current_livreur'] = $current_livreur;
+        //$data['date'] = date('Y-m-d');
+        $data['date'] = '2024-06-03';
+        $data["livraison_du_jours"] = $this->LivreurModel->getLivraisonLivreurEnUneJourneAvecGain($current_livreur["id"],$data['date']);
         $data['contents'] = "livreurPage/LivraisonJournalier";
         $this->load->view('templates_livreur/template', $data);
 
@@ -147,11 +153,57 @@ class LivreurController extends CI_Controller {
         $data['current_livreur'] = $current_livreur;
         $data['contents'] = "livreurPage/StatistiqueLivreur";
         $this->load->view('templates_livreur/template', $data);
-
+    }
+/**fonction qui recupere donner du mois du livreur */
+    public function statistiqueLivreur(){
+        $mois = $this->input->post('mois');
+        $anner = $this->input->post('annee');
+        $idLivreur = $this->input->post("id_livreur");
+        $data = array();
+        if($mois != 0 && $anner != 0){
+            $data =  $this->LivreurModel->getStatistiqueJour($idLivreur,$anner,$mois);
+        } 
+        if($data==null){
+            $data = array("day"=>'0',"month"=>'0',"year"=>'0',"revenue"=>'0');
+        }
+        echo json_encode($data);
     }
 
+    /***fonction update livraison payement */
 
+    public function updateLivraison($id_commande){
+        
+        if ($this->session->userdata('livreur_session')) {
+            $current_livreur = $this->session->userdata('livreur_session');
+            }
+        $this->LivreurModel->updateLivraisonPayementCommande($id_commande,1);
+        $data['current_livreur'] = $current_livreur;
+        //$data['date'] = date('Y-m-d');
+        $data['date'] = '2024-06-03';
+        $data["livraison_du_jours"] = $this->LivreurModel->getLivraisonLivreurEnUneJourneAvecGain($current_livreur["id"],$data['date']);
+        $data['contents'] = "livreurPage/LivraisonJournalier";
+        $this->load->view('templates_livreur/template', $data);
+    }
 
+    /**update status livreur */
+    public function updateStatus(){
+        if ($this->session->userdata('livreur_session')) {
+            $current_livreur = $this->session->userdata('livreur_session');
+        }
+        $status = $this->input->post('status');
+        $this->LivreurModel->updateStatus($current_livreur["id"],$status);
+        redirect('LivreurController');
+    }
+
+    public function accepterLivreur($id_commande){
+        if ($this->session->userdata('livreur_session')) {
+            $current_livreur = $this->session->userdata('livreur_session');
+        }
+        
+        $this->LivreurModel->insert_livraison_payement_commande($id_commande, $current_livreur['id']);
+
+        redirect('LivreurController');
+    }
 
 
 }

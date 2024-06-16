@@ -25,9 +25,7 @@
                 <img src="<?php echo base_url()?>assets/images/Logo.png">
             </a>
         </nav>
-
         <!-- End of Navbar -->
-
         <main>
             <div>
                 <h1>abonnement actuelle</h1>
