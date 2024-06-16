@@ -19,7 +19,7 @@
                     </span>
                     <h3>Accueil</h3>
                 </a>
-                <a href="<?= site_url('RouteController/listRestoLivreur') ?>">
+                <a href="<?= site_url('AdmisController/listRestoLivreur') ?>">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
@@ -37,13 +37,13 @@
                     </span>
                     <h3>Revenue Mensuel</h3>
                 </a>
-                <a href="#">
+                <a href="<?=site_url('AdmisController/miseEnAvant') ?>">
                     <span class="material-icons-sharp">
                         settings
                     </span>
-                    <h3>Settings</h3>
+                    <h3>mise en avant</h3>
                 </a>
-                <a href="<?=site_url('AdminController/adminLogout') ?>">
+                <a href="<?=site_url('AdmisController/adminLogout') ?>">
                     <span class="material-icons-sharp">
                         logout
                     </span>

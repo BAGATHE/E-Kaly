@@ -25,31 +25,6 @@ class RestoController extends CI_Controller {
         $this->load->view('templates_resto/template', $data);
     }
 
-    /**Fontion insertion dans la base */
-    public function create() {
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('mot_de_pass', 'Mot de passe', 'required');
-
-        if ($this->form_validation->run() === FALSE) {
-            $data['contents'] = "adminPage/Ajout";
-            $this->load->view('templates/template', $data);
-        } else {
-            $data = [
-                'email' => $this->input->post('email'),
-                'mot_de_pass' => $this->input->post('mot_de_pass'),
-                'nom' => $this->input->post('nom'),
-                'adresse' => $this->input->post('adresse'),
-                'description' =>$this->input->post('description'),
-                'heure_ouverture'=>$this->input->post('heure_ouverture'),
-                'heure_fermeture'=>$this->input->post('heure_fermeture')
-            ];
-            $this->RestoModel->save($data);
-            redirect('RestoController/insertionPage');
-        }
-    }
 
     /**recupere donné Resto par id*/
         public function loadForm($id_resto){
@@ -138,17 +113,6 @@ public function logOut(){
         $this->load->view('resto/index', $data);
     }
 
-      /***redirection vers une page ajout Restaurant*/
-      public function insertionPage(){
-        $current_administrator  = null;
-        if ($this->session->userdata('admin_session')) {
-            $current_administrator = $this->session->userdata('admin_session');
-        }
-        $data['current_administrator'] = $current_administrator; 
-        $data['contents'] = "adminPage/Ajout";
-        $this->load->view('templates/template', $data);        
-    }
-    
     /** redirection vers une page ajout de plat */
     public function ajouterPlatPage(){
         $current_resto  = null;
