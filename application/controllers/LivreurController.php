@@ -137,8 +137,8 @@ class LivreurController extends CI_Controller {
             $current_livreur = $this->session->userdata('livreur_session');
             }
         $data['current_livreur'] = $current_livreur;
-        //$data['date'] = date('Y-m-d');
-        $data['date'] = '2024-06-03';
+        $data['date'] = date('Y-m-d');
+        //$data['date'] = '2024-06-03';
         $data["livraison_du_jours"] = $this->LivreurModel->getLivraisonLivreurEnUneJourneAvecGain($current_livreur["id"],$data['date']);
         $data['contents'] = "livreurPage/LivraisonJournalier";
         $this->load->view('templates_livreur/template', $data);
