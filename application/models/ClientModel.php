@@ -191,6 +191,11 @@ class  ClientModel extends CI_Model {
       return $this->db->insert('Note_resto', $data);
    }
 
+   public function getRestoFavorisClient($idClient) {
+      $query = $this->db->query("CALL procedure_getRestoFavorisClient(?)", array($idClient));
+      return $query->result_array(); 
+  }
+
 }
 
 ?>

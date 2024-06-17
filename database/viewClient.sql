@@ -78,6 +78,9 @@ SELECT
     r.id AS id_resto,
     r.nom AS nom_resto,
     r.id_adresse,
+    ir.repere,
+    ir.description,
+    ir.telephone,
     COALESCE(nm.note_moyenne, 0) AS note_moyenne,
     CASE 
         WHEN CURDATE() BETWEEN vad.date_debut AND vad.date_fin THEN 1 
@@ -89,7 +92,29 @@ LEFT JOIN
     v_note_moyenne_par_resto nm ON r.id = nm.id_resto
 LEFT JOIN 
     v_mise_en_avant_dates vad ON r.id = vad.id_resto
+LEFT JOIN 
+    Info_resto ir ON r.id = ir.id_resto
 ORDER BY 
     mise_en_avant_valide DESC, 
     note_moyenne DESC;
 
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE procedure_getRestoFavorisClient(IN idClient INT)
+BEGIN
+    SELECT
+        r.id AS id_resto,
+        r.nom AS nom_resto,
+        r.id_adresse,
+        ir.repere,
+        ir.description,
+        ir.telephone
+    FROM Resto r
+    JOIN Favori_client fc ON r.id = fc.id_resto
+    LEFT JOIN Info_resto ir ON r.id = ir.id_resto
+    WHERE fc.id_client = idClient;
+END //
+DELIMITER ;
