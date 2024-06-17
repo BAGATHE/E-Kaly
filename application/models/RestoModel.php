@@ -280,6 +280,11 @@ public function getRestaurantByIdWithNote($id){
       return $query->result_array();
    }
 
+   public function getListeRestoAvecNoteEtParMiseEnAvant(){
+      $query = $this->db->get('v_liste_resto_avec_note_et_mise_en_avant');
+      return $query->result_array();
+   }
+   
 
 }
 
