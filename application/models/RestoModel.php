@@ -264,16 +264,16 @@ public function getRestaurantByIdWithNote($id){
    public function searchRestoWithCriteria ($heureOuverture, $heureFermeture, $adresse, $nom)
    {
       $this->db->from('Info_resto');
-      if (!empty($heureOuverture) && $heureOuverture!=null) {
+      if (!empty($heureOuverture) || $heureOuverture!=null) {
          $this->db->like('Info_resto.heure_ouverture', $heureOuverture);
       }
-      if (!empty($heureFermeture) && $heureFermeture!=null) {
+      if (!empty($heureFermeture) || $heureFermeture!=null) {
          $this->db->like('Info_resto.heure_fermeture', $heureFermeture); 
       }
-      if (!empty($adresse) && $adresse!=null) {
+      if (!empty($adresse) || $adresse!=null) {
          $this->db->like('Info_resto.adresse', $adresse);
       }
-      if (!empty($nom) && $nom!=null) {
+      if (!empty($nom) || $nom!=null) {
          $this->db->like('Info_resto.nom', $nom);
       }
       $query = $this->db->get();

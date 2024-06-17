@@ -141,13 +141,13 @@ class PlatModel extends CI_Model {
    public function searchPlatWithCriteria ($prixMin, $prixMax, $nom)
    {
       $this->db->from('Plat');
-      if (!empty($nom) && $nom!=null) {
+      if (!empty($nom) || $nom!=null) {
          $this->db->like('Plat.description', $nom);
       }
-      if (!empty($prixMin) && $prixMin!=null) {
+      if (!empty($prixMin) || $prixMin!=null) {
          $this->db->where('Plat.prix >=', $prixMin); 
       }
-      if (!empty($prixMax) && $prixMax!=null) {
+      if (!empty($prixMax) || $prixMax!=null) {
          $this->db->where('Plat.prix <=', $prixMax); 
       }
 
