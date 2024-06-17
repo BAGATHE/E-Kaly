@@ -129,6 +129,13 @@ class PlatModel extends CI_Model {
       $query = $this->db->get('Plat');
       return $query->result_array();
    }
+
+   /* Info plat avec note */
+   public function getListplatRestaurantByIdRestaurantwithNote($id){
+      $this->db->where('id_resto', $id);
+      $query = $this->db->get('v_infoPlatNote');
+      return $query->result_array();
+   }
 }
 
 ?>

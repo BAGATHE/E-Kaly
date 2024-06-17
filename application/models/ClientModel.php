@@ -158,6 +158,16 @@ class  ClientModel extends CI_Model {
       $query = $this->db->get('Client');
       return $query->result_array();
    }
+   public function getFraisLivraison($idRecuperation, $idLivraison) {
+      $query = "SELECT func_getfraisLivraison(?, ?) AS frais";
+      $result = $this->db->query($query, array($idRecuperation, $idLivraison));
+      
+      if ($result->num_rows() > 0) {
+         return $result->row()->frais;
+      } else {
+         return null; 
+      }
+   }
 }
 
 ?>

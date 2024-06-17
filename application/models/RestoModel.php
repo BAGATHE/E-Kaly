@@ -252,12 +252,12 @@ public function detailsCommmande($idCommande)
        $query = $this->db->get('v_details_commande_avec_nom_plat');
        return $query->result_array();
    }
-
-
-
-
-
-
 }
 
+/* Info resto avec note */
+public function getRestaurantByIdWithNote($id){
+   $this->db->where('id', $id);
+   $query = $this->db->get('v_infoRestoNote');
+   return $query->result_array();
+}
 ?>
