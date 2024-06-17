@@ -252,12 +252,36 @@ public function detailsCommmande($idCommande)
        $query = $this->db->get('v_details_commande_avec_nom_plat');
        return $query->result_array();
    }
-}
 
-/* Info resto avec note */
+   /* Info resto avec note */
 public function getRestaurantByIdWithNote($id){
    $this->db->where('id', $id);
    $query = $this->db->get('v_infoRestoNote');
    return $query->result_array();
 }
+
+//recherche multicriteres Resto (avec details)
+   public function searchRestoWithCriteria ($heureOuverture, $heureFermeture, $adresse, $nom)
+   {
+      $this->db->from('Info_resto');
+      if (!empty($heureOuverture) && $heureOuverture!=null) {
+         $this->db->like('Info_resto.heure_ouverture', $heureOuverture);
+      }
+      if (!empty($heureFermeture) && $heureFermeture!=null) {
+         $this->db->like('Info_resto.heure_fermeture', $heureFermeture); 
+      }
+      if (!empty($adresse) && $adresse!=null) {
+         $this->db->like('Info_resto.adresse', $adresse);
+      }
+      if (!empty($nom) && $nom!=null) {
+         $this->db->like('Info_resto.nom', $nom);
+      }
+      $query = $this->db->get();
+      return $query->result_array();
+   }
+
+
+}
+
+
 ?>

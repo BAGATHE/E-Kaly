@@ -168,6 +168,29 @@ class  ClientModel extends CI_Model {
          return null; 
       }
    }
+
+   //insertion note_plat 
+   public function insert_note_plat ($idClient, $idPlat, $note) {
+      $data = array(
+          'id_client' => $idClient,
+          'id_plat' => $idPlat,
+          'note' => $note
+      );
+
+      return $this->db->insert('Note_plat', $data);
+  }
+
+  //insertion note_resto   
+  public function insert_note_resto ($idClient, $idResto, $note) {
+      $data = array(
+         'id_client' => $idClient,
+         'id_resto' => $idResto,
+         'note' => $note
+      );
+
+      return $this->db->insert('Note_resto', $data);
+   }
+
 }
 
 ?>
