@@ -158,6 +158,44 @@ class  ClientModel extends CI_Model {
       $query = $this->db->get('Client');
       return $query->result_array();
    }
+   public function getFraisLivraison($idRecuperation, $idLivraison) {
+      $query = "SELECT func_getfraisLivraison(?, ?) AS frais";
+      $result = $this->db->query($query, array($idRecuperation, $idLivraison));
+      
+      if ($result->num_rows() > 0) {
+         return $result->row()->frais;
+      } else {
+         return null; 
+      }
+   }
+
+   //insertion note_plat 
+   public function insert_note_plat ($idClient, $idPlat, $note) {
+      $data = array(
+          'id_client' => $idClient,
+          'id_plat' => $idPlat,
+          'note' => $note
+      );
+
+      return $this->db->insert('Note_plat', $data);
+  }
+
+  //insertion note_resto   
+  public function insert_note_resto ($idClient, $idResto, $note) {
+      $data = array(
+         'id_client' => $idClient,
+         'id_resto' => $idResto,
+         'note' => $note
+      );
+
+      return $this->db->insert('Note_resto', $data);
+   }
+
+   public function getRestoFavorisClient($idClient) {
+      $query = $this->db->query("CALL procedure_getRestoFavorisClient(?)", array($idClient));
+      return $query->result_array(); 
+  }
+
 }
 
 ?>
