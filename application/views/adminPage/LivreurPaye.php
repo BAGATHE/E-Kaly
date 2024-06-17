@@ -3,14 +3,26 @@
 
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
             <form  id='statistique'  method="POST" action="<?php echo site_url('AdmisController/RevenuParMoisLivreur');?>">
-            
-            
-
+            <select class="form-select  d-sm-inline-block" aria-label="Default select example" id="mois" style="width: 12vw;" name="mois">
+                <option value="0" selected>choisir  mois</option>
+                <option value="1">Janvier</option>
+                <option value="2">Fevrier</option>
+                <option value="3">Mars</option>
+                <option value="4">Avril</option>
+                <option value="5">Mai</option>
+                <option value="6">Juin</option>
+                <option value="7">Juillet</option>
+                <option value="8">Aout</option>
+                <option value="9">Septembre</option>
+                <option value="10">Octobre</option>
+                <option value="11">Novembre</option>
+                <option value="12">Decembre</option>
+              </select>
               <select class="form-select  d-sm-inline-block" aria-label="Default select example" id="anner" style="width: 12vw;" name="anner">
                 <option value="0">choisir  année</option>
                 <option value="2024">2024</option>
               </select>
-              <button class="btn btn-primary" type="submit">Ajouter</button>
+              <button class="btn btn-primary" type="submit">Voir</button>
             </form>
         </div>
 
@@ -60,11 +72,11 @@
 
                 <div class="profile">
                     <div class="info">
-                        <p><b>nom_admin</b></p>
+                        <p><?php echo $current_administrator["nom"]; ?></p>
                         <small class="text-muted">Admin</small>
                     </div>
                     <div class="profile-photo">
-                        <img src="./assets/images/profile-1.jpg">
+                        <img src="<?php echo base_url()?>assets/images/manager.svg">
                     </div>
                 </div>
 

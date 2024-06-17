@@ -64,12 +64,12 @@ INSERT INTO Info_resto (id_resto, nom, adresse, repere,description, heure_ouvert
 
 -- Insérer des données dans la table Plat
 INSERT INTO Plat (id_resto, description, prix) VALUES
-(1, 'Pizza Margherita', 10.99),
-(1, 'Spaghetti Carbonara', 12.99),
-(2, 'Burger Cheese', 8.99),
-(2, 'Salade César', 7.49),
-(3, 'Sushi Assorti', 15.99),
-(3, 'Ramen au Poulet', 11.49);
+(1, 'Pizza Margherita', 8000),
+(1, 'Spaghetti Carbonara', 6000),
+(2, 'Burger Cheese', 7000),
+(2, 'Salade César', 5000),
+(3, 'Sushi Assorti', 9000),
+(3, 'Ramen au Poulet', 6000);
 
 
 INSERT INTO Change_quantite_plat (id_plat, date, production) VALUES
@@ -167,7 +167,7 @@ INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (2, 1, 5),
 (3, 2, 3);
 
-INSERT INTO Prix_mise_en_avant(prix) VALUES(100);
+INSERT INTO Prix_mise_en_avant(prix) VALUES(200000);
 
 
 

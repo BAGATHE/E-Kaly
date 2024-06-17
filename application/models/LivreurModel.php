@@ -148,6 +148,7 @@ class  LivreurModel extends CI_Model {
       $this->db->where("id_commande", $id);
       return $this->db->update("Livraison_payement_commande", $data);
   }
+
   public function updateStatus($id_livreur,$status) {
    $data = array('status' => $status);
    $this->db->where("id_livreur", $id_livreur);
@@ -245,6 +246,9 @@ public function getLivraisonLivreurEnUneJourneAvecGain($idLivreur, $dateRecherch
       $query = $this->db->get('v_livraison_livreur_avec_gain');
       return $query->result_array();
    }
+//tout les livraison du mois d'un livreur
+public function getPayementDumois
+
 
 // STATISTIQUE LIVREUR
 

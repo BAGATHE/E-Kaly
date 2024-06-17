@@ -211,9 +211,12 @@ public function adminLogout() {
     $this->session->sess_destroy();
     $this->load->view('login');
 }
+/*liste restaurant avec mise en avant */
 public function miseEnAvant(){
     echo "mbola ts vita";
 }
+
+
 
 
     /**page de revenue*/
@@ -222,12 +225,32 @@ public function miseEnAvant(){
         $this->load->view('templates/template', $data);
         
     }
-
+    /**page livreur payer */
     public function livreurPaye(){
+        $current_administrator  = null;
+        if ($this->session->userdata('admin_session')) {
+            $current_administrator = $this->session->userdata('admin_session');
+        }
+        $data = array();      
+        $data['current_administrator'] = $current_administrator; 
         $data['contents'] = "adminPage/LivreurPaye";
         $this->load->view('templates/template',$data);
     }
+    /***recupation de la liste livreur payer dans le mois definis */
+    public function RevenuParMoisLivreur(){
+        $current_administrator  = null;
+        if ($this->session->userdata('admin_session')) {
+            $current_administrator = $this->session->userdata('admin_session');
+        }
+        $mois = $this->input->post("mois");
+        $anner = $this->input->post("anner");
 
+        $data = array();      
+        //$data["livreurs"] = $this->LivreurModel->getAllWithInfo();
+        $data['current_administrator'] = $current_administrator; 
+        $data['contents'] = "adminPage/LivreurPaye";
+        $this->load->view('templates/template',$data);
+    }
 
     public function listRestoLivreur(){
         $data = array();
