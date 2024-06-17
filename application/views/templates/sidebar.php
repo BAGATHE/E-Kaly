@@ -29,7 +29,7 @@
                     <span class="material-icons-sharp">
                         delivery_dining
                     </span>
-                    <h3>Livreurs Payés</h3>
+                    <h3>Fiche de Paye Livreur</h3>
                 </a>
                 <a href="<?= site_url('AdmisController/revenue') ?>">
                     <span class="material-icons-sharp">
