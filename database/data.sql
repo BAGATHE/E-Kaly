@@ -167,6 +167,11 @@ INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (2, 1, 5),
 (3, 2, 3);
 
+INSERT INTO Note_resto (id_client, id_resto, note) VALUES
+(1, 1, 9),
+(2, 1, 1),
+(3, 2, 7);
+
 INSERT INTO Prix_mise_en_avant(prix) VALUES(200000);
 
 

@@ -297,8 +297,9 @@ public function miseEnAvant(){
         $data = null;
         
         if($mois != 0 && $anner != 0){
+            $data=$this->AdmisModel->revenuParMoisPlateForm($mois,$anner);
         } else {
-        
+            $data=$this->AdmisModel->revenuParAnPlateForm($anner);
         }
         if($data==null){
             $data[] = array("day"=>'0',"month"=>'0',"year"=>'0',"revenue"=>'0');
@@ -306,6 +307,5 @@ public function miseEnAvant(){
         
         echo json_encode($data);
     }
-
 }
 ?>
