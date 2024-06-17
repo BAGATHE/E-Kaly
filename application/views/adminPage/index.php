@@ -12,7 +12,7 @@
                     </div>
                 <?php } ?>
                     <div class="user">
-                        <a href="<?= site_url('AdmisController/insertionPage')?>"><img src="<?php echo base_url()?>assets/images/plus.png"></a>
+                        <a href="<?= site_url('AdmisController/insertionPageAdmin')?>"><img src="<?php echo base_url()?>assets/images/plus.png"></a>
                         <h2>Ajouter</h2>
                     </div>
                 </div>

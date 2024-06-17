@@ -247,7 +247,6 @@ public function getLivraisonLivreurEnUneJourneAvecGain($idLivreur, $dateRecherch
       return $query->result_array();
    }
 //tout les livraison du mois d'un livreur
-public function getPayementDumois
 
 
 // STATISTIQUE LIVREUR
