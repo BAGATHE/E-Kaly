@@ -114,7 +114,7 @@ BEGIN
         ir.telephone
     FROM Resto r
     JOIN Favori_client fc ON r.id = fc.id_resto
-    LEFT JOIN Info_resto ir ON r.id = ir.id_resto
+    JOIN Info_resto ir ON r.id = ir.id_resto
     WHERE fc.id_client = idClient;
 END //
 DELIMITER ;
