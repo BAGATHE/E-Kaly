@@ -1,45 +1,41 @@
 -- revenu total somme commission livreur et restaurant
+
 create or replace view v_revenu_par_mois as
 select 
-    year,
-    month,
     day,
-    sum(revenu) as revenu_total
-from (
+    month,
+    year,
+    sum(revenu) as revenu_total_jour
+from
+    (
     select 
-        year,
-        month,
         day,
-        revenu
+        month,
+        year,
+        revenu 
     from 
-        v_revenu_par_jour_resto_jour
-) as revenu_par_jour
-group by
-    year, month, day
-order by
-    year, month, day;
+        v_revenu_par_jour_resto_jour 
+    union ALL
 
+    select 
+        day,
+        month,
+        year,
+        somme_commission
+    from 
+            v_total_commission_frais_livraison_par_jour
+    ) as combinaison
+GROUP by 
+    day,month,year;
 
 create or replace view v_revenu_par_an as
 select 
-    mois,
-    annee,
-    sum(revenu) as revenu_total
-from (
-    select 
-        month as mois,
-        year as annee,
-        revenu
-    from 
-        v_revenu_par_jour_resto_mois
-) as revenus_combines
+    month,
+    year,
+    sum(revenu_total_jour) as revenu_total
+from
+    v_revenu_par_mois
 group by
-    mois, annee
+    month, year
 order by
-    annee, mois;
-
-
-
-
-
-    
+    month, year ASC;    
