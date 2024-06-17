@@ -136,6 +136,24 @@ class PlatModel extends CI_Model {
       $query = $this->db->get('v_infoPlatNote');
       return $query->result_array();
    }
+
+   //recheche multi-critere 2.0
+   public function searchPlatWithCriteria ($prixMin, $prixMax, $nom)
+   {
+      $this->db->from('Plat');
+      if (!empty($nom) || $nom!=null) {
+         $this->db->like('Plat.description', $nom);
+      }
+      if (!empty($prixMin) || $prixMin!=null) {
+         $this->db->where('Plat.prix >=', $prixMin); 
+      }
+      if (!empty($prixMax) || $prixMax!=null) {
+         $this->db->where('Plat.prix <=', $prixMax); 
+      }
+
+      $query = $this->db->get();
+      return $query->result_array();
+   }
 }
 
 ?>

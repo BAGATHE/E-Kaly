@@ -62,3 +62,34 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+CREATE OR REPLACE VIEW v_note_moyenne_par_resto AS
+SELECT 
+    id_resto, 
+    AVG(note) AS note_moyenne
+FROM 
+    Note_resto
+GROUP BY 
+    id_resto;
+
+CREATE OR REPLACE VIEW v_liste_resto_avec_note_et_mise_en_avant AS
+SELECT 
+    r.id AS id_resto,
+    r.nom AS nom_resto,
+    r.id_adresse,
+    COALESCE(nm.note_moyenne, 0) AS note_moyenne,
+    CASE 
+        WHEN CURDATE() BETWEEN vad.date_debut AND vad.date_fin THEN 1 
+        ELSE 0 
+    END AS mise_en_avant_valide
+FROM 
+    Resto r
+LEFT JOIN 
+    v_note_moyenne_par_resto nm ON r.id = nm.id_resto
+LEFT JOIN 
+    v_mise_en_avant_dates vad ON r.id = vad.id_resto
+ORDER BY 
+    mise_en_avant_valide DESC, 
+    note_moyenne DESC;
+
