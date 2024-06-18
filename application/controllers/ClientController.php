@@ -122,15 +122,7 @@ class ClientController extends CI_Controller {
         $data['client'] = $current_client;
         $this->load->view('clientPage/AccueilClient',$data);
     }
-    /*redirection vers page panier*/
-    public function panierPage(){
-        $current_client  = null;
-        if ($this->session->userdata('client_session')) {
-            $current_client = $this->session->userdata('client_session');
-            }
-        $data['client'] = $current_client;
-        $this->load->view('clientPage/PanierClient',$data);
-    }
+  
     /*redirection vers page favoris*/ 
     public function favorisPage(){
         $current_client  = null;
