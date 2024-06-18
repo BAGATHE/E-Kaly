@@ -26,7 +26,7 @@ $(document).ready(function() {
                     <span class="quantite-btn increment">+</span>
                     <input type="hidden" name="articles[${articleIndex}][name]" value="${itemName}">
                     <input type="hidden" name="articles[${articleIndex}][price]" value="${itemPrice}">
-                    <input type="hidden" name="id_plat" value="${idplat}">
+                    <input type="hidden" name="articles[${articleIndex}][id_plat]" value="${idplat}">
                     
                 </div>
             </div>

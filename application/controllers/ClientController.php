@@ -5,10 +5,13 @@ class ClientController extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->helper('date');
         $this->load->library('session');
         $this->load->model('ClientModel');
         $this->load->model('PlatModel');
         $this->load->model('RestoModel');
+        $this->load->model('CommandeModel');
+        $this->load->model('CommandePlatModel');
         if(!$this->session->userdata("client_session")){
             redirect("EntryPoint/index2");
         }
@@ -162,6 +165,46 @@ class ClientController extends CI_Controller {
         $this->session->sess_destroy();
         $this->load->view('clientPage/AccueilClient');
     }
+    public function getPrixLivraison(){
+        $adresse_resto = $this->input->post("adresse_resto");
+        $adresse_target = $this->input->post("adresse_target");
+        $prix_livraison = $this->ClientModel->getFraisLivraison($adresse_resto,$adresse_target);
+        echo json_encode($prix_livraison);
+    }
+
+    public function ValiderPanier(){
+        $articles = $this->input->post('articles');
+        $idresto = $this->input->post('id_resto');
+        $adresse = $this->input->post('adresse');
+        $repere = $this->input->post('repere');
+        $client = $this->input->post('id_client');
+        $currentDateTime = date('Y-m-d H:i:s');
+      
+        $dataCommande = [
+            'id_client' => $client,
+            'adresse' => $adresse,
+            'repere' => $repere, 
+            'date' => $currentDateTime,
+         ]; 
+        $this->CommandeModel->save($dataCommande);
+        $Current_id_commande = $this->CommandeModel->getLastCommandeId();
+        
+        if($Current_id_commande != null){
+            foreach ($articles as $article) {
+                // Exemple d'insertion dans la base de données
+                $data = array(
+                    'id_commande' => $Current_id_commande,
+                    'id_plat' =>$article['id_plat'],
+                    'quantite' => $article['quantity'],
+                    'prix' => $article['price']
+                );
+            $this->CommandePlatModel->save($data);
+        }
+        echo json_encode("success");
+        }else{
+        echo json_encode("failed");
+        }
+}
     
     
 }

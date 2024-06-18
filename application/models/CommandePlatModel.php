@@ -91,7 +91,7 @@ class CommandePlatModel extends CI_Model {
    public function setPrix($prix){
       $this->prix = $prix ;
    }
-
+/*
    public function save() {
       $data = [
          'id_commande' => $this->id_commande,
@@ -102,7 +102,10 @@ class CommandePlatModel extends CI_Model {
 
       $this->db->insert('Commande_plat', $data);
    }
-
+*/
+public function save($data) {
+   $this->db->insert('Commande_plat', $data);
+}
    public function getAll() {
       $query = $this->db->get('Commande_plat');
       return $query->result_array();

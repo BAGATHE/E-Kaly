@@ -166,8 +166,10 @@
     </article>
 
     <aside id="div_panier">
-    <form action="" method="post" id="formulairePanier"> 
-        <div class="panier">
+    <form action="<?=base_url()?>index.php/ClientController/ValiderPanier" method="post" id="formulairePanier"> 
+    <input type="hidden" name="id_resto" value="<?=$info_resto["id"] ?>">    
+    <input type="hidden" name="id_client" value="<?=$client["id"] ?>">
+    <div class="panier">
             <div class="header-panier">
                 <span class="titre-panier">Votre panier</span>
                 <span class="nombre-articles">0 Articles</span>
@@ -190,13 +192,14 @@
             <option value="32">andoram 102</option>
         </select>
         <input type="text" placeholder="repere" id="repere" name="repere">
-        <input type="text" placeholder="numero telephone joingnable" id="numero" name="numero" >
         </div>
         <div id="map" ></div>
         <div>
           <h3 style="text-align:center;">Prix de livraison</h3>
-          <p style="text-align:center; display:none;"  >758522</p>
+          <p style="text-align:center;" id="livraison_prix"></p>
         </div>
+        <h3 style="text-align:center;" >Total a payer : <span id="total_payement"></span></h3>
+        <button type="submit" class="bouton-continuer" id="">Valider</button>
         </section>
       </form>
     </aside>
@@ -367,26 +370,25 @@
                 var url = $("#url").text();
                 var adresseResto = $("#adresse_resto").text();
 
-
-                /*$.ajax({
-                  url: url+"ClientControler/test", // Remplacez par l'URL correcte de votre contrôleur CodeIgniter
+                $.ajax({
+                  url: url+"index.php/ClientController/getPrixLivraison", // Remplacez par l'URL correcte de votre contrôleur CodeIgniter
                   type: 'POST', // Utilisation de POST pour envoyer les données
                   dataType: 'json', // Attendre une réponse JSON
                   data: {
-                    latitude: latitude,
-                    longitude: longitude
+                    adresse_resto: adresseResto,
+                    adresse_target: adresse_target
                   },
                   success: function(response) {
-                    // Traitement de la réponse du contrôleur CodeIgniter
-                    console.log(response); // Affichage dans la console à des fins de débogage
-                    // Faire d'autres actions avec la réponse si nécessaire
+                    $("#livraison_prix").text(response);
+                    var total = parseInt($(".prix-sous-total").text()) + parseInt(response);
+                    $("#total_payement").text(total);
                   },
                   error: function(xhr, status, error) {
                     // Gestion des erreurs
                     console.error(xhr.responseText); // Affichage de l'erreur dans la console
                   }
                 });
-              */
+              
               
             });
         });
@@ -396,8 +398,34 @@
               console.log(infoElement);
               if (infoElement.style.display === "none" || infoElement.style.display === "") {
                 infoElement.style.display = "block";} else { infoElement.style.display = "none";}
-              });
-              
+              });         
+    </script>
+    <script>
+       $('#formulairePanier').submit(function(event){
+        event.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+         //Récupérer les données du formulaire
+         var formData = $(this).serialize();
+         $.ajax({
+            type: 'POST',
+            url: url ,
+            data: formData,
+            success: function(response) {
+              var result = JSON.parse(response);
+              if(result === "success") {
+                alert("Votre commande sera livrée le plus tôt possible, à tout à l'heure.");
+                window.location.href = "<?php echo site_url('ClientController/PlatClientPage'); ?>";
+              } else {
+                alert("Erreur lors de la validation du formulaire.");
+              }
+            },
+            /*error: function(xhr, status, error) {
+                // Gérer les erreurs de requête AJAX
+                alert('Une erreur s\'est produite lors de la validation: ' + error);
+            }*/
+        });
+     });
     </script>
       
 </body>
