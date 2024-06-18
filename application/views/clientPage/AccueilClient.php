@@ -10,20 +10,20 @@
   <!-- 
     - favicon
   -->
-  <link rel="shortcut icon" href="./assets/images/Logo.png" type="image/svg+xml">
+  <link rel="shortcut icon" href="<?php echo base_url()?>assets/images/Logo.png" type="image/svg+xml">
 
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href="./assets/css/client.css">
-  <link rel="stylesheet" href="./assets/font/font.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/css/client.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/font/font.css">
 
   <!-- 
     - preload images
   -->
-  <link rel="preload" as="image" href="./assets/images/hero-banner.png" media="min-width(768px)">
-  <link rel="preload" as="image" href="./assets/images/hero-banner-bg.png" media="min-width(768px)">
-  <link rel="preload" as="image" href="./assets/images/hero-bg.jpg">
+  <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-banner.png" media="min-width(768px)">
+  <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-banner-bg.png" media="min-width(768px)">
+  <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-bg.jpg">
 
 </head>
 
@@ -44,28 +44,27 @@
         <ul class="navbar-list">
 
           <li class="nav-item">
-            <a href="#home" class="navbar-link" data-nav-link>Accueil</a>
+            <a href="<?=site_url('ClientController/acceuilPage')?>" class="navbar-link" data-nav-link>Accueil</a>
           </li>
 
           <li class="nav-item">
-            <a href="#about" class="navbar-link" data-nav-link>Mon Panier</a>
+            <a href="<?=site_url('ClientController/favorisPage')?>" class="navbar-link" data-nav-link>Favoris</a>
           </li>
 
           <li class="nav-item">
-            <a href="#food-menu" class="navbar-link" data-nav-link>Favoris</a>
+              <a href="<?=site_url('ClientController/aboutPage')?>" class="navbar-link" data-nav-link>A Propos</a>  
           </li>
-
-          <li class="nav-item">
-            <a href="#" class="navbar-link" data-nav-link>A Propos</a>
-          </li>
+         
 
         </ul>
       </nav>
 
       <div class="header-btn-group">
-
-        <button class="btn btn-hover">Login</button>
-
+      <?php if(!isset($client) || $client == null){ ?>
+        <a href="<?php echo site_url('AuthentificationController/checkUserLogin');?>"><button class="btn btn-hover">Login</button></a>
+      <?php  }else{?>
+        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">deconnection</button></a>
+      <?php } ?>
         <button class="nav-toggle-btn" aria-label="Toggle Menu" data-menu-toggle-btn>
           <span class="line top"></span>
           <span class="line middle"></span>
@@ -85,6 +84,28 @@
       <!-- 
         - #HERO
       -->
+    
+      <section class="hero" id="home" style="background-image: url('<?php echo base_url()?>assets/images/green-banner-bg.jpg')">
+        <div class="container">
+
+          <div class="hero-content">
+
+            <h2 class="h1 hero-title">Vous avez droit au meilleur!</h2>
+
+            <p class="hero-text">Du restaurant à votre porte, profitez du confort de la livraison à domicile. Rapide, fiable, et toujours à temps pour vous!</p>
+
+          </div>
+
+          <figure class="hero-banner">
+            <img src="<?php echo base_url()?>assets/images/hero-banner-bg.png" width="820" height="716" alt="" aria-hidden="true"
+              class="w-100 hero-img-bg">
+
+            <img src="<?php echo base_url()?>assets/images/delivery.png" width="700" height="637" loading="lazy" alt="Burger"
+              class="w-100 hero-img">
+          </figure>
+
+        </div>
+      </section>
 
       <section class="section section-divider white blog" id="blog">
         
@@ -109,11 +130,11 @@
 
 
           <h2 class="h2 section-title">
-            Vos restaurant <span class="span">favoris</span>
+            Les restaurants <span class="span">disponibles</span>
           </h2>
 
           <p class="section-text">
-            Voici la liste de vos restaurants favoris.
+            Voici la liste des restaurants disponibles sur notre plateforme.
           </p>
 
           <!-- Liste resto -->
@@ -121,7 +142,7 @@
             <li>
               <div class="blog-card">
                 <div class="card-banner">
-                  <img src="./assets/images/resto-1.jpg" width="600" height="390" loading="lazy"
+                  <img src="<?php echo base_url()?>assets/images/resto-1.jpg" width="600" height="390" loading="lazy"
                     alt="What Do You Think About Cheese Pizza Recipes?" class="w-100">
                     <div class="open">Ouvert</div>
                 </div>
@@ -135,9 +156,9 @@
                     </a>
 
                   </div>
-
+                  
                   <h3 class="h3">
-                    <a href="#" class="card-title">Bogota By-Pass</a>
+                    <a href="<?=site_url('ClientController/PlatClientPage')?>" class="card-title">Bogota By-Pass</a>
                   </h3>
 
                   <p class="card-text">
@@ -145,22 +166,12 @@
                   </p>
 
                   <a href="#" class="btn-link">
-                    <span>
+                  <span>3.5</span>  
+                  <span>
                         <span class="material-icons-sharp">
                             star
                         </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
+                   
                     </span>
                   </a>
 
@@ -181,7 +192,7 @@
               <div class="blog-card">
 
                 <div class="card-banner">
-                  <img src="./assets/images/resto-2.jpg" width="600" height="390" loading="lazy"
+                  <img src="<?php echo base_url()?>assets/images/resto-2.jpg" width="600" height="390" loading="lazy"
                     alt="Making Chicken Strips With New Delicious Ingridents." class="w-100">
                     <div class="open">Ouvert</div>
 
@@ -206,27 +217,17 @@
                   </p>
 
                   <a href="#" class="btn-link">
-                    <span>
+                  <span>3.5</span>  
+                  <span>
                         <span class="material-icons-sharp">
                             star
                         </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
+                   
                     </span>
                   </a>
 
                   <a href="#" class="btn-link">
-                    <span class="favori-active">
+                    <span class="favoris-resto">
                         <span class="material-icons-sharp">
                             favorite
                         </span>
@@ -242,7 +243,7 @@
               <div class="blog-card">
 
                 <div class="card-banner">
-                  <img src="./assets/images/resto-3.jpg" width="600" height="390" loading="lazy"
+                  <img src="<?php echo base_url()?>assets/images/resto-3.jpg" width="600" height="390" loading="lazy"
                     alt="Innovative Hot Chessyraw Pasta Make Creator Fact." class="w-100">
                     <div class="close">Ferme</div>
 
@@ -267,28 +268,17 @@
                   </p>
 
                   <a href="#" class="btn-link">
-                    <span>
+                  <span>3.5</span>  
+                  <span>
                         <span class="material-icons-sharp">
                             star
                         </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
+                   
                     </span>
-
                   </a>
 
                   <a href="#" class="btn-link">
-                    <span class="favori-active">
+                    <span class="favoris-resto">
                         <span class="material-icons-sharp">
                             favorite
                         </span>
@@ -299,6 +289,57 @@
 
               </div>
             </li>
+
+            <li>
+              <div class="blog-card">
+
+                <div class="card-banner">
+                  <img src="<?php echo base_url()?>assets/images/resto-2.jpg" width="600" height="390" loading="lazy"
+                    alt="Making Chicken Strips With New Delicious Ingridents." class="w-100">
+                    <div class="open">Ouvert</div>
+
+                </div>
+
+                <div class="card-content">
+
+                  <div class="card-meta-wrapper">
+
+                    <a href="#" class="card-meta-link">
+                      <time class="meta-info" datetime="2022-01-01">De 10h00 a 19h00</time>
+                    </a>
+
+                  </div>
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">Raddison Blue</a>
+                  </h3>
+
+                  <p class="card-text">
+                    <span class="loc">Localisation :</span> Tana Water Front
+                  </p>
+
+                  <a href="#" class="btn-link">
+                  <span>3.5</span>  
+                  <span>
+                        <span class="material-icons-sharp">
+                            star
+                        </span>
+                   
+                    </span>
+                  </a>
+                  <a href="#" class="btn-link">
+                    <span class="favoris-resto">
+                        <span class="material-icons-sharp">
+                            favorite
+                        </span>
+                    </span>
+                  </a>
+
+                </div>
+
+              </div>
+            </li>
+          
 
           </ul>
 
@@ -322,7 +363,7 @@
 
   <footer class="footer">
 
-    <div class="footer-top" style="background-image: url('./assets/images/footer-illustration.png')">
+    <div class="footer-top" style="background-image: url('<?php echo base_url()?>assets/images/footer-illustration.png')">
       <div class="container">
 
         <div class="footer-brand">
@@ -409,12 +450,12 @@
   <!-- 
     - custom js link
   -->
-  <script src="./assets/js/script.js" defer></script>
+  <script src="<?php echo base_url()?>assets/js/script.js" defer></script>
 
   <!-- 
     - ionicon link
   -->
-  <script type="module" src="./assets/js/ionicons.esm.js"></script>
+  <script type="module" src="<?php echo base_url()?>assets/js/ionicons.esm.js"></script>
   <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
 
 </body>

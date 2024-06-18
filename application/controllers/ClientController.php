@@ -5,10 +5,20 @@ class ClientController extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->library('session');
         $this->load->model('ClientModel');
+        if(!$this->session->userdata("client_session")){
+            redirect("EntryPoint/index2");
+        }
     }
 
-    public function index() {}
+    public function index() {
+        if ($this->session->userdata('client_session')) {
+            $current_client = $this->session->userdata('client_session');
+            }
+        $data['client'] = $current_client;
+        $this->load->view('clientPage/AccueilClient',$data);
+    }
 
     public function create() {
         $this->load->helper('form');
@@ -102,5 +112,61 @@ class ClientController extends CI_Controller {
             }
         }
     }
+
+    /*redirection vers page acceuil*/ 
+    public function acceuilPage(){
+        $current_client  = null;
+        if ($this->session->userdata('client_session')) {
+            $current_client = $this->session->userdata('client_session');
+            }
+        $data['client'] = $current_client;
+        $this->load->view('clientPage/AccueilClient',$data);
+    }
+    /*redirection vers page panier*/
+    public function panierPage(){
+        $current_client  = null;
+        if ($this->session->userdata('client_session')) {
+            $current_client = $this->session->userdata('client_session');
+            }
+        $data['client'] = $current_client;
+        $this->load->view('clientPage/PanierClient',$data);
+    }
+    /*redirection vers page favoris*/ 
+    public function favorisPage(){
+        $current_client  = null;
+        if ($this->session->userdata('client_session')) {
+            $current_client = $this->session->userdata('client_session');
+            }
+        $data['client'] = $current_client;
+        $this->load->view('clientPage/FavoriClient',$data);
+    }
+    /*redirection vers page apropos*/ 
+    public function aboutPage(){
+        $current_client  = null;
+        if ($this->session->userdata('client_session')) {
+            $current_client = $this->session->userdata('client_session');
+            }
+        $data['client'] = $current_client;
+        $this->load->view('clientPage/APropos',$data);
+    }
+    /*redirection vers page plat resto */ 
+    public function PlatClientPage(){
+        $current_client  = null;
+        if ($this->session->userdata('client_session')) {
+            $current_client = $this->session->userdata('client_session');
+            }
+        $data['client'] = $current_client;
+        $this->load->view('clientPage/PlatClient',$data);
+    }
+
+
+    /*deconnection**/
+    public function clientLogout(){
+        $this->session->unset_userdata('client_session');
+        $this->session->sess_destroy();
+        $this->load->view('clientPage/AccueilClient');
+    }
+    
+    
 }
 ?>

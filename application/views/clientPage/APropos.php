@@ -10,20 +10,20 @@
   <!-- 
     - favicon
   -->
-  <link rel="shortcut icon" href="./assets/images/Logo.png" type="image/svg+xml">
+  <link rel="shortcut icon" href="<?php echo base_url()?>assets/images/Logo.png" type="image/svg+xml">
 
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href="./assets/css/client.css">
-  <link rel="stylesheet" href="./assets/font/font.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/css/client.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/font/font.css">
 
   <!-- 
     - preload images
   -->
-  <link rel="preload" as="image" href="./assets/images/hero-banner.png" media="min-width(768px)">
-  <link rel="preload" as="image" href="./assets/images/hero-banner-bg.png" media="min-width(768px)">
-  <link rel="preload" as="image" href="./assets/images/hero-bg.jpg">
+  <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-banner.png" media="min-width(768px)">
+  <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-banner-bg.png" media="min-width(768px)">
+  <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-bg.jpg">
 
 </head>
 
@@ -44,28 +44,27 @@
         <ul class="navbar-list">
 
           <li class="nav-item">
-            <a href="#home" class="navbar-link" data-nav-link>Accueil</a>
+            <a href="<?=site_url('ClientController/acceuilPage')?>" class="navbar-link" data-nav-link>Accueil</a>
           </li>
 
           <li class="nav-item">
-            <a href="#about" class="navbar-link" data-nav-link>Mon Panier</a>
+            <a href="<?=site_url('ClientController/favorisPage')?>" class="navbar-link" data-nav-link>Favoris</a>
           </li>
 
           <li class="nav-item">
-            <a href="#food-menu" class="navbar-link" data-nav-link>Favoris</a>
+              <a href="<?=site_url('ClientController/aboutPage')?>" class="navbar-link" data-nav-link>A Propos</a>  
           </li>
-
-          <li class="nav-item">
-            <a href="#" class="navbar-link" data-nav-link>A Propos</a>
-          </li>
+         
 
         </ul>
       </nav>
 
       <div class="header-btn-group">
-
-        <button class="btn btn-hover">Login</button>
-
+      <?php if(!isset($client) || $client == null){ ?>
+        <a href="<?php echo site_url('AuthentificationController/checkUserLogin');?>"><button class="btn btn-hover">Login</button></a>
+      <?php  }else{?>
+        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">deconnection</button></a>
+      <?php } ?>
         <button class="nav-toggle-btn" aria-label="Toggle Menu" data-menu-toggle-btn>
           <span class="line top"></span>
           <span class="line middle"></span>
@@ -91,7 +90,7 @@
         <div class="container">
 
           <div class="about-banner">
-            <img src="./assets/images/terme.png" width="1000" height="880" loading="lazy" alt="delivery boy"
+            <img src="<?php echo base_url()?>assets/images/terme.png" width="1000" height="880" loading="lazy" alt="delivery boy"
               class="w-100 delivery-img" data-delivery-boy>
           </div>
 
@@ -164,7 +163,7 @@
 
           <figure class="delivery-banner">
 
-            <img src="./assets/images/Logo.png" width="1000" height="880" loading="lazy" alt="delivery boy"
+            <img src="<?php echo base_url()?>assets/images/Logo.png" width="1000" height="880" loading="lazy" alt="delivery boy"
               class="w-100 delivery-img" data-delivery-boy>
           </figure>
 
@@ -193,7 +192,7 @@
                 <div class="profile-wrapper">
 
                   <figure class="avatar">
-                    <img src="./assets/images/avatar-1.jpg" width="80" height="80" loading="lazy" alt="Robert William">
+                    <img src="<?php echo base_url()?>assets/images/avatar-1.jpg" width="80" height="80" loading="lazy" alt="Robert William">
                   </figure>
 
                   <div>
@@ -214,7 +213,7 @@
                 <div class="profile-wrapper">
 
                   <figure class="avatar">
-                    <img src="./assets/images/avatar-2.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
+                    <img src="<?php echo base_url()?>assets/images/avatar-2.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
                   </figure>
 
                   <div>
@@ -234,7 +233,7 @@
                 <div class="profile-wrapper">
 
                   <figure class="avatar">
-                    <img src="./assets/images/avatar-3.jpg" width="80" height="80" loading="lazy" alt="Charles Richard">
+                    <img src="<?php echo base_url()?>assets/images/avatar-3.jpg" width="80" height="80" loading="lazy" alt="Charles Richard">
                   </figure>
 
                   <div>
@@ -266,7 +265,7 @@
 
   <footer class="footer">
 
-    <div class="footer-top" style="background-image: url('./assets/images/footer-illustration.png')">
+    <div class="footer-top" style="background-image: url('<?php echo base_url()?>assets/images/footer-illustration.png')">
       <div class="container">
 
         <div class="footer-brand">
@@ -355,12 +354,12 @@
   <!-- 
     - custom js link
   -->
-  <script src="./assets/js/script.js" defer></script>
+  <script src="<?php echo base_url()?>assets/js/script.js" defer></script>
 
   <!-- 
     - ionicon link
   -->
-  <script type="module" src="./assets/js/ionicons.esm.js"></script>
+  <script type="module" src="<?php echo base_url()?>assets/js/ionicons.esm.js"></script>
   <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
 
 </body>

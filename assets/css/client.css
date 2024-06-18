@@ -413,8 +413,7 @@ body.active { overflow: hidden; }
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: .5em;
-  margin-top: 5em;
+
 }
 
 .container .search-content input,select{

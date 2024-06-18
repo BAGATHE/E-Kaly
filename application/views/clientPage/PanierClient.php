@@ -10,20 +10,20 @@
   <!-- 
     - favicon
   -->
-  <link rel="shortcut icon" href="./assets/images/Logo.png" type="image/svg+xml">
+  <link rel="shortcut icon" href="<?php echo base_url()?>assets/images/Logo.png" type="image/svg+xml">
 
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href="./assets/css/client.css">
-  <link rel="stylesheet" href="./assets/font/font.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/css/client.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/font/font.css">
 
   <!-- 
     - preload images
   -->
-  <link rel="preload" as="image" href="./assets/images/hero-banner.png" media="min-width(768px)">
-  <link rel="preload" as="image" href="./assets/images/hero-banner-bg.png" media="min-width(768px)">
-  <link rel="preload" as="image" href="./assets/images/hero-bg.jpg">
+  <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-banner.png" media="min-width(768px)">
+  <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-banner-bg.png" media="min-width(768px)">
+  <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-bg.jpg">
 
 </head>
 
@@ -32,7 +32,6 @@
   <!-- 
     - #HEADER
   -->
-
   <header class="header" data-header>
     <div class="container">
 
@@ -44,28 +43,28 @@
         <ul class="navbar-list">
 
           <li class="nav-item">
-            <a href="#home" class="navbar-link" data-nav-link>Accueil</a>
+            <a href="<?=site_url('ClientController/acceuilPage')?>" class="navbar-link" data-nav-link>Accueil</a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="<?=site_url('ClientController/favorisPage')?>" class="navbar-link" data-nav-link>Favoris</a>
           </li>
 
           <li class="nav-item">
-            <a href="#about" class="navbar-link" data-nav-link>Mon Panier</a>
+              <a href="<?=site_url('ClientController/aboutPage')?>" class="navbar-link" data-nav-link>A Propos</a>  
           </li>
-
-          <li class="nav-item">
-            <a href="#food-menu" class="navbar-link" data-nav-link>Favoris</a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#" class="navbar-link" data-nav-link>A Propos</a>
-          </li>
+         
 
         </ul>
       </nav>
 
       <div class="header-btn-group">
-
-        <button class="btn btn-hover">Login</button>
-
+      <?php if(!isset($client) || $client == null){ ?>
+        <a href="<?php echo site_url('AuthentificationController/checkUserLogin');?>"><button class="btn btn-hover">Login</button></a>
+      <?php  }else{?>
+        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">deconnection</button></a>
+      <?php } ?>
         <button class="nav-toggle-btn" aria-label="Toggle Menu" data-menu-toggle-btn>
           <span class="line top"></span>
           <span class="line middle"></span>
@@ -99,28 +98,34 @@
           </div>
 
           <h2 class="h2 section-title">
-            Plat disponibles chez <span class="span">Bogota By-Pass</span>
+            <span class="span">Votre Panier</span>
           </h2>
 
-          <p class="section-text">
-            Vous trouvez ici la liste des plats disponibles.
-          </p>
-
+          <div class="achat">
+            <p class="section-text prix-total" style="color: #222222; font-size: 25px;">
+              Prix Total : <span>50000 Ar</span>
+            </p>
+            <form action="">
+              <button type="submit" class="valider-achat btn-hover">Valider achat</button>
+            </form>
+          </div>
           <ul class="food-menu-list">
 
             <li>
               <div class="food-menu-card">
 
                 <div class="card-banner">
-                  <img src="./assets/images/food-menu-1.png" width="300" height="300" loading="lazy"
+                  <img src="<?php echo base_url()?>assets/images/food-menu-1.png" width="300" height="300" loading="lazy"
                     alt="Fried Chicken Unlimited" class="w-100">
+                </div>
 
-                    <button class="btn food-menu-btn">
-                      <span class="material-icons-sharp">
-                        shopping_cart
-                      </span>
-                      Ajouter au panier
-                    </button>
+                
+                <div class="remove-cart">
+                  <a href="">
+                    <span class="material-icons-sharp">
+                      clear
+                    </span>
+                  </a>
                 </div>
 
                 <div class="wrapper">
@@ -131,25 +136,15 @@
 
                 <div class="price-wrapper" style="display: flex;">
 
-                  <data class="price" value="49.00">$49.00</data>
-
-                  <a href="#" class="btn-link">
-                    <span style="display: flex;">
-                        <p>5</p>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                    </span>
-
-                  </a>
+                  <data class="price" value="49.00"> <span style="color: #505050;">Prix unitaire:</span>$49.00</data>
+                  <data class="price" value="49.00"><span style="color: #505050;">Prix total:</span> $49.00</data>
 
                 </div>
 
-                <div class="price-wrapper note-fav">
-                  <form action="" >
-                    <input type="number" max="5" min="0" placeholder="Noter">
-                    <button type="submit">Noter</button>
-                  </form>
+                <div class="price-wrapper" style="color: #222222;">
+                  <a href="">-</a>
+                  <p>2</p>
+                  <a href="">+</a>
                 </div>
 
               </div>
@@ -159,15 +154,16 @@
               <div class="food-menu-card">
 
                 <div class="card-banner">
-                  <img src="./assets/images/food-menu-2.png" width="300" height="300" loading="lazy"
+                  <img src="<?php echo base_url()?>assets/images/food-menu-2.png" width="300" height="300" loading="lazy"
                     alt="Burger King Whopper" class="w-100">
+                </div>
 
-                    <button class="btn food-menu-btn">
-                      <span class="material-icons-sharp">
-                        shopping_cart
-                      </span>
-                      Ajouter au panier
-                    </button>
+                <div class="remove-cart">
+                  <a href="">
+                    <span class="material-icons-sharp">
+                      clear
+                    </span>
+                  </a>
                 </div>
 
                 <div class="wrapper">
@@ -178,25 +174,15 @@
 
                 <div class="price-wrapper" style="display: flex;">
 
-                  <data class="price" value="49.00">$49.00</data>
-
-                  <a href="#" class="btn-link">
-                    <span style="display: flex;">
-                        <p>5</p>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                    </span>
-
-                  </a>
+                  <data class="price" value="49.00"> <span style="color: #505050;">Prix unitaire:</span>$49.00</data>
+                  <data class="price" value="49.00"><span style="color: #505050;">Prix total:</span> $49.00</data>
 
                 </div>
 
-                <div class="price-wrapper note-fav">
-                  <form action="" >
-                    <input type="number" max="5" min="0" placeholder="Noter">
-                    <button type="submit">Noter</button>
-                  </form>
+                <div class="price-wrapper" style="color: #222222;">
+                  <a href="">-</a>
+                  <p>2</p>
+                  <a href="">+</a>
                 </div>
 
               </div>
@@ -206,15 +192,16 @@
               <div class="food-menu-card">
 
                 <div class="card-banner">
-                  <img src="./assets/images/food-menu-3.png" width="300" height="300" loading="lazy"
+                  <img src="<?php echo base_url()?>assets/images/food-menu-3.png" width="300" height="300" loading="lazy"
                     alt="White Castle Pizzas" class="w-100">
+                </div>
 
-                    <button class="btn food-menu-btn">
-                      <span class="material-icons-sharp">
-                        shopping_cart
-                      </span>
-                      Ajouter au panier
-                    </button>
+                <div class="remove-cart">
+                  <a href="">
+                    <span class="material-icons-sharp">
+                      clear
+                    </span>
+                  </a>
                 </div>
 
                 <div class="wrapper">
@@ -225,30 +212,19 @@
 
                 <div class="price-wrapper" style="display: flex;">
 
-                  <data class="price" value="49.00">$49.00</data>
-
-                  <a href="#" class="btn-link">
-                    <span style="display: flex;">
-                        <p>5</p>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                    </span>
-
-                  </a>
+                  <data class="price" value="49.00"> <span style="color: #505050;">Prix unitaire:</span>$49.00</data>
+                  <data class="price" value="49.00"><span style="color: #505050;">Prix total:</span> $49.00</data>
 
                 </div>
 
-                <div class="price-wrapper note-fav">
-                  <form action="" >
-                    <input type="number" max="5" min="0" placeholder="Noter">
-                    <button type="submit">Noter</button>
-                  </form>
+                <div class="price-wrapper" style="color: #222222;">
+                  <a href="">-</a>
+                  <p>2</p>
+                  <a href="">+</a>
                 </div>
 
               </div>
             </li>
-
           </ul>
 
 
@@ -276,7 +252,7 @@
 
   <footer class="footer">
 
-    <div class="footer-top" style="background-image: url('./assets/images/footer-illustration.png')">
+    <div class="footer-top" style="background-image: url('<?php echo base_url()?>assets/images/footer-illustration.png')">
       <div class="container">
 
         <div class="footer-brand">
@@ -364,13 +340,14 @@
   <!-- 
     - custom js link
   -->
-  <script src="./assets/js/script.js" defer></script>
+  <script src="<?php echo base_url()?>assets/js/script.js" defer></script>
 
   <!-- 
     - ionicon link
   -->
-  <script type="module" src="./assets/js/ionicons.esm.js"></script>
+  <script type="module" src="<?php echo base_url()?>assets/js/ionicons.esm.js"></script>
   <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
+
 
 </body>
 

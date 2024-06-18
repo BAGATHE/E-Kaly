@@ -7,9 +7,11 @@ class EntryPoint extends CI_Controller {
         $this->load->model('AdmisModel');
     }
 
-	public function index()
-	{
+	public function index(){
+    $this->load->view('clientPage/AccueilClient');
+    }
+    public function index2(){
     $this->load->view('login');
-}
+    }
 }
 ?>
