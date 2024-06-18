@@ -107,10 +107,10 @@
           </p>
 
           <ul class="food-menu-list">
-
+            <!-- php boucle de liste de plat du resto -->
+           <?php foreach($list_plat_resto as $plat){ ?>
             <li>
               <div class="food-menu-card">
-
                 <div class="card-banner">
                   <img src="<?php echo base_url()?>assets/images/food-menu-1.png" width="300" height="300" loading="lazy"
                     alt="Fried Chicken Unlimited" class="w-100">
@@ -124,18 +124,18 @@
                 </div>
 
                 <div class="wrapper">
-                  <p class="category">Chicken</p>
+                  <p class="category"></p>
                 </div>
-
-                <h3 class="h3 card-title">Fried Chicken Unlimited</h3>
+                <input type="hidden" name="plat_id" value="<?=$plat["id_plat"] ?>" class="plat_id">
+                <h3 class="h3 card-title"><?=$plat["description"] ?></h3>
 
                 <div class="price-wrapper" style="display: flex;">
 
-                  <data class="price" value="49.00">$49.00</data>
+                  <data class="price" value="<?=$plat["prix"]?>"><?=$plat["prix"]?> Ar</data>
 
                   <a href="#" class="btn-link">
                     <span style="display: flex;">
-                        <p>5</p>
+                        <p><?=$plat["note"]?></p>
                         <span class="material-icons-sharp">
                             star
                         </span>
@@ -154,239 +154,7 @@
 
               </div>
             </li>
-
-            <li>
-              <div class="food-menu-card">
-
-                <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/food-menu-2.png" width="300" height="300" loading="lazy"
-                    alt="Burger King Whopper" class="w-100">
-
-                    <button class="btn food-menu-btn">
-                      <span class="material-icons-sharp">
-                        shopping_cart
-                      </span>
-                      Ajouter au panier
-                    </button>
-                </div>
-
-                <div class="wrapper">
-                  <p class="category">Noddles</p>
-                </div>
-
-                <h3 class="h3 card-title">Burger King Whopper</h3>
-
-                <div class="price-wrapper" style="display: flex;">
-
-                  <data class="price" value="49.00">$49.00</data>
-
-                  <a href="#" class="btn-link">
-                    <span style="display: flex;">
-                        <p>5</p>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                    </span>
-
-                  </a>
-
-                </div>
-
-                <div class="price-wrapper note-fav">
-                  <form action="" >
-                    <input type="number" max="5" min="0" placeholder="Noter">
-                    <button type="submit">Noter</button>
-                  </form>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="food-menu-card">
-
-                <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/food-menu-3.png" width="300" height="300" loading="lazy"
-                    alt="White Castle Pizzas" class="w-100">
-
-                    <button class="btn food-menu-btn">
-                      <span class="material-icons-sharp">
-                        shopping_cart
-                      </span>
-                      Ajouter au panier
-                    </button>
-                </div>
-
-                <div class="wrapper">
-                  <p class="category">Pizzas</p>
-                </div>
-
-                <h3 class="h3 card-title">White Castle Pizzas</h3>
-
-                <div class="price-wrapper" style="display: flex;">
-
-                  <data class="price" value="49.00">$49.00</data>
-
-                  <a href="#" class="btn-link">
-                    <span style="display: flex;">
-                        <p>5</p>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                    </span>
-
-                  </a>
-
-                </div>
-
-                <div class="price-wrapper note-fav">
-                  <form action="" >
-                    <input type="number" max="5" min="0" placeholder="Noter">
-                    <button type="submit">Noter</button>
-                  </form>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="food-menu-card">
-
-                <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/food-menu-2.png" width="300" height="300" loading="lazy"
-                    alt="Burger King Whopper" class="w-100">
-
-                    <button class="btn food-menu-btn">
-                      <span class="material-icons-sharp">
-                        shopping_cart
-                      </span>
-                      Ajouter au panier
-                    </button>
-                </div>
-
-                <div class="wrapper">
-                  <p class="category">Noddles</p>
-                </div>
-
-                <h3 class="h3 card-title">Burger King Whopper</h3>
-
-                <div class="price-wrapper" style="display: flex;">
-
-                  <data class="price" value="49.00">$49.00</data>
-
-                  <a href="#" class="btn-link">
-                    <span style="display: flex;">
-                        <p>5</p>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                    </span>
-
-                  </a>
-
-                </div>
-
-                <div class="price-wrapper note-fav">
-                  <form action="" >
-                    <input type="number" max="5" min="0" placeholder="Noter">
-                    <button type="submit">Noter</button>
-                  </form>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="food-menu-card">
-
-                <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/food-menu-2.png" width="300" height="300" loading="lazy"
-                    alt="Burger King Whopper" class="w-100">
-
-                    <button class="btn food-menu-btn">
-                      <span class="material-icons-sharp">
-                        shopping_cart
-                      </span>
-                      Ajouter au panier
-                    </button>
-                </div>
-
-                <div class="wrapper">
-                  <p class="category">Noddles</p>
-                </div>
-
-                <h3 class="h3 card-title">Burger King Whopper</h3>
-
-                <div class="price-wrapper" style="display: flex;">
-
-                  <data class="price" value="49.00">$49.00</data>
-
-                  <a href="#" class="btn-link">
-                    <span style="display: flex;">
-                        <p>5</p>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                    </span>
-
-                  </a>
-
-                </div>
-
-                <div class="price-wrapper note-fav">
-                  <form action="" >
-                    <input type="number" max="5" min="0" placeholder="Noter">
-                    <button type="submit">Noter</button>
-                  </form>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="food-menu-card">
-
-                <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/food-menu-2.png" width="300" height="300" loading="lazy"
-                    alt="Burger King Whopper" class="w-100">
-
-                    <button class="btn food-menu-btn">
-                      <span class="material-icons-sharp">
-                        shopping_cart
-                      </span>
-                      Ajouter au panier
-                    </button>
-                </div>
-
-                <div class="wrapper">
-                  <p class="category">Noddles</p>
-                </div>
-
-                <h3 class="h3 card-title">Burger King Whopper</h3>
-
-                <div class="price-wrapper" style="display: flex;">
-
-                  <data class="price" value="49.00">$49.00</data>
-
-                  <a href="#" class="btn-link">
-                    <span style="display: flex;">
-                        <p>5</p>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                    </span>
-
-                  </a>
-
-                </div>
-                <div class="price-wrapper note-fav">
-                  <form action="" >
-                    <input type="number" max="5" min="0" placeholder="Noter">
-                    <button type="submit">Noter</button>
-                  </form>
-                </div>
-              </div>
-            </li>
+           <?php } ?>
           </ul>
 
 
@@ -398,41 +166,20 @@
     </article>
 
     <aside id="div_panier">
+    <form action="" method="post" id="formulairePanier"> 
         <div class="panier">
             <div class="header-panier">
                 <span class="titre-panier">Votre panier</span>
                 <span class="nombre-articles">0 Articles</span>
             </div>
             <div class="contenu-panier">
-              <!--
-                <div class="article" data-price="52000">
-                    <span class="supprimer-article">✖</span>
-                    <span class="nom-article">MIX GOURMANDISE MARINE</span>
-                    <span class="prix-article">52000</span> Ar
-                    <div class="quantite">
-                        <button class="quantite-btn decrement">-</button>
-                        <span class="quantite-nombre">1</span>
-                        <button class="quantite-btn increment">+</button>
-                    </div>
-                </div>
-                <div class="article" data-price="52000">
-                    <span class="supprimer-article">✖</span>
-                    <span class="nom-article">MIX GOURMANDISE MARINE</span>
-                    <span class="prix-article">52000</span> Ar
-                    <div class="quantite">
-                        <button class="quantite-btn decrement">-</button>
-                        <span class="quantite-nombre">1</span>
-                        <button class="quantite-btn increment">+</button>
-                    </div>
-                </div>
-      -->
                 <div class="sous-total">
                     <span class="texte-sous-total">Sous-total</span>
                     <span class="prix-sous-total"></span> Ar
                 </div>
             </div>
             <button type="button" class="bouton-continuer" id="bouton-confirmation">Continuer</button>
-        </div>
+            </div>
         
         <section id="info_complementaire" style="display:none;">
         <div class="input-adresse">
@@ -448,11 +195,10 @@
         <div id="map" ></div>
         <div>
           <h3 style="text-align:center;">Prix de livraison</h3>
-          
           <p style="text-align:center; display:none;"  >758522</p>
         </div>
         </section>
-        
+      </form>
     </aside>
   </main>
 
@@ -578,7 +324,8 @@
   <!-- <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
 
 
- 
+ <span style="display:none;" id="url"><?=base_url() ?></span>
+ <span style="display:none;" id="adresse_resto"><?=$info_resto["adresse"] ?></span>
   <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Initialisation de la carte à Antananarivo, Madagascar
@@ -598,14 +345,16 @@
             };
             var currentMarker = null;
             // Gestionnaire de l'événement de changement de sélection
+            var adresse_target = null;
             document.getElementById('optionsAdresse').addEventListener('change', function(event) {
                 var selectedDistrict = event.target.value;
+                adresse_target = event.target.value;
                 if (selectedDistrict && districts[selectedDistrict]) {
                     var coordinates = districts[selectedDistrict];
                     map.setView(coordinates, 15); // Ajustez le niveau de zoom si nécessaire
                 }
-                var mapElement = document.getElementById("map");
-                mapElement.classList.add('show');
+                //var mapElement = document.getElementById("map");
+                //mapElement.classList.add('show');
             });
             map.on('click', function(e) {
                 var inputElement = document.getElementById("repere");
@@ -615,9 +364,29 @@
                 }
                 // Ajouter un nouveau marqueur à l'endroit cliqué
                 currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+                var url = $("#url").text();
+                var adresseResto = $("#adresse_resto").text();
 
 
-
+                /*$.ajax({
+                  url: url+"ClientControler/test", // Remplacez par l'URL correcte de votre contrôleur CodeIgniter
+                  type: 'POST', // Utilisation de POST pour envoyer les données
+                  dataType: 'json', // Attendre une réponse JSON
+                  data: {
+                    latitude: latitude,
+                    longitude: longitude
+                  },
+                  success: function(response) {
+                    // Traitement de la réponse du contrôleur CodeIgniter
+                    console.log(response); // Affichage dans la console à des fins de débogage
+                    // Faire d'autres actions avec la réponse si nécessaire
+                  },
+                  error: function(xhr, status, error) {
+                    // Gestion des erreurs
+                    console.error(xhr.responseText); // Affichage de l'erreur dans la console
+                  }
+                });
+              */
               
             });
         });
@@ -630,6 +399,7 @@
               });
               
     </script>
+      
 </body>
 
 </html>

@@ -7,6 +7,8 @@ class ClientController extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('ClientModel');
+        $this->load->model('PlatModel');
+        $this->load->model('RestoModel');
         if(!$this->session->userdata("client_session")){
             redirect("EntryPoint/index2");
         }
@@ -147,6 +149,8 @@ class ClientController extends CI_Controller {
         if ($this->session->userdata('client_session')) {
             $current_client = $this->session->userdata('client_session');
             }
+        $data['list_plat_resto'] = $this->PlatModel->getAllInfo(1);
+        $data['info_resto'] = $this->RestoModel->getById(1); 
         $data['client'] = $current_client;
         $this->load->view('clientPage/PlatClient',$data);
     }

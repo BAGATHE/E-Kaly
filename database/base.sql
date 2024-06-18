@@ -204,11 +204,11 @@ create table Commission_admin(
 );
 
 
-CREATE TABLE Tarif_livraison (
+CREATE OR REPLACE TABLE Tarif_livraison (
     tarif_min decimal(10,2),
     tarif_moyen decimal(10,2),
     tarif_max decimal(10,2)
-);
+)engine=innodb;
 
 
 ALTER TABLE `Info_livreur` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);

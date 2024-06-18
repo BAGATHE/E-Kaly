@@ -175,8 +175,6 @@ INSERT INTO Note_resto (id_client, id_resto, note) VALUES
 INSERT INTO Prix_mise_en_avant(prix) VALUES(200000);
 
 
-
 INSERT INTO Tarif_livraison (tarif_min,tarif_moyen,tarif_max)
 VALUES (1500,3000,5000);
-
 --teste
