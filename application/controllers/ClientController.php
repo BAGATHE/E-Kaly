@@ -120,12 +120,7 @@ class ClientController extends CI_Controller {
 
     /*redirection vers page acceuil*/ 
     public function acceuilPage(){
-        $current_client  = null;
-        if ($this->session->userdata('client_session')) {
-            $current_client = $this->session->userdata('client_session');
-            }
-        $data['client'] = $current_client;
-        $this->load->view('clientPage/AccueilClient',$data);
+        redirect('EntryPoint');
     }
   
     /*redirection vers page favoris*/ 
@@ -149,13 +144,13 @@ class ClientController extends CI_Controller {
         $this->load->view('clientPage/APropos',$data);
     }
     /*redirection vers page plat resto */ 
-    public function PlatClientPage(){
+    public function PlatClientPage($id_resto){
         $current_client  = null;
         if ($this->session->userdata('client_session')) {
             $current_client = $this->session->userdata('client_session');
             }
-        $data['list_plat_resto'] = $this->PlatModel->getAllInfo(1);
-        $data['info_resto'] = $this->RestoModel->getById(1); 
+        $data['list_plat_resto'] = $this->PlatModel->getAllInfo($id_resto);
+        $data['info_resto'] = $this->RestoModel->getById($id_resto); 
         $data['client'] = $current_client;
         $this->load->view('clientPage/PlatClient',$data);
     }
@@ -165,7 +160,7 @@ class ClientController extends CI_Controller {
     public function clientLogout(){
         $this->session->unset_userdata('client_session');
         $this->session->sess_destroy();
-        $this->load->view('clientPage/AccueilClient');
+        redirect('EntryPoint');
     }
     public function getPrixLivraison(){
         $adresse_resto = $this->input->post("adresse_resto");
@@ -260,7 +255,92 @@ public function rechercherPlat(){
     ->set_content_type('application/json')
     ->set_output(json_encode($response));
    */
-}   
+}  
+
+/**recupere la note du resto que le client a mis */
+public function getNoteRestoClient() {
+    $id_resto = $this->input->get('id_resto');
+    $id_client = $this->input->get('id_client');
+    
+    // Vérifiez si le client a déjà noté ce restaurant
+    $this->db->where('id_resto', $id_resto);
+    $this->db->where('id_client', $id_client);
+    $query = $this->db->get('Note_resto');
+    $note = $query->row_array();
+
+    if ($note) {
+        echo json_encode(array('status' => 'success', 'note' => $note['note']));
+    } else {
+        echo json_encode(array('status' => 'success', 'note' => null));
+    }
+}
+
+/**insere le note resto que le client actif a mis  */
+public function insertNoteRestoClient() {
+    $id_resto = $this->input->post('id_resto');
+    $id_client = $this->input->post('id_client');
+    $note = $this->input->post('rate');
+    
+    // Vérifiez si le client a déjà noté ce restaurant
+    $this->db->where('id_resto', $id_resto);
+    $this->db->where('id_client', $id_client);
+    $query = $this->db->get('Note_resto');
+    
+    if ($query->num_rows() > 0) {
+        // Mise à jour de la note existante
+        $this->db->where('id_resto', $id_resto);
+        $this->db->where('id_client', $id_client);
+        $this->db->update('Note_resto', array('note' => $note));
+        
+        if ($this->db->affected_rows() > 0) {
+            echo json_encode(array('status' => 'success', 'message' => 'Note mise à jour avec succès'));
+        } else {
+            echo json_encode(array('status' => 'error', 'message' => 'Erreur lors de la mise à jour de la note'));
+        }
+    } else {
+        // Insertion d'une nouvelle note
+        $data = array(
+            'id_resto' => $id_resto,
+            'id_client' => $id_client,
+            'note' => $note
+        );
+        
+        $this->db->insert('Note_resto', $data);
+        
+        if ($this->db->affected_rows() > 0) {
+            echo json_encode(array('status' => 'success', 'message' => 'Note insérée avec succès'));
+        } else {
+            echo json_encode(array('status' => 'error', 'message' => 'Erreur lors de l\'insertion de la note'));
+        }
+    }
+}
+/*insertion de note sur un plat */
+public function insertNotePlatClient() {
+    $id_plat = $this->input->post('id_plat');
+    $id_client = $this->input->post('id_client');
+    $note = $this->input->post('note');
+    
+    // Vérifier si le client a déjà noté ce plat
+    $this->db->where('id_plat', $id_plat);
+    $this->db->where('id_client', $id_client);
+    $query = $this->db->get('Note_Plat');
+    $existing_note = $query->row_array();
+
+    if ($existing_note) {
+        // Mise à jour de la note existante
+        $this->db->where('id', $existing_note['id']);
+        $this->db->update('Note_Plat', array('note' => $note));
+    } else {
+        // Insertion d'une nouvelle note
+        $this->db->insert('Note_Plat', array(
+            'id_client' => $id_client,
+            'id_plat' => $id_plat,
+            'note' => $note
+        ));
+    }
+
+    echo json_encode(array('status' => 'success'));
+}
     
 }
 ?>

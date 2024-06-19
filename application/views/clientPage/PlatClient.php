@@ -87,6 +87,22 @@
       -->
       <section class="section food-menu" id="food-menu">
         <div class="container">
+        <h4 style="margin-right:2.5vw;">Notez nous!</h4>
+        <input type="hidden" name="resto_note" value="<?=site_url("ClientController/getNoteRestoClient");?>" id="client_note_resto" >
+        <form action="<?php echo site_url("ClientController/insertNoteRestoClient"); ?>" class="rating"  style="margin-right:24vw;" id="ratingForm">
+          <input type="hidden" name="id_resto" value="<?=$info_resto["id"] ?>">    
+          <input type="hidden" name="id_client" value="<?=$client["id"] ?>">
+          <input value="5" name="rate" id="star5" type="radio">
+          <label title="text" for="star5"></label>
+          <input value="4" name="rate" id="star4" type="radio">
+          <label title="text" for="star4"></label>
+          <input value="3" name="rate" id="star3" type="radio">
+          <label title="text" for="star3"></label>
+          <input value="2" name="rate" id="star2" type="radio">
+          <label title="text" for="star2"></label>
+          <input value="1" name="rate" id="star1" type="radio">
+          <label title="text" for="star1"></label>
+          </form>
         <div class="search-content">
             <form action="<?=site_url("ClientController/rechercherPlat") ?>" method="POST" id="recherche_plat">
               <input type="text" name="nom_plat" id="" placeholder="recherche plat">
@@ -134,9 +150,9 @@
 
 
           <h2 class="h2 section-title">
-            Plat disponibles chez <span class="span">Bogota By-Pass</span>
+            Plat disponibles chez <span class="span"><?=$info_resto["nom"] ?></span>
           </h2>
-
+         
           <p class="section-text">
             Vous trouvez ici la liste des plats disponibles.
           </p>
@@ -181,8 +197,10 @@
                 </div>
 
                 <div class="price-wrapper note-fav">
-                  <form action="" >
-                    <input type="number" max="5" min="0" placeholder="Noter">
+                  <form action="<?=site_url("ClientController/insertNotePlatClient")?>" class="noteForm" method="POST" >
+                    <input type="hidden" name="id_plat" value="<?=$plat["id_plat"] ?>" >
+                    <input type="hidden" name="id_client" value="<?=$client["id"] ?>">
+                    <input type="number" max="5" min="0" placeholder="Noter" name="note">
                     <button type="submit">Noter</button>
                   </form>
                 </div>
@@ -253,18 +271,7 @@
       <div class="container">
 
         <div class="footer-brand">
-        <form class="rating">
-          <input value="5" name="rate" id="star5" type="radio">
-          <label title="text" for="star5"></label>
-          <input value="4" name="rate" id="star4" type="radio">
-          <label title="text" for="star4"></label>
-          <input value="3" name="rate" id="star3" type="radio" checked="">
-          <label title="text" for="star3"></label>
-          <input value="2" name="rate" id="star2" type="radio">
-          <label title="text" for="star2"></label>
-          <input value="1" name="rate" id="star1" type="radio">
-          <label title="text" for="star1"></label>
-      </form>
+        
           <a href="" class="logo">BOGOTA by pass<span class="span">.</span></a>
 
           <p class="footer-text">
@@ -354,7 +361,7 @@
   <script src="<?php echo base_url()?>assets/js/script.js" defer></script>
   <script src="<?=base_url()?>assets/jquery/jquery.min.js"></script>
   <script src="<?=base_url()?>assets/jquery/jquery-3.7.1.js"></script>
-  <!--<script src="<?=base_url()?>assets/js/rechercheClient.js"></script>-->
+  <script src="<?=base_url()?>assets/js/NoteResto.js"></script>
   <script src="<?=base_url()?>assets/js/panier.js"></script>
   
 

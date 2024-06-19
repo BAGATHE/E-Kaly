@@ -145,17 +145,11 @@
           <!-- Liste resto -->
           <ul class="blog-list">
             <?php foreach ($restaurants as $restaurant): ?>
-              <?php 
-                  $random_status = rand(0, 1) ? 'Ouvert' : 'Ferme';
-              ?>
+             
               <li>
                   <div class="blog-card">
                       <div class="card-banner">
-                          <img src="<?php echo base_url('assets/images/').$restaurant['image']; ?>" width="600" height="390" loading="lazy"
-                              alt="<?php echo $restaurant['nom_resto']; ?>" class="w-100">
-                          <div class="<?php echo $random_status === 'Ouvert' ? 'open' : 'close'; ?>">
-                              <?php echo $random_status; ?>
-                          </div>
+                      <img src="<?php if($restaurant['image'] != null) { echo base_url('assets/images/').$restaurant['image']; } else { echo base_url('assets/images/Logo.png'); } ?>" width="600" height="390" loading="lazy" alt="<?php echo $restaurant['nom_resto']; ?>" class="w-100">
                       </div>
 
                       <div class="card-content">

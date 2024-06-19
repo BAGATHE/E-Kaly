@@ -153,6 +153,7 @@ BEGIN
     SELECT
         r.id AS id_resto,
         r.nom AS nom_resto,
+        fc.id_client,
         r.id_adresse,
         ir.repere,
         ir.description,

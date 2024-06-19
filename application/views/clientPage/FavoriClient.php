@@ -106,7 +106,6 @@
                 <div class="card-banner">
                   <img src="<?php echo base_url()?>assets/images/resto-1.jpg" width="600" height="390" loading="lazy"
                     alt="What Do You Think About Cheese Pizza Recipes?" class="w-100">
-                    <div class="open">Ouvert</div>
                 </div>
 
                 <div class="card-content">
@@ -114,7 +113,9 @@
                   <div class="card-meta-wrapper">
 
                     <a href="#" class="card-meta-link">
-                      <time class="meta-info" datetime="2022-01-01"><span><?=$restaurant["heure_ouverture"]  ?></span>a <span><?=$restaurant["heure_fermeture"]?></span></time>
+                        <time class="meta-info" datetime="<?php echo $restaurant['heure_ouverture']; ?>">
+                           De <?php echo $restaurant['heure_ouverture']; ?> à <?php echo $restaurant['heure_fermeture']; ?>
+                        </time>
                     </a>
 
                   </div>
@@ -127,32 +128,11 @@
                     <span class="loc">Localisation :</span> <?=$restaurant["repere"]?>
                   </p>
 
-                  <a href="#" class="btn-link">
-                    <span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                    </span>
-                  </a>
 
-                  <a href="#" class="btn-link">
-                    <span class="favori-active">
-                        <span class="material-icons-sharp">
-                            favorite
-                        </span>
-                    </span>
+                  <a href="<?= site_url('ClientController/toFavorite/'.$restaurant['id_resto']) ?>" class="btn-link">
+                              <span class="<?php echo $restaurant['id_client'] ? 'favori-active' : 'favoris-resto'; ?>">
+                                  <span class="material-icons-sharp">favorite</span>
+                              </span>
                   </a>
 
                 </div>
