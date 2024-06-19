@@ -12,8 +12,10 @@ class ClientController extends CI_Controller {
         $this->load->model('RestoModel');
         $this->load->model('CommandeModel');
         $this->load->model('CommandePlatModel');
+
         $this->load->model('AdresseModel');
         
+        $this->load->model('PlatModel');
         if(!$this->session->userdata("client_session")){
             redirect("EntryPoint/index2");
         }
@@ -171,7 +173,7 @@ class ClientController extends CI_Controller {
         $prix_livraison = $this->ClientModel->getFraisLivraison($adresse_resto,$adresse_target);
         echo json_encode($prix_livraison);
     }
-
+/*validation panier*/
     public function ValiderPanier(){
         $articles = $this->input->post('articles');
         $idresto = $this->input->post('id_resto');
@@ -205,6 +207,7 @@ class ClientController extends CI_Controller {
         echo json_encode("failed");
         }
 }
+
     
     public function toFavorite($id_resto) {
         $this->load->model('Favori_model');
@@ -238,5 +241,26 @@ class ClientController extends CI_Controller {
         $this->load->view('clientPage/AccueilClient',$data);
     }
 
+/** recherche plat dans un restorant specific */
+public function rechercherPlat(){
+    $current_client  = null;
+    if ($this->session->userdata('client_session')) {
+        $current_client = $this->session->userdata('client_session');
+        }
+    $id_resto = $this->input->post('id_resto');
+    $prix_min = $this->input->post('prix_min');
+    $prix_max = $this->input->post('prix_max');
+    $nom_plat = $this->input->post('nom_plat');
+    $data['plat_recherche'] =$this->PlatModel->searchPlatWithCriteria ($id_resto,$prix_min, $prix_max ,$nom_plat);
+    $data['list_plat_resto'] = $this->PlatModel->getAllInfo(1);
+    $data['info_resto'] = $this->RestoModel->getById(1);
+    $data['client'] = $current_client; 
+    $this->load->view('clientPage/PlatClient',$data);
+   /* $this->output
+    ->set_content_type('application/json')
+    ->set_output(json_encode($response));
+   */
+}   
+    
 }
 ?>

@@ -85,16 +85,20 @@
 
       <section class="section food-menu" id="food-menu">
         <div class="container">
-
-          <div class="search-content">
+       <!--SECTION RECHERCHE-->
+        <div class="search-content">
             <form action="">
-              <input type="text" name="" id="" placeholder="Recherche de plat">
+              <input type="text" name="" id="" placeholder="recherche plat">
+              <input type="number" name="prix_min">
+              <input type="time" name="prix_max">
               <button type="submit">
                 <span class="material-icons-sharp">
                   search
                 </span>
               </button>
             </form>
+          <!-- SECTION RESULTAT-->
+
           </div>
 
           <h2 class="h2 section-title">

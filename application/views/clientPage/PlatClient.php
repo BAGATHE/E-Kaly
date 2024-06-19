@@ -87,16 +87,51 @@
       -->
       <section class="section food-menu" id="food-menu">
         <div class="container">
-          <div class="search-content">
-            <form action="">
-              <input type="text" name="" id="" placeholder="Recherche de plat">
+        <div class="search-content">
+            <form action="<?=site_url("ClientController/rechercherPlat") ?>" method="POST" id="recherche_plat">
+              <input type="text" name="nom_plat" id="" placeholder="recherche plat">
+              <input type="number" name="prix_min" placeholder="prix min">
+              <input type="number" name="prix_max" placeholder="prix_max">
+              <input type="hidden" name="id_resto" value="<?=$info_resto["id"] ?>">   
               <button type="submit">
                 <span class="material-icons-sharp">
                   search
                 </span>
               </button>
             </form>
+          <!-- SECTION RESULTAT-->
+          <ul class="food-menu-list-2">
+            <?php if(isset($plat_recherche) && $plat_recherche != null){ ?>
+              <?php foreach($plat_recherche as $plat_resto){ ?>
+            <li>
+              <div class="food-menu-card">
+                <div class="card-banner">
+                    <button class="btn food-menu-btn">
+                      <span class="material-icons-sharp">
+                        shopping_cart
+                      </span>
+                      Ajouter au panier
+                    </button>
+                </div>
+
+                <div class="wrapper">
+                  <p class="category"></p>
+                </div>
+                <input type="hidden" name="plat_id" value="<?=$plat_resto["id_plat"] ?>" class="plat_id">
+                <h3 class="h3 card-title"><?=$plat_resto["description"] ?></h3>
+
+                <div class="price-wrapper" style="display: flex;">
+                <data class="price" value="<?=$plat_resto["prix"]?>"><?=$plat_resto["prix"]?> Ar</data>
+                </div>
+              </div>
+            </li>
+           <?php }  } ?>
+          
+          </ul>
+          
+
           </div>
+
 
           <h2 class="h2 section-title">
             Plat disponibles chez <span class="span">Bogota By-Pass</span>
@@ -319,7 +354,10 @@
   <script src="<?php echo base_url()?>assets/js/script.js" defer></script>
   <script src="<?=base_url()?>assets/jquery/jquery.min.js"></script>
   <script src="<?=base_url()?>assets/jquery/jquery-3.7.1.js"></script>
+  <!--<script src="<?=base_url()?>assets/js/rechercheClient.js"></script>-->
   <script src="<?=base_url()?>assets/js/panier.js"></script>
+  
+
   <!-- 
     - ionicon link
   -->
@@ -426,8 +464,7 @@
             }*/
         });
      });
-    </script>
-      
+    </script>    
 </body>
 
 </html>

@@ -794,6 +794,11 @@ body.active { overflow: hidden; }
   gap: 30px;
 }
 
+.food-menu-list-2 {
+  display: grid;
+  gap: 30px;
+}
+
 .food-menu-card {
   background-color: var(--white);
   padding: 40px;
@@ -1573,6 +1578,7 @@ textarea.input-field {
    */
 
   .food-menu-list { grid-template-columns: 1fr 1fr; }
+  .food-menu-list-2 { grid-template-columns: 1fr 1fr; }
 
   .food-menu-card :is(.wrapper, .price-wrapper) { justify-content: flex-start; }
 
@@ -1752,6 +1758,7 @@ textarea.input-field {
    */
 
   .food-menu-list { grid-template-columns: repeat(3, 1fr); }
+  .food-menu-list-2 { grid-template-columns: repeat(3, 1fr); }
 
   .food-menu-card { height: 100%; }
 
