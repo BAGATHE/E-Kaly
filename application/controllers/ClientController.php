@@ -134,7 +134,9 @@ class ClientController extends CI_Controller {
         if ($this->session->userdata('client_session')) {
             $current_client = $this->session->userdata('client_session');
             }
+        $data['favoris_restaurant']=$this->ClientModel->getRestoFavorisClient($current_client['id']);    
         $data['client'] = $current_client;
+        //var_dump($data['favoris_restaurant']);
         $this->load->view('clientPage/FavoriClient',$data);
     }
     /*redirection vers page apropos*/ 

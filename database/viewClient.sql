@@ -103,7 +103,7 @@ ORDER BY
 
 DELIMITER //
 
-CREATE PROCEDURE procedure_getRestoFavorisClient(IN idClient INT)
+CREATE or REPLACE PROCEDURE procedure_getRestoFavorisClient(IN idClient INT)
 BEGIN
     SELECT
         r.id AS id_resto,
@@ -111,7 +111,9 @@ BEGIN
         r.id_adresse,
         ir.repere,
         ir.description,
-        ir.telephone
+        ir.telephone,
+        ir.heure_ouverture,
+        ir.heure_fermeture
     FROM Resto r
     JOIN Favori_client fc ON r.id = fc.id_resto
     JOIN Info_resto ir ON r.id = ir.id_resto
