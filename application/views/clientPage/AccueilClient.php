@@ -113,7 +113,7 @@
 
           
         <div class="search-content">
-          <form action="<?php echo site_url('ClientController/search_resto_multi_critere'); ?>" method="POST">
+          <form action="<?php echo site_url('ClientController/search_resto_multi_critere'); ?>" method="GET">
               <input type="text" name="nom" placeholder="Nom de restaurant">
 
               <select name="adresse" id="adresse">
