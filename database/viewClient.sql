@@ -98,7 +98,52 @@ ORDER BY
     mise_en_avant_valide DESC, 
     note_moyenne DESC;
 
+CREATE OR REPLACE VIEW v_resto_info AS
+SELECT 
+    r.id AS id_resto,
+    r.nom AS nom_resto,
+    r.email, 
+    ir.nom AS nom_info, 
+    a.nom AS adresse,
+    ir.adresse AS id_adresse, 
+    ir.repere, 
+    ir.description, 
+    ir.telephone, 
+    ir.heure_ouverture, 
+    ir.heure_fermeture,
+    COALESCE(nm.note_moyenne, 0) AS note_moyenne,
+    ir.image
+FROM 
+    Resto r
+LEFT JOIN 
+    Info_resto ir ON r.id = ir.id_resto
+LEFT JOIN 
+    v_note_moyenne_par_resto nm on nm.id_resto=ir.id_resto
+LEFT JOIN 
+    Adresse a ON ir.adresse = a.id;
 
+CREATE OR REPLACE VIEW v_liste_resto_complet AS
+SELECT
+  vl.id_resto,
+  vl.nom_resto,
+  a.nom AS adresse,
+  ir.repere,
+  ir.description,
+  ir.telephone,
+  ir.heure_ouverture,
+  ir.heure_fermeture,
+  ir.image,
+  vl.note_moyenne,
+  vl.mise_en_avant_valide
+FROM
+  v_liste_resto_avec_note_et_mise_en_avant vl
+LEFT JOIN
+  Info_resto ir ON vl.id_resto = ir.id_resto
+LEFT JOIN
+  Adresse a ON ir.adresse = a.id
+ORDER BY
+  vl.mise_en_avant_valide DESC,
+  vl.note_moyenne DESC;
 
 
 DELIMITER //

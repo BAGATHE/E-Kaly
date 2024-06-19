@@ -12,17 +12,15 @@ class ClientController extends CI_Controller {
         $this->load->model('RestoModel');
         $this->load->model('CommandeModel');
         $this->load->model('CommandePlatModel');
+        $this->load->model('AdresseModel');
+        
         if(!$this->session->userdata("client_session")){
             redirect("EntryPoint/index2");
         }
     }
 
     public function index() {
-        if ($this->session->userdata('client_session')) {
-            $current_client = $this->session->userdata('client_session');
-            }
-        $data['client'] = $current_client;
-        $this->load->view('clientPage/AccueilClient',$data);
+        redirect('EntryPoint');
     }
 
     public function create() {
@@ -208,6 +206,37 @@ class ClientController extends CI_Controller {
         }
 }
     
-    
+    public function toFavorite($id_resto) {
+        $this->load->model('Favori_model');
+        // Vérifier si l'utilisateur est connecté (id_client en session)
+        $id_client = $this->session->userdata('client_session')['id'];
+
+        // Vérifier si le restaurant est déjà favori pour cet utilisateur
+        $is_favorite = $this->Favori_model->isFavorite($id_resto, $id_client);
+
+        if ($is_favorite) {
+            // Si déjà favori, supprimer le favori
+            $this->Favori_model->removeFavorite($id_resto, $id_client);
+        } else {
+            // Sinon, ajouter le restaurant aux favoris
+            $this->Favori_model->addFavorite($id_resto, $id_client);
+        }
+
+        redirect('ClientController'); // À adapter selon votre structure de routage
+    }
+    public function search_resto_multi_critere()
+    {
+        $heureOuverture = $this->input->post('heureOuverture');
+        $heureFermeture = $this->input->post('heureFermeture');
+        $adresse = $this->input->post('adresse');
+        $nom = $this->input->post('nom');
+        $current_client = $this->session->userdata('client_session');
+
+        $data['restaurants'] = $this->RestoModel->searchRestoWithCriteriaWithFavorite($heureOuverture, $heureFermeture, $adresse, $nom, $current_client['id']);
+        $data['client'] = $current_client;
+        $data['adresses']=$this->AdresseModel->getAll();
+        $this->load->view('clientPage/AccueilClient',$data);
+    }
+
 }
 ?>

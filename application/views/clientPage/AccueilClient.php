@@ -112,21 +112,26 @@
         <div class="container">
 
           
-          <div class="search-content">
-            <form action="">
-              <input type="text" name="" id="" placeholder="Nom de restaurant">
-              <select name="" id="">
-                <option value="">Quartier</option>
+        <div class="search-content">
+          <form action="<?php echo site_url('ClientController/search_resto_multi_critere'); ?>" method="POST">
+              <input type="text" name="nom" placeholder="Nom de restaurant">
+
+              <select name="adresse" id="adresse">
+                  <option value="">Quartier</option>
+                  <?php foreach ($adresses as $adresse) { ?>
+                      <option value="<?php echo $adresse['id']; ?>"><?php echo $adresse['nom']; ?></option>
+                  <?php } ?>
               </select>
-              <input type="time" name="" id="">
-              <input type="time" name="" id="">
+
+              <input type="time" name="heureOuverture">
+              <input type="time" name="heureFermeture">
+
               <button type="submit">
-                <span class="material-icons-sharp">
-                  search
-                </span>
+                  <span class="material-icons-sharp">search</span>
               </button>
-            </form>
-          </div>
+          </form>
+      </div>
+
 
 
           <h2 class="h2 section-title">
@@ -139,208 +144,53 @@
 
           <!-- Liste resto -->
           <ul class="blog-list">
-            <li>
-              <div class="blog-card">
-                <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/resto-1.jpg" width="600" height="390" loading="lazy"
-                    alt="What Do You Think About Cheese Pizza Recipes?" class="w-100">
-                    <div class="open">Ouvert</div>
-                </div>
+            <?php foreach ($restaurants as $restaurant): ?>
+              <?php 
+                  $random_status = rand(0, 1) ? 'Ouvert' : 'Ferme';
+              ?>
+              <li>
+                  <div class="blog-card">
+                      <div class="card-banner">
+                          <img src="<?php echo base_url('assets/images/').$restaurant['image']; ?>" width="600" height="390" loading="lazy"
+                              alt="<?php echo $restaurant['nom_resto']; ?>" class="w-100">
+                          <div class="<?php echo $random_status === 'Ouvert' ? 'open' : 'close'; ?>">
+                              <?php echo $random_status; ?>
+                          </div>
+                      </div>
 
-                <div class="card-content">
+                      <div class="card-content">
+                          <div class="card-meta-wrapper">
+                              <a href="#" class="card-meta-link">
+                                  <time class="meta-info" datetime="<?php echo $restaurant['heure_ouverture']; ?>">
+                                      De <?php echo $restaurant['heure_ouverture']; ?> à <?php echo $restaurant['heure_fermeture']; ?>
+                                  </time>
+                              </a>
+                          </div>
+                          
+                          <h3 class="h3">
+                              <a href="<?= site_url('ClientController/PlatClientPage/'.$restaurant['id_resto']) ?>" class="card-title"><?php echo $restaurant['nom_resto']; ?></a>
+                          </h3>
 
-                  <div class="card-meta-wrapper">
+                          <p class="card-text">
+                              <span class="loc">Localisation :</span> <?php echo $restaurant['adresse'] . ', ' . $restaurant['repere']; ?>
+                          </p>
 
-                    <a href="#" class="card-meta-link">
-                      <time class="meta-info" datetime="2022-01-01">De 8h00 a 17h00</time>
-                    </a>
+                          <a href="#" class="btn-link">
+                              <span><?php echo $restaurant['note_moyenne']; ?></span>  
+                              <span>
+                                  <span class="material-icons-sharp">star</span>
+                              </span>
+                          </a>
 
+                          <a href="<?= site_url('ClientController/toFavorite/'.$restaurant['id_resto']) ?>" class="btn-link">
+                              <span class="<?php echo $restaurant['id_client_favori'] ? 'favori-active' : 'favoris-resto'; ?>">
+                                  <span class="material-icons-sharp">favorite</span>
+                              </span>
+                          </a>
+                      </div>
                   </div>
-                  
-                  <h3 class="h3">
-                    <a href="<?=site_url('ClientController/PlatClientPage')?>" class="card-title">Bogota By-Pass</a>
-                  </h3>
-
-                  <p class="card-text">
-                    <span class="loc">Localisation :</span> By-Pass a cote de Gastronomie Pizza
-                  </p>
-
-                  <a href="#" class="btn-link">
-                  <span>3.5</span>  
-                  <span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                   
-                    </span>
-                  </a>
-
-                  <a href="#" class="btn-link">
-                    <span class="favori-active">
-                        <span class="material-icons-sharp">
-                            favorite
-                        </span>
-                    </span>
-                  </a>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="blog-card">
-
-                <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/resto-2.jpg" width="600" height="390" loading="lazy"
-                    alt="Making Chicken Strips With New Delicious Ingridents." class="w-100">
-                    <div class="open">Ouvert</div>
-
-                </div>
-
-                <div class="card-content">
-
-                  <div class="card-meta-wrapper">
-
-                    <a href="#" class="card-meta-link">
-                      <time class="meta-info" datetime="2022-01-01">De 10h00 a 19h00</time>
-                    </a>
-
-                  </div>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Raddison Blue</a>
-                  </h3>
-
-                  <p class="card-text">
-                    <span class="loc">Localisation :</span> Tana Water Front
-                  </p>
-
-                  <a href="#" class="btn-link">
-                  <span>3.5</span>  
-                  <span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                   
-                    </span>
-                  </a>
-
-                  <a href="#" class="btn-link">
-                    <span class="favoris-resto">
-                        <span class="material-icons-sharp">
-                            favorite
-                        </span>
-                    </span>
-                  </a>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="blog-card">
-
-                <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/resto-3.jpg" width="600" height="390" loading="lazy"
-                    alt="Innovative Hot Chessyraw Pasta Make Creator Fact." class="w-100">
-                    <div class="close">Ferme</div>
-
-                </div>
-
-                <div class="card-content">
-
-                  <div class="card-meta-wrapper">
-
-                    <a href="#" class="card-meta-link">
-                      <time class="meta-info" datetime="2022-01-01">De 7h00 a 22h00</time>
-                    </a>
-
-                  </div>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Restaurant Madama</a>
-                  </h3>
-
-                  <p class="card-text">
-                    <span class="loc">Localisation :</span> Andoharanofotsy a cote de l'IT University
-                  </p>
-
-                  <a href="#" class="btn-link">
-                  <span>3.5</span>  
-                  <span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                   
-                    </span>
-                  </a>
-
-                  <a href="#" class="btn-link">
-                    <span class="favoris-resto">
-                        <span class="material-icons-sharp">
-                            favorite
-                        </span>
-                    </span>
-                  </a>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="blog-card">
-
-                <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/resto-2.jpg" width="600" height="390" loading="lazy"
-                    alt="Making Chicken Strips With New Delicious Ingridents." class="w-100">
-                    <div class="open">Ouvert</div>
-
-                </div>
-
-                <div class="card-content">
-
-                  <div class="card-meta-wrapper">
-
-                    <a href="#" class="card-meta-link">
-                      <time class="meta-info" datetime="2022-01-01">De 10h00 a 19h00</time>
-                    </a>
-
-                  </div>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Raddison Blue</a>
-                  </h3>
-
-                  <p class="card-text">
-                    <span class="loc">Localisation :</span> Tana Water Front
-                  </p>
-
-                  <a href="#" class="btn-link">
-                  <span>3.5</span>  
-                  <span>
-                        <span class="material-icons-sharp">
-                            star
-                        </span>
-                   
-                    </span>
-                  </a>
-                  <a href="#" class="btn-link">
-                    <span class="favoris-resto">
-                        <span class="material-icons-sharp">
-                            favorite
-                        </span>
-                    </span>
-                  </a>
-
-                </div>
-
-              </div>
-            </li>
-          
-
+              </li>
+          <?php endforeach; ?>
           </ul>
 
         </div>

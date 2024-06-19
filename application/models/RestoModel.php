@@ -279,12 +279,59 @@ public function getRestaurantByIdWithNote($id){
       $query = $this->db->get();
       return $query->result_array();
    }
+   public function searchRestoWithCriteriaWithFavorite($heureOuverture, $heureFermeture, $adresse, $nom, $idClient)
+   {
+       $this->db->select('vr.id_resto, vr.nom_resto, vr.adresse, vr.repere, vr.description, vr.telephone, vr.heure_ouverture, vr.heure_fermeture,vr.note_moyenne, vr.image, fc.id_client AS id_client_favori');
+       $this->db->from('v_liste_resto_complet vr');
+   
+       if (!empty($heureOuverture)) {
+           $this->db->like('vr.heure_ouverture', $heureOuverture);
+       }
+       if (!empty($heureFermeture)) {
+           $this->db->like('vr.heure_fermeture', $heureFermeture);
+       }
+       if (!empty($adresse)) {
+           $this->db->where('vr.id_adresse', $adresse);
+       }
+       if (!empty($nom)) {
+           $this->db->like('vr.nom_resto', $nom);
+       }
+   
+       // Jointure avec Favori_client
+       if (!empty($idClient)) {
+           $this->db->join('Favori_client fc', 'vr.id_resto = fc.id_resto AND fc.id_client = ' . $idClient, 'left');
+       }
+   
+       $query = $this->db->get();
+       return $query->result_array();
+   }
+   
 
    public function getListeRestoAvecNoteEtParMiseEnAvant(){
       $query = $this->db->get('v_liste_resto_avec_note_et_mise_en_avant');
       return $query->result_array();
    }
-   
+   public function getListeRestoComplet($idClient)
+   {
+      $this->db->select('vlc.id_resto, vlc.nom_resto, vlc.adresse, vlc.repere, vlc.description, vlc.telephone, vlc.heure_ouverture, vlc.heure_fermeture, vlc.image, vlc.note_moyenne, vlc.mise_en_avant_valide, fc.id_client AS id_client_favori');
+      $this->db->from('v_liste_resto_complet vlc');
+      
+      if ($idClient !== null) {
+         $this->db->join('Favori_client fc', 'vlc.id_resto = fc.id_resto AND fc.id_client = ' . $this->db->escape($idClient), 'left');
+      } else {
+         $this->db->join('Favori_client fc', 'vlc.id_resto = fc.id_resto AND fc.id_client IS NULL', 'left');
+      }
+
+      $this->db->order_by('vlc.mise_en_avant_valide', 'DESC');
+      $this->db->order_by('vlc.note_moyenne', 'DESC');
+
+      $query = $this->db->get();
+      return $query->result_array();
+   }
+
+  
+  
+  
 
 }
 
