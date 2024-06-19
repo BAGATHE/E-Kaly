@@ -226,10 +226,10 @@ class ClientController extends CI_Controller {
     }
     public function search_resto_multi_critere()
     {
-        $heureOuverture = $this->input->post('heureOuverture');
-        $heureFermeture = $this->input->post('heureFermeture');
-        $adresse = $this->input->post('adresse');
-        $nom = $this->input->post('nom');
+        $heureOuverture = $this->input->get('heureOuverture');
+        $heureFermeture = $this->input->get('heureFermeture');
+        $adresse = $this->input->get('adresse');
+        $nom = $this->input->get('nom');
         $current_client = $this->session->userdata('client_session');
 
         $data['restaurants'] = $this->RestoModel->searchRestoWithCriteriaWithFavorite($heureOuverture, $heureFermeture, $adresse, $nom, $current_client['id']);
