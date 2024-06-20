@@ -123,14 +123,6 @@ CREATE TABLE Admis (
     mot_de_pass VARCHAR(255)
 );
 
-
-
-
-
-
-
-
-
 CREATE TABLE Livraison_payement_commande (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_commande INT,
