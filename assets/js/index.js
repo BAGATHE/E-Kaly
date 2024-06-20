@@ -34,26 +34,4 @@ darkMode.addEventListener('click', () => {
 // });
 
 
-function showForm(formId) {
-    // Hide all forms
-    document.querySelectorAll('.ajout form').forEach(form => {
-        form.style.display = 'none';
-    });
-
-    // Show the selected form
-    document.getElementById(formId).style.display = 'block';
-}
-
-// Add event listeners to buttons
-document.querySelector('#livreurBtn').addEventListener('click', function() {
-    showForm('livreurForm');
-});
-
-document.querySelector('#restaurantBtn').addEventListener('click', function() {
-    showForm('restaurantForm');
-});
-
-document.querySelector('#adminBtn').addEventListener('click', function() {
-    showForm('adminForm');
-});
 

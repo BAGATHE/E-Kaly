@@ -125,17 +125,39 @@ class AdmisController extends CI_Controller {
         }
 
       /***redirection vers une page ajout cote administrateur */
-      public function insertionPage(){
+      public function insertionPageAdmin(){
         $current_administrator  = null;
         if ($this->session->userdata('admin_session')) {
             $current_administrator = $this->session->userdata('admin_session');
         }
         $data["adresses"] = $this->AdresseModel->getAll();
         $data['current_administrator'] = $current_administrator; 
-        $data['contents'] = "adminPage/Ajout";
+        $data['contents'] = "adminPage/AjoutAdmin";
+        $this->load->view('templates/template', $data);
+    }
+    /*redirection vers page ajout resto*/
+    public function insertionPageResto(){
+        $current_administrator  = null;
+        if ($this->session->userdata('admin_session')) {
+            $current_administrator = $this->session->userdata('admin_session');
+        }
+        $data["adresses"] = $this->AdresseModel->getAll();
+        $data['current_administrator'] = $current_administrator; 
+        $data['contents'] = "adminPage/AjoutResto";
         $this->load->view('templates/template', $data);
     }
 
+     /*redirection vers page ajout Livreur*/
+     public function insertionPageLivreur(){
+        $current_administrator  = null;
+        if ($this->session->userdata('admin_session')) {
+            $current_administrator = $this->session->userdata('admin_session');
+        }
+        $data["adresses"] = $this->AdresseModel->getAll();
+        $data['current_administrator'] = $current_administrator; 
+        $data['contents'] = "adminPage/AjoutLivreur";
+        $this->load->view('templates/template', $data);
+    }
     /*modifier les renesignement de l'admin**/
     public function edit() {
         $id = $this->input->post('id');
@@ -265,16 +287,7 @@ public function miseEnAvant(){
         $this->load->view('templates/template', $data);
     }
 
-    public function insertionRestoLivreurPage(){
-        $current_administrator  = null;
-        if ($this->session->userdata('admin_session')) {
-            $current_administrator = $this->session->userdata('admin_session');
-        }
-        $data["adresses"] = $this->AdresseModel->getAll();
-        $data['current_administrator'] = $current_administrator; 
-        $data['contents'] = "adminPage/Ajout";
-        $this->load->view('templates/template', $data);
-    }
+  
 
 
      /*statitique general commission gagner par la plateforme commission restaurant + livreur*/
@@ -284,8 +297,9 @@ public function miseEnAvant(){
         $data = null;
         
         if($mois != 0 && $anner != 0){
+            $data=$this->AdmisModel->revenuParMoisPlateForm($mois,$anner);
         } else {
-        
+            $data=$this->AdmisModel->revenuParAnPlateForm($anner);
         }
         if($data==null){
             $data[] = array("day"=>'0',"month"=>'0',"year"=>'0',"revenue"=>'0');
@@ -293,6 +307,5 @@ public function miseEnAvant(){
         
         echo json_encode($data);
     }
-
 }
 ?>

@@ -76,7 +76,7 @@ class CommandeModel extends CI_Model {
    public function setDateCommande($date_commande){
       $this->date_commande = $date_commande ;
    }
-
+/*
    public function save() {
       $data = [
          'id_client' => $this->id_client,
@@ -86,7 +86,10 @@ class CommandeModel extends CI_Model {
 
       $this->db->insert('Commande', $data);
    }
-
+*/
+public function save($data) {
+   $this->db->insert('Commande', $data);
+}
    public function getAll() {
       $query = $this->db->get('Commande');
       return $query->result_array();
@@ -148,53 +151,14 @@ class CommandeModel extends CI_Model {
             return null;
         }
     }
-    public function getTarifLivraison($idCommande) {
-        // Charger Dijkstra et RestoModel
-        $this->load->model('Dijkstra', 'ModeleDijkstra'); // Assurez-vous que votre modèle Dijkstra est correctement chargé
-        $this->load->model('RestoModel', 'ModeleResto');
-    
-        // Récupérer l'adresse de la commande
-        $commande = $this->getById($idCommande);
-        $idAdresse = $commande['adresse'];
-      
-        // Récupérer l'adresse du restaurant
-        $idAdresseRestaurant = -1;
-    
-         $resto=$this->getRestoByCommandeId($commande["id"]);
-         if($resto!=null){
-            $restoInfo=$this->ModeleResto->getInfoRestoById($resto['id']);
-            $idAdresseRestaurant = -1;
-      
-            if($restoInfo!=null){
-               $idAdresseRestaurant = $restoInfo['adresse'];
-            }
-         }
-         
-         
-        // Utiliser Dijkstra pour trouver la distance entre le restaurant et l'adresse de livraison
-        $resultatDijkstra = $this->ModeleDijkstra->trouverCheminPlusCourt($idAdresseRestaurant, $idAdresse);
-        $distance = $resultatDijkstra['distance'];
-    
-        // Récupérer le tarif de livraison en fonction de la distance
-        $tarifLivraison = $this->calculerTarifSelonDistance($distance);
-        return $tarifLivraison;
-    }
-    
-    private function calculerTarifSelonDistance($distance) {
-        // Récupérer les tarifs de livraison à partir de la table TarifLivraison
-        $tarifs = $this->db->get('Tarif_livraison')->result_array();
-    
-        // Trouver le tarif correspondant à la distance
-        foreach ($tarifs as $tarif) {
-            if ($distance >= $tarif['distance_min'] && $distance < $tarif['distance_max']) {
-                return $tarif['tarif'];
-            }
-        }
-    
-        // Si la distance dépasse le maximum défini, retourner le tarif maximum
-        $dernierTarif = end($tarifs);
-        return $dernierTarif['tarif'];
-    }
+   /*fonction qui recupere dernier insertion*/ 
+public function getLastCommandeId() {
+   $this->db->select('id');
+   $this->db->order_by('id', 'DESC');
+   $query = $this->db->get('Commande', 1);
+   $result = $query->row_array();
+   return $result ? $result['id'] : null;
+}
     
     
 }

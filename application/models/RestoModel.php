@@ -111,7 +111,7 @@ class  RestoModel extends CI_Model {
 
 /* recuperation  info resto par l'ID*/
 public function getById($id) {
-      $this->db->select('resto.id, resto.email, info_resto.nom, info_resto.adresse,info_resto.description,info_resto.heure_ouverture,info_resto.heure_fermeture');
+      $this->db->select('resto.id, resto.email, info_resto.nom, info_resto.adresse,info_resto.repere,info_resto.description,info_resto.heure_ouverture,info_resto.heure_fermeture');
       $this->db->from('Resto resto');
       $this->db->join('Info_resto info_resto', 'resto.id = info_resto.id_resto');
       $this->db->where('resto.id',$id);
@@ -253,11 +253,87 @@ public function detailsCommmande($idCommande)
        return $query->result_array();
    }
 
+   /* Info resto avec note */
+public function getRestaurantByIdWithNote($id){
+   $this->db->where('id', $id);
+   $query = $this->db->get('v_infoRestoNote');
+   return $query->result_array();
+}
 
+//recherche multicriteres Resto (avec details)
+   public function searchRestoWithCriteria ($heureOuverture, $heureFermeture, $adresse, $nom)
+   {
+      $this->db->from('Info_resto');
+      if (!empty($heureOuverture) || $heureOuverture!=null) {
+         $this->db->like('Info_resto.heure_ouverture', $heureOuverture);
+      }
+      if (!empty($heureFermeture) || $heureFermeture!=null) {
+         $this->db->like('Info_resto.heure_fermeture', $heureFermeture); 
+      }
+      if (!empty($adresse) || $adresse!=null) {
+         $this->db->like('Info_resto.adresse', $adresse);
+      }
+      if (!empty($nom) || $nom!=null) {
+         $this->db->like('Info_resto.nom', $nom);
+      }
+      $query = $this->db->get();
+      return $query->result_array();
+   }
+   public function searchRestoWithCriteriaWithFavorite($heureOuverture, $heureFermeture, $adresse, $nom, $idClient)
+   {
+       $this->db->select('vr.id_resto, vr.nom_resto, vr.adresse, vr.repere, vr.description, vr.telephone, vr.heure_ouverture, vr.heure_fermeture,vr.note_moyenne, vr.image, fc.id_client AS id_client_favori');
+       $this->db->from('v_liste_resto_complet vr');
+   
+       if (!empty($heureOuverture)) {
+           $this->db->like('vr.heure_ouverture', $heureOuverture);
+       }
+       if (!empty($heureFermeture)) {
+           $this->db->like('vr.heure_fermeture', $heureFermeture);
+       }
+       if (!empty($adresse)) {
+           $this->db->where('vr.id_adresse', $adresse);
+       }
+       if (!empty($nom)) {
+           $this->db->like('vr.nom_resto', $nom);
+       }
+   
+       // Jointure avec Favori_client
+       if (!empty($idClient)) {
+           $this->db->join('Favori_client fc', 'vr.id_resto = fc.id_resto AND fc.id_client = ' . $idClient, 'left');
+       }
+   
+       $query = $this->db->get();
+       return $query->result_array();
+   }
+   
 
+   public function getListeRestoAvecNoteEtParMiseEnAvant(){
+      $query = $this->db->get('v_liste_resto_avec_note_et_mise_en_avant');
+      return $query->result_array();
+   }
+   public function getListeRestoComplet($idClient)
+   {
+      $this->db->select('vlc.id_resto, vlc.nom_resto, vlc.adresse, vlc.repere, vlc.description, vlc.telephone, vlc.heure_ouverture, vlc.heure_fermeture, vlc.image, vlc.note_moyenne, vlc.mise_en_avant_valide, fc.id_client AS id_client_favori');
+      $this->db->from('v_liste_resto_complet vlc');
+      
+      if ($idClient !== null) {
+         $this->db->join('Favori_client fc', 'vlc.id_resto = fc.id_resto AND fc.id_client = ' . $this->db->escape($idClient), 'left');
+      } else {
+         $this->db->join('Favori_client fc', 'vlc.id_resto = fc.id_resto AND fc.id_client IS NULL', 'left');
+      }
 
+      $this->db->order_by('vlc.mise_en_avant_valide', 'DESC');
+      $this->db->order_by('vlc.note_moyenne', 'DESC');
 
+      $query = $this->db->get();
+      return $query->result_array();
+   }
+
+  
+  
+  
 
 }
+
 
 ?>

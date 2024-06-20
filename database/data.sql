@@ -40,7 +40,8 @@ INSERT INTO `Adresse` (`nom`) VALUES
 ('67ha'),
 ('Andoharanofotsy'),
 ('Ankadimbahoaka'),
-('Soanierana');
+('Soanierana'),
+('iavoloha');
 
 --inserer voisin de l'adresse
 INSERT INTO `Voisin` (`id_adresse1`,`id_adresse2`) VALUES
@@ -117,14 +118,6 @@ INSERT INTO Admis (nom, prenom, email, mot_de_pass) VALUES
 
 
 
-INSERT INTO Status(id_livreur,status) VALUES (1,'dispo');
-INSERT INTO Status(id_livreur,status) VALUES (2,'dispo');
-INSERT INTO Status(id_livreur,status) VALUES (3,'dispo');
-INSERT INTO Status(id_livreur,status) VALUES (4,'non-dispo');
-INSERT INTO Status(id_livreur,status) VALUES (5,'dispo');
-INSERT INTO Status(id_livreur,status) VALUES (6,'dispo');
-INSERT INTO Status(id_livreur,status) VALUES (7,'dispo');
-
 
 -- Insertion dans la table Livreur
 INSERT INTO Livreur (id,email, mot_de_pass) VALUES (1,'livreur1@gmail.com', 'livreur1');
@@ -148,6 +141,16 @@ INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (7,'livreur7'
 
 
 
+INSERT INTO Status(id_livreur,status) VALUES (1,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (2,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (3,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (4,'non-dispo');
+INSERT INTO Status(id_livreur,status) VALUES (5,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (6,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (7,'dispo');
+
+
+
 
 -- Insérer des données dans la table Livraison_payement_commande
 INSERT INTO Livraison_payement_commande ( id_commande, id_livreur,paye) VALUES
@@ -167,11 +170,14 @@ INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (2, 1, 5),
 (3, 2, 3);
 
-INSERT INTO Prix_mise_en_avant(prix) VALUES(200000);
+INSERT INTO Note_resto (id_client, id_resto, note) VALUES
+(1, 1, 9),
+(2, 1, 1),
+(3, 2, 7);
 
+INSERT INTO Prix_mise_en_avant(prix) VALUES(200000);
 
 
 INSERT INTO Tarif_livraison (tarif_min,tarif_moyen,tarif_max)
 VALUES (1500,3000,5000);
-
 --teste

@@ -243,3 +243,4 @@ select
     prix as prix_par_mois, 
     id_prix
 from Mise_en_avant;
+

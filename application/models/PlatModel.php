@@ -129,6 +129,34 @@ class PlatModel extends CI_Model {
       $query = $this->db->get('Plat');
       return $query->result_array();
    }
+
+   /* Info plat avec note */
+   public function getListplatRestaurantByIdRestaurantwithNote($id){
+      $this->db->where('id_resto', $id);
+      $query = $this->db->get('v_infoPlatNote');
+      return $query->result_array();
+   }
+
+   //recheche multi-critere 2.0
+   public function searchPlatWithCriteria ($idresto ,$prixMin, $prixMax, $nom)
+   {
+      $this->db->from('v_info_global_plat_resto');
+      if (!empty($nom) || $nom!=null) {
+         $this->db->like('v_info_global_plat_resto.description', $nom);
+      }
+      if (!empty($prixMin) || $prixMin!=null) {
+         $this->db->where('v_info_global_plat_resto.prix >=', $prixMin); 
+      }
+      if (!empty($prixMax) || $prixMax!=null) {
+         $this->db->where('v_info_global_plat_resto.prix <=', $prixMax); 
+      }
+      if (!empty($idresto) || $idresto!=null) {
+         $this->db->where('v_info_global_plat_resto.id_resto =',$idresto); 
+      }
+
+      $query = $this->db->get();
+      return $query->result_array();
+   }
 }
 
 ?>

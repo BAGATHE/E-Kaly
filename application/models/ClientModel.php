@@ -91,7 +91,7 @@ class  ClientModel extends CI_Model {
    public function setMotDePass($mot_de_pass){
       $this->mot_de_pass = $mot_de_pass ;
    }
-
+/*
    public function checkLogin($email,$mot_de_pass) {
       $this->db->where('email', $email);
       $this->db->where('mot_de_pass', $mot_de_pass);
@@ -104,7 +104,7 @@ class  ClientModel extends CI_Model {
           return null;
       }
   }
-
+*/
    public function save() {
       $data = [
          'nom' => $this->nom,
@@ -158,6 +158,59 @@ class  ClientModel extends CI_Model {
       $query = $this->db->get('Client');
       return $query->result_array();
    }
+
+   /*fontion authentification pour se connecter*/
+   public function checkLogin($email,$mot_de_pass) {
+   $this->db->where('email', $email);
+   $this->db->where('mot_de_pass', $mot_de_pass);
+   $query = $this->db->get('Client');
+
+   if ($query->num_rows() === 1) {
+      $row = $query->row_array();
+      return $this->ClientModel->getById($row["id"]);
+   } else {
+       return null;
+   } 
+}
+
+   public function getFraisLivraison($idRecuperation, $idLivraison) {
+      $query = "SELECT func_getfraisLivraison(?, ?) AS frais";
+      $result = $this->db->query($query, array($idRecuperation, $idLivraison));
+      
+      if ($result->num_rows() > 0) {
+         return $result->row()->frais;
+      } else {
+         return null; 
+      }
+   }
+
+   //insertion note_plat 
+   public function insert_note_plat ($idClient, $idPlat, $note) {
+      $data = array(
+          'id_client' => $idClient,
+          'id_plat' => $idPlat,
+          'note' => $note
+      );
+
+      return $this->db->insert('Note_plat', $data);
+  }
+
+  //insertion note_resto   
+  public function insert_note_resto ($idClient, $idResto, $note) {
+      $data = array(
+         'id_client' => $idClient,
+         'id_resto' => $idResto,
+         'note' => $note
+      );
+
+      return $this->db->insert('Note_resto', $data);
+   }
+
+   public function getRestoFavorisClient($idClient) {
+      $query = $this->db->query("CALL procedure_getRestoFavorisClient(?)", array($idClient));
+      return $query->result_array(); 
+  }
+  
 }
 
 ?>
