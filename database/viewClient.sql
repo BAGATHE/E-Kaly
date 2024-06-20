@@ -126,6 +126,7 @@ CREATE OR REPLACE VIEW v_liste_resto_complet AS
 SELECT
   vl.id_resto,
   vl.nom_resto,
+  a.id AS id_adresse,
   a.nom AS adresse,
   ir.repere,
   ir.description,

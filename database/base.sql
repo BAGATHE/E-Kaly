@@ -50,8 +50,8 @@ CREATE TABLE Info_resto (
     telephone VARCHAR(255),
     heure_ouverture TIME,
     heure_fermeture TIME,
-    latitude DECIMAL(2, 10) DEFAULT NULL,
-    longitude DECIMAL(2, 10) DEFAULT NULL,
+    latitude REAL,
+    longitude REAL,
     image VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (id_resto) REFERENCES Resto(id),
     FOREIGN KEY (adresse) REFERENCES Adresse(id)
@@ -81,8 +81,8 @@ CREATE TABLE Commande (
     adresse INT,
     repere VARCHAR(250),
     date DATETIME,
-    latitude DECIMAL(2, 10) DEFAULT NULL,
-    longitude DECIMAL(2, 10) DEFAULT NULL,
+    latitude REAL,
+    longitude REAL,
     FOREIGN KEY (id_client) REFERENCES Client(id),
     FOREIGN KEY (adresse) REFERENCES Adresse(id)
 );
@@ -122,14 +122,6 @@ CREATE TABLE Admis (
     email VARCHAR(255),
     mot_de_pass VARCHAR(255)
 );
-
-
-
-
-
-
-
-
 
 CREATE TABLE Livraison_payement_commande (
     id INT PRIMARY KEY AUTO_INCREMENT,
