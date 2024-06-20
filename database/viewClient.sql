@@ -166,3 +166,24 @@ BEGIN
     WHERE fc.id_client = idClient;
 END //
 DELIMITER ;
+
+
+create or replace view v_quantite_plat_restant AS
+select 
+	vrpcpc.id_plat,
+    production,
+    sum(quantite)as nombre_vendu,
+    production - sum(quantite) as quantite_restant,
+    day(vrpcpc.date) as day,
+    month(vrpcpc.date) as month,
+    year(vrpcpc.date) as year
+from 
+	v_resto_plat_Commande_plat_Commande as vrpcpc
+join 
+	Change_quantite_plat as cqp
+on 
+	vrpcpc.id_plat = cqp.id_plat 
+and
+	cqp.date = (select max(date) from Change_quantite_plat where date <= vrpcpc.date)
+group by
+	id_plat,day(date),month(date),year(date);
