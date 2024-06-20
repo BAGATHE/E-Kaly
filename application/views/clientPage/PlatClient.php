@@ -236,7 +236,7 @@
             <button type="button" class="bouton-continuer" id="bouton-confirmation">Continuer</button>
             </div>
         
-        <section id="info_complementaire" style="display:none;">
+        <section id="info_complementaire">
         <div class="input-adresse">
         <select name="adresse" id="optionsAdresse" >
             <option value="0" selected>choisir quartier</option>
@@ -247,13 +247,13 @@
         <input type="text" placeholder="repere" id="repere" name="repere">
         </div>
         <div id="map" ></div>
-        <div>
+        <div id="prix_total_payement"  style="display:none;">
           <h3 style="text-align:center;">Prix de livraison</h3>
           <p style="text-align:center;" id="livraison_prix"></p>
-        </div>
+      
         <h3 style="text-align:center;" >Total a payer : <span id="total_payement"></span></h3>
         <button type="submit" class="bouton-continuer" id="">Valider</button>
-        <input type="" id="latitude"  value="">
+        </div>
         </section>
       </form>
     </aside>
@@ -441,7 +441,7 @@
         });
 
        document.querySelector('#bouton-confirmation').addEventListener('click', function(event) {
-              var infoElement = document.getElementById('info_complementaire');
+              var infoElement = document.getElementById('prix_total_payement');
               console.log(infoElement);
               if (infoElement.style.display === "none" || infoElement.style.display === "") {
                 infoElement.style.display = "block";} else { infoElement.style.display = "none";}

@@ -285,10 +285,10 @@ public function getRestaurantByIdWithNote($id){
        $this->db->from('v_liste_resto_complet vr');
    
        if (!empty($heureOuverture)) {
-           $this->db->like('vr.heure_ouverture', $heureOuverture);
+           $this->db->where('vr.heure_ouverture >=', $heureOuverture);
        }
        if (!empty($heureFermeture)) {
-           $this->db->like('vr.heure_fermeture', $heureFermeture);
+           $this->db->where('vr.heure_fermeture <=', $heureFermeture);
        }
        if (!empty($adresse)) {
            $this->db->where('vr.id_adresse', $adresse);
