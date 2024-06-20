@@ -176,7 +176,7 @@ class ClientController extends CI_Controller {
         $repere = $this->input->post('repere');
         $client = $this->input->post('id_client');
         $currentDateTime = date('Y-m-d H:i:s');
-      
+       
         $dataCommande = [
             'id_client' => $client,
             'adresse' => $adresse,

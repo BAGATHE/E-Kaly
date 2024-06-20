@@ -50,6 +50,8 @@ CREATE TABLE Info_resto (
     telephone VARCHAR(255),
     heure_ouverture TIME,
     heure_fermeture TIME,
+    latitude DECIMAL(2, 10) DEFAULT NULL,
+    longitude DECIMAL(2, 10) DEFAULT NULL,
     image VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (id_resto) REFERENCES Resto(id),
     FOREIGN KEY (adresse) REFERENCES Adresse(id)
@@ -61,6 +63,7 @@ CREATE TABLE Plat (
     id_resto INT,
     description VARCHAR(255),
     prix DECIMAL(10, 2),
+    image VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (id_resto) REFERENCES Resto(id)
 );
 
@@ -78,6 +81,8 @@ CREATE TABLE Commande (
     adresse INT,
     repere VARCHAR(250),
     date DATETIME,
+    latitude DECIMAL(2, 10) DEFAULT NULL,
+    longitude DECIMAL(2, 10) DEFAULT NULL,
     FOREIGN KEY (id_client) REFERENCES Client(id),
     FOREIGN KEY (adresse) REFERENCES Adresse(id)
 );

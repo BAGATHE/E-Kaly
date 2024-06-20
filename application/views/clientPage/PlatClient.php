@@ -253,6 +253,7 @@
         </div>
         <h3 style="text-align:center;" >Total a payer : <span id="total_payement"></span></h3>
         <button type="submit" class="bouton-continuer" id="">Valider</button>
+        <input type="" id="latitude"  value="">
         </section>
       </form>
     </aside>
@@ -414,6 +415,7 @@
                 currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
                 var url = $("#url").text();
                 var adresseResto = $("#adresse_resto").text();
+
 
                 $.ajax({
                   url: url+"index.php/ClientController/getPrixLivraison", // Remplacez par l'URL correcte de votre contrôleur CodeIgniter
