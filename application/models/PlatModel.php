@@ -157,6 +157,15 @@ class PlatModel extends CI_Model {
       $query = $this->db->get();
       return $query->result_array();
    }
+   
+   public function getQuantitePlatRestant($id,$jour,$mois,$annee) {
+      $this->db->where('id_plat', $id);
+      $this->db->where('day', $jour);
+      $this->db->where('month', $mois);
+      $this->db->where('year', $annee);
+      $query = $this->db->get('v_quantite_plat_restant');
+      return $query->row_array();
+   }
 }
 
 ?>
