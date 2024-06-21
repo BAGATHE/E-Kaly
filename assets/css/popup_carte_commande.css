@@ -1,60 +1,56 @@
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 600px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.popup-header {
-    padding: 10px;
-    background-color: #4caf50; /* Couleur principale verte */
-    color: #fff;
-    text-align: center;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.popup-content {
-    padding: 20px;
-}
-
-.popup-footer {
-    text-align: right;
-    padding: 10px;
-}
-
-.close-btn {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.close-btn:hover {
-    background-color: #45a049;
-}
-
-#map {
-    width: 100%;
-    height: 400px;
-}
-
 #overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* Change to block to display */
+    z-index: 10;
+}
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 20;
+    display: none; /* Change to block to display */
+}
+.popup-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 1.2em;
+}
+.popup-content {
+    padding: 20px;
+}
+#map {
+    height: 300px;
+    width: 100%;
+    background: #f0f0f0;
+}
+.popup-footer {
+    padding: 10px;
+    text-align: right;
+    border-top: 1px solid #ddd;
+}
+.close-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+.close-btn:hover {
+    background-color: #45a049;
 }
