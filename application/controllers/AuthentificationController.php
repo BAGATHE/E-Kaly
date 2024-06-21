@@ -12,6 +12,37 @@ class AuthentificationController extends CI_Controller {
         $this->load->library('session');
     }
 
+    public function create() {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('nom', 'Nom', 'required');
+        $this->form_validation->set_rules('prenom', 'Prenom', 'required');
+        $this->form_validation->set_rules('telephone', 'Telephone', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('mot_de_pass', 'Mot de passe', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+          echo json_encode("failed");
+        } else {
+            $data = [
+                'nom' => $this->input->post('nom'),
+                'prenom' => $this->input->post('prenom'),
+                'email' => $this->input->post('email'),
+                'telephone' => $this->input->post('telephone'),
+                'mot_de_pass' => $this->input->post('mot_de_pass')
+            ];
+            if($this->ClientModel->save($data)){
+                echo json_encode("success");
+            }else{
+                echo json_encode("failed");
+            };
+        
+        }
+    }
+
+
+
 
 public function checkUserLogin(){
         $this->load->helper('form');

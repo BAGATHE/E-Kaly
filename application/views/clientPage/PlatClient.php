@@ -252,6 +252,8 @@
           <p style="text-align:center;" id="livraison_prix"></p>
       
         <h3 style="text-align:center;" >Total a payer : <span id="total_payement"></span></h3>
+        <input type="hidden" name="latitude" id="latitude" val="">
+        <input type="hidden" name="longitude" val="" id="longitude">
         <button type="submit" class="bouton-continuer" id="">Valider</button>
         </div>
         </section>
@@ -415,6 +417,8 @@
                 currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
                 var url = $("#url").text();
                 var adresseResto = $("#adresse_resto").text();
+                $("#latitude").val(e.latlng.lat);
+                $("#longitude").val(e.latlng.lng);
 
 
                 $.ajax({
@@ -462,7 +466,7 @@
               var result = JSON.parse(response);
               if(result === "success") {
                 alert("Votre commande sera livrée le plus tôt possible, à tout à l'heure.");
-                window.location.href = "<?php echo site_url('ClientController/PlatClientPage'); ?>";
+                window.location.href = "<?php echo site_url('ClientController'); ?>";
               } else {
                 alert("Erreur lors de la validation du formulaire.");
               }

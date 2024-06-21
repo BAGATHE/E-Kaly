@@ -35,7 +35,9 @@
                             <td><?= $administrator['nom'] ?></td>
                             <td><?= $administrator['prenom'] ?></td>
                             <td><?= $administrator['email'] ?></td>
-                            <td><a href="<?= site_url('AdmisController/delete/'.$administrator['id']) ?>"style="color: red;">Supprimer</a></td>
+                            <td>
+                                <a href="<?= site_url('AdmisController/delete/'.$administrator['id']) ?>" class="delete-link" style="color: red;">Supprimer</a>
+                            </td>
                             <td><a href="<?= site_url('AdmisController/loadForm/'.$administrator['id']) ?>">Modifier</a></td>
                         </tr>
                        <?php  }?>
@@ -45,29 +47,33 @@
             <!-- End of New Users Section -->
 
             <!-- End of Recent Orders -->
-            <div class="recent-orders client_div" >
-                <h2>Listes des clients</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Prenom</th>
-                            <th>Email</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach($clients as $client){ ?>
-                    <tr>
-                        <td><?= $client["nom"]?></td>
-                        <td><?= $client["prenom"]?></td>
-                        <td><?= $client["email"]?></td>
-                        <td><a href="" style="color: red;">Supprimer</a></td>
-                    </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-            </div>
+            <div class="recent-orders client_div">
+    <h2>Listes des clients</h2>
+    <table id="client-table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($clients as $client){ ?>
+        <tr>
+            <td><?= $client["nom"]?></td>
+            <td><?= $client["prenom"]?></td>
+            <td><?= $client["email"]?></td>
+            <td>
+                <a href="<?= site_url('AdmisController/deleteClient/'.$client["id"]) ?>" class="delete-link" style="color: red;">Supprimer</a>
+            </td>
+        </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+    <div id="pagination-container"></div>
+</div>
+
             <!-- End of Recent Orders -->
 
         </main>
@@ -103,5 +109,46 @@
             </div>
             <!-- End of Nav -->
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var rowsPerPage = 2;
+        var rows = $('#client-table tbody tr');
+        var rowsCount = rows.length;
+        var pageCount = Math.ceil(rowsCount / rowsPerPage);
+        var numbers = $('#pagination-container');
+
+        // Générer les numéros de page
+        for (var i = 0; i < pageCount; i++) {
+            numbers.append('<a href="#" class="page-link">' + (i + 1) + '</a> ');
+        }
+
+        // Afficher les lignes correspondant à la page actuelle
+        function showPage(page) {
+            rows.hide();
+            rows.slice((page - 1) * rowsPerPage, page * rowsPerPage).show();
+        }
+
+        // Afficher la première page
+        showPage(1);
+
+        // Gestion du clic sur les numéros de page
+        $('.page-link').click(function(e) {
+            e.preventDefault();
+            showPage($(this).text());
+        });
+
+        // Ajouter le gestionnaire de confirmation de suppression
+        $('.delete-link').on('click', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            var confirmDelete = confirm('Confirmer la suppression');
+            if (confirmDelete) {
+                window.location.href = url;
+            }
+        });
+    });
+</script>
+
   
 

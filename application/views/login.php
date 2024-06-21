@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="form-container" id="register-container">
-            <form action="<?php echo site_url('ClientController/insertClient');?>" method="POST" >
+            <form id="inscription_client" action="<?php echo site_url('AuthentificationController/create');?>" method="POST" >
                 <h1>Inscription.</h1>
                 <div class="input-group">
                     <input type="text" name="nom" class="input">
@@ -27,15 +27,15 @@
                     <label class="label">Prenom</label>
                 </div>
                 <div class="input-group">
-                    <input type="email" name="mail" class="input">
+                    <input type="email" name="email" class="input">
                     <label class="label">Email</label>
                 </div>
                 <div class="input-group">
-                    <input type="text" name="phone" class="input">
+                    <input type="text" name="telephone" class="input">
                     <label class="label">Telephone</label>
                 </div>
                 <div class="input-group">
-                    <input type="password" name="mdp" class="input">
+                    <input type="password" name="mot_de_pass" class="input">
                     <label class="label">Mot de passe</label>
                 </div>
                 <button type="submit">S'inscrir</button>
@@ -62,4 +62,31 @@
     </div>
 </body>
 <script src="<?=base_url()?>assets/js/login.js"></script>
+<script src="<?=base_url()?>assets/jquery/jquery.min.js"></script>
+<script src="<?=base_url()?>assets/jquery/jquery-3.7.1.js"></script>
+<script>
+ $(document).ready(function() {
+    $('#inscription_client').submit(function(event){
+        event.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+         var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data:formData ,
+        success: function(response) {
+          
+        },
+        error: function(error) {
+            console.log(error);
+            alert('Erreur lors de la récupération de la note');
+        }
+    })
+
+    });
+
+
+    });
+</script>
 </html>

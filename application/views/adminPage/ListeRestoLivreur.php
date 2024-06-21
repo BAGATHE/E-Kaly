@@ -26,7 +26,9 @@
                         <td><?=$resto['heure_ouverture'] ?></td>
                         <td><?=$resto['heure_fermeture'] ?></td>
                         <td><?=$resto['email'] ?></td>
-                        <td><a href="" style="color: red;">Supprimer</a></td>
+                        <td>
+                            <a href="" class="delete-link" style="color: red;">Supprimer</a>
+                        </td>
                         <td><a href="<?= site_url('RestoController/loadForm/'.$resto['id']) ?>">Modifier</a></td>
                     </tr>
                     <?php } ?>
@@ -54,7 +56,9 @@
                         <td><?=$livreur['nom_complet'] ?></td>
                         <td><?=$livreur['email'] ?></td>
                         <td><?=$livreur['adresse'] ?></td>
-                        <td><a href="" style="color: red;">Supprimer</a></td>
+                        <td>
+                            <a href="" class="delete-link" style="color: red;">Supprimer</a>
+                        </td>
                         <td><a href="<?= site_url('LivreurController/loadForm/'.$livreur['id']) ?>">Modifier</a></td>
                     </tr>
                     <?php } ?>
@@ -94,4 +98,18 @@
             </div>
 
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+    $(document).ready(function() {
+        // Ajouter le gestionnaire de confirmation de suppression
+        $('.delete-link').on('click', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            var confirmDelete = confirm('Confirmer la suppression');
+            if (confirmDelete) {
+                window.location.href = url;
+            }
+        });
+    });
+</script>
 

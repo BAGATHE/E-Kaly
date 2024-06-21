@@ -175,6 +175,8 @@ class ClientController extends CI_Controller {
         $adresse = $this->input->post('adresse');
         $repere = $this->input->post('repere');
         $client = $this->input->post('id_client');
+        $latitude = $this->input->post('latitude');
+        $longitude = $this->input->post('longitude');
         $currentDateTime = date('Y-m-d H:i:s');
        
         $dataCommande = [
@@ -182,6 +184,8 @@ class ClientController extends CI_Controller {
             'adresse' => $adresse,
             'repere' => $repere, 
             'date' => $currentDateTime,
+            'latitude'=> $latitude,
+            'longitude'=>$longitude
          ]; 
         $this->CommandeModel->save($dataCommande);
         $Current_id_commande = $this->CommandeModel->getLastCommandeId();

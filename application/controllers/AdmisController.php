@@ -188,6 +188,10 @@ class AdmisController extends CI_Controller {
         $this->AdmisModel->delete($id);
         redirect('AdmisController');
     }
+    public function deleteClient($id) {
+        $this->ClientModel->delete($id);
+        redirect('AdmisController');
+    }
 
 
     /*** recherche multi critère  */

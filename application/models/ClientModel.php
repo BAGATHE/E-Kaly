@@ -105,15 +105,8 @@ class  ClientModel extends CI_Model {
       }
   }
 */
-   public function save() {
-      $data = [
-         'nom' => $this->nom,
-         'prenom' => $this->prenom,
-         'email' => $this->email,
-         'mot_de_pass' => $this->mot_de_pass,
-      ];
-
-      $this->db->insert('Client', $data);
+   public function save($data ) {
+      return $this->db->insert('Client', $data);
    }
 
    public function getById($id) {
