@@ -239,7 +239,7 @@
         <section id="info_complementaire">
         <div class="input-adresse">
         <select name="adresse" id="optionsAdresse" >
-            <option value="0" selected>choisir quartier</option>
+            <option value="0" selected>Choisir quartier</option>
             <option value="1">Analakely</option>
             <option value="20">Isotry</option>
             <option value="32">andoram 102</option>

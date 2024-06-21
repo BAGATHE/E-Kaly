@@ -23,9 +23,9 @@ main {
       align-items: center;
       height: 122vh; /* Hauteur ajustée pour centrer verticalement */
       background-color: white;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      /* border: 1px solid #e0e0e0;
+      border-radius: 8px; */
+      /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
       padding: 20px;
       box-sizing: border-box;
   }
