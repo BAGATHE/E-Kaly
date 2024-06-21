@@ -16,11 +16,15 @@
             </div>
         </div>
         <div class="form-container" id="register-container">
-            <form >
+            <form action="<?php echo site_url('ClientController/insertClient');?>" method="POST" >
                 <h1>Inscription.</h1>
                 <div class="input-group">
                     <input type="text" name="nom" class="input">
                     <label class="label">Nom</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" name="prenom" class="input">
+                    <label class="label">Prenom</label>
                 </div>
                 <div class="input-group">
                     <input type="email" name="mail" class="input">
@@ -57,5 +61,5 @@
         </div>
     </div>
 </body>
-<script src="<?=base_url()?>assets/js/script.js"></script>
+<script src="<?=base_url()?>assets/js/login.js"></script>
 </html>
