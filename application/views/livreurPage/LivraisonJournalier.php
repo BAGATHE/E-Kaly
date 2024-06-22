@@ -22,6 +22,7 @@
                             <th>adresse de livraison</th>
                             <th>Commission</th>
                             <th>Status</th>
+                            <th>Carte</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -33,6 +34,18 @@
                             <td><?=$livraison["adresse"] ?></td>
                             <td><?=$livraison["gain"] ?></td>
                             <td><?php echo ($livraison["status_livraison"] == 1) ? "Livré" : "non livré"; ?></td>
+                            <td>
+                                <p onclick="showPopup(
+                                    '<?= addslashes($livraison['resto']) ?>',
+                                    '<?= addslashes($livraison['adresse_resto']) ?>',
+                                    <?= $livraison['latitude_resto'] ?>,
+                                    <?= $livraison['longitude_resto'] ?>,
+                                    '<?= addslashes($livraison['adresse']) ?>',
+                                    '<?= addslashes($livraison['repere_commande']) ?>',
+                                    <?= $livraison['latitude_commande'] ?>,
+                                    <?= $livraison['longitude_commande'] ?>
+                                )">Afficher la carte</p>
+                            </td>
                             <td><a href="<?=site_url("LivreurController/updateLivraison/".$livraison['id_commande']); ?>"><?php echo ($livraison["status_livraison"] == 0) ? "livraison effectuer" : ""; ?></a></td>
                         </tr>
                         <?php }?>
@@ -60,3 +73,17 @@
                 </div>
             </div>
         </div>
+<div id="overlay"></div>
+
+<div id="popup" class="popup">
+    <div class="popup-header">Carte de la commande</div>
+    <div class="popup-content">
+        <div id="map"></div>
+    </div>
+    <div class="popup-footer">
+        <button class="close-btn" onclick="closePopup()">Fermer</button>
+    </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="<?=base_url()?>assets/js/popup_carte_commande.js"></script>

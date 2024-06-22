@@ -7,6 +7,7 @@
     <link href="<?=base_url()?>assets/font/font2.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?=base_url()?>assets/css/livreur.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/status.css">
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/popup_carte_commande.css">
     <link rel="icon" href="<?=base_url()?>assets/images/logo.png">
     <title>E-Kaly - Livreur</title>
 </head>

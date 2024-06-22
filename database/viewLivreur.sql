@@ -177,6 +177,7 @@ order by
     vlc.id_livreur, vlc.id_commande;
 
 
+
 CREATE OR REPLACE VIEW v_liste_livraison_livreur_jour AS
 SELECT
     c.id AS id_commande,
@@ -184,7 +185,13 @@ SELECT
     a.nom AS adresse,
     r.nom AS resto,
     c.date AS date_commande,
-    lp.paye AS status_livraison
+    lp.paye AS status_livraison,
+    c.latitude AS latitude_commande,
+    c.longitude AS longitude_commande,
+    ir.latitude AS latitude_resto,
+    ir.longitude AS longitude_resto,
+    aa.nom AS adresse_resto,
+    c.repere AS repere_commande
 FROM
     Commande c
 JOIN
@@ -199,8 +206,14 @@ JOIN
     Resto r ON p.id_resto = r.id
 JOIN
     Adresse a ON c.adresse = a.id
+JOIN
+    Info_resto ir ON r.id = ir.id_resto
+JOIN
+    Adresse aa ON ir.adresse = aa.id
 GROUP BY
     id_commande, resto;
+
+
 
 
 CREATE OR REPLACE VIEW v_livraison_livreur_avec_gain AS
@@ -211,7 +224,13 @@ SELECT
     vlllj.resto,
     vlllj.adresse,
     vlllj.status_livraison,
-    COALESCE(g.montant, 0) AS gain
+    vlllj.latitude_commande,
+    vlllj.longitude_commande,
+    vlllj.latitude_resto,
+    vlllj.longitude_resto,
+    COALESCE(g.montant, 0) AS gain,
+    vlllj.adresse_resto,
+    vlllj.repere_commande
 FROM 
     v_liste_livraison_livreur_jour vlllj
 LEFT JOIN
