@@ -50,19 +50,20 @@ function initMap(restaurant, destination) {
     });
 }
 
-function showPopup(id_commande) {
-    // Remplace ceci par une requête AJAX pour obtenir les données de latitude et longitude
+
+
+function showPopup(restoName, restoAddress, restoLat, restoLng, deliveryAddress, deliveryRepere, deliveryLat, deliveryLng) {
     var restaurant = {
-        name: "Le Gourmet",
-        address: "123 Rue de la Gastronomie, Antananarivo",
-        latitude: -18.8792,
-        longitude: 47.5079
+    name: restoName,
+    address: restoAddress,
+    latitude: parseFloat(restoLat),
+    longitude: parseFloat(restoLng)
     };
     var destination = {
-        address: "456 Avenue de la Livraison, Antananarivo",
-        repere : "pres du mpivarotra mangahazo",
-        latitude: -18.8892,
-        longitude: 47.5179
+    address: deliveryAddress,
+    repere: deliveryRepere,
+    latitude: parseFloat(deliveryLat),
+    longitude: parseFloat(deliveryLng)
     };
 
     initMap(restaurant, destination);
@@ -70,6 +71,7 @@ function showPopup(id_commande) {
     document.getElementById('popup').style.display = 'block';
     document.getElementById('overlay').style.display = 'block';
 }
+
 
 function closePopup() {
     document.getElementById('popup').style.display = 'none';
