@@ -1,5 +1,4 @@
 -- revenu total somme commission livreur et restaurant
-
 create or replace view v_revenu_par_mois as
 select 
     day,
@@ -59,6 +58,20 @@ group by
     month,
     id_livreur;
 
+
+--payement livreur par mois avec info 
+create or replace view v_payement_livreur_with_info_livreur as 
+select 
+    vpl.*,
+    info_livreur.nom_complet,
+     info_livreur.telephone
+from 
+    v_payement_livreur as vpl
+join 
+    Info_livreur as info_livreur
+on 
+    vpl.id_livreur = info_livreur.id_livreur;
+
 -- info mise en avant resto 
 create or  replace view v_info_mise_en_avant as 
 select 
@@ -74,3 +87,17 @@ join
 	Resto as r 
 on 
 	r.id = m.id_resto; 
+
+    CREATE OR REPLACE VIEW v_combined_commission_frais_livraison AS
+SELECT
+    cpcpr.date,
+    cpcpr.prix_commande,
+    cpcpr.commission,
+    tcfp.somme_commission,
+    tcfp.somme_frais_livraison
+FROM
+    v_commission_par_Commande_par_resto_par_jour cpcpr
+JOIN
+    v_total_commission_frais_livraison_par_jour tcfp
+ON
+    DATE(cpcpr.date) = tcfp.date;

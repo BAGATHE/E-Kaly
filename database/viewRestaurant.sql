@@ -5,7 +5,8 @@ select
     p.id as id_plat,
     r.id_adresse,
     p.description ,
-    p.prix
+    p.prix,
+    p.image
 from 
     Resto as r
 join 

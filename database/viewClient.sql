@@ -172,6 +172,7 @@ DELIMITER ;
 create or replace view v_quantite_plat_restant AS
 select 
 	vrpcpc.id_plat,
+    vrpcpc.description,
     production,
     sum(quantite)as nombre_vendu,
     production - sum(quantite) as quantite_restant,

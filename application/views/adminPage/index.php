@@ -11,12 +11,13 @@
                         <h2><?= $administrator['nom']  ?></h2>
                     </div>
                 <?php } ?>
-                    <div class="user">
+               
+                <div class="user">
                         <a href="<?= site_url('AdmisController/insertionPageAdmin')?>"><img src="<?php echo base_url()?>assets/images/plus.png"></a>
                         <h2>Ajouter</h2>
                     </div>
                 </div>
-            
+                
                 <div class="recent-orders">
                     <table>
                         <thead>

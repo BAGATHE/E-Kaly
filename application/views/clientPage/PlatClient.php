@@ -159,12 +159,11 @@
 
           <ul class="food-menu-list">
             <!-- php boucle de liste de plat du resto -->
-           <?php foreach($list_plat_resto as $plat){ ?>
+           <?php foreach($list_plat_resto as $plat){  ?>
             <li>
               <div class="food-menu-card">
                 <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/food-menu-1.png" width="300" height="300" loading="lazy"
-                    alt="Fried Chicken Unlimited" class="w-100">
+                   <img src="<?php if($plat['image'] != null) { echo base_url('assets/images/').$plat['image']; } else { echo base_url('assets/images/Logo.png'); } ?>" width="600" height="390" loading="lazy" alt="<?php echo $plat['description']; ?>" class="w-100">
 
                     <button class="btn food-menu-btn">
                       <span class="material-icons-sharp">
@@ -239,10 +238,10 @@
         <section id="info_complementaire">
         <div class="input-adresse">
         <select name="adresse" id="optionsAdresse" >
-            <option value="0" selected>Choisir quartier</option>
-            <option value="1">Analakely</option>
-            <option value="20">Isotry</option>
-            <option value="32">andoram 102</option>
+           <option value="0" selected>Choisir quartier</option>
+              <?php foreach ($adresses as $adresse ){ ?>
+                <option value="<?=$adresse["id"] ?>"><?=$adresse["nom"] ?></option>
+          <?php }  ?>
         </select>
         <input type="text" placeholder="repere" id="repere" name="repere">
         </div>
@@ -388,12 +387,56 @@
             }).addTo(map);
 
             // Dictionnaire des quartiers avec leurs coordonnées
-            var districts = {
-                '20': [-18.9033, 47.5182],
-                '1': [-18.9137, 47.5252],
-                '32': [-18.98609417455635, 47.532829187957816]
-                // Ajoutez d'autres quartiers avec leurs coordonnées
-            };
+           var districts = {
+                '1': [-18.9083181,47.5262845],
+                '2': [-18.8978735,47.5255695],
+                '3': [-18.9242775,47.5287731],
+                '4': [-18.9159866,47.5657712],
+                '5': [-18.9275742,47.5130896],
+                '6': [-18.9292156,47.4981480],
+                '7': [-18.8986092,47.5200540],
+                '8': [-18.9037134,47.5293499],
+                '9': [-18.9174615,47.5313719],
+                '10': [-18.9007471,47.5173715],
+                '11': [-18.9123208,47.5365130],
+                '12': [-18.8958717,47.5384325],
+                '13': [-18.9021321,47.5246027],
+                '14': [-18.9021313,47.5352782],
+                '15': [-18.91000000, 47.52650000],
+                '16': [-18.9104394,47.5306336],
+                '17': [-18.9107383,47.5210239],
+                '18': [-18.9104247,47.5168708],
+                '19': [-18.9191141,47.5243646],
+                '20': [-18.9097086,47.5288741],
+                '21': [-18.8918640,47.5355036],
+                '22': [-18.9123265,47.5119034],
+                '23': [-18.9073725,47.5210871],
+                '24': [-18.9325956,47.5274904],
+                '26': [-18.9578923,47.5281890],
+                '28': [-18.9127038,47.5163415],
+                '29': [-18.9034637,47.5123933],
+                '30': [-18.9792134,47.5335333],
+                '31': [-18.9426447,47.5240731],
+                '32': [-18.9362863,47.5245648],
+                '33': [-18.9977702,47.5342483],
+                '34': [-18.8867581,47.5212986],
+                '35': [-18.9030772,47.5217396],
+                '36': [-18.9182962,47.5449553],
+                '37': [-18.8756504,47.5251073],
+                '38': [-18.8846077,47.5099316],
+                '39': [-18.8767941,47.5468778],
+                '40': [-18.9005783,47.5450308],
+                '41': [-18.8889, 47.5983],
+                '42': [-18.9032, 47.5546],
+                '43': [-18.8870, 47.5427],
+                '44': [-18.8711, 47.5401],
+                '45': [-18.8635, 47.5300],
+                '46': [-18.9125, 47.5281],
+                '47': [-18.8983, 47.5270],
+                '48': [-18.9115, 47.5378],
+                '49': [-18.9127, 47.5298],
+                '50': [-18.9172, 47.5304]
+                };
             var currentMarker = null;
             // Gestionnaire de l'événement de changement de sélection
             var adresse_target = null;
@@ -449,6 +492,13 @@
               console.log(infoElement);
               if (infoElement.style.display === "none" || infoElement.style.display === "") {
                 infoElement.style.display = "block";} else { infoElement.style.display = "none";}
+
+                 var prix_livraison =  $("#livraison_prix").text();
+                 if(prix_livraison== null || ""){
+                  prix_livraison = 0;
+                 }
+                  var total = parseInt($(".prix-sous-total").text()) + parseInt(prix_livraison);
+                  $("#total_payement").text(total);
               });         
     </script>
     <script>
@@ -463,12 +513,16 @@
             url: url ,
             data: formData,
             success: function(response) {
+              console.log(response);
               var result = JSON.parse(response);
-              if(result === "success") {
+              if(result.status === "success") {
                 alert("Votre commande sera livrée le plus tôt possible, à tout à l'heure.");
                 window.location.href = "<?php echo site_url('ClientController'); ?>";
               } else {
-                alert("Erreur lors de la validation du formulaire.");
+                console.log(response);
+                 console.log(result.response);
+                 var errorMessages = result.response;
+                 alert(errorMessages);
               }
             },
             /*error: function(xhr, status, error) {

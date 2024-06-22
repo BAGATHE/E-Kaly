@@ -190,7 +190,7 @@ public function getStatRestoJour($mois,$annee) {
 public function payement_livreur($mois,$annee){
    $this->db->where('month',$mois);
    $this->db->where('year',$annee);
-   $query = $this->db->get('v_payement_livreur');
+   $query = $this->db->get('v_payement_livreur_with_info_livreur');
    return $query->result_array();
 }
 

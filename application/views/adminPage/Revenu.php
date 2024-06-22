@@ -23,7 +23,7 @@
                 <option value="0">choisir  année</option>
                 <option value="2024">2024</option>
               </select>
-              <button class="btn btn-primary" type="submit">Ajouter</button>
+              <button type="submit">Valider</button>
             </form>
         </div>
         
@@ -31,6 +31,31 @@
            
             <canvas id="myChartannuel" width="400" height="200"></canvas>
             <canvas id="myChartmensuelle" width="400" height="200"></canvas>
+
+            <!-- Tableau ajouter -->
+            <div class="bottom-data">
+                <div class="orders">
+                    <div class="header">
+                        <i class='bx bx-receipt'></i>
+                        <h3 style="text-align: center;">Details</h3>
+                        <i class='bx bx-filter'></i>
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <table id="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Plat</th>
+                                <th>Prix Unitaire</th>
+                                <th>Quantite</th>
+                                <th>Prix total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             
         </main>
         <!-- End of Main Content -->

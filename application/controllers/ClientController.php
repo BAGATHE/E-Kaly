@@ -152,6 +152,7 @@ class ClientController extends CI_Controller {
         $data['list_plat_resto'] = $this->PlatModel->getAllInfo($id_resto);
         $data['info_resto'] = $this->RestoModel->getById($id_resto); 
         $data['client'] = $current_client;
+        $data['adresses'] = $this->AdresseModel->getAll();
         $this->load->view('clientPage/PlatClient',$data);
     }
 
@@ -168,44 +169,74 @@ class ClientController extends CI_Controller {
         $prix_livraison = $this->ClientModel->getFraisLivraison($adresse_resto,$adresse_target);
         echo json_encode($prix_livraison);
     }
-/*validation panier*/
-    public function ValiderPanier(){
-        $articles = $this->input->post('articles');
-        $idresto = $this->input->post('id_resto');
-        $adresse = $this->input->post('adresse');
-        $repere = $this->input->post('repere');
-        $client = $this->input->post('id_client');
-        $latitude = $this->input->post('latitude');
-        $longitude = $this->input->post('longitude');
-        $currentDateTime = date('Y-m-d H:i:s');
-       
+    /* Validation panier */
+public function ValiderPanier() {
+    $articles = $this->input->post('articles');
+    $idresto = $this->input->post('id_resto');
+    $adresse = $this->input->post('adresse');
+    $repere = $this->input->post('repere');
+    $client = $this->input->post('id_client');
+    $latitude = $this->input->post('latitude');
+    $longitude = $this->input->post('longitude');
+    $currentDateTime = date('Y-m-d H:i:s');
+
+    /* Vérification de la quantité disponible aujourd'hui pour chaque plat */
+    $verification = "";
+    $date = date('Y-m-d');
+    list($annee, $mois, $jour) = explode('-', $date); 
+      for($i=0; $i<count($articles);$i++) {
+        $article = $articles[$i];
+        $production = $this->PlatModel->getQuantitePlatRestant($article['id_plat'], $jour, $mois,$annee); 
+        if ($production["production"] < $article['quantity']) {
+            $verification = $verification."Vous pouvez commander que " . $production["production"] . " de " . $production["description"]."\n";
+        } else if($production["quantite_restant"]  < $article['quantity'] ) {
+            $verification = $verification."La quantité restante disponible de " . $production["description"] . " est de " . $production["quantite_restant"]."\n";
+        }
+    }
+    if ($verification !="") { 
+        $response = ["status" => "failed", "response" => $verification];
+        echo json_encode($response); 
+        return;
+    } else {
         $dataCommande = [
             'id_client' => $client,
             'adresse' => $adresse,
-            'repere' => $repere, 
+            'repere' => $repere,
             'date' => $currentDateTime,
-            'latitude'=> $latitude,
-            'longitude'=>$longitude
-         ]; 
+            'latitude' => $latitude,
+            'longitude' => $longitude
+        ];
+        $this->db->trans_start(); // Démarrer une transaction
         $this->CommandeModel->save($dataCommande);
         $Current_id_commande = $this->CommandeModel->getLastCommandeId();
-        
-        if($Current_id_commande != null){
+
+        if ($Current_id_commande != null) {
             foreach ($articles as $article) {
                 // Exemple d'insertion dans la base de données
                 $data = array(
                     'id_commande' => $Current_id_commande,
-                    'id_plat' =>$article['id_plat'],
+                    'id_plat' => $article['id_plat'],
                     'quantite' => $article['quantity'],
                     'prix' => $article['price']
                 );
-            $this->CommandePlatModel->save($data);
+                $this->CommandePlatModel->save($data);
+            }
+            $this->db->trans_complete(); // Terminer la transaction
+
+            if ($this->db->trans_status() === FALSE) {
+                $response = ["status" => "failed", "response" => "Erreur lors de l'enregistrement de la commande."];
+            } else {
+                $response = ["status" => "success"];
+            }
+        } else {
+            $response = ["status" => "failed", "response" => "Erreur lors de la récupération de l'ID de la commande."];
+            $this->db->trans_rollback(); // Annuler la transaction
         }
-        echo json_encode("success");
-        }else{
-        echo json_encode("failed");
-        }
+
+        echo json_encode($response);
+    }
 }
+
 
     
     public function toFavorite($id_resto) {

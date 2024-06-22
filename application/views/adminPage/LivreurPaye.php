@@ -22,7 +22,7 @@
                 <option value="0">choisir  année</option>
                 <option value="2024">2024</option>
               </select>
-              <button class="btn btn-primary" type="submit">Voir</button>
+              <input type="submit" value="Voir">
             </form>
         </div>
 
@@ -34,19 +34,22 @@
                         <tr>
                             <th>Nom</th>
                             <th>Contact</th>
-                            <th>Horaire</th>
-                            <th>Chiffre obtenu</th>
-                            <th>Statuts</th>
+                            <th>Salaire du mois</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
-                    <tr>
-                        <td>nom_livreur</td>
-                        <td>contact_livreur</td>
-                        <td>horaire_travail</td>
-                        <td>100000</td>
-                        <td style="color: #085696;">Payé</td>
-                    </tr>
+                    <tbody>
+                        <?php if(isset($livreurs_payement) || !empty($livreurs_payement)){ 
+                           foreach($livreurs_payement as $livreur){ ?>
+                        <tr>
+                            <td><?=$livreur["nom_complet"] ?></td>
+                            <td><?=$livreur["telephone"] ?></td>
+                            <td><?=$livreur["montant_a_paye"]?></td>
+                            <td style="color: #085696;">Voir details</td>
+                        </tr>
+
+                        <?php }  }?>
+                   
+                    </tbody>
                 </table>
             </div>
 

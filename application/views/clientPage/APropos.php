@@ -154,17 +154,25 @@
             </h2>
 
             <p class="section-text">
-              The restaurants in Hangzhou also catered to many northern Chinese who had fled south from Kaifeng during
-              the Jurchen
-              invasion of the 1120s, while it is also known that many restaurants were run by families.
+            Vous voulez manger chez votre restaurant préféré mais que vous ne voulez pas galérer dans les embouteillages ? N'attendez plus, et gagnez du temps ! Fini les files d'attente, les embouteillages pour pouvoir manger chez votre restaurant préféré, E-Kaly s'occupe de tout.
+
+            E-Kaly est la façon la plus facile de commander vos repas en ligne à partir de votre smartphone ou votre tablette. Du bout des doigts, accédez à de délicieuses cuisines (chinoise, malagasy, européenne, ...) et à un choix de restaurants qui livrent dans votre ville/quartier. Idéal pour les déjeuners au bureau, lorsque vous n'avez pas le temps de quitter le travail et galérer dans les embouteillages.
+
+            Rejoignez notre communauté E-Kaly, la seule façon de :
+
+            •    choisir les repas des meilleurs restaurants près de chez vous
+            •    commander où que vous soyez
+            •    suivre votre commande en temps réel
+
+
             </p>
 
           </div>
 
           <figure class="delivery-banner">
 
-            <img src="<?php echo base_url()?>assets/images/Logo.png" width="1000" height="880" loading="lazy" alt="delivery boy"
-              class="w-100 delivery-img" data-delivery-boy>
+            <img src="<?php echo base_url()?>assets/images/Logo.png" width="500" height="500" loading="lazy" alt="delivery boy"
+              class="w-40 delivery-img" data-delivery-boy>
           </figure>
 
         </div>

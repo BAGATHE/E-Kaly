@@ -18,18 +18,18 @@ $(document).ready(function(){
                 var dailyRevenue = Array(30).fill(0); // Initialise tous les jours du mois à 
                 jsonResponse.forEach(function(item) {
                     var day = parseInt(item.day, 10); // Jour de 1 à 30
-                    dailyRevenue[day - 1] = parseFloat(item.revenu); // Met à jour avec les revenus
+                    dailyRevenue[day - 1] = parseFloat(item.revenu_total_jour); // Met à jour avec les revenus
                 });
                 
                 // Mettre à jour le graphique
                 updateChart(myChartmensuelle, dailyRevenue);
                 monthlyRevenue =  Array(12).fill(0);
-                updateChart(myChartannuel, monthlyRevenue);
+                updateChart(myChartannuel,monthlyRevenue);
               }else{
                 var monthlyRevenue = Array(12).fill(0); // Initialise tous les mois à 0
                 jsonResponse .forEach(function(item) {
                 var monthIndex = parseInt(item.month, 10) - 1; // Les mois sont de 0 à 11
-                monthlyRevenue[monthIndex] = parseFloat(item.revenu); // Met à jour avec les revenus   
+                monthlyRevenue[monthIndex] = parseFloat(item.revenu_total); // Met à jour avec les revenus   
                 });
                 updateChart(myChartannuel, monthlyRevenue);
                 dailyRevenue = Array(30).fill(0);

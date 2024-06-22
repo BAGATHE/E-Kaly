@@ -258,7 +258,8 @@ public function miseEnAvant(){
             $current_administrator = $this->session->userdata('admin_session');
         }
         $data = array();      
-        $data['current_administrator'] = $current_administrator; 
+        $data['current_administrator'] = $current_administrator;
+
         $data['contents'] = "adminPage/LivreurPaye";
         $this->load->view('templates/template',$data);
     }
@@ -270,9 +271,8 @@ public function miseEnAvant(){
         }
         $mois = $this->input->post("mois");
         $anner = $this->input->post("anner");
-
         $data = array();      
-        //$data["livreurs"] = $this->LivreurModel->getAllWithInfo();
+        $data["livreurs_payement"] = $this->AdmisModel->payement_livreur($mois,$anner);
         $data['current_administrator'] = $current_administrator; 
         $data['contents'] = "adminPage/LivreurPaye";
         $this->load->view('templates/template',$data);

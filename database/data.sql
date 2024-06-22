@@ -1,3 +1,9 @@
+--Insertion dans la table Admis
+INSERT INTO Admis (nom, prenom, email, mot_de_pass) VALUES
+('admin1', 'admin1', 'admin1@gmail.com', 'admin1'),
+('admin2', 'admin2', 'admin2@gmail.com', 'admin2');
+
+
 -- Insertion dans la table CLient
 INSERT INTO `Client` (`nom`, `prenom`, `email`,`telephone`,`mot_de_pass`) VALUES
 ('Bernard', 'Alice', 'alice@gmail.com','0326257346' ,'alice'),
@@ -183,70 +189,16 @@ INSERT INTO `Voisin` (`id_adresse1`,`id_adresse2`) VALUES
 
 -- Insérer des données dans la table Resto
 INSERT INTO Resto (nom,id_adresse, email,mot_de_pass) VALUES
-('Fong Mei',32,'resto1@example.com', 'mdp1'),
-('EURASIE',28,'resto2@example.com','mdp2'),
-('Selesy',15,'resto3@example.com','mdp3');
+('PAKOPAKO',7,'pakopako@gmail.com', 'pakopako'),
+('Chez Madama',28,'madama@gmail.com','madama'),
+('Selesy',49,'selesy@gmail.com','selesy');
 
 
 -- Insertion des données dans la table Info_resto
-INSERT INTO Info_resto (id_resto, nom, adresse, repere,description, heure_ouverture, heure_fermeture) VALUES
-( 1, 'Fong Mei', 32,'pharmacie', 'Description Resto A', '08:00:00', '22:00:00'),
-( 2, 'EURASIE', 28,'magasin M','Description Resto B', '09:00:00', '23:00:00'),
-( 3, 'Selesy', 15,'jazz club','Description Resto C', '10:00:00', '18:00:00');
-
-
--- Insérer des données dans la table Plat
-INSERT INTO Plat (id_resto, description, prix) VALUES
-(1, 'Pizza Margherita', 8000),
-(1, 'Spaghetti Carbonara', 6000),
-(2, 'Burger Cheese', 7000),
-(2, 'Salade César', 5000),
-(3, 'Sushi Assorti', 9000),
-(3, 'Ramen au Poulet', 6000);
-
-
-INSERT INTO Change_quantite_plat (id_plat, date, production) VALUES
-(7, '2024-06-01 08:00:00', 50),
-(8, '2024-06-01 08:00:00', 40),
-(9, '2024-06-01 08:00:00', 30),
-(10, '2024-06-01 08:00:00', 20),
-(11, '2024-06-01 08:00:00', 15),
-(12, '2024-06-01 08:00:00', 25);
-
-
--- Insérer des données dans la table Commande
-INSERT INTO Commande (id_client,adresse,repere,date) VALUES
-(1,32,'itu','2024-06-03 10:00:00'),
-(1,28,'forello','2024-06-03 11:30:00'),
-(1,15,'black jack','2024-06-03 12:45:00'),
-(1,35,'maison blanche','2024-06-11 08:00:00'),
-(1,35,'maison blanche','2024-06-11 10:00:00');
-
--- Insérer des données dans la table Commande_plat
--- (Assumant que vous avez une table Commande déjà créée)
-INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES
-(1, 1, 2, 21.98),
-(1, 4, 1, 7.49),
-(2, 3, 1, 8.99),
-(2, 6, 2, 22.98),
-(3, 2, 1, 8.99),
-(3, 5, 2, 31.98),
-(4, 1, 2, 21.98),
-(5, 1, 2, 21.98);
-
--- Insérer des données dans la table Commission_admin
-INSERT INTO Commission_admin (commission_resto,commission_livreur) VALUES 
-(5,30);
-
-
-
---Insertion dans la table Admis
-INSERT INTO Admis (nom, prenom, email, mot_de_pass) VALUES
-('admin1', 'admin1', 'admin1@gmail.com', 'admin1'),
-('admin2', 'admin2', 'admin2@gmail.com', 'admin2');
-
-
-
+INSERT INTO Info_resto (id_resto, nom, adresse, repere,description, heure_ouverture, heure_fermeture,latitude,longitude,image) VALUES
+( 1, 'PAKOPAKO', 7,'Skate park', 'Venez savourez de bon Plat chez PAKOPAKO', '11:30:00', '19:00:00',-18.8983496847481,47.52367911306232,'pakopako.png'),
+( 2, 'Chez Madama', 28,'ITU Andoharanofotsy','tongava misakafo', '11:00:00', '18:00:00',-18.98599963341681,47.53279656171799,null),
+( 3, 'Selesy', 15,'Residence du Rova ',' ', '10:00:00', '18:00:00',-18.914764079712324,47.531726360321045,null);
 
 
 
@@ -283,19 +235,49 @@ INSERT INTO Status(id_livreur,status) VALUES (7,'dispo');
 
 
 
+-- Insérer des données dans la table Plat
+INSERT INTO Plat (id_resto, description, prix,image) VALUES
+(1, 'Atin"ny coucou', 8000,"coucou.jpg"),
+(1, 'Akondro metissy BALAHAZO', 4000,"akondro.jpg"),
+(1, 'Bolongany Akoho', 7000,"bolongany.jpg"),
+(1, 'Assiette Kida son ty', 5000,"assiette.jpg"),
+(2, 'Akoho sauce + Achard', 6000,null),
+(2, 'steak sy vary', 6000,null),
+(2, 'saucisse sy haricot', 5000,null),
+(2, 'poisson frite', 7000,null),
+(3, 'Big Akondro',2000,null),
+(3, 'Mofo ananas',500,null),
+(3, 'Mofo sakay',500,null);
+
+
+INSERT INTO Change_quantite_plat (id_plat, date, production) VALUES
+(1, '2024-06-01 08:00:00', 15),
+(2, '2024-06-01 08:00:00', 25),
+(3, '2024-06-01 08:00:00', 20),
+(4, '2024-06-01 08:00:00', 30),
+(5, '2024-06-01 08:00:00', 30),
+(6, '2024-06-01 08:00:00', 15),
+(7, '2024-06-01 08:00:00', 10),
+(8, '2024-06-01 08:00:00', 10),
+(9, '2024-06-01 08:00:00', 100),
+(10, '2024-06-01 08:00:00', 100),
+(11, '2024-06-01 08:00:00', 100);
+
+
+-- Insérer des données dans la table Commande
+--INSERT INTO Commande (id_client,adresse,repere,date) VALUES();
+
+
+-- Insérer des données dans la table Commande_plat
+-- (Assumant que vous avez une table Commande déjà créée)
+--INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(1, 1, 2, 21.98);
+
+-- Insérer des données dans la table Commission_admin
+INSERT INTO Commission_admin (commission_resto,commission_livreur) VALUES (5,30);
+
 
 -- Insérer des données dans la table Livraison_payement_commande
-INSERT INTO Livraison_payement_commande ( id_commande, id_livreur,paye) VALUES
-(1,  1, 1),
-(2, 1, 1),
-(3,  1, 0);
-
-
-
-
-
-
-
+--INSERT INTO Livraison_payement_commande ( id_commande, id_livreur,paye) VALUES();
 
 INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (1, 1, 4),
@@ -303,12 +285,11 @@ INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (3, 2, 3);
 
 INSERT INTO Note_resto (id_client, id_resto, note) VALUES
-(1, 1, 9),
+(1, 1, 4),
 (2, 1, 1),
-(3, 2, 7);
+(3, 2, 4);
 
 INSERT INTO Prix_mise_en_avant(prix) VALUES(200000);
-
 
 INSERT INTO Tarif_livraison (tarif_min,tarif_moyen,tarif_max)
 VALUES (2000,4000,7000);
