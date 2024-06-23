@@ -19,7 +19,7 @@ class LivreurController extends CI_Controller {
         $data['solde']=$this->LivreurModel-> getCommissionDuJour($current_livreur['id'],date("Y-m-d"));
         $data['livraison']=$this->LivreurModel->algoCommandeLivreur($current_livreur['id'],date("Y-m-d"));
         $data['contents'] = "livreurPage/LivreurAccueil";
-        $this->load->view('templates_livreur/template', $data);
+       $this->load->view('templates_livreur/template', $data);
     }
 
  

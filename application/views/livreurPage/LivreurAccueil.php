@@ -78,11 +78,11 @@
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <p>Bonjour, <b>John Doe</b></p>
+                        <p>Bonjour, <b><?=$current_livreur["nom_complet"]; ?></b></p>
                         <small class="text-muted">Livreur</small>
                     </div>
                     <div class="profile-photo">
-                        <img src="assets/images/profile.jpg" alt="profile photo">
+                        <img src="<?=base_url()?>assets/images/Logo.png" alt="logotipo">
                     </div>
                 </div>
             </div>

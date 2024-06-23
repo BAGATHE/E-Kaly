@@ -104,8 +104,7 @@
           <li>
               <div class="blog-card">
                 <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/resto-1.jpg" width="600" height="390" loading="lazy"
-                    alt="What Do You Think About Cheese Pizza Recipes?" class="w-100">
+                  <img src="<?php if($restaurant['image'] != null) { echo base_url('assets/images/').$restaurant['image']; } else { echo base_url('assets/images/Logo.png'); } ?>" width="600" height="390" loading="lazy" alt="<?php echo $restaurant['nom_resto']; ?>" class="w-100">
                 </div>
 
                 <div class="card-content">
@@ -121,7 +120,7 @@
                   </div>
 
                   <h3 class="h3">
-                    <a href="#" class="card-title"><?=$restaurant["nom_resto"]?></a>
+                     <a href="<?= site_url('ClientController/PlatClientPage/'.$restaurant['id_resto']) ?>" class="card-title"><?php echo $restaurant['nom_resto']; ?></a>
                   </h3>
 
                   <p class="card-text">

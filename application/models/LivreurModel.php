@@ -264,6 +264,7 @@ public function getLivraisonLivreurEnUneJourneAvecGain($idLivreur, $dateRecherch
       $solde=$query->row_array();
       if($solde==null){
          $solde['somme_commission']=0;
+         $solde["somme_frais_livraison"]=0;
       }
       return $solde;
    }
