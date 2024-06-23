@@ -22,7 +22,8 @@
                 <option value="0">choisir  année</option>
                 <option value="2024">2024</option>
               </select>
-              <input type="submit" value="Voir">
+              <button style="width: 5em; height: 3em; color: var(--white-clr); border-radius: 5px; background: var(--green-clr); cursor: pointer;"  
+                type="submit">Voir</button>
             </form>
         </div>
 

@@ -63,7 +63,7 @@
       <?php if(!isset($client) || $client == null){ ?>
         <a href="<?php echo site_url('AuthentificationController/checkUserLogin');?>"><button class="btn btn-hover">Login</button></a>
       <?php  }else{?>
-        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">deconnection</button></a>
+        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">Déconnection</button></a>
       <?php } ?>
         <button class="nav-toggle-btn" aria-label="Toggle Menu" data-menu-toggle-btn>
           <span class="line top"></span>

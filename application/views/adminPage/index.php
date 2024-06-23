@@ -128,6 +128,8 @@
         function showPage(page) {
             rows.hide();
             rows.slice((page - 1) * rowsPerPage, page * rowsPerPage).show();
+            $('.page-link').removeClass('active');
+            $('.page-link').eq(page - 1).addClass('active');
         }
 
         // Afficher la première page

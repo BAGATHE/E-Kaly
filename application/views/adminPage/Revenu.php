@@ -2,7 +2,7 @@
       <!-- Main Content -->
         <main>
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
-            <form  id='statistique'  method="POST" action="<?php echo site_url('AdmisController/checkStatisiqueGeneral');?>">
+            <form class="liste" id='statistique'  method="POST" action="<?php echo site_url('AdmisController/checkStatisiqueGeneral');?>">
             <select class="form-select  d-sm-inline-block" aria-label="Default select example" id="mois" style="width: 12vw;" name="mois">
                 <option value="0" selected>choisir  mois</option>
                 <option value="1">Janvier</option>
@@ -23,7 +23,8 @@
                 <option value="0">choisir  année</option>
                 <option value="2024">2024</option>
               </select>
-              <button type="submit">Valider</button>
+              <button style="width: 5em; height: 3em; color: var(--white-clr); border-radius: 5px; background: var(--green-clr); cursor: pointer;" 
+                    type="submit">Valider</button>
             </form>
         </div>
         

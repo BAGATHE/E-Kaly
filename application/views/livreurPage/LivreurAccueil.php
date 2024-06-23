@@ -36,7 +36,6 @@
                             <th>Adresse de livraison</th>
                             <th>Prix de la livraison</th>
                             <th>Commission</th>
-                            <th>Livrée</th>
                             <th>Action</th>
                         </tr>
                     </thead>

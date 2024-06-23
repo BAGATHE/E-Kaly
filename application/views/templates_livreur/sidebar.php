@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?= site_url('LivreurController') ?>" class="active"> 
+                <a href="<?= site_url('LivreurController') ?>"> 
                     <span class="material-symbols-sharp">home</span>
                     <h3>Accueil</h3>
                 </a>

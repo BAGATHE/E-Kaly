@@ -393,6 +393,36 @@ main .recent-orders a{
     color: var(--color-primary);
 }
 
+
+/* Style de la pagination */
+#pagination-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#pagination-container .page-link {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#pagination-container .page-link:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#pagination-container .page-link.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+
 .right-section{
     margin-top: 1.4rem;
 }
