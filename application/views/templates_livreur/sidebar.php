@@ -21,7 +21,7 @@
                     <span class="material-symbols-sharp">insights</span>
                     <h3>Performance</h3>
                 </a>
-                <a href="<?= site_url('LivreurController/') ?>">
+                <a href="<?= site_url('LivreurController/livreurLogout') ?>">
                     <span class="material-symbols-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>

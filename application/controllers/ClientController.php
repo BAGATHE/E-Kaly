@@ -181,18 +181,31 @@ public function ValiderPanier() {
     $currentDateTime = date('Y-m-d H:i:s');
 
     /* Vérification de la quantité disponible aujourd'hui pour chaque plat */
-    $verification = "";
-    $date = date('Y-m-d');
-    list($annee, $mois, $jour) = explode('-', $date); 
-      for($i=0; $i<count($articles);$i++) {
-        $article = $articles[$i];
-        $production = $this->PlatModel->getQuantitePlatRestant($article['id_plat'], $jour, $mois,$annee); 
-        if ($production["production"] < $article['quantity']) {
-            $verification = $verification."Vous pouvez commander que " . $production["production"] . " de " . $production["description"]."\n";
-        } else if($production["quantite_restant"]  < $article['quantity'] ) {
-            $verification = $verification."La quantité restante disponible de " . $production["description"] . " est de " . $production["quantite_restant"]."\n";
-        }
+  $verification = "";
+  $date = date('Y-m-d');
+  for ($i = 0; $i < count($articles); $i++) {
+    $article = $articles[$i];
+    $production = $this->PlatModel->getProductionJournalierePlat($article['id_plat']); 
+    $consommation = $this->PlatModel->getConsommationJournalierePLat($date, $article['id_plat']);
+    
+    if ($consommation == null) {
+        $consommation["consommation"] = 0;
+        $consommation["description"] = $this->PlatModel->getById($article['id_plat'])["description"];
     }
+    
+    if (!isset($production["production"])) {
+        $production["production"] = 0; // Ensure production is set to avoid errors
+    }
+
+    $restePlat = $production["production"] - $consommation["consommation"];
+    
+    if ($production["production"] < $article['quantity']) {
+        $verification .= "Vous pouvez commander que " . $production["production"] . " de " . $consommation["description"] . "\n";
+    } else if ($restePlat < $article['quantity']) {
+        $verification .= "La quantité restante disponible de " . $consommation["description"] . " est de " . $restePlat . "\n";
+    }
+   }
+   
     if ($verification !="") { 
         $response = ["status" => "failed", "response" => $verification];
         echo json_encode($response); 

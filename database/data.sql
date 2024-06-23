@@ -265,12 +265,15 @@ INSERT INTO Change_quantite_plat (id_plat, date, production) VALUES
 
 
 -- Insérer des données dans la table Commande
---INSERT INTO Commande (id_client,adresse,repere,date) VALUES();
+INSERT INTO Commande (id_client,adresse,repere,date,latitude,longitude) VALUES(1,7,"Iscam",'2024-06-22 08:00:00',-18.9292156,47.4981480);
+INSERT INTO Commande (id_client,adresse,repere,date,latitude,longitude) VALUES(1,7,"Iscam",'2024-06-22 10:00:00',-18.9292156,47.4981480);
 
 
 -- Insérer des données dans la table Commande_plat
 -- (Assumant que vous avez une table Commande déjà créée)
---INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(1, 1, 2, 21.98);
+INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(1, 1, 2, 8000);
+INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(1, 2, 2, 4000);
+INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(2, 2, 4, 4000);
 
 -- Insérer des données dans la table Commission_admin
 INSERT INTO Commission_admin (commission_resto,commission_livreur) VALUES (5,30);

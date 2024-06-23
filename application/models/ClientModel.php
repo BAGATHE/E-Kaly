@@ -203,7 +203,6 @@ class  ClientModel extends CI_Model {
       $query = $this->db->query("CALL procedure_getRestoFavorisClient(?)", array($idClient));
       return $query->result_array(); 
   }
-  
 }
 
 ?>

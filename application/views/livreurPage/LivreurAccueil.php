@@ -9,7 +9,7 @@
                            <form action="<?=site_url("LivreurController/updateStatus")?>" method="post">
                         <select name="status" id="status">
                             <option value="dispo" <?= $status == "dispo" ? "selected" : "" ?>>Actif</option>
-                            <option value="non dispo" <?= $status == "non dispo" ? "selected" : "" ?>>Inactif</option>
+                            <option value="non dispo" <?= $status == "non-dispo" ? "selected" : "" ?>>Inactif</option>
                         </select>
                               <button type="submit">Valider</button>
                            </form>
@@ -21,7 +21,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Argent du jour</h3>
-                            <h1 class="ekaly"><?= number_format($solde['somme_commission'])?> Ar</h1>
+                            <h1 class="ekaly"><?= number_format($solde['somme_frais_livraison'])?> Ar</h1>
                         </div>
                     </div>
                 </div>
