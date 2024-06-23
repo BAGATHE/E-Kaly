@@ -4,12 +4,6 @@
         <nav>
             <form action="#">
                 <div class="form-input">
-                    <input type="search" placeholder="Search...">
-                    <button class="search-btn" type="submit">
-                        <span class="material-icons-sharp">
-                            troubleshoot
-                        </span>
-                    </button>
                 </div>
             </form>
             <input type="checkbox" id="theme-toggle" hidden>
@@ -20,17 +14,17 @@
                 </span>
                 <span class="count">0</span>
             </a>
-            <a href="#" class="profile">
-                <p><?=$current_resto["nom"]?></p>
-                <img src="<?php echo base_url()?>assets/images/Logo.png">
+            <a href="<?= site_url('RestoController/infoProfil')?>" class="profile">
+                <p><?=$profil["nom"]?></p>
+                <img src="<?php echo base_url()?>assets/images/<?=$profil['image'] ?>">
             </a>
         </nav>
         <!-- End of Navbar -->
         <main>
             <div>
-                <h1>abonnement actuelle</h1>
-                <h2>date debut: <span><?php if($mise_en_avant_info !=  null ) echo $mise_en_avant_info['date_debut'] ; ?></span></h2>
-                <h2>date fin: <span><?php if($mise_en_avant_info != null ) echo  $mise_en_avant_info['date_fin']  ;?></span></h2>
+                <h1 style="color:darkcyan;">Abonnement actuelle</h1>
+                <h2>Date debut : <span><?php if($mise_en_avant_info !=  null ) echo $mise_en_avant_info['date_debut'] ;else echo "Mbola tsy nanomboka?"; ?></span></h2>
+                <h2>Date fin : <span><?php if($mise_en_avant_info != null ) echo  $mise_en_avant_info['date_fin']  ;?></span></h2>
             </div>
 
             <div class="bottom-data">
@@ -48,7 +42,7 @@
                             </div>
                             <div class="form-input">
                                 <label for="">Date</label>
-                                <input type="date" placeholder="date"  name="date">
+                                <input type="date" placeholder="date"  name="date" value="2024-06-23">
                             </div>
                             <div class="form-input">
                                 <label for="">Durée</label>

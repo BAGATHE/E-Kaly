@@ -4,12 +4,6 @@
         <nav>
             <form action="#">
                 <div class="form-input">
-                    <input type="search" placeholder="Search...">
-                    <button class="search-btn" type="submit">
-                        <span class="material-icons-sharp">
-                            troubleshoot
-                        </span>
-                    </button>
                 </div>
             </form>
             <input type="checkbox" id="theme-toggle" hidden>
@@ -20,9 +14,9 @@
                 </span>
                 <span class="count">0</span>
             </a>
-            <a href="#" class="profile">
-                <p><?=$current_resto["nom"]?></p>
-                <img src="<?php echo base_url()?>assets/images/Logo.png">
+            <a href="<?= site_url('RestoController/infoProfil')?>" class="profile">
+                <p><?=$profil["nom"]?></p>
+                <img src="<?php echo base_url()?>assets/images/<?=$profil['image'] ?>">
             </a>
         </nav>
 
@@ -33,7 +27,7 @@
             <div class="bottom-data">
                 <div class="orders">
                     <div class="ajout">
-                        <form action="<?=site_url('RestoController/modifierPlat') ?>" method="post">
+                        <form action="<?=site_url('RestoController/modifierPlat') ?>" method="post" enctype="multipart/form-data">
                             <h2>Modifier Plat</h2>
                             <input type="hidden" name="id_plat" value="<?=$plat["id"] ?>">
                             <input type="hidden" name="id_resto" value="<?=$plat["id_resto"] ?>">
@@ -47,7 +41,7 @@
                             </div>
                             <div class="form-input">
                                 <label for="">Image</label>
-                                <input type="file">
+                                <input type="file" name="image">
                             </div>
                             <button type="submit">Modifier</button>
                         </form>

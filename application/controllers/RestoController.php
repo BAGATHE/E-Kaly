@@ -10,6 +10,7 @@ class RestoController extends CI_Controller {
         $this->load->model('PlatModel');
         $this->load->model('ChangeQuantitePlatModel');
         $this->load->model('MiseEnAvantModel');
+        $this->load->helper('upload_helper');
        
     }
 
@@ -18,9 +19,10 @@ class RestoController extends CI_Controller {
         $current_resto  = null;
         if ($this->session->userdata('resto_session')) {
             $current_resto = $this->session->userdata('resto_session');
-            }
+        }
         $data['list_plat_resto'] = $this->PlatModel->getAllInfo($current_resto['id']);
         $data['current_resto'] = $current_resto;
+        $data['profil']=$this->RestoModel->getById($current_resto['id']);
         $data['contents'] = "restoPage/Accueil";
         $this->load->view('templates_resto/template', $data);
     }
@@ -120,6 +122,7 @@ public function logOut(){
             $current_resto = $this->session->userdata('resto_session');
         }
         $data['current_resto'] = $current_resto; 
+        $data['profil']=$this->RestoModel->getById($current_resto['id']);
         $data['contents'] = "restoPage/AjoutResto";
         $this->load->view('templates_resto/template', $data);        
     }
@@ -131,10 +134,20 @@ public function logOut(){
         $prix = $this->input->post('prix');
         $quantite_production = $this->input->post('production');
         $date = $this->input->post('date');
+
+        $image=$_FILES['image']['name']; 
+        $target_file= "assets/images/".$image_resto;
+        try{
+            move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+        }catch(Exception $e){
+            $e->getMessage();
+        }
+
         $info_plat = [
             'id_resto'=>$id_resto,
             'description'=>$description,
-            'prix'=>$prix
+            'prix'=>$prix,
+            'image'=>$image
         ];
         $this->PlatModel->save($info_plat);
         $id_last_idPlat = $this->PlatModel-> getLastPLatId();
@@ -157,7 +170,8 @@ public function logOut(){
             $current_resto = $this->session->userdata('resto_session');
         }
         $data['current_resto'] = $current_resto;
-        
+        $data['profil']=$this->RestoModel->getById($current_resto['id']);
+    
         $date=$this->input->post('date');
         $mois=$this->input->post('mois');
         $annee=$this->input->post('annee');
@@ -180,6 +194,8 @@ public function logOut(){
         $current_resto = $this->session->userdata('resto_session');
     }
     $data['current_resto'] = $current_resto;
+    $data['profil']=$this->RestoModel->getById($current_resto['id']);
+
         // Récupérer les détails de la commande à partir du modèle
         $data['details_commande'] = $this->RestoModel->detailsCommmande($id_commande);
         $data['commande'] = $this->RestoModel->detailsCommandeHistorique($id_commande)[0];
@@ -195,6 +211,8 @@ public function DetailCommandeByid($id_commande) {
             $current_resto = $this->session->userdata('resto_session');
         }
         $data['current_resto'] = $current_resto;
+        $data['profil']=$this->RestoModel->getById($current_resto['id']);
+
         $data['details_commande'] = $this->RestoModel->detailsCommmande($id_commande);
         $data['commande'] = $this->RestoModel->detailsCommandeHistorique($id_commande)[0];
         $data["contents"] = "restoPage/DetailNotification";
@@ -208,6 +226,8 @@ public function DetailCommandeByid($id_commande) {
         $current_resto = $this->session->userdata('resto_session');
         }
         $data['current_resto'] = $current_resto;
+        $data['profil']=$this->RestoModel->getById($current_resto['id']);
+
         $data['plat'] = $this->PlatModel->getById($id_plat);
         $data['change_quantiter_plat'] = $this->ChangeQuantitePlatModel->getByIdPlat($id_plat);
         $data['contents'] = "restoPage/ModifPlat";
@@ -221,6 +241,8 @@ public function DetailCommandeByid($id_commande) {
             $current_resto = $this->session->userdata('resto_session');
             }
             $data['current_resto'] = $current_resto;
+            $data['profil']=$this->RestoModel->getById($current_resto['id']);
+
             //$data['id_plat'] = $id_plat;
             $data['contents'] = "restoPage/ModifQuantitePlat";
             $this->load->view('templates_resto/template', $data);
@@ -252,11 +274,21 @@ public function modifierPlat(){
     $id_resto = $this->input->post('id_resto');
     $description = $this->input->post('description_plat');
     $prix = $this->input->post('prix_plat');
+
+    $image=$_FILES['image']['name']; if($image==null) $image=$this->PlatModel->getById($id_plat)['image'];
+
+    $target_file= "assets/images/".$image;
+    try{
+        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+    }catch(Exception $e){
+        $e->getMessage();
+    }
     $donner = [
         'id'=>$id_plat,
         'id_resto'=>$id_resto,
         'description'=>$description,
-        'prix'=>$prix
+        'prix'=>$prix,
+        'image'=>$image
     ];
     $this->PlatModel->edit($id_plat,$donner);
     redirect('RestoController');
@@ -271,6 +303,8 @@ public function loadMiseEnAvantPage(){
     $data["mise_en_avant_info"] = $this->RestoModel->getMiseEnAvantParResto($current_resto['id']);
     $data["prix_mise_en_avant"] = $this->RestoModel->getPrixMiseEnAvant();
     $data['current_resto'] = $current_resto; 
+    $data['profil']=$this->RestoModel->getById($current_resto['id']);
+
     $data['contents'] = "restoPage/MiseEnAvant";
     $this->load->view('templates_resto/template', $data);
 }
@@ -282,6 +316,8 @@ public function loadStatistiquePage(){
             $current_resto = $this->session->userdata('resto_session');
         }
     $data['current_resto'] = $current_resto; 
+    $data['profil']=$this->RestoModel->getById($current_resto['id']);
+
     $data['contents'] = "restoPage/GlobalStatResto";
     $this->load->view('templates_resto/template', $data);
 }
@@ -311,15 +347,50 @@ public function globalStatResto(){
 
 /**fonction insertion dans la table mise_en_avant */
 public function ajout_abonnement(){
-    $data = [
-        'id_resto' =>  $this->input->post("id_resto"),
-        'id_prix' => $this->input->post("id_prix"),
-        'prix' => $this->input->post("prix"),
-        'date' => $this->input->post("date"),
-        'duree' => $this->input->post("duree")
-    ];
-    $this->MiseEnAvantModel->save($data);
-    redirect("RestoController/loadMiseEnAvantPage");
+    $current_resto  = null;
+    if ($this->session->userdata('resto_session')) {
+        $current_resto = $this->session->userdata('resto_session');
+    }
+    $mise_en_avant_info= $this->RestoModel->getMiseEnAvantParResto($current_resto['id']);
+    $prix_mise_en_avant = $this->RestoModel->getPrixMiseEnAvant();
+
+    if ($mise_en_avant_info ==null) {
+        $data = [
+            'id_resto' =>  $this->input->post("id_resto"),
+            'id_prix' => $this->input->post("id_prix"),
+            'prix' => $this->input->post("prix"),
+            'date' => $this->input->post("date"),
+            'duree' => $this->input->post("duree")
+        ];
+        $this->MiseEnAvantModel->save($data);
+        redirect("RestoController/loadMiseEnAvantPage");
+    }else {
+        $date=$this->input->post("date");
+        // Raha mbola tafiditra ao anaty duree anle ancien mise_en_avant
+        if (date_create($date) <= date_create($mise_en_avant_info['date_fin']) ) {
+            $new_date=$mise_en_avant_info['date_debut'];
+            $new_duree=$mise_en_avant_info['duree']+$this->input->post("duree");
+            $data = [
+                'id_resto' =>  $this->input->post("id_resto"),
+                'id_prix' => $this->input->post("id_prix"),
+                'prix' => $this->input->post("prix"),
+                'date' => $new_date,
+                'duree' => $new_duree
+            ];
+        }else {
+        // Raha efa lany
+            $data = [
+                'id_resto' =>  $this->input->post("id_resto"),
+                'id_prix' => $this->input->post("id_prix"),
+                'prix' => $this->input->post("prix"),
+                'date' => $this->input->post("date"),
+                'duree' => $this->input->post("duree")
+            ];
+        }
+        $this->MiseEnAvantModel->update($mise_en_avant_info['id'],$data);
+        redirect("RestoController/loadMiseEnAvantPage");
+        
+    }
 }
 
 /**function load page notification*/
@@ -328,9 +399,11 @@ public function notificationPage(){
     if ($this->session->userdata('resto_session')) {
         $current_resto = $this->session->userdata('resto_session');
     }
-$data['current_resto'] = $current_resto; 
-$data['contents'] = "restoPage/NotificationResto";
-$this->load->view('templates_resto/template', $data);
+    $data['current_resto'] = $current_resto; 
+    $data['profil']=$this->RestoModel->getById($current_resto['id']);
+
+    $data['contents'] = "restoPage/NotificationResto";
+    $this->load->view('templates_resto/template', $data);
 }
 
 /***fonction qui recupere la liste de commande du jour*/
@@ -342,6 +415,61 @@ public function getTodayOrders(){
     $data['date'] = date('Y-m-d');
     $data = $this->RestoModel->historiqueCommandeJour($data['date'],$current_resto["id"]);
      echo json_encode($data);
+}
+
+/** Fonction load Profil page du Resto */
+public function infoProfil(){
+    $current_resto  = null;
+    if ($this->session->userdata('resto_session')) {
+        $current_resto = $this->session->userdata('resto_session');
+    }
+    $data['current_resto'] = $current_resto; 
+    // $data['image']=$current_resto['image'];
+    $data['adresses']=$this->AdresseModel->getAll();
+    $data['profil']=$this->RestoModel->getById($current_resto['id']);
+    $data['contents'] = "restoPage/Profil";
+    $this->load->view('templates_resto/template', $data);   
+}
+
+/** Fonction edit Resto's Profil */
+public function updateProfil(){
+    $current_resto  = null;
+    if ($this->session->userdata('resto_session')) {
+        $current_resto = $this->session->userdata('resto_session');
+    }
+    $image_resto=$_FILES['profile_image']['name'];  if ($image_resto==null) $image_resto=$this->RestoModel->getById($current_resto['id'])['image'];
+    $id_resto = $this->input->post('id_resto');
+    $nom_resto = $this->input->post('nom_resto');
+    $telephone = $this->input->post('telephone');
+    $heure_ouverture = $this->input->post('ouverture');
+    $heure_fermeture = $this->input->post('fermeture');
+    $adresse = $this->input->post('adresse');
+    $repere = $this->input->post('repere');
+    $description = $this->input->post('description');
+    
+    // Moving image to assets
+    $target_file= "assets/images/".$image_resto;
+    try{
+        move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file);
+    }catch(Exception $e){
+        $e->getMessage();
+    }
+
+    $donnees = [
+        'id_resto'=>$id_resto,
+        'nom'=>$nom_resto,
+        'telephone'=>$telephone,
+        'heure_ouverture'=>$heure_ouverture,
+        'heure_fermeture'=>$heure_fermeture,
+        'adresse'=>$adresse,
+        'repere'=>$repere,  
+        'description'=>$description,
+        'image'=>$image_resto
+    ];
+    // echo $_FILES['profile_image']['tmp_name'];
+    $this->RestoModel->editData($id_resto,$donnees);
+    redirect('RestoController/infoProfil');
+    // redirect('RestoController');    
 }
 
 }
