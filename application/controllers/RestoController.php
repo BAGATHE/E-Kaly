@@ -11,7 +11,7 @@ class RestoController extends CI_Controller {
         $this->load->model('ChangeQuantitePlatModel');
         $this->load->model('MiseEnAvantModel');
         $this->load->helper('upload_helper');
-       
+  
     }
 
     /**redirectioon page acceuil resto apres success authnetification de la fonction login  */

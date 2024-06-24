@@ -60,8 +60,11 @@ $(document).ready(function() {
             var statusSpan = document.createElement('span');
             statusSpan.className = 'status process';
             var statusLink = document.createElement('a');
-            statusLink.href = '#';
-            statusLink.textContent = 'En cours';
+            if(order.paye==1){
+                statusLink.textContent = 'Valider';
+            }else{
+                statusLink.textContent = 'En cours';
+            }
             statusSpan.appendChild(statusLink);
             status.appendChild(statusSpan);
             tr.appendChild(status);

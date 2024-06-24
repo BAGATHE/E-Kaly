@@ -6,8 +6,7 @@ select
     p.image as image,
     r.id_adresse,
     p.description ,
-    p.prix,
-    p.image
+    p.prix
 from 
     Resto as r
 join 
@@ -119,6 +118,14 @@ select
 from v_historique_commande_restaurant as hcr 
 join Client 
 on Client.id=hcr.id_client;
+
+create or replace view v_historique_commande_restaurant_avec_nom_client_avec_status as 
+select 
+    hcrn.*,
+
+from v_historique_commande_restaurant_avec_nom_client as hcrn 
+join Livraison_payement_commande lpc
+on lpc.id_commande=hcrn.id_commande;
 
 -- liste des detaisl de tout les commandes effectuer sur plateform
 create or replace view v_details_commande as

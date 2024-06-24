@@ -2,7 +2,7 @@
         <main>
             <div class="ajout">
             <form  method="post" id="livreurForm" action="<?php echo site_url('LivreurController/edit');?>" >
-                    <h2>Ajouter Livreur</h2>
+                    <h2>Modifier Livreur</h2>
                     <input type="hidden" name="id" value="<?=$livreur["id"]?>">
                     <div class="form-input">
                         <label for="">Nom Complet</label>
@@ -10,7 +10,7 @@
                     </div>
                     
                     <div class="form-input">
-                        <label for="">email</label>
+                        <label for="">Email</label>
                         <input type="email" placeholder="email" name="email" value="<?=$livreur['email'] ?>">
                     </div>
                     

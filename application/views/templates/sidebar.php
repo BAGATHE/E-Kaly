@@ -35,13 +35,13 @@
                     <span class="material-icons-sharp">
                         assessment
                     </span>
-                    <h3>Revenue Mensuel</h3>
+                    <h3>Revenue</h3>
                 </a>
                 <a href="<?=site_url('AdmisController/miseEnAvant') ?>">
                     <span class="material-icons-sharp">
                         settings
                     </span>
-                    <h3>mise en avant</h3>
+                    <h3>Mise en avant</h3>
                 </a>
                 <a href="<?=site_url('AdmisController/adminLogout') ?>">
                     <span class="material-icons-sharp">
