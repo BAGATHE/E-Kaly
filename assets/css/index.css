@@ -302,6 +302,12 @@ main .analyse .searches svg circle{
     stroke-dasharray: 200;
 }
 
+main .analyse .diff svg circle{
+    stroke: var(--green-clr);
+    stroke-dashoffset: -30;
+    stroke-dasharray: 200;
+}
+
 main .analyse .progresss .percentage{
     position: absolute;
     top: -3px;

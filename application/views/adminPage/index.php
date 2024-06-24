@@ -2,102 +2,95 @@
         <!-- Main Content -->
         <main>
             <div class="header">
-                <div class="left">
+                <div class="left" style="margin-top:11vh;">
                     <h1>Dashboard</h1>
                 </div>
             </div>
 
-            <!-- Dashboard -->
-            <ul class="insights">
-                <li>
-                    <span class="material-icons-sharp">
-                        boy
-                    </span>
-                    <span class="info">
-                        <h3>
-                            15
-                        </h3>
-                        <p>Nombres de client actif</p>
-                    </span>
-                </li>
-                <li>
-                    <span class="material-icons-sharp">
-                        house
-                    </span>
-                    <span class="info">
-                        <h3>
-                            20
-                        </h3>
-                        <p>Nombre de restaurant</p>
-                    </span>
-                </li>
-                <li>
-                    <span class="material-icons-sharp">
-                        assessment
-                    </span>
-                    <span class="info">
-                        <h3>
-                            14000 Ar
-                        </h3>
-                        <p>Revenus mensuel</p>
-                    </span>
-                </li>
-                <li>
-                    <span class="material-icons-sharp">
-                        auto_graph
-                    </span>
-                    <span class="info">
-                        <h3>
-                            6000 Ar
-                        </h3>
-                        <p>Difference de revenus</p>
-                    </span>
-                </li>
-            </ul>
-            <!-- End of Dashboard -->
+            <!-- Analyses -->
+            <div class="analyse">
+                <div class="sales">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Client actif</h3>
+                            <h1>20</h1>
+                        </div>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <span class="material-icons-sharp">
+                                    boy
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="visits">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Restaurant sur le plateforme</h3>
+                            <h1>24</h1>
+                        </div>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <span class="material-icons-sharp">
+                                    house
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="searches">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Revenue mensuel</h3>
+                            <h1>14 000 Ar</h1>
+                        </div>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <span class="material-icons-sharp">
+                                    assessment
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="diff">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Difference de revenus</h3>
+                            <h1>6000 Ar</h1>
+                        </div>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <span class="material-icons-sharp">
+                                    auto_graph
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Analyses -->
+
+            
             <!-- New Users Section -->
             <div class="new-users">
-                <h2>Listes des admins</h2>
                 <div class="user-list">
-                <?php foreach( $administrators as $administrator ){ ?>
-                    <div class="user">
-                        <img src="<?php echo base_url()?>assets/images/manager.svg">
-                        <h2><?= $administrator['nom']  ?></h2>
-                    </div>
-                <?php } ?>
-               
-                <div class="user">
-                        <a href="<?= site_url('AdmisController/insertionPageAdmin')?>"><img src="<?php echo base_url()?>assets/images/plus.png"></a>
-                        <h2>Ajouter</h2>
-                    </div>
+                    
                 </div>
                 
-                <div class="recent-orders">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>identifiant</th>
-                                <th>Nom</th>
-                                <th>Prenom</th>
-                                <th>Email</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                        <?php foreach( $administrators as $administrator ){ ?>
-                        <tr>
-                            <td><?= $administrator['id'] ?></td>
-                            <td><?= $administrator['nom'] ?></td>
-                            <td><?= $administrator['prenom'] ?></td>
-                            <td><?= $administrator['email'] ?></td>
-                            <td>
-                                <a href="<?= site_url('AdmisController/delete/'.$administrator['id']) ?>" class="delete-link" style="color: red;">Supprimer</a>
-                            </td>
-                            <td><a href="<?= site_url('AdmisController/loadForm/'.$administrator['id']) ?>">Modifier</a></td>
-                        </tr>
-                       <?php  }?>
-                    </table>
-                </div>
             </div>
             <!-- End of New Users Section -->
 
@@ -150,19 +143,42 @@
                         dark_mode
                     </span>
                 </div>
-
-                <div class="profile">
-                    <div class="info">
-                        <p><?php echo $current_administrator["nom"]; ?></p>
-                        <small class="text-muted">Admin</small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="<?php echo base_url()?>assets/images/manager.svg">
-                    </div>
-                </div>
+                    
+                  
+                
 
             </div>
             <!-- End of Nav -->
+             <div class="reminders">
+                <div class="header">
+                    <h2>Administrateur</h2>  <a href="<?= site_url('AdmisController/insertionPageAdmin')?>"><img src="<?php echo base_url()?>assets/images/plus.png" style="width: 60px;"></a>
+                    <span class="material-icons-sharp">
+                        admin_panel_settings
+                    </span>
+                </div>
+                <?php foreach( $administrators as $administrator ){ ?>
+
+                <div class="notification">
+                    <div class="icon" style="width: 60px;">
+                    <div class="profile-photo" >
+                        <img src="<?php echo base_url()?>assets/images/manager.svg">
+                    </div>
+                    </div>
+                    <div class="content">
+                        <div class="info">
+                            <h3><?php echo $administrator["nom"]; ?></h3>
+                            <small class="text_muted">
+                                admministrateur
+                            </small>
+                        </div>
+                        <span class="material-icons-sharp">
+                            more_vert
+                        </span>
+                    </div>
+                </div>
+                <?php } ?>
+              
+            </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
