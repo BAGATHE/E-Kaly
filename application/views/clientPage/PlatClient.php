@@ -28,8 +28,8 @@
   <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-banner.png" media="min-width(768px)">
   <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-banner-bg.png" media="min-width(768px)">
   <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-bg.jpg">
-
-</head>
+    
+  </head>
 
 <body id="top">
 

@@ -247,3 +247,18 @@ select
     id_prix
 from Mise_en_avant;
 
+CREATE OR REPLACE VIEW v_mise_en_avant_dates_with_info_resto AS 
+select
+    msv.id,
+    msv.id_resto, 
+    msv.date as date_debut,
+    msv.DATE_ADD(date, INTERVAL duree MONTH) as date_fin,
+    msv.duree,
+    msv.prix as prix_par_mois, 
+    msv.id_prix,
+    ir.nom
+    From Mise_en_avant as msv 
+
+    join Info_resto ir
+
+    on msv.id_resto=ir.id_resto;

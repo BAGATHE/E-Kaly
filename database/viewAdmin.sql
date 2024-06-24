@@ -31,7 +31,20 @@ create or replace view v_revenu_par_an as
 select 
     month,
     year,
-    sum(revenu_total_jour) as revenu_total
+    sum(revenu_total_jour) + 
+        coalesce(
+            (
+                select 
+                    sum(prix_par_mois) 
+                from 
+                    v_mise_en_avant_dates 
+                where 
+                    month BETWEEN MONTH(date_debut) and MONTH(date_fin)
+                and 
+                    year BETWEEN YEAR(date_debut) and YEAR(date_fin)  
+            ),0
+        ) 
+    as revenu_total
 from
     v_revenu_par_mois
 group by
@@ -101,3 +114,5 @@ JOIN
     v_total_commission_frais_livraison_par_jour tcfp
 ON
     DATE(cpcpr.date) = tcfp.date;
+
+  

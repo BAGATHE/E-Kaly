@@ -239,7 +239,15 @@ public function adminLogout() {
 }
 /*liste restaurant avec mise en avant */
 public function miseEnAvant(){
-    echo "mbola ts vita";
+     $current_administrator  = null;
+        if ($this->session->userdata('admin_session')) {
+            $current_administrator = $this->session->userdata('admin_session');
+        }
+        $data = array();      
+        $data['current_administrator'] = $current_administrator;
+        $data["list_resto"] =$this->RestoModel->getAllMiseEnAvant(); 
+        $data['contents'] = "adminPage/MiseEnAvant";
+        $this->load->view('templates/template',$data);
 }
 
 

@@ -135,8 +135,10 @@ public function logOut(){
         $quantite_production = $this->input->post('production');
         $date = $this->input->post('date');
 
-        $image=$_FILES['image']['name']; 
-        $target_file= "assets/images/".$image_resto;
+         $image = $_FILES['image']['name']; 
+        $target_file = "assets/images/".$image; // Correction ici
+
+        
         try{
             move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
         }catch(Exception $e){
@@ -428,6 +430,7 @@ public function infoProfil(){
     $data['adresses']=$this->AdresseModel->getAll();
     $data['profil']=$this->RestoModel->getById($current_resto['id']);
     $data['contents'] = "restoPage/Profil";
+    
     $this->load->view('templates_resto/template', $data);   
 }
 

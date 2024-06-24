@@ -26,7 +26,7 @@
             <div class="bottom-data">
                 <div class="orders">
                     <div class="ajout">
-                        <form action="<?=site_url('RestoController/insertionPlat_etQuantiteProduction')?>" method="POST" enctype="multipart/form-data">
+                    <form action="<?=site_url('RestoController/insertionPlat_etQuantiteProduction')?>" method="POST" enctype="multipart/form-data">
                             <h2>Ajouter Plat</h2>
                             <input type="hidden" name ="id_resto"value="<?=$current_resto["id"] ?>">
                             <div class="form-input">

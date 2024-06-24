@@ -23,7 +23,7 @@
         <main>
             <div>
                 <h1 style="color:darkcyan;">Abonnement actuelle</h1>
-                <h2>Date debut : <span><?php if($mise_en_avant_info !=  null ) echo $mise_en_avant_info['date_debut'] ;else echo "Mbola tsy nanomboka?"; ?></span></h2>
+                <h2>Date debut : <span><?php if($mise_en_avant_info !=  null ) echo $mise_en_avant_info['date_debut'] ;else echo "Aucune souscription a l'abonnement"; ?></span></h2>
                 <h2>Date fin : <span><?php if($mise_en_avant_info != null ) echo  $mise_en_avant_info['date_fin']  ;?></span></h2>
             </div>
 

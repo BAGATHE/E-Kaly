@@ -29,7 +29,6 @@
                         <td>
                             <a href="" class="delete-link" style="color: red;">Supprimer</a>
                         </td>
-                        <td><a href="<?= site_url('RestoController/loadForm/'.$resto['id']) ?>">Modifier</a></td>
                     </tr>
                     <?php } ?>
                     </tbody>

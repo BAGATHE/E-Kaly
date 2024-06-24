@@ -1,6 +1,60 @@
 
         <!-- Main Content -->
         <main>
+            <div class="header">
+                <div class="left">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <ul class="insights">
+                <li>
+                    <span class="material-icons-sharp">
+                        boy
+                    </span>
+                    <span class="info">
+                        <h3>
+                            15
+                        </h3>
+                        <p>Nombres de client actif</p>
+                    </span>
+                </li>
+                <li>
+                    <span class="material-icons-sharp">
+                        house
+                    </span>
+                    <span class="info">
+                        <h3>
+                            20
+                        </h3>
+                        <p>Nombre de restaurant</p>
+                    </span>
+                </li>
+                <li>
+                    <span class="material-icons-sharp">
+                        assessment
+                    </span>
+                    <span class="info">
+                        <h3>
+                            14000 Ar
+                        </h3>
+                        <p>Revenus mensuel</p>
+                    </span>
+                </li>
+                <li>
+                    <span class="material-icons-sharp">
+                        auto_graph
+                    </span>
+                    <span class="info">
+                        <h3>
+                            6000 Ar
+                        </h3>
+                        <p>Difference de revenus</p>
+                    </span>
+                </li>
+            </ul>
+            <!-- End of Dashboard -->
             <!-- New Users Section -->
             <div class="new-users">
                 <h2>Listes des admins</h2>
