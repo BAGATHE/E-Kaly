@@ -6,14 +6,13 @@
                     <h1>Dashboard</h1>
                 </div>
             </div>
-
             <!-- Analyses -->
             <div class="analyse">
                 <div class="sales">
                     <div class="status">
                         <div class="info">
                             <h3>Client actif</h3>
-                            <h1>20</h1>
+                            <h1><?=$nb_client ?></h1>
                         </div>
                         <div class="progresss">
                             <svg>
@@ -31,7 +30,7 @@
                     <div class="status">
                         <div class="info">
                             <h3>Restaurant sur le plateforme</h3>
-                            <h1>24</h1>
+                            <h1><?=$nb_resto ?></h1>
                         </div>
                         <div class="progresss">
                             <svg>
@@ -49,7 +48,7 @@
                     <div class="status">
                         <div class="info">
                             <h3>Revenue mensuel</h3>
-                            <h1>14 000 Ar</h1>
+                            <h1><?=number_format($revenu_generer["revenu_n"], 2, '.', ',') ?> Ar</h1>
                         </div>
                         <div class="progresss">
                             <svg>
@@ -66,8 +65,8 @@
                 <div class="diff">
                     <div class="status">
                         <div class="info">
-                            <h3>Difference de revenus</h3>
-                            <h1>6000 Ar</h1>
+                            <h3>Variation</h3>
+                            <h1><?=number_format($revenu_generer["pourcentage_variation"],0, '.', ',') ?> %</h1>
                         </div>
                         <div class="progresss">
                             <svg>
