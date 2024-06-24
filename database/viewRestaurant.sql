@@ -3,6 +3,7 @@ create or replace view  v_resto_plat AS
 select 
     r.id as id_resto,
     p.id as id_plat,
+    p.image as image,
     r.id_adresse,
     p.description ,
     p.prix,
@@ -150,7 +151,7 @@ select
     cqp.production
 from 
     v_resto_plat as  vrp
-join 
+left join 
     Change_quantite_plat as cqp
 on 
     vrp.id_plat = cqp.id_plat
@@ -161,6 +162,7 @@ GROUP BY
 create or replace view v_info_global_plat_resto as 
 select 
     vcqp.*,
+    -- vcqp.image as images,
     coalesce(avg(note),0) as note
 FROM   
     v_changement_quantite_plat as vcqp
