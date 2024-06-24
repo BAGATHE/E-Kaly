@@ -94,7 +94,7 @@
 
         <!-- End of Navbar -->
 
-        <h1 style="color:darkcyan;">A propos du Resto:</h1>
+        <h1 style="color:darkcyan;">À propos du Resto:</h1>
         <main style="display: -webkit-inline-box;">
             <div class="col-xl-4">
                 <!-- Profile picture card-->
