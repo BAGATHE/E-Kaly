@@ -12,7 +12,7 @@
                             <th>Description</th>
                             <th>Heure ouverture</th>
                             <th>Heure fermeture</th>
-                            <th>email</th>
+                            <th>Email</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -43,7 +43,7 @@
                             <th>identifiant</th>
                             <th>Nom</th>
                             <th>Email</th>
-                            <th>Adress</th>
+                            <th>Adresse</th>
                             
                             <th></th>
                         </tr>

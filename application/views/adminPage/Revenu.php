@@ -28,13 +28,13 @@
             </form>
         </div>
         
-            <h1>Revenue Mensuel</h1>
-           
+            <h1>Revenue Annuel</h1>
             <canvas id="myChartannuel" width="400" height="200"></canvas>
+            <h1>Revenue Mensuel</h1>
             <canvas id="myChartmensuelle" width="400" height="200"></canvas>
 
             <!-- Tableau ajouter -->
-            <div class="bottom-data">
+            <!-- <div class="bottom-data">
                 <div class="orders">
                     <div class="header">
                         <i class='bx bx-receipt'></i>
@@ -56,7 +56,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> -->
             
         </main>
         <!-- End of Main Content -->

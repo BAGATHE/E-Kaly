@@ -84,15 +84,7 @@
             </div>
             <!-- End of Analyses -->
 
-            
-            <!-- New Users Section -->
-            <div class="new-users">
-                <div class="user-list">
-                    
-                </div>
-                
-            </div>
-            <!-- End of New Users Section -->
+    
 
             <!-- End of Recent Orders -->
             <div class="recent-orders client_div">
@@ -171,9 +163,9 @@
                                 admministrateur
                             </small>
                         </div>
-                        <span class="material-icons-sharp">
+                        <!-- <span class="material-icons-sharp">
                             more_vert
-                        </span>
+                        </span> -->
                     </div>
                 </div>
                 <?php } ?>
