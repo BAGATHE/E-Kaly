@@ -246,7 +246,7 @@ public function historiqueCommandeMois($mois, $annee,$id_resto)
 /*historique des commmande du jour choisi*/
 public function historiqueCommandeJour($date,$id_resto)
    {
-       $sql= "select * from v_historique_commande_restaurant_avec_nom_client where DATE(date)='".$date."' and id_resto=".$id_resto;
+       $sql= "select * from v_historique_commande_restaurant_avec_nom_client_avec_status where DATE(date)='".$date."' and id_resto=".$id_resto;
        $query= $this->db->query($sql);
        return $query->result_array();
    }
