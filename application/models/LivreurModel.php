@@ -280,7 +280,7 @@ public function getLivraisonLivreurEnUneJourneAvecGain($idLivreur, $dateRecherch
       $data = array(
          'id_commande' => $id_commande,
          'id_livreur' => $id_livreur,
-         'paye' => false // Initialement, la commande n'est pas payée
+         'paye' => 0 // Initialement, la commande n'est pas payée
       );
 
       // Insérer les données dans la table
