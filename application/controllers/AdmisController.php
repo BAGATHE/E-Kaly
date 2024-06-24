@@ -22,6 +22,9 @@ class AdmisController extends CI_Controller {
         $data['current_administrator'] = $current_administrator; 
         $data['administrators'] = $this->AdmisModel->getAll();
         $data['clients'] = $this->ClientModel->getAll();
+        $data["nb_client"] = $this->AdmisModel->getCountClient();
+        $data["nb_resto"] = $this->AdmisModel->getCountResto();
+        $data["revenu_generer"] = $this->AdmisModel->getRevenu_details(); 
         $data['contents'] = "adminPage/index";
         $this->load->view('templates/template', $data);
     }

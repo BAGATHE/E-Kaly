@@ -116,3 +116,25 @@ ON
     DATE(cpcpr.date) = tcfp.date;
 
   
+create or replace view v_revenu_n as
+select * from v_revenu_par_an where year(now()) = year and month(now()) = month;
+
+create or replace view v_revenu_n_moins_un as
+select * from v_revenu_par_an where year(now()) = year and month(now()) = month - 1;
+
+create or replace view v_variation_revenu as
+select 
+    n.year as annee_n,
+    n.month as mois_n,
+    n.revenu_total as revenu_n,
+    COALESCE(nmoinsun.revenu_total, 0) as revenu_n_moins_un,
+    case
+        when nmoinsun.revenu_total != 0 and nmoinsun.revenu_total != null then
+            ((n.revenu_total - nmoinsun.revenu_total) / nmoinsun.revenu_total) * 100
+        else
+            -100
+    end as pourcentage_variation
+from 
+    v_revenu_n n
+left join v_revenu_n_moins_un nmoinsun 
+on n.month = nmoinsun.month;

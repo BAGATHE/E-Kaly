@@ -199,6 +199,23 @@ public function info_mise_en_avant(){
    return $query->result_array();
 }
 
+public function getCountClient() {
+   $query = $this->db->query('SELECT COUNT(*) AS client_count FROM Client');
+   $row = $query->row();
+   return $row->client_count;
+}
+
+public function getCountResto() {
+   $query = $this->db->query('SELECT COUNT(*) AS resto_count FROM Resto');
+   $row = $query->row();
+   return $row->resto_count;
+}
+
+public function getRevenu_details() {
+   $query = $this->db->get('v_variation_revenu');
+   return $query->row_array();
+}
+
 }
 
 ?>
