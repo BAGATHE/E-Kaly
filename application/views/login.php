@@ -58,6 +58,7 @@
             </form>
             <p>ou</p>
             <label id="register">Inscription</label>
+            <p style="color:red"><?php if(isset($error)) echo $error;?></p>
         </div>
     </div>
 </body>
@@ -76,7 +77,8 @@
         url: url,
         data:formData ,
         success: function(response) {
-          
+          alert("success");
+          window.location.href="<?php site_url("EntryPoint/index2")?>";
         },
         error: function(error) {
             console.log(error);

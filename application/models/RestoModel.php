@@ -340,11 +340,17 @@ public function getRestaurantByIdWithNote($id){
       $query = $this->db->get();
       return $query->result_array();
    }
-
-  
-  
-  
-
+   
+   public function ableToTakeCommand($id_resto,$heur){
+      $query = "SELECT ableToTakeCommand(?, ?) AS able";
+      $result = $this->db->query($query, array($id_resto, $heur));
+      
+      if ($result->num_rows() > 0) {
+         return $result->row()->able;
+      } else {
+         return null; 
+      }
+   }
 }
 
 
