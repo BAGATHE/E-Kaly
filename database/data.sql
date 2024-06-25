@@ -1,4 +1,4 @@
---Insertion dans la table Admis
+-- Insertion dans la table Admis
 INSERT INTO Admis (nom, prenom, email, mot_de_pass) VALUES
 ('admin1', 'admin1', 'admin1@gmail.com', 'admin1'),
 ('admin2', 'admin2', 'admin2@gmail.com', 'admin2');
@@ -191,8 +191,13 @@ INSERT INTO `Voisin` (`id_adresse1`,`id_adresse2`) VALUES
 INSERT INTO Resto (nom,id_adresse, email,mot_de_pass) VALUES
 ('PAKOPAKO',7,'pakopako@gmail.com', 'pakopako'),
 ('Chez Madama',28,'madama@gmail.com','madama'),
-('Selesy',49,'selesy@gmail.com','selesy');
-
+('Selesy',49,'selesy@gmail.com','selesy'),
+('Bon appetit',48,'Bon_appetit@gmail.com', 'Bon_appetit'),
+('Passion coco',27,'Passion_coco@gmail.com','Passion_coco'),
+('CHIKY',11,'CHIKY@gmail.com','CHIKY'),
+('Xin Hai',1,'Xin_Hai@gmail.com', 'Xin_Hai'),
+('DROPZON',2,'DROPZON@gmail.com','DROPZON'),
+('O zone',15,'O_zone@gmail.com','O_zone');
 
 -- Insertion des données dans la table Info_resto
 INSERT INTO Info_resto (id_resto, nom, adresse, repere,description, heure_ouverture, heure_fermeture,latitude,longitude,image) VALUES
@@ -318,7 +323,7 @@ INSERT INTO Commission_admin (commission_resto,commission_livreur) VALUES (5,30)
 
 
 -- Insérer des données dans la table Livraison_payement_commande
---INSERT INTO Livraison_payement_commande ( id_commande, id_livreur,paye) VALUES();
+-- INSERT INTO Livraison_payement_commande ( id_commande, id_livreur,paye) VALUES();
 
 INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (1, 1, 4),
@@ -334,4 +339,4 @@ INSERT INTO Prix_mise_en_avant(prix) VALUES(200000);
 
 INSERT INTO Tarif_livraison (tarif_min,tarif_moyen,tarif_max)
 VALUES (2000,4000,7000);
---teste
+-- teste

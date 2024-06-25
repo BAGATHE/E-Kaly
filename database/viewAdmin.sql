@@ -72,7 +72,7 @@ group by
     id_livreur;
 
 
---payement livreur par mois avec info 
+-- payement livreur par mois avec info 
 create or replace view v_payement_livreur_with_info_livreur as 
 select 
     vpl.*,
