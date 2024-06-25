@@ -122,7 +122,7 @@ on Client.id=hcr.id_client;
 create or replace view v_historique_commande_restaurant_avec_nom_client_avec_status as 
 select 
     hcrn.*,
-
+    lpc.paye
 from v_historique_commande_restaurant_avec_nom_client as hcrn 
 join Livraison_payement_commande lpc
 on lpc.id_commande=hcrn.id_commande;
@@ -268,3 +268,21 @@ SELECT
 FROM Mise_en_avant AS msv
 JOIN Info_resto ir
 ON msv.id_resto = ir.id_resto;
+
+
+DELIMITER //
+
+CREATE OR REPLACE FUNCTION ableToTakeCommand (idResto INT, heure TIME)
+RETURNS INT
+BEGIN
+    DECLARE countCommands INT;
+    
+    SELECT COUNT(*)
+    INTO countCommands
+    FROM Info_resto
+    WHERE id_resto = idResto
+    AND heure BETWEEN heure_ouverture AND addtime(heure_fermeture, - 1);    
+    RETURN countCommands;
+END //
+
+DELIMITER ;

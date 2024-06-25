@@ -179,11 +179,19 @@ public function ValiderPanier() {
     $latitude = $this->input->post('latitude');
     $longitude = $this->input->post('longitude');
     $currentDateTime = date('Y-m-d H:i:s');
-
+    $currentTime = date('H:i:s', strtotime($currentDateTime));
     /* Vérification de la quantité disponible aujourd'hui pour chaque plat */
-  $verification = "";
-  $date = date('Y-m-d');
-  for ($i = 0; $i < count($articles); $i++) {
+    $verification = "";
+    $date = date('Y-m-d');
+    
+    if ($this->RestoModel->ableToTakeCommand($idresto,$currentTime) == 0) { 
+        $response = ["status" => "failed", "response" => "Le restaurant ne peut plus prendre votre commande"];
+        echo json_encode($response);    
+        return;
+    }
+
+
+    for ($i = 0; $i < count($articles); $i++) {
     $article = $articles[$i];
     $production = $this->PlatModel->getProductionJournalierePlat($article['id_plat']); 
     $consommation = $this->PlatModel->getConsommationJournalierePLat($date, $article['id_plat']);
