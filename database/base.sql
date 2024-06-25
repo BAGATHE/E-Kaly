@@ -67,7 +67,7 @@ CREATE TABLE Plat (
     FOREIGN KEY (id_resto) REFERENCES Resto(id) ON DELETE CASCADE
 );
 
-CREATE TABLE Change_quantite_plat (
+CREATE or replace TABLE Change_quantite_plat (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_plat INT,
     date DATETIME,
