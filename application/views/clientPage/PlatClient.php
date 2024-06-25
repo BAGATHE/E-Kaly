@@ -65,7 +65,7 @@
       <?php if(!isset($client) || $client == null){ ?>
         <a href="<?php echo site_url('AuthentificationController/checkUserLogin');?>"><button class="btn btn-hover">Login</button></a>
       <?php  }else{?>
-        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">deconnection</button></a>
+        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">Déconnection</button></a>
       <?php } ?>
         <button class="nav-toggle-btn" aria-label="Toggle Menu" data-menu-toggle-btn>
           <span class="line top"></span>
@@ -161,7 +161,7 @@
             <!-- php boucle de liste de plat du resto -->
            <?php foreach($list_plat_resto as $plat){  ?>
             <li>
-              <div class="food-menu-card">
+              <div class="food-menu-card plat">
                 <div class="card-banner">
                    <img src="<?php if($plat['image'] != null) { echo base_url('assets/images/').$plat['image']; } else { echo base_url('assets/images/Logo.png'); } ?>" width="600" height="390" loading="lazy" alt="<?php echo $plat['description']; ?>" class="w-100">
 

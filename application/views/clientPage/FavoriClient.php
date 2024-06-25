@@ -62,7 +62,7 @@
       <?php if(!isset($client) || $client == null){ ?>
         <a href="<?php echo site_url('AuthentificationController/checkUserLogin');?>"><button class="btn btn-hover">Login</button></a>
       <?php  }else{?>
-        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">deconnection</button></a>
+        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">Déconnection</button></a>
       <?php } ?>
         <button class="nav-toggle-btn" aria-label="Toggle Menu" data-menu-toggle-btn>
           <span class="line top"></span>
@@ -91,7 +91,7 @@
   
 
           <h2 class="h2 section-title">
-            Vos restaurant <span class="span">favoris</span>
+            Vos restaurants <span class="span">favoris</span>
           </h2>
 
           <p class="section-text">
@@ -102,7 +102,7 @@
           <ul class="blog-list">
         <?php foreach($favoris_restaurant as $restaurant ){ ?>
           <li>
-              <div class="blog-card">
+              <div class="blog-card favori">
                 <div class="card-banner">
                   <img src="<?php if($restaurant['image'] != null) { echo base_url('assets/images/').$restaurant['image']; } else { echo base_url('assets/images/Logo.png'); } ?>" width="600" height="390" loading="lazy" alt="<?php echo $restaurant['nom_resto']; ?>" class="w-100">
                 </div>

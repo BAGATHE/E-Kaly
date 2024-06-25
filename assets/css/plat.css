@@ -55,8 +55,8 @@
 }
 
 .content main .card img {
-    width: 250px;
-    height: 250px;
+    width: 60%;
+    height: 50%;
 }
 
 .content main .card .info {
@@ -74,7 +74,6 @@
 .content main .card .info .price,.qtt {
     color: var(--green-clr);
 } 
-
 .content main .card .info .note{
     display: flex;
     align-items: center; 

@@ -124,6 +124,10 @@ ion-icon { display: block; }
 
 img { height: auto; }
 
+.accueil img { height: 150%; }
+.plat img { height: 150%; }
+.favori img { height: 150%; }
+
 input,
 select,
 button,
