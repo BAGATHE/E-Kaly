@@ -5,10 +5,47 @@ INSERT INTO Admis (nom, prenom, email, mot_de_pass) VALUES
 
 
 -- Insertion dans la table CLient
-INSERT INTO `Client` (`nom`, `prenom`, `email`,`telephone`,`mot_de_pass`) VALUES
-('Bernard', 'Alice', 'alice@gmail.com','0326257346' ,'alice'),
-('Durand', 'Louis', 'louis@gmail.com', '0348965471','louis'),
-('Moreau', 'Claire', 'claire@gmail.com','0339624875' ,'claire');
+INSERT INTO Client (nom, prenom, email, telephone, mot_de_pass) VALUES
+('Rakoto', 'Andry', 'andry.rakoto@example.com', '0341122334', 'Andry'),
+('Rasoa', 'Mamy', 'mamy.rasoa@example.com', '0341122335', 'Mamy'),
+('Rajoelina', 'Fetra', 'fetra.rajoelina@example.com', '0341122336', 'Fetra'),
+('Randria', 'Aina', 'aina.randria@example.com', '0341122337', 'Aina'),
+('Ravelo', 'Tina', 'tina.ravelo@example.com', '0341122338', 'Tina'),
+('Razafy', 'Rivo', 'rivo.razafy@example.com', '0341122339', 'Rivo'),
+('Ranaivo', 'Faly', 'faly.ranaivo@example.com', '0341122340', 'Faly'),
+('Raharinaivo', 'Hery', 'hery.raharinaivo@example.com', '0341122341', 'Hery'),
+('Rasolonjatovo', 'Noro', 'noro.rasolonjatovo@example.com', '0341122342', 'Noro'),
+('Ramaroson', 'Lova', 'lova.ramaroson@example.com', '0341122343', 'Lova'),
+('Rabe', 'Zo', 'zo.rabe@example.com', '0341122344', 'Zo'),
+('Rabary', 'Tahina', 'tahina.rabary@example.com', '0341122345', 'Tahina'),
+('Rakotobe', 'Ialy', 'ialy.rakotobe@example.com', '0341122346', 'Ialy'),
+('Rajaonarivelo', 'Tovo', 'tovo.rajaonarivelo@example.com', '0341122347', 'Tovo'),
+('Ravoninahitriniarivo', 'Kanto', 'kanto.ravoninahitriniarivo@example.com', '0341122348', 'Kanto'),
+('Raveloson', 'Miora', 'miora.raveloson@example.com', '0341122349', 'Miora'),
+('Rabenarivo', 'Ando', 'ando.rabenarivo@example.com', '0341122350', 'Ando'),
+('Rafalimanana', 'Zara', 'zara.rafalimanana@example.com', '0341122351', 'Zara'),
+('Randriamampionona', 'Tojo', 'tojo.randriamampionona@example.com', '0341122352', 'Tojo'),
+('Ramahavalisoa', 'Sitraka', 'sitraka.ramahavalisoa@example.com', '0341122353', 'Sitraka'),
+('Rafidison', 'Malala', 'malala.rafidison@example.com', '0341122354', 'Malala'),
+('Rakotomavo', 'Zina', 'zina.rakotomavo@example.com', '0341122355', 'Zina'),
+('Rakotonirina', 'Niry', 'niry.rakotonirina@example.com', '0341122356', 'Niry'),
+('Rakotondrabe', 'Feno', 'feno.rakotondrabe@example.com', '0341122357', 'Feno'),
+('Ravelomanana', 'Haja', 'haja.ravelomanana@example.com', '0341122358', 'Haja'),
+('Razakanirina', 'Avo', 'avo.razakanirina@example.com', '0341122359', 'Avo'),
+('Rabenja', 'Tsiky', 'tsiky.rabenja@example.com', '0341122360', 'Tsiky'),
+('Randrianarisoa', 'Dina', 'dina.randrianarisoa@example.com', '0341122361', 'Dina'),
+('Rakotomalala', 'Tantely', 'tantely.rakotomalala@example.com', '0341122362', 'Tantely'),
+('Rasoarimalala', 'Elina', 'elina.rasoarimalala@example.com', '0341122363', 'Elina'),
+('Randrianasolo', 'Valy', 'valy.randrianasolo@example.com', '0341122364', 'Valy'),
+('Randrianirina', 'Mbola', 'mbola.randrianirina@example.com', '0341122365', 'Mbola'),
+('Rasoamanarivo', 'Kely', 'kely.rasoamanarivo@example.com', '0341122366', 'Kely'),
+('Rasolonirina', 'Antsa', 'antsa.rasolonirina@example.com', '0341122367', 'Antsa'),
+('Rabenirina', 'Nantenaina', 'nantenaina.rabenirina@example.com', '0341122368', 'Nantenaina'),
+('Rajaonarison', 'Ketaka', 'ketaka.rajaonarison@example.com', '0341122369', 'Ketaka'),
+('Ranaivomanana', 'Nivo', 'nivo.ranaivomanana@example.com', '0341122370', 'Nivo'),
+('Raveloarisoa', 'Voahirana', 'voahirana.raveloarisoa@example.com', '0341122371', 'Voahirana'),
+('Rabenirina', 'Solonirina', 'solonirina.rabenirina@example.com', '0341122372', 'Solonirina');
+
 
 
 -- Insérer des données dans la table Adresse
@@ -211,28 +248,27 @@ INSERT INTO Info_resto (id_resto, nom, adresse, repere,description, heure_ouvert
 (8,'DROPZON',2,'Ankadifotsy','drop drop','08:00:00','13:00:00',-18.896887319553702,47.52277851104736,'drop.JPG'),
 (9,'O zone',15,'Isoraka','ozone','10:00:00','20:00:00',-18.912212391314878,47.52065225505948,'ozone.jpeg');
 
-
-
-
 -- Insertion dans la table Livreur
-INSERT INTO Livreur (id,email, mot_de_pass) VALUES (1,'livreur1@gmail.com', 'livreur1');
-INSERT INTO Livreur (id,email, mot_de_pass) VALUES (2,'livreur3@gmail.com', 'livreur2');
-INSERT INTO Livreur (id,email, mot_de_pass) VALUES (3,'livreur2@gmail.com', 'livreur3');
-
+INSERT INTO Livreur (id,email, mot_de_pass) VALUES ('livreur1@gmail.com', 'livreur1');
+INSERT INTO Livreur (id,email, mot_de_pass) VALUES ('livreur3@gmail.com', 'livreur2');
+INSERT INTO Livreur (id,email, mot_de_pass) VALUES ('livreur2@gmail.com', 'livreur3');
 INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur4@gmail.com', 'livreur4');
 INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur5@gmail.com', 'livreur5');
 INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur6@gmail.com', 'livreur6');
 INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur7@gmail.com', 'livreur7');
-
+INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur8@gmail.com', 'livreur8');
+INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur9@gmail.com', 'livreur9');
 -- Insertion dans la table Info_livreur
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (1,'livreur1',15);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (2,'livreur2',20);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (3,'livreur3',28);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (1, 'Jean Rakotomalala', 15);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (2, 'Pauline Rabeharisoa', 27);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (3, 'Michel Randriamahefa', 28);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (4, 'Julie Rasoamalala', 1);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (5, 'Marie Rakotondravelo', 7);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (6, 'Thomas Raharimanana', 16);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (7, 'Isabelle Razanadrakoto', 20);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (8, 'Luc Rabenjamina', 11);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (9, 'Elise Ravelomanantsoa', 48);
 
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (4,'livreur4',32);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (5,'livreur5',35);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (6,'livreur6',32);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (7,'livreur7',22);
 
 
 
@@ -243,6 +279,8 @@ INSERT INTO Status(id_livreur,status) VALUES (4,'non-dispo');
 INSERT INTO Status(id_livreur,status) VALUES (5,'dispo');
 INSERT INTO Status(id_livreur,status) VALUES (6,'dispo');
 INSERT INTO Status(id_livreur,status) VALUES (7,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (8,'dispo');
+INSERT INTO Status(id_livreur,status) VALUES (9,'dispo');
 
 
 
@@ -341,15 +379,15 @@ INSERT INTO Change_quantite_plat (id_plat, date, production) VALUES
 
 
 -- Insérer des données dans la table Commande
-INSERT INTO Commande (id_client,adresse,repere,date,latitude,longitude) VALUES(1,7,"Iscam",'2024-06-22 08:00:00',-18.9292156,47.4981480);
-INSERT INTO Commande (id_client,adresse,repere,date,latitude,longitude) VALUES(1,7,"Iscam",'2024-06-22 10:00:00',-18.9292156,47.4981480);
+-- INSERT INTO Commande (id_client,adresse,repere,date,latitude,longitude) VALUES(1,7,"Iscam",'2024-06-22 08:00:00',-18.9292156,47.4981480);
+-- INSERT INTO Commande (id_client,adresse,repere,date,latitude,longitude) VALUES(1,7,"Iscam",'2024-06-22 10:00:00',-18.9292156,47.4981480);
 
 
 -- Insérer des données dans la table Commande_plat
 -- (Assumant que vous avez une table Commande déjà créée)
-INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(1, 1, 2, 8000);
-INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(1, 2, 2, 4000);
-INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(2, 2, 4, 4000);
+-- INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(1, 1, 2, 8000);
+-- INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(1, 2, 2, 4000);
+-- INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(2, 2, 4, 4000);
 
 -- Insérer des données dans la table Commission_admin
 INSERT INTO Commission_admin (commission_resto,commission_livreur) VALUES (5,30);
@@ -361,15 +399,45 @@ INSERT INTO Commission_admin (commission_resto,commission_livreur) VALUES (5,30)
 INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (1, 1, 4),
 (2, 1, 5),
-(3, 2, 3);
+(3, 2, 3),
+(4, 3, 2),
+(5, 4, 5),
+(6, 5, 1),
+(7, 6, 4),
+(8, 7, 3),
+(9, 8, 5),
+(10, 9, 2),
+(11, 10, 4),
+(12, 11, 5),
+(13, 12, 1),
+(14, 13, 3),
+(15, 14, 2);
+
 
 INSERT INTO Note_resto (id_client, id_resto, note) VALUES
 (1, 1, 4),
 (2, 1, 1),
-(3, 2, 4);
+(3, 2, 4),
+(4, 3, 5),
+(5, 4, 3),
+(6, 5, 2),
+(7, 6, 5),
+(8, 7, 4),
+(9, 8, 3),
+(10, 9, 2),
+(11, 1, 1),
+(12, 2, 5),
+(13, 3, 4),
+(14, 4, 3),
+(15, 5, 2),
+(16, 6, 1),
+(17, 7, 5),
+(18, 8, 4),
+(19, 9, 3),
+(20, 1, 2);
+
 
 INSERT INTO Prix_mise_en_avant(prix) VALUES(200000);
 
 INSERT INTO Tarif_livraison (tarif_min,tarif_moyen,tarif_max)
-VALUES (2000,4000,7000);
--- teste
+VALUES (3000,5000,8000);

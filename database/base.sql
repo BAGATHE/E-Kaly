@@ -1,8 +1,4 @@
 
-drop database Ekaly;
-create database Ekaly;
-use Ekaly;
-
 drop database ekaly;
 create database ekaly;
 use ekaly;
