@@ -64,7 +64,7 @@ INSERT INTO `Adresse` (`nom`) VALUES
 ('Ambohijatovo'),
 ('Andohalo');
 
---inserer voisin de l'adresse
+-- inserer voisin de l'adresse
 INSERT INTO `Voisin` (`id_adresse1`,`id_adresse2`) VALUES
 ('1','11'),
 ('1','33'),
@@ -196,9 +196,15 @@ INSERT INTO Resto (nom,id_adresse, email,mot_de_pass) VALUES
 
 -- Insertion des données dans la table Info_resto
 INSERT INTO Info_resto (id_resto, nom, adresse, repere,description, heure_ouverture, heure_fermeture,latitude,longitude,image) VALUES
-( 1, 'PAKOPAKO', 7,'Skate park', 'Venez savourez de bon Plat chez PAKOPAKO', '11:30:00', '19:00:00',-18.8983496847481,47.52367911306232,'pakopako.png'),
-( 2, 'Chez Madama', 28,'ITU Andoharanofotsy','tongava misakafo', '11:00:00', '18:00:00',-18.98599963341681,47.53279656171799,null),
-( 3, 'Selesy', 15,'Residence du Rova ',' ', '10:00:00', '18:00:00',-18.914764079712324,47.531726360321045,null);
+(1, 'PAKOPAKO', 7,'Skate park', 'Venez savourez de bon Plat chez PAKOPAKO', '11:30:00', '19:00:00',-18.8983496847481,47.52367911306232,'pakopako.png'),
+(2, 'Chez Madama', 28,'ITU Andoharanofotsy','tongava misakafo', '11:00:00', '18:00:00',-18.98599963341681,47.53279656171799,null),
+(3, 'Selesy', 15,'Rond point Faravohitra ',' ', '10:00:00', '18:00:00',-18.914764079712324,47.531726360321045,'selesy.jpg'),
+(4,'Bon appetit',48,'ampandrana','Bon appetit','08:30:00','22:00:00',-18.905216763768436,47.53353602027097,'pao.jpg'),
+(5,'Passion coco',27,'67ha nord ouest','Saveur coco','08:00:00','12:00:00',-18.902869849546796,47.50907892132396,'passion.png'),
+(6,'CHIKY',11,'chiky Behoririka','chiken chiken','08:00:00','18:00:00',-18.901876022333454,47.527863485616614,'chiky.jpg'),
+(7,'Xin Hai',1,'Ambodifilao Analakey','chinesse','13:00:00','20:30:00',-18.908479328941524,47.52671997071501,'xi.jpg'),
+(8,'DROPZON',2,'Ankadifotsy','drop drop','08:00:00','13:00:00',-18.896887319553702,47.52277851104736,'drop.JPG'),
+(9,'O zone',15,'Isoraka','ozone','10:00:00','20:00:00',-18.912212391314878,47.52065225505948,'ozone.jpeg');
 
 
 
@@ -237,17 +243,49 @@ INSERT INTO Status(id_livreur,status) VALUES (7,'dispo');
 
 -- Insérer des données dans la table Plat
 INSERT INTO Plat (id_resto, description, prix,image) VALUES
-(1, 'Atin"ny coucou', 8000,"coucou.jpg"),
-(1, 'Akondro metissy BALAHAZO', 4000,"akondro.jpg"),
-(1, 'Bolongany Akoho', 7000,"bolongany.jpg"),
-(1, 'Assiette Kida son ty', 5000,"assiette.jpg"),
+(1, 'Biriani foza de luxe',20000,"biriani.jpg"),
+(1, 'Akondro metissy BALAHAZO',4000,"balahazo.jpg"),
+(1, 'Assiette vehihivavy',10000,"vehivavy.jpg"),
+(1, 'Dite manaikitra tenda',3000,"dithe.jpg"),
+(1,'Akohooo na matata',10500,'akohooo.jpg'),
 (2, 'Akoho sauce + Achard', 6000,null),
 (2, 'steak sy vary', 6000,null),
 (2, 'saucisse sy haricot', 5000,null),
 (2, 'poisson frite', 7000,null),
-(3, 'Big Akondro',2000,null),
-(3, 'Mofo ananas',500,null),
-(3, 'Mofo sakay',500,null);
+(3, 'Big mofo anana',3000,'mofo_anana_GM.jpg'),
+(3, 'Mofo anana',1000,'mofo_anana.png'),
+(3, 'Mofo akondro gold',2000,'mofo_akondro_gold.jpg'),
+(3,'Mofo akondro tsotra',500,'mofo_akondro_tsotra.jpg'),
+(3,'Mofo akondro VIP',1000,'mofo_akondro.jpg'),
+(4,'Biscottine de crevette',27500,'biscotine.JPG'),
+(4,'TSASIOU MIEL',1900,'miel.jpg'),
+(4,'nem tsasiou',11500,'nem.JPG'),
+(4,'VAN TAN FRIT',9500,'fitte.JPG'),
+(5,'POISSON CREVETTE COCO',25000,'poisson.png'),
+(5,'VIANDE RITRA RAVITOTO SPECIAL',20000,'ravitoto.png'),
+(5,'CANARD RITRA FACON COTIER',2000,'canard.png'),
+(5,'CREVETTE COCO',20000,'coco.png'),
+(5,'POISSON COCO',20000,'poison_coco.png'),
+(6,'CRISPY BUCKET',80000,'crispy.jpg'),
+(6,'DOBLO',18000,'doblo.PNG'),
+(6,'CHIKY BALLS',8000,'balls.JPG'),
+(6,'MAXI GRILLED',98000,'maxi.JPG'),
+(6,'DUO',42000,'duo.JPG'),
+(7,'Nouilles sauce',12000,'nouilles.jpg'),
+(7,'SESAME CHIKEN',12000,'sesame.jpg'),
+(7,'Curry Chiken',12000,'curry.jpg'),
+(7,'Brochette de poulet',7000,'brochette.jpg'),
+(7,'MINE SAO PORC',12000,'minesao.jpg'),
+(8,'Salade Fraicheur',18000,'salade.jpg'),
+(8,'Nouille sautees tsa siu',18000,'tsasiu'),
+(8,'RIBS',21000,'ribs.jpg'),
+(8,'BO BUN',19000,'bo.jpg'),
+(8,'Beignets de crevettes',18000,'beignet.jpg'),
+(9,'Riz cantonnais au crevette',12000,'ananas.jpg'),
+(9,'Riz cantonnais fruit de mer',12000,'fuit.jpg'),
+(9,'Riz au panne croustillant',19000,'panne.jpg'),
+(9,'Riz au canard laque',25000,'canard.jpg'),
+(9,'riz cantonnais au boeuf',17000,'boeuf.jpg');
 
 
 INSERT INTO Change_quantite_plat (id_plat, date, production) VALUES
