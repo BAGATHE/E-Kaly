@@ -17,7 +17,7 @@ from
     union ALL
 
     select 
-        day,v_payement_livreur_with_info_livreur
+        day,
         month,
         year,
         somme_commission

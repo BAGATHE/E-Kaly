@@ -241,6 +241,7 @@
         <div class="input-adresse">
         <select name="adresse" id="optionsAdresse" >
            <option value="0" selected>Choisir quartier</option>
+
               <?php foreach ($adresses as $adresse ){ ?>
                 <option value="<?=$adresse["id"] ?>"><?=$adresse["nom"] ?></option>
           <?php }  ?>

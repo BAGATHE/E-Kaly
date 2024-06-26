@@ -123,8 +123,8 @@
                   <?php } ?>
               </select>
 
-              <input type="time" name="heureOuverture">
-              <input type="time" name="heureFermeture">
+              <input type="time" name="heureOuverture" value="08:00">
+              <input type="time" name="heureFermeture" value="23:00">
 
               <button type="submit">
                   <span class="material-icons-sharp">search</span>

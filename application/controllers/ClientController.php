@@ -153,6 +153,7 @@ class ClientController extends CI_Controller {
         $data['info_resto'] = $this->RestoModel->getById($id_resto); 
         $data['client'] = $current_client;
         $data['adresses'] = $this->AdresseModel->getAll();
+       
         $this->load->view('clientPage/PlatClient',$data);
     }
 
@@ -303,9 +304,10 @@ public function rechercherPlat(){
     $prix_max = $this->input->post('prix_max');
     $nom_plat = $this->input->post('nom_plat');
     $data['plat_recherche'] =$this->PlatModel->searchPlatWithCriteria ($id_resto,$prix_min, $prix_max ,$nom_plat);
-    $data['list_plat_resto'] = $this->PlatModel->getAllInfo(1);
-    $data['info_resto'] = $this->RestoModel->getById(1);
+    $data['list_plat_resto'] = $this->PlatModel->getAllInfo($id_resto);
+    $data['info_resto'] = $this->RestoModel->getById($id_resto);
     $data['client'] = $current_client; 
+    $data['adresses'] = $this->AdresseModel->getAll();
     $this->load->view('clientPage/PlatClient',$data);
    /* $this->output
     ->set_content_type('application/json')

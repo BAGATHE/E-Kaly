@@ -238,12 +238,12 @@ INSERT INTO Resto (nom,id_adresse, email,mot_de_pass) VALUES
 
 -- Insertion des données dans la table Info_resto
 INSERT INTO Info_resto (id_resto, nom, adresse, repere,description, heure_ouverture, heure_fermeture,latitude,longitude,image) VALUES
-(1, 'PAKOPAKO', 7,'Skate park', 'Venez savourez de bon Plat chez PAKOPAKO', '11:30:00', '19:00:00',-18.8983496847481,47.52367911306232,'pakopako.png'),
-(2, 'Chez Madama', 28,'ITU Andoharanofotsy','tongava misakafo', '11:00:00', '18:00:00',-18.98599963341681,47.53279656171799,null),
-(3, 'Selesy', 15,'Rond point Faravohitra ',' ', '10:00:00', '18:00:00',-18.914764079712324,47.531726360321045,'selesy.jpg'),
-(4,'Bon appetit',48,'ampandrana','Bon appetit','08:30:00','22:00:00',-18.905216763768436,47.53353602027097,'pao.jpg'),
+(1, 'PAKOPAKO', 7,'Skate park', 'Venez savourez de bon Plat chez PAKOPAKO', '09:30:00', '19:00:00',-18.8983496847481,47.52367911306232,'pakopako.png'),
+(2, 'Chez Madama', 28,'ITU Andoharanofotsy','tongava misakafo', '22:00:00', '23:00:00',-18.98599963341681,47.53279656171799,null),
+(3, 'Selesy', 14,'Rond point Faravohitra ',' ', '10:00:00', '18:00:00',-18.914764079712324,47.531726360321045,'selesy.jpg'),
+(4,'Bon appetit',7,'ampandrana','Bon appetit','08:30:00','22:00:00',-18.905216763768436,47.53353602027097,'pao.jpg'),
 (5,'Passion coco',27,'67ha nord ouest','Saveur coco','08:00:00','12:00:00',-18.902869849546796,47.50907892132396,'passion.png'),
-(6,'CHIKY',11,'chiky Behoririka','chiken chiken','08:00:00','18:00:00',-18.901876022333454,47.527863485616614,'chiky.jpg'),
+(6,'CHIKY',11,'chiky Behoririka','chiken chiken','08:00:00','18:00:00',-18.901876022333454,47.527863485616614,'chicky.jpg'),
 (7,'Xin Hai',1,'Ambodifilao Analakey','chinesse','13:00:00','20:30:00',-18.908479328941524,47.52671997071501,'xi.jpg'),
 (8,'DROPZON',2,'Ankadifotsy','drop drop','08:00:00','13:00:00',-18.896887319553702,47.52277851104736,'drop.JPG'),
 (9,'O zone',15,'Isoraka','ozone','10:00:00','20:00:00',-18.912212391314878,47.52065225505948,'ozone.jpeg');
@@ -377,24 +377,8 @@ INSERT INTO Change_quantite_plat (id_plat, date, production) VALUES
 (42, '2024-06-01 08:00:00', 25),
 (43, '2024-06-01 08:00:00', 20);
 
-
--- Insérer des données dans la table Commande
--- INSERT INTO Commande (id_client,adresse,repere,date,latitude,longitude) VALUES(1,7,"Iscam",'2024-06-22 08:00:00',-18.9292156,47.4981480);
--- INSERT INTO Commande (id_client,adresse,repere,date,latitude,longitude) VALUES(1,7,"Iscam",'2024-06-22 10:00:00',-18.9292156,47.4981480);
-
-
--- Insérer des données dans la table Commande_plat
--- (Assumant que vous avez une table Commande déjà créée)
--- INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(1, 1, 2, 8000);
--- INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(1, 2, 2, 4000);
--- INSERT INTO Commande_plat (id_commande, id_plat, quantite, prix) VALUES(2, 2, 4, 4000);
-
 -- Insérer des données dans la table Commission_admin
 INSERT INTO Commission_admin (commission_resto,commission_livreur) VALUES (5,30);
-
-
--- Insérer des données dans la table Livraison_payement_commande
--- INSERT INTO Livraison_payement_commande ( id_commande, id_livreur,paye) VALUES();
 
 INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 (1, 1, 4),
@@ -416,7 +400,7 @@ INSERT INTO Note_plat (id_client, id_plat, note) VALUES
 
 INSERT INTO Note_resto (id_client, id_resto, note) VALUES
 (1, 1, 4),
-(2, 1, 1),
+(2, 1, 2),
 (3, 2, 4),
 (4, 3, 5),
 (5, 4, 3),
