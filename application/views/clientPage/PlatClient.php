@@ -259,30 +259,6 @@
         <input type="hidden" name="longitude" val="" id="longitude">
         <button type="submit" class="bouton-continuer" id="">Valider</button>
         </div>
-
-
-          <div class="input-adresse">
-            <select name="adresse" id="optionsAdresse" >
-              <option value="0" selected>Choisir quartier</option>
-                  <?php foreach ($adresses as $adresse ){ ?>
-                    <option value="<?=$adresse["id"] ?>"><?=$adresse["nom"] ?></option>
-              <?php }  ?>
-            </select>
-            <input type="text" placeholder="repere" id="repere" name="repere">
-          </div>
-          
-          <div id="map" ></div>
-
-          <div id="prix_total_payement"  style="display:none;">
-            <h3 style="text-align:center;">Prix de livraison</h3>
-            <p style="text-align:center;" id="livraison_prix"></p>
-        
-            <h3 style="text-align:center;" >Total a payer : <span id="total_payement"></span></h3>
-            <input type="hidden" name="latitude" id="latitude" val="">
-            <input type="hidden" name="longitude" val="" id="longitude">
-            <button type="submit" class="bouton-continuer" id="">Valider</button>
-          </div>
-
         </section>
       </form>
     </aside>

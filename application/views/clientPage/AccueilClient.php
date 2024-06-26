@@ -184,46 +184,6 @@
                           </a>
                       </div>
 
-                <div class="blog-card accueil">
-                  <div class="card-banner">
-                    <img src="<?php if ($restaurant['image'] != null) {
-                                echo base_url('assets/images/') . $restaurant['image'];
-                              } else {
-                                echo base_url('assets/images/Logo.png');
-                              } ?>" width="600" height="390" loading="lazy" alt="<?php echo $restaurant['nom_resto']; ?>" class="w-100">
-
-                  </div>
-
-                  <div class="card-content">
-                    <div class="card-meta-wrapper">
-                      <a href="#" class="card-meta-link">
-                        <time class="meta-info" datetime="<?php echo $restaurant['heure_ouverture']; ?>">
-                          De <?php echo $restaurant['heure_ouverture']; ?> à <?php echo $restaurant['heure_fermeture']; ?>
-                        </time>
-                      </a>
-                    </div>
-
-                    <h3 class="h3">
-                      <a href="<?= site_url('ClientController/PlatClientPage/' . $restaurant['id_resto']) ?>" class="card-title"><?php echo $restaurant['nom_resto']; ?></a>
-                    </h3>
-
-                    <p class="card-text">
-                      <span class="loc">Localisation :</span> <?php echo $restaurant['adresse'] . ', ' . $restaurant['repere']; ?>
-                    </p>
-
-                    <a href="#" class="btn-link">
-                      <span><?php echo $restaurant['note_moyenne']; ?></span>
-                      <span>
-                        <span class="material-icons-sharp">star</span>
-                      </span>
-                    </a>
-
-                    <a href="<?= site_url('ClientController/toFavorite/' . $restaurant['id_resto']) ?>" class="btn-link">
-                      <span class="<?php echo $restaurant['id_client_favori'] ? 'favori-active' : 'favoris-resto'; ?>">
-                        <span class="material-icons-sharp">favorite</span>
-                      </span>
-                    </a>
-                  </div>
                 </div>
               </li>
             <?php endforeach; ?>
