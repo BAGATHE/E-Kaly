@@ -38,7 +38,7 @@
                             <p>
                                 Note : 
                                 <span class="etoile">
-                                <?=$plat["note"] ?>
+                                <?=number_format($plat["note"] ,0, '.', ',') ?>
                                     <span class="material-icons-sharp">
                                         star
                                     </span>

@@ -78,7 +78,7 @@ function updateOrdersTable(data) {
     let ordersTable = $('#orders-table tbody');
     ordersTable.empty();
     $.each(data, function(index, order) {
-        ordersTable.append('<tr><td>' + order.description + '</td><td>' + order.prix  + '</td><td>' + order.quantite + '</td><td>'+order.quantite * order.prix   +'</td></tr>');
+        ordersTable.append('<tr><td>' + order.description + '</td><td>' + order.prix  + '</td><td>' + order.vendu + '</td><td>'+order.vendu * order.prix   +'</td></tr>');
     });
 }
 

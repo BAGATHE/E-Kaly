@@ -45,7 +45,6 @@
                             <td><?=$livreur["nom_complet"] ?></td>
                             <td><?=$livreur["telephone"] ?></td>
                             <td><?=$livreur["montant_a_paye"]?></td>
-                            <td style="color: #085696;">Voir details</td>
                         </tr>
 
                         <?php }  }?>

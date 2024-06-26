@@ -29,7 +29,7 @@
                 <?php if (!empty($details_commande)) : ?>
                     <?php foreach ($details_commande as $detail) : ?>
                         <div class="card">
-                            <img src="<?php echo base_url('assets/images/humber.png'); ?>" alt="">
+                            <img src="<?php if($detail['image'] != null) { echo base_url('assets/images/').$detail['image']; } else { echo base_url('assets/images/Logo.png'); } ?>" width="600" height="390" loading="lazy" alt="<?php echo $detail['image']; ?>" class="w-100">
                             <div class="right">
                                 <div class="info">
                                     <h2><?php echo $detail['description']; ?></h2>

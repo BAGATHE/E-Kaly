@@ -185,7 +185,9 @@
 
                   <a href="#" class="btn-link">
                     <span style="display: flex;">
-                        <p><?=$plat["note"]?></p>
+                        <p>
+                          <?=number_format($plat["note"],1, '.', ',') ?>
+                        </p>
                         <span class="material-icons-sharp">
                             star
                         </span>

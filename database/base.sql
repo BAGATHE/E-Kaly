@@ -1,4 +1,5 @@
 
+
 drop database ekaly;
 create database ekaly;
 use ekaly;

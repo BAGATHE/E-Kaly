@@ -21,7 +21,6 @@
         </nav>
 
         <!-- End of Navbar -->
-
         <main>
             <div>
                 <h5>Date et heure Reception de Commande : <?=$commande['date'] ?> </h5>

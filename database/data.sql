@@ -259,15 +259,15 @@ INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur7@gmail.com', 'livreur7
 INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur8@gmail.com', 'livreur8');
 INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur9@gmail.com', 'livreur9');
 -- Insertion dans la table Info_livreur
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (1, 'Jean Rakotomalala', 15);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (2, 'Pauline Rabeharisoa', 27);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (3, 'Michel Randriamahefa', 28);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (4, 'Julie Rasoamalala', 1);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (5, 'Marie Rakotondravelo', 7);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (6, 'Thomas Raharimanana', 16);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (7, 'Isabelle Razanadrakoto', 20);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (8, 'Luc Rabenjamina', 11);
-INSERT INTO Info_livreur (id_livreur, nom_complet, adresse) VALUES (9, 'Elise Ravelomanantsoa', 48);
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse,telephone) VALUES (1, 'Jean Rakotomalala', 15,'0325689747');
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse,telephone) VALUES (2, 'Pauline Rabeharisoa', 27,'0326897454');
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse,telephone) VALUES (3, 'Michel Randriamahefa', 28,'0326589741');
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse,telephone) VALUES (4, 'Julie Rasoamalala', 1,'0335689745');
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse,telephone) VALUES (5, 'Marie Rakotondravelo', 7,'0326897454');
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse,telephone) VALUES (6, 'Thomas Raharimanana', 16,'0326589741');
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse,telephone) VALUES (7, 'Isabelle Razanadrakoto', 20,'0326589741');
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse,telephone) VALUES (8, 'Luc Rabenjamina', 11,'0325689747');
+INSERT INTO Info_livreur (id_livreur, nom_complet, adresse,telephone) VALUES (9, 'Elise Ravelomanantsoa', 48,'0335689745');
 
 
 
@@ -296,7 +296,7 @@ INSERT INTO Plat (id_resto, description, prix,image) VALUES
 (2, 'saucisse sy haricot', 5000,null),
 (2, 'poisson frite', 7000,null),
 (3, 'Big mofo anana',3000,'mofo_anana_GM.jpg'),
-(3, 'Mofo anana',1000,'mofo_anana.png'),
+(3, 'Mofo anana',1000,'mofo_ananaPM.jpg'),
 (3, 'Mofo akondro gold',2000,'mofo_akondro_gold.jpg'),
 (3,'Mofo akondro tsotra',500,'mofo_akondro_tsotra.jpg'),
 (3,'Mofo akondro VIP',1000,'mofo_akondro.jpg'),

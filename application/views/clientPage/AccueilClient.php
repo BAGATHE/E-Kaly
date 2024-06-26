@@ -170,7 +170,9 @@
                           </p>
 
                           <a href="#" class="btn-link">
-                              <span><?php echo $restaurant['note_moyenne']; ?></span>  
+                              <span>
+                                <?=number_format( $restaurant['note_moyenne'],1, '.', ',') ?>
+                              </span>  
                               <span>
                                   <span class="material-icons-sharp">star</span>
                               </span>

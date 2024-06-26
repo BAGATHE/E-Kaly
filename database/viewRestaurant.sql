@@ -144,7 +144,8 @@ select
     quantite,
     Plat.description,
     Plat.prix as prix_unitaire,
-    (quantite*Plat.prix) as total
+    (quantite*Plat.prix) as total,
+    Plat.image
 from Commande_plat
 join Plat 
 on Plat.id=Commande_plat.id_plat;
