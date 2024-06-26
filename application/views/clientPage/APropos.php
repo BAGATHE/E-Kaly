@@ -278,7 +278,7 @@
                 <div class="profile-wrapper">
 
                   <figure class="avatar">
-                    <img src="<?php echo base_url()?>assets/images/dev/Profil.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
+                    <img src="<?php echo base_url()?>assets/images/dev/Zo.png" width="80" height="80" loading="lazy" alt="Thomas Josef">
                   </figure>
 
                   <div>
