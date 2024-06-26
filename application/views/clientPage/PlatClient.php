@@ -236,25 +236,28 @@
             </div>
         
         <section id="info_complementaire">
-        <div class="input-adresse">
-        <select name="adresse" id="optionsAdresse" >
-           <option value="0" selected>Choisir quartier</option>
-              <?php foreach ($adresses as $adresse ){ ?>
-                <option value="<?=$adresse["id"] ?>"><?=$adresse["nom"] ?></option>
-          <?php }  ?>
-        </select>
-        <input type="text" placeholder="repere" id="repere" name="repere">
-        </div>
-        <div id="map" ></div>
-        <div id="prix_total_payement"  style="display:none;">
-          <h3 style="text-align:center;">Prix de livraison</h3>
-          <p style="text-align:center;" id="livraison_prix"></p>
-      
-        <h3 style="text-align:center;" >Total a payer : <span id="total_payement"></span></h3>
-        <input type="hidden" name="latitude" id="latitude" val="">
-        <input type="hidden" name="longitude" val="" id="longitude">
-        <button type="submit" class="bouton-continuer" id="">Valider</button>
-        </div>
+
+          <div class="input-adresse">
+            <select name="adresse" id="optionsAdresse" >
+              <option value="0" selected>Choisir quartier</option>
+                  <?php foreach ($adresses as $adresse ){ ?>
+                    <option value="<?=$adresse["id"] ?>"><?=$adresse["nom"] ?></option>
+              <?php }  ?>
+            </select>
+            <input type="text" placeholder="repere" id="repere" name="repere">
+          </div>
+          
+          <div id="map" ></div>
+
+          <div id="prix_total_payement"  style="display:none;">
+            <h3 style="text-align:center;">Prix de livraison</h3>
+            <p style="text-align:center;" id="livraison_prix"></p>
+        
+            <h3 style="text-align:center;" >Total a payer : <span id="total_payement"></span></h3>
+            <input type="hidden" name="latitude" id="latitude" val="">
+            <input type="hidden" name="longitude" val="" id="longitude">
+            <button type="submit" class="bouton-continuer" id="">Valider</button>
+          </div>
         </section>
       </form>
     </aside>
@@ -267,17 +270,17 @@
     - #FOOTER
   -->
 
-  <footer class="footer" style="border:solid 2px yellow;" >
+  <footer class="footer">
 
     <div class="footer-top" style="background-image: url('<?php echo base_url()?>assets/images/footer-illustration.png')">
       <div class="container">
 
         <div class="footer-brand">
-        
-          <a href="" class="logo">BOGOTA by pass<span class="span">.</span></a>
+
+          <a href="" class="logo">E-Kaly<span class="span">.</span></a>
 
           <p class="footer-text">
-            Financial experts support or help you to to find out which way you can raise your funds more.
+            Des experts financiers vous soutiennent ou vous aident à découvrir de quelle manière vous pouvez lever davantage de fonds.
           </p>
 
         </div>
@@ -285,19 +288,19 @@
         <ul class="footer-list">
 
           <li>
-            <p class="footer-list-title">Contact Info</p>
+            <p class="footer-list-title">Contact</p>
           </li>
 
           <li>
-            <p class="footer-list-item">+1 (062) 109-9222</p>
+            <p class="footer-list-item">+261 34 84 520 18</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Info@YourGmail24.com</p>
+            <p class="footer-list-item">ekaly@gmail.com</p>
           </li>
 
           <li>
-            <address class="footer-list-item">153 Williamson Plaza, Maggieberg, MT 09514</address>
+            <address class="footer-list-item">Lot 201-E420, Andoharanofotsy,Antananarivo.</address>
           </li>
 
         </ul>
@@ -305,33 +308,30 @@
         <ul class="footer-list">
 
           <li>
-            <p class="footer-list-title">Opening Hours</p>
+            <p class="footer-list-title">Heure d'ouverture</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Monday-Friday: 08:00-22:00</p>
+            <p class="footer-list-item">Lundi-Vendredi: 06:00-22:00</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Tuesday 4PM: Till Mid Night</p>
+            <p class="footer-list-item">Samedi 05:00-00:00</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Saturday: 10:00-16:00</p>
+            <p class="footer-list-item">Dimanche: 10:00-22:00</p>
           </li>
 
         </ul>
 
-      
-     
       </div>
-
     </div>
 
     <div class="footer-bottom">
       <div class="container">
         <p class="copyright-text">
-          &copy; 2024 Devellopeurs : <a href="#" class="copyright-link">Antonio - Matthieu - Angelo - Naly - Zo - Ando - Mahery - Tsanta - Rova - Joshua</a>
+          &copy; 2024 - Devellopeurs : <a href="#" class="copyright-link">Antonio - Matthieu - Angelo - Naly - Zo - Ando - Mahery - Tsanta - Rova - Joshua</a>
         </p>
       </div>
     </div>

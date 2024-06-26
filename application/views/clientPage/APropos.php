@@ -17,6 +17,8 @@
   -->
   <link rel="stylesheet" href="<?php echo base_url()?>assets/css/client.css">
   <link rel="stylesheet" href="<?php echo base_url()?>assets/font/font.css">
+  
+  <script src="<?php echo base_url()?>assets/js/terme.js"></script>
 
   <!-- 
     - preload images
@@ -100,37 +102,13 @@
               Termes <span class="span">&</span> Conditions
             </h2>
 
-            <p class="section-text">
+            <!-- <p class="section-text">
               The restaurants in Hangzhou also catered to many northern Chinese who had fled south from Kaifeng during
               the Jurchen
               invasion of the 1120s, while it is also known that many restaurants were run by families.
-            </p>
+            </p> -->
 
-            <ul class="about-list">
-
-              <li class="about-item">
-                <ion-icon name="checkmark-outline"></ion-icon>
-
-                <span class="span">Delicious & Healthy Foods</span>
-              </li>
-
-              <li class="about-item">
-                <ion-icon name="checkmark-outline"></ion-icon>
-
-                <span class="span">Spacific Family And Kids Zone</span>
-              </li>
-
-              <li class="about-item">
-                <ion-icon name="checkmark-outline"></ion-icon>
-
-                <span class="span">Music & Other Facilities</span>
-              </li>
-
-              <li class="about-item">
-                <ion-icon name="checkmark-outline"></ion-icon>
-
-                <span class="span">Fastest Food Home Delivery</span>
-              </li>
+            <ul class="about-list" id="about-list">
 
             </ul>
 
@@ -154,15 +132,9 @@
             </h2>
 
             <p class="section-text">
-            Vous voulez manger chez votre restaurant préféré mais que vous ne voulez pas galérer dans les embouteillages ? N'attendez plus, et gagnez du temps ! Fini les files d'attente, les embouteillages pour pouvoir manger chez votre restaurant préféré, E-Kaly s'occupe de tout.
-
-            E-Kaly est la façon la plus facile de commander vos repas en ligne à partir de votre smartphone ou votre tablette. Du bout des doigts, accédez à de délicieuses cuisines (chinoise, malagasy, européenne, ...) et à un choix de restaurants qui livrent dans votre ville/quartier. Idéal pour les déjeuners au bureau, lorsque vous n'avez pas le temps de quitter le travail et galérer dans les embouteillages.
-
-            Rejoignez notre communauté E-Kaly, la seule façon de :
-
-            •    choisir les repas des meilleurs restaurants près de chez vous
-            •    commander où que vous soyez
-            •    suivre votre commande en temps réel
+            E-Kaly est le moyen le plus simple de commander vos repas en ligne depuis votre smartphone ou votre tablette. 
+            A portée de main, accédez à de délicieuses cuisines  et à un choix de restaurants qui livrent dans votre ville/quartier. 
+            Idéal pour les déjeuners au bureau, lorsque vous n'avez pas le temps de quitter le travail,ou vous êtes étudiant  et que vous luttez contre les embouteillages 
 
 
             </p>
@@ -194,13 +166,14 @@
 
           <ul class="testi-list has-scrollbar">
 
+            <!-- Angelo -->
             <li class="testi-item">
               <div class="testi-card">
 
                 <div class="profile-wrapper">
 
                   <figure class="avatar">
-                    <img src="<?php echo base_url()?>assets/images/avatar-1.jpg" width="80" height="80" loading="lazy" alt="Robert William">
+                    <img src="<?php echo base_url()?>assets/images/dev/Profil.jpg" width="80" height="80" loading="lazy" alt="Robert William">
                   </figure>
 
                   <div>
@@ -215,13 +188,14 @@
               </div>
             </li>
 
+            <!-- Antonio -->
             <li class="testi-item">
               <div class="testi-card">
 
                 <div class="profile-wrapper">
 
                   <figure class="avatar">
-                    <img src="<?php echo base_url()?>assets/images/avatar-2.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
+                    <img src="<?php echo base_url()?>assets/images/dev/Antonio.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
                   </figure>
 
                   <div>
@@ -231,23 +205,170 @@
                   </div>
 
                 </div>
-
+                
               </div>
             </li>
-
+            <!-- Rova -->
             <li class="testi-item">
               <div class="testi-card">
 
                 <div class="profile-wrapper">
 
                   <figure class="avatar">
-                    <img src="<?php echo base_url()?>assets/images/avatar-3.jpg" width="80" height="80" loading="lazy" alt="Charles Richard">
+                    <img src="<?php echo base_url()?>assets/images/dev/Rova.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
+                  </figure>
+
+                  <div>
+                    <h3 class="h4 testi-name">Rova</h3>
+
+                    <p class="testi-title">Frontend Develloper</p>
+                  </div>
+
+                </div>
+
+              </div>
+            </li>
+
+            <!-- Matthieu -->
+            <li class="testi-item">
+              <div class="testi-card">
+
+                <div class="profile-wrapper">
+
+                  <figure class="avatar">
+                    <img src="<?php echo base_url()?>assets/images/dev/Profil.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
+                  </figure>
+
+                  <div>
+                    <h3 class="h4 testi-name">Matthieu</h3>
+
+                    <p class="testi-title">Frontend Develloper</p>
+                  </div>
+
+                </div>
+
+              </div>
+            </li>
+
+            <!-- Naly -->
+            <li class="testi-item">
+              <div class="testi-card">
+
+                <div class="profile-wrapper">
+
+                  <figure class="avatar">
+                    <img src="<?php echo base_url()?>assets/images/dev/Profil.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
                   </figure>
 
                   <div>
                     <h3 class="h4 testi-name">Naly</h3>
 
                     <p class="testi-title">Backend Develloper</p>
+                  </div>
+
+                </div>
+
+              </div>
+            </li>
+
+            <!-- Zo -->
+            <li class="testi-item">
+              <div class="testi-card">
+
+                <div class="profile-wrapper">
+
+                  <figure class="avatar">
+                    <img src="<?php echo base_url()?>assets/images/dev/Profil.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
+                  </figure>
+
+                  <div>
+                    <h3 class="h4 testi-name">Zo</h3>
+
+                    <p class="testi-title">Backend Develloper</p>
+                  </div>
+
+                </div>
+
+              </div>
+            </li>
+
+            <!-- Mahery -->
+            <li class="testi-item">
+              <div class="testi-card">
+
+                <div class="profile-wrapper">
+
+                  <figure class="avatar">
+                    <img src="<?php echo base_url()?>assets/images/dev/Profil.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
+                  </figure>
+
+                  <div>
+                    <h3 class="h4 testi-name">Mahery</h3>
+
+                    <p class="testi-title">Backend Develloper</p>
+                  </div>
+
+                </div>
+
+              </div>
+            </li>
+
+            <!-- Ando -->
+            <li class="testi-item">
+              <div class="testi-card">
+
+                <div class="profile-wrapper">
+
+                  <figure class="avatar">
+                    <img src="<?php echo base_url()?>assets/images/dev/Profil.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
+                  </figure>
+
+                  <div>
+                    <h3 class="h4 testi-name">Ando</h3>
+
+                    <p class="testi-title">Backend Develloper</p>
+                  </div>
+
+                </div>
+
+              </div>
+            </li>
+
+            <!-- Joshua -->
+            <li class="testi-item">
+              <div class="testi-card">
+
+                <div class="profile-wrapper">
+
+                  <figure class="avatar">
+                    <img src="<?php echo base_url()?>assets/images/dev/Profil.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
+                  </figure>
+
+                  <div>
+                    <h3 class="h4 testi-name">Joshua</h3>
+
+                    <p class="testi-title">Integrateur</p>
+                  </div>
+
+                </div>
+
+              </div>
+            </li>
+
+            <!-- Tsanta -->
+            <li class="testi-item">
+              <div class="testi-card">
+
+                <div class="profile-wrapper">
+
+                  <figure class="avatar">
+                    <img src="<?php echo base_url()?>assets/images/dev/Profil.jpg" width="80" height="80" loading="lazy" alt="Thomas Josef">
+                  </figure>
+
+                  <div>
+                    <h3 class="h4 testi-name">Tsanta</h3>
+
+                    <p class="testi-title">Integrateur</p>
                   </div>
 
                 </div>
@@ -281,7 +402,7 @@
           <a href="" class="logo">E-Kaly<span class="span">.</span></a>
 
           <p class="footer-text">
-            Financial experts support or help you to to find out which way you can raise your funds more.
+            Des experts financiers vous soutiennent ou vous aident à découvrir de quelle manière vous pouvez lever davantage de fonds.
           </p>
 
         </div>
@@ -289,19 +410,19 @@
         <ul class="footer-list">
 
           <li>
-            <p class="footer-list-title">Contact Info</p>
+            <p class="footer-list-title">Contact</p>
           </li>
 
           <li>
-            <p class="footer-list-item">+1 (062) 109-9222</p>
+            <p class="footer-list-item">+261 34 84 520 18</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Info@YourGmail24.com</p>
+            <p class="footer-list-item">ekaly@gmail.com</p>
           </li>
 
           <li>
-            <address class="footer-list-item">153 Williamson Plaza, Maggieberg, MT 09514</address>
+            <address class="footer-list-item">Lot 201-E420, Andoharanofotsy,Antananarivo.</address>
           </li>
 
         </ul>
@@ -309,19 +430,19 @@
         <ul class="footer-list">
 
           <li>
-            <p class="footer-list-title">Opening Hours</p>
+            <p class="footer-list-title">Heure d'ouverture</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Monday-Friday: 08:00-22:00</p>
+            <p class="footer-list-item">Lundi-Vendredi: 06:00-22:00</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Tuesday 4PM: Till Mid Night</p>
+            <p class="footer-list-item">Samedi 05:00-00:00</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Saturday: 10:00-16:00</p>
+            <p class="footer-list-item">Dimanche: 10:00-22:00</p>
           </li>
 
         </ul>
@@ -332,7 +453,7 @@
     <div class="footer-bottom">
       <div class="container">
         <p class="copyright-text">
-          &copy; 2024 Devellopeurs : <a href="#" class="copyright-link">Antonio - Matthieu - Angelo - Naly - Zo - Ando - Mahery - Tsanta - Rova - Joshua</a>
+          &copy; 2024 - Devellopeurs : <a href="#" class="copyright-link">Antonio - Matthieu - Angelo - Naly - Zo - Ando - Mahery - Tsanta - Rova - Joshua</a>
         </p>
       </div>
     </div>

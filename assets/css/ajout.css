@@ -50,6 +50,16 @@
     outline: none;
 }
 
+input[type="date"] {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    width: 17.1em;
+    height: 3em;
+    padding-left: 2em;
+    border-radius: 5px;
+    border: 1px solid var(--black-clr);
+}
+
 ::-webkit-file-upload-button {
     color: white;
     background: #858585;

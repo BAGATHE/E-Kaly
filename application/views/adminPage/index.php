@@ -6,7 +6,7 @@
                     <h1>Dashboard</h1>
                 </div>
             </div>
-            <!-- Analyses -->
+            <!-- dashboard -->
             <div class="analyse">
                 <div class="sales">
                     <div class="status">
@@ -81,7 +81,7 @@
                     </div>
                 </div>
             </div>
-            <!-- End of Analyses -->
+            <!-- End of dashboard -->
 
     
 

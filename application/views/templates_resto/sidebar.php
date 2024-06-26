@@ -6,7 +6,7 @@
             <h2>E-<span class="kaly">KALY</span></h2>
         </div>
         <ul class="side-menu">
-            <li  class="active">
+            <li>
                 <a href="<?= site_url('RestoController')?>">
                     <span class="material-icons-sharp">
                         home
@@ -30,7 +30,7 @@
                     Mise en avant
                 </a>
             </li>
-            <li   class="active">
+            <li>
                 <a href="<?= site_url('RestoController/loadStatistiquePage')?>">
                     <span class="material-icons-sharp">
                     insert_chart
