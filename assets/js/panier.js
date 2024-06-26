@@ -32,7 +32,7 @@ $(document).ready(function() {
             </div>
         `);
 
-        $('.contenu-panier').prepend($newArticle);
+        $('.contenu-panier').append($newArticle);
         updateSousTotal();
         articleIndex++; 
 

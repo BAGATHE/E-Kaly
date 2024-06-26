@@ -152,6 +152,8 @@ class ClientController extends CI_Controller {
         $data['list_plat_resto'] = $this->PlatModel->getAllInfo($id_resto);
         $data['info_resto'] = $this->RestoModel->getById($id_resto); 
         $data['client'] = $current_client;
+        $data['adresses'] = $this->AdresseModel->getAll();
+       
         $this->load->view('clientPage/PlatClient',$data);
     }
 
@@ -168,40 +170,95 @@ class ClientController extends CI_Controller {
         $prix_livraison = $this->ClientModel->getFraisLivraison($adresse_resto,$adresse_target);
         echo json_encode($prix_livraison);
     }
-/*validation panier*/
-    public function ValiderPanier(){
-        $articles = $this->input->post('articles');
-        $idresto = $this->input->post('id_resto');
-        $adresse = $this->input->post('adresse');
-        $repere = $this->input->post('repere');
-        $client = $this->input->post('id_client');
-        $currentDateTime = date('Y-m-d H:i:s');
-       
+    /* Validation panier */
+public function ValiderPanier() {
+    $articles = $this->input->post('articles');
+    $idresto = $this->input->post('id_resto');
+    $adresse = $this->input->post('adresse');
+    $repere = $this->input->post('repere');
+    $client = $this->input->post('id_client');
+    $latitude = $this->input->post('latitude');
+    $longitude = $this->input->post('longitude');
+    $currentDateTime = date('Y-m-d H:i:s');
+    $currentTime = date('H:i:s', strtotime($currentDateTime));
+    /* Vérification de la quantité disponible aujourd'hui pour chaque plat */
+    $verification = "";
+    $date = date('Y-m-d');
+    
+    if ($this->RestoModel->ableToTakeCommand($idresto,$currentTime) == 0) { 
+        $response = ["status" => "failed", "response" => "Le restaurant ne peut plus prendre votre commande"];
+        echo json_encode($response);    
+        return;
+    }
+
+
+    for ($i = 0; $i < count($articles); $i++) {
+    $article = $articles[$i];
+    $production = $this->PlatModel->getProductionJournalierePlat($article['id_plat']); 
+    $consommation = $this->PlatModel->getConsommationJournalierePLat($date, $article['id_plat']);
+    
+    if ($consommation == null) {
+        $consommation["consommation"] = 0;
+        $consommation["description"] = $this->PlatModel->getById($article['id_plat'])["description"];
+    }
+    
+    if (!isset($production["production"])) {
+        $production["production"] = 0; // Ensure production is set to avoid errors
+    }
+
+    $restePlat = $production["production"] - $consommation["consommation"];
+    
+    if ($production["production"] < $article['quantity']) {
+        $verification .= "Vous pouvez commander que " . $production["production"] . " de " . $consommation["description"] . "\n";
+    } else if ($restePlat < $article['quantity']) {
+        $verification .= "La quantité restante disponible de " . $consommation["description"] . " est de " . $restePlat . "\n";
+    }
+   }
+   
+    if ($verification !="") { 
+        $response = ["status" => "failed", "response" => $verification];
+        echo json_encode($response); 
+        return;
+    } else {
         $dataCommande = [
             'id_client' => $client,
             'adresse' => $adresse,
-            'repere' => $repere, 
+            'repere' => $repere,
             'date' => $currentDateTime,
-         ]; 
+            'latitude' => $latitude,
+            'longitude' => $longitude
+        ];
+        $this->db->trans_start(); // Démarrer une transaction
         $this->CommandeModel->save($dataCommande);
         $Current_id_commande = $this->CommandeModel->getLastCommandeId();
-        
-        if($Current_id_commande != null){
+
+        if ($Current_id_commande != null) {
             foreach ($articles as $article) {
                 // Exemple d'insertion dans la base de données
                 $data = array(
                     'id_commande' => $Current_id_commande,
-                    'id_plat' =>$article['id_plat'],
+                    'id_plat' => $article['id_plat'],
                     'quantite' => $article['quantity'],
                     'prix' => $article['price']
                 );
-            $this->CommandePlatModel->save($data);
+                $this->CommandePlatModel->save($data);
+            }
+            $this->db->trans_complete(); // Terminer la transaction
+
+            if ($this->db->trans_status() === FALSE) {
+                $response = ["status" => "failed", "response" => "Erreur lors de l'enregistrement de la commande."];
+            } else {
+                $response = ["status" => "success"];
+            }
+        } else {
+            $response = ["status" => "failed", "response" => "Erreur lors de la récupération de l'ID de la commande."];
+            $this->db->trans_rollback(); // Annuler la transaction
         }
-        echo json_encode("success");
-        }else{
-        echo json_encode("failed");
-        }
+
+        echo json_encode($response);
+    }
 }
+
 
     
     public function toFavorite($id_resto) {
@@ -247,9 +304,10 @@ public function rechercherPlat(){
     $prix_max = $this->input->post('prix_max');
     $nom_plat = $this->input->post('nom_plat');
     $data['plat_recherche'] =$this->PlatModel->searchPlatWithCriteria ($id_resto,$prix_min, $prix_max ,$nom_plat);
-    $data['list_plat_resto'] = $this->PlatModel->getAllInfo(1);
-    $data['info_resto'] = $this->RestoModel->getById(1);
+    $data['list_plat_resto'] = $this->PlatModel->getAllInfo($id_resto);
+    $data['info_resto'] = $this->RestoModel->getById($id_resto);
     $data['client'] = $current_client; 
+    $data['adresses'] = $this->AdresseModel->getAll();
     $this->load->view('clientPage/PlatClient',$data);
    /* $this->output
     ->set_content_type('application/json')

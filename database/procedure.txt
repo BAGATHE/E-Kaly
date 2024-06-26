@@ -1,0 +1,113 @@
+ouvrir 5 navigateur different pour eviter l'erreur de session et pour plus de rapidite 
+
+navigateur 1 pour le client 1er affiche acceuil client
+navigateur 2 pour le livreur 1er afichage page login  
+navigateur 2 pour le livreur 1er afichage page login  
+navigateur 3 pour le restaurant  1er afichage acceuil restoraurant pakopako  
+navigateur 4 pour le admin   1er afichage page login  
+ 
+
+
+
+
+COTE CLIENT
+page acceuil client
+-defilement jusqu'en bas
+
+-cliquer sur login
+   -sur la page login =>faire une inscription apres inscription 
+                      =>loger avec le donner d'inscription
+
+
+de retour sur la page d'acceuil 
+ -mettre en favori 2 resto selesy et pakopako
+ -cliquez sur la navigation favoris pour voir le resto mise en favori 
+ -retour sur l'acceuil en cliquant sur acceuil 
+ -recherche de plat (quartier, heure ouverture et fermeture,nom)
+         -teste recherche juste avec quartier antanimena
+         -testes avec nom resto pakopako entrer quartier antanimena 
+
+ -apres affichage resultat recherche cliquer sur le resto pakopako
+
+
+arriver sur la page affichage du plar du restto 
+  -notez le resto  mettre 5 etoile et regarder la listede plat et mettre une note de 5 au plat 
+   apres revenir sur la page acceuil et voir le changement de note sur le resto clique sur le resto pour revenir sur la page d'affichage du resto 
+  
+  -faire une recherche de plat mettre mot clef choisir prix min et max entre 2000 et 6000
+  ajouter le recherche au panier puis choisi 2 autre plat sur la liste de plat du resto 
+   et voir le changement du note plat  
+
+
+  -dans le panier a droite ajouter le nombre de quantiter du plat et faire un teste de diminution 
+  -cliquez sur le croix rouge sur l'un des plat pour supprimer
+
+  -teste autre fonctionnalite mettre les plat a plus de 100 chacun  c'est un input type number il suffit juste de cliquez sur le nombre et mettre la quantiter  
+
+  -ne pas encore cliquer sur le bouton continuer mais 
+  il faut d'abord choisi quartier mettre mahamasina cliquez un endroit sur la carte sur le quartier de mahamasina 
+  puis clique sur  le bouton continuez 
+
+  -puis pour plus de demos en change le quartier a behoririka cliquer sur un point de la carte ou se trouve behoririka puis double clique sur le bouton continuez  avant de validez mettre un repere
+
+  lors de la validation il doit avoir de erreur que le quantiter n'est pas disponible qu'il peut commandez que certain quantiter
+
+  -puis apres exception reduire le quantiter inferieur a 10
+
+  #faire une autre commande 
+
+
+  apres cela il recevra une confirmation  et redirigez vers acceuil 
+
+  cliquez sur chez madama pour faire une teste d'une autre fonctionnalite choisir un plat mettre dans le panier procedure comme celle du haut puis validez il devra retourner une exception que le restaurant ne peut pas  prendre de commande par ce que il n'êst pas encore ouvert 
+
+
+pour voir le livreur qui peut voir la livraison apres commande dans terminal  
+ select * from v_livreur_commande_frais_commission_payement;
+
+
+Coter restaurant
+juste pour voir la commande cliquez sur la cloche de notifiaction a gauche pour voir la commande le status doit etre en cours et peut voir le details de la commande 
+
+SUR NAVIGATEUR LIVREUR  
+se loger sur un livreur qui peut voir la livraison et un autre qui ne peut pas voir la livraison
+on affiche d'abord le profil du livreur qui ne peut pas voir la livraison apres on ferme le navigateur et on reviens 
+sur le livreur qui peut voir la livraison 
+
+-accepter la livraison 
+-allez sur la page livraison du jour 
+-cliquez sur affichez la carte survolez sur les 2 marker 
+-cliquez sur livraison effectuez  et l'argent du jour se update 
+
+allez sur la page performance 
+choisir juin 2024
+apres affichage  revenir qur acceuil et ouis se deconnecter
+
+
+
+COTER RESTAURANT 
+
+cliquez sur la cloche de notifiaction a gauche pour voir la commande et le status doit etre valider apres que le livreur a efectuer la livraison 
+
+presenté  les autre  fonctionnalité 
+-cliquer sur le nom du resto pakopako il poura visualiser sont profil et modifier
+-historique commande
+-mise en avant
+-global statistique 
+
+
+COTER ADMIN
+testse les fonctionnalité 
+supprimer client
+-livreur,resto => suppression,ajout  
+
+fiche de paye livreur 
+ -recherche juin 2024
+revenu 
+-recherche que  2024  et apres  et recherche  juin 2024 et mai 2024
+
+-affichage page mise en avant 
+
+
+
+

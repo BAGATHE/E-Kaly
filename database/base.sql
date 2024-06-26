@@ -1,7 +1,4 @@
 
-drop database Ekaly;
-create database Ekaly;
-use Ekaly;
 
 drop database ekaly;
 create database ekaly;
@@ -25,10 +22,10 @@ CREATE TABLE Voisin (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_adresse1 INT,
     id_adresse2 INT,
-    FOREIGN KEY (id_adresse1) REFERENCES Adresse(id),
-    FOREIGN KEY (id_adresse2) REFERENCES Adresse(id)
-
+    FOREIGN KEY (id_adresse1) REFERENCES Adresse(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_adresse2) REFERENCES Adresse(id) ON DELETE CASCADE
 );
+
 
 
 CREATE TABLE Resto (
@@ -37,7 +34,7 @@ CREATE TABLE Resto (
     id_adresse INT,
     email VARCHAR(255),
     mot_de_pass VARCHAR(255),
-    FOREIGN KEY (id_adresse) REFERENCES Adresse(id)
+    FOREIGN KEY (id_adresse) REFERENCES Adresse(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Info_resto (
@@ -53,8 +50,8 @@ CREATE TABLE Info_resto (
     latitude REAL,
     longitude REAL,
     image VARCHAR(255) DEFAULT NULL,
-    FOREIGN KEY (id_resto) REFERENCES Resto(id),
-    FOREIGN KEY (adresse) REFERENCES Adresse(id)
+    FOREIGN KEY (id_resto) REFERENCES Resto(id) ON DELETE CASCADE,
+    FOREIGN KEY (adresse) REFERENCES Adresse(id) ON DELETE CASCADE
 );
 
 
@@ -64,15 +61,15 @@ CREATE TABLE Plat (
     description VARCHAR(255),
     prix DECIMAL(10, 2),
     image VARCHAR(255) DEFAULT NULL,
-    FOREIGN KEY (id_resto) REFERENCES Resto(id)
+    FOREIGN KEY (id_resto) REFERENCES Resto(id) ON DELETE CASCADE
 );
 
-CREATE TABLE Change_quantite_plat (
+CREATE or replace TABLE Change_quantite_plat (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_plat INT,
     date DATETIME,
     production INT,
-    FOREIGN KEY (id_plat) REFERENCES Plat(id)
+    FOREIGN KEY (id_plat) REFERENCES Plat(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Commande (
@@ -83,8 +80,8 @@ CREATE TABLE Commande (
     date DATETIME,
     latitude REAL,
     longitude REAL,
-    FOREIGN KEY (id_client) REFERENCES Client(id),
-    FOREIGN KEY (adresse) REFERENCES Adresse(id)
+    FOREIGN KEY (id_client) REFERENCES Client(id) ON DELETE CASCADE,
+    FOREIGN KEY (adresse) REFERENCES Adresse(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Commande_plat (
@@ -93,8 +90,8 @@ CREATE TABLE Commande_plat (
     id_plat INT,
     quantite INT,
     prix DECIMAL(10, 2),
-    FOREIGN KEY (id_commande) REFERENCES Commande(id),
-    FOREIGN KEY (id_plat) REFERENCES Plat(id)
+    FOREIGN KEY (id_commande) REFERENCES Commande(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_plat) REFERENCES Plat(id) ON DELETE CASCADE
 );
 
 
@@ -110,8 +107,8 @@ CREATE TABLE Info_livreur (
     nom_complet VARCHAR(255),
     adresse INT,
     telephone VARCHAR(255),
-    FOREIGN KEY (id_livreur) REFERENCES Livreur(id) ,
-    FOREIGN KEY (adresse) REFERENCES Adresse(id)
+    FOREIGN KEY (id_livreur) REFERENCES Livreur(id) ON DELETE CASCADE ,
+    FOREIGN KEY (adresse) REFERENCES Adresse(id) ON DELETE CASCADE
     
 );
 
@@ -128,8 +125,8 @@ CREATE TABLE Livraison_payement_commande (
     id_commande INT,
     id_livreur INT,
     paye BOOLEAN,
-    FOREIGN KEY (id_commande) REFERENCES Commande(id),
-    FOREIGN KEY (id_livreur) REFERENCES Livreur(id)
+    FOREIGN KEY (id_commande) REFERENCES Commande(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_livreur) REFERENCES Livreur(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Note_plat (
@@ -137,8 +134,8 @@ CREATE TABLE Note_plat (
     id_client INT,
     id_plat INT,
     note decimal(10,2),
-    FOREIGN KEY (id_client) REFERENCES Client(id),
-    FOREIGN KEY (id_plat) REFERENCES Plat(id)
+    FOREIGN KEY (id_client) REFERENCES Client(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_plat) REFERENCES Plat(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Note_resto (
@@ -146,16 +143,16 @@ CREATE TABLE Note_resto (
     id_client INT,
     id_resto INT,
     note INT,
-    FOREIGN KEY (id_client) REFERENCES Client(id),
-    FOREIGN KEY (id_resto) REFERENCES Resto(id)
+    FOREIGN KEY (id_client) REFERENCES Client(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_resto) REFERENCES Resto(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Favori_client (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_resto INT,
     id_client INT,
-    FOREIGN KEY (id_resto) REFERENCES Resto(id),
-    FOREIGN KEY (id_client) REFERENCES Client(id)
+    FOREIGN KEY (id_resto) REFERENCES Resto(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_client) REFERENCES Client(id) ON DELETE CASCADE
 );
 
 
@@ -173,15 +170,15 @@ CREATE TABLE Mise_en_avant (
     prix DECIMAL(10, 2),
     date DATE,
     duree INT,
-    FOREIGN KEY (id_resto) REFERENCES Resto(id),
-    FOREIGN KEY (id_prix) REFERENCES Prix_mise_en_avant(id)
+    FOREIGN KEY (id_resto) REFERENCES Resto(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_prix) REFERENCES Prix_mise_en_avant(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Status (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_livreur INT,
     status VARCHAR(255),
-    FOREIGN KEY (id_livreur) REFERENCES Livreur(id)
+    FOREIGN KEY (id_livreur) REFERENCES Livreur(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Payement (
@@ -190,7 +187,7 @@ CREATE TABLE Payement (
     id_commande INT,
     date DATETIME,
     montant DECIMAL(10, 2),
-    FOREIGN KEY (id_livreur) REFERENCES Livreur(id)
+    FOREIGN KEY (id_livreur) REFERENCES Livreur(id) ON DELETE CASCADE
 );
 
 
@@ -206,56 +203,3 @@ CREATE OR REPLACE TABLE Tarif_livraison (
     tarif_moyen decimal(10,2),
     tarif_max decimal(10,2)
 );
-
-
-ALTER TABLE `Info_livreur` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);
-
-ALTER TABLE `Info_livreur` ADD FOREIGN KEY (`adresse`) REFERENCES `Adresse` (`id`);
-
-ALTER TABLE `Plat` ADD FOREIGN KEY (`id_resto`) REFERENCES `Resto` (`id`);
-
-ALTER TABLE `Change_quantite_plat` ADD FOREIGN KEY (`id_plat`) REFERENCES `Plat` (`id`);
-
-ALTER TABLE `Commande` ADD FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
-
-ALTER TABLE `Commande` ADD FOREIGN KEY (`adresse`) REFERENCES `Adresse` (`id`);
-
-ALTER TABLE `Commande_plat` ADD FOREIGN KEY (`id_commande`) REFERENCES `Commande` (`id`);
-
-ALTER TABLE `Commande_plat` ADD FOREIGN KEY (`id_plat`) REFERENCES `Plat` (`id`);
-
-ALTER TABLE `Livraison_payement_commande` ADD FOREIGN KEY (`id_commande`) REFERENCES `Commande` (`id`);
-
-ALTER TABLE `Livraison_payement_commande` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);
-
-ALTER TABLE `Note_plat` ADD FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
-
-ALTER TABLE `Note_plat` ADD FOREIGN KEY (`id_plat`) REFERENCES `Plat` (`id`);
-
-ALTER TABLE `Note_resto` ADD FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
-
-ALTER TABLE `Note_resto` ADD FOREIGN KEY (`id_resto`) REFERENCES `Resto` (`id`);
-
-ALTER TABLE `Favori_client` ADD FOREIGN KEY (`id_resto`) REFERENCES `Resto` (`id`);
-
-ALTER TABLE `Favori_client` ADD FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
-
-ALTER TABLE `Commission` ADD FOREIGN KEY (`id_resto`) REFERENCES `Resto` (`id`);
-
-ALTER TABLE `Commission` ADD FOREIGN KEY (`id_commande`) REFERENCES `Commande` (`id`);
-
-ALTER TABLE `Info_resto` ADD FOREIGN KEY (`id_resto`) REFERENCES `Resto` (`id`);
-
-ALTER TABLE `Info_resto` ADD FOREIGN KEY (`adresse`) REFERENCES `Adresse` (`id`);
-
-ALTER TABLE `Mise_en_avant` ADD FOREIGN KEY (`id_resto`) REFERENCES `Resto` (`id`);
-
-ALTER TABLE `Mise_en_avant` ADD FOREIGN KEY (`id_prix`) REFERENCES `Prix` (`id`);
-
-ALTER TABLE `Status` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);
-
-ALTER TABLE `Payement` ADD FOREIGN KEY (`id_livreur`) REFERENCES `Livreur` (`id`);
-
-ALTER TABLE `lien_adresse` ADD FOREIGN KEY (`id_adresse1`) REFERENCES `Adresse` (`id`);
-
-ALTER TABLE `lien_adresse` ADD FOREIGN KEY (`id_adresse2`) REFERENCES `Adresse` (`id`);

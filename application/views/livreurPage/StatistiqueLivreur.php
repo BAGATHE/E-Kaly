@@ -1,5 +1,5 @@
 <main>
-         <h1>Statistique livreur</h1>
+         <h1>Statistiques Livreur</h1>
          <form id='statistiqueLivreur'  method="POST" action="<?php echo site_url('LivreurController\statistiqueLivreur');?>">
          <input type="hidden" name="id_livreur" value="<?=$current_livreur['id'] ?>"/>    
          <div class="liste">

@@ -65,6 +65,7 @@ body {
    user-select: none;
    overflow-x: hidden;
    color: var(--color-dark);
+   padding-top:1em ;
 }
 
 .container {
@@ -249,6 +250,7 @@ aside .sidebar .message-count {
 /* ---------------- MAIN -------------------- */
 main {
    margin-top: 1.4rem;
+   padding: 2em;
 }
 
 main .liste {

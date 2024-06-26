@@ -176,6 +176,11 @@ class  MiseEnAvantModel extends CI_Model {
       return $query->result_array();
   }
 
+  public function update($id,$data){
+      $this->db->where('id', $id);
+      return $this->db->update('mise_en_avant', $data);
+  }
+
 }
 
 ?>

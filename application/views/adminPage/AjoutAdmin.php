@@ -8,15 +8,15 @@
                         <input type="text" placeholder="Nom Admin" name="nom">
                     </div>
                     <div class="form-input">
-                        <label for="">prenom</label>
+                        <label for="">Prenom</label>
                         <input type="text" placeholder="prenom" name="prenom">
                     </div>
                     <div class="form-input">
-                        <label for="">email</label>
+                        <label for="">Email</label>
                         <input type="email" placeholder="email" name="email">
                     </div>
                     <div class="form-input">
-                        <label for="">mot de passe</label>
+                        <label for="">Mot de passe</label>
                         <input type="text" placeholder="mot de passe" name="mot_de_pass">
                     </div>
                     <button type="submit">Ajouter</button>

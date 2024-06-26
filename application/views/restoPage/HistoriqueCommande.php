@@ -4,12 +4,7 @@
         <nav>
             <form action="#">
                 <div class="form-input">
-                    <input type="search" placeholder="Search...">
-                    <button class="search-btn" type="submit">
-                        <span class="material-icons-sharp">
-                            troubleshoot
-                        </span>
-                    </button>
+
                 </div>
             </form>
             <input type="checkbox" id="theme-toggle" hidden>
@@ -20,9 +15,9 @@
                 </span>
                 <span class="count">0</span>
             </a>
-            <a href="#" class="profile">
-                <p><?=$current_resto["nom"]?></p>
-                <img src="<?php echo base_url()?>assets/images/Logo.png">
+            <a href="<?= site_url('RestoController/infoProfil')?>" class="profile">
+                <p><?=$profil["nom"]?></p>
+                <img src="<?php echo base_url()?>assets/images/<?=$profil['image'] ?>">
             </a>
         </nav>
 
@@ -33,7 +28,7 @@
                 <div class="orders">
                     <div class="header">
                         <i class='bx bx-receipt'></i>
-                        <h3>Recent Orders</h3>
+                        <h3>Historiques des commandes</h3>
                         <i class='bx bx-filter'></i>
                         <i class='bx bx-search'></i>
                     </div>
@@ -59,13 +54,13 @@
                             <option value="0">choisir  année</option>
                             <option value="2024">2024</option>
                         </select>
-                        <button class="btn btn-primary" type="submit">voir</button>
+                        <button class="btn btn-primary" style="width: 5em; height: 3em; color: var(--white-clr); border-radius: 5px; background: var(--green-clr); cursor: pointer;" type="submit">voir</button>
                         </form>
                     </div>
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
                         <form  id='statistique'  method="POST" action="<?php echo site_url('RestoController\historiqueCommande');?>">
                         <input type="date" name="date">
-                        <button class="btn btn-primary" type="submit">voir</button>
+                        <button class="btn btn-primary" style="width: 5em; height: 3em; color: var(--white-clr); border-radius: 5px; background: var(--green-clr); cursor: pointer;" type="submit">voir</button>
                         </form>
                     </div>
                     <table>
@@ -74,9 +69,9 @@
                                 <th>Client</th>
                                 <th>Date de Commande</th>
                                 <th>Adresse de Livraison</th>
-                                <th>Intitule</th>
+                                <th>N° Commande</th>
                                 <th>Somme(+Livraison)</th>
-                                <th>Commission(Plateform)</th>
+                                <th>Commission(Plateforme)</th>
                                 <th>Voir detail</th>
                             </tr>
                         </thead>

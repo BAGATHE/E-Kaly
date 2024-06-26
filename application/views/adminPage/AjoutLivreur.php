@@ -10,7 +10,7 @@
                     </div>
                     
                     <div class="form-input">
-                        <label for="">email</label>
+                        <label for="">Email</label>
                         <input type="email" placeholder="email" name="email">
                     </div>
                     
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="form-input">
-                        <label for="">mot de passe</label>
+                        <label for="">Mot de passe</label>
                         <input type="password" placeholder="mot de passe" name="mot_de_pass">
                     </div>
                     <button type="submit">Ajouter</button>

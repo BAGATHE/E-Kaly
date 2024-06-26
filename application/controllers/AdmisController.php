@@ -22,6 +22,9 @@ class AdmisController extends CI_Controller {
         $data['current_administrator'] = $current_administrator; 
         $data['administrators'] = $this->AdmisModel->getAll();
         $data['clients'] = $this->ClientModel->getAll();
+        $data["nb_client"] = $this->AdmisModel->getCountClient();
+        $data["nb_resto"] = $this->AdmisModel->getCountResto();
+        $data["revenu_generer"] = $this->AdmisModel->getRevenu_details(); 
         $data['contents'] = "adminPage/index";
         $this->load->view('templates/template', $data);
     }
@@ -188,6 +191,10 @@ class AdmisController extends CI_Controller {
         $this->AdmisModel->delete($id);
         redirect('AdmisController');
     }
+    public function deleteClient($id) {
+        $this->ClientModel->delete($id);
+        redirect('AdmisController');
+    }
 
 
     /*** recherche multi critère  */
@@ -235,7 +242,15 @@ public function adminLogout() {
 }
 /*liste restaurant avec mise en avant */
 public function miseEnAvant(){
-    echo "mbola ts vita";
+     $current_administrator  = null;
+        if ($this->session->userdata('admin_session')) {
+            $current_administrator = $this->session->userdata('admin_session');
+        }
+        $data = array();      
+        $data['current_administrator'] = $current_administrator;
+        $data["list_resto"] =$this->RestoModel->getAllMiseEnAvant(); 
+        $data['contents'] = "adminPage/MiseEnAvant";
+        $this->load->view('templates/template',$data);
 }
 
 
@@ -254,7 +269,8 @@ public function miseEnAvant(){
             $current_administrator = $this->session->userdata('admin_session');
         }
         $data = array();      
-        $data['current_administrator'] = $current_administrator; 
+        $data['current_administrator'] = $current_administrator;
+
         $data['contents'] = "adminPage/LivreurPaye";
         $this->load->view('templates/template',$data);
     }
@@ -266,9 +282,8 @@ public function miseEnAvant(){
         }
         $mois = $this->input->post("mois");
         $anner = $this->input->post("anner");
-
         $data = array();      
-        //$data["livreurs"] = $this->LivreurModel->getAllWithInfo();
+        $data["livreurs_payement"] = $this->AdmisModel->payement_livreur($mois,$anner);
         $data['current_administrator'] = $current_administrator; 
         $data['contents'] = "adminPage/LivreurPaye";
         $this->load->view('templates/template',$data);

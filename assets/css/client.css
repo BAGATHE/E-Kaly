@@ -124,6 +124,10 @@ ion-icon { display: block; }
 
 img { height: auto; }
 
+.accueil img { height: 150%; }
+.plat img { height: 150%; }
+.favori img { height: 150%; }
+
 input,
 select,
 button,
@@ -994,7 +998,7 @@ body.active { overflow: hidden; }
   #DELIVERY
 \*-----------------------------------*/
 
-.delivery-content { margin-block-end: 40px; }
+.delivery-content { margin-block-end: 40px; margin-right: 2em;}
 
 .delivery .section-title {
   max-width: 17ch;
@@ -1257,9 +1261,22 @@ body.active { overflow: hidden; }
   gap: 10px;
 }
 
+.input-adresse {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
 
+.input-adresse input {
+  width: 15em;
+}
 
+#map:focus-within { outline: 1px auto -webkit-focus-ring-color; }
 
+#map {
+  position: relative;
+}
 
 /*-----------------------------------*\
   #FOOTER

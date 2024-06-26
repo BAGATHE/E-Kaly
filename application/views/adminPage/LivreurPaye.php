@@ -22,7 +22,8 @@
                 <option value="0">choisir  année</option>
                 <option value="2024">2024</option>
               </select>
-              <button class="btn btn-primary" type="submit">Voir</button>
+              <button style="width: 5em; height: 3em; color: var(--white-clr); border-radius: 5px; background: var(--green-clr); cursor: pointer;"  
+                type="submit">Voir</button>
             </form>
         </div>
 
@@ -34,19 +35,20 @@
                         <tr>
                             <th>Nom</th>
                             <th>Contact</th>
-                            <th>Horaire</th>
-                            <th>Chiffre obtenu</th>
-                            <th>Statuts</th>
+                            <th>Salaire du mois</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
-                    <tr>
-                        <td>nom_livreur</td>
-                        <td>contact_livreur</td>
-                        <td>horaire_travail</td>
-                        <td>100000</td>
-                        <td style="color: #085696;">Payé</td>
-                    </tr>
+                    <tbody>
+                        <?php if(isset($livreurs_payement) || !empty($livreurs_payement)){ 
+                           foreach($livreurs_payement as $livreur){ ?>
+                        <tr>
+                            <td><?=$livreur["nom_complet"] ?></td>
+                            <td><?=$livreur["telephone"] ?></td>
+                            <td><?=$livreur["montant_a_paye"]?></td>
+                        </tr>
+
+                        <?php }  }?>
+                    </tbody>
                 </table>
             </div>
 
@@ -83,3 +85,5 @@
             </div>
 
         </div>
+<script src="<?=base_url()?>assets/jquery/jquery.min.js"></script>
+<script src="<?=base_url()?>assets/jquery/jquery-3.7.1.js"></script>

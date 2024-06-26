@@ -103,6 +103,12 @@ class  RestoModel extends CI_Model {
    return $this->db->update($nom_table, $data);
 }
 
+/** update generaliser */
+public function editData($id, $data) {
+   $this->db->where('id_resto', $id);
+   return $this->db->update('info_resto', $data);
+}
+
 /**supresision de ligne dans  une table */
    public function delete($id) {
       $this->db->where('id',$id);
@@ -111,7 +117,7 @@ class  RestoModel extends CI_Model {
 
 /* recuperation  info resto par l'ID*/
 public function getById($id) {
-      $this->db->select('resto.id, resto.email, info_resto.nom, info_resto.adresse,info_resto.repere,info_resto.description,info_resto.heure_ouverture,info_resto.heure_fermeture');
+      $this->db->select('resto.id, resto.email, info_resto.nom, info_resto.adresse,info_resto.repere,info_resto.description,info_resto.heure_ouverture,info_resto.heure_fermeture,info_resto.image,info_resto.telephone,info_resto.latitude,info_resto.longitude');
       $this->db->from('Resto resto');
       $this->db->join('Info_resto info_resto', 'resto.id = info_resto.id_resto');
       $this->db->where('resto.id',$id);
@@ -218,9 +224,15 @@ public function getPrixMiseEnAvant(){
    }
 /**recuperation de l'information mise en avant du resto */
 public function getMiseEnAvantParResto($idResto) {
+
       $this->db->where('id_resto', $idResto);
       $query = $this->db->get('v_mise_en_avant_dates');
       return $query->row_array();
+   }
+
+   public function getAllMiseEnAvant(){
+      $query = $this->db->get('v_mise_en_avant_dates_with_info_resto');
+      return $query->result_array();
    }
 
 /*historique des commmande du mois choisi*/
@@ -234,7 +246,7 @@ public function historiqueCommandeMois($mois, $annee,$id_resto)
 /*historique des commmande du jour choisi*/
 public function historiqueCommandeJour($date,$id_resto)
    {
-       $sql= "select * from v_historique_commande_restaurant_avec_nom_client where DATE(date)='".$date."' and id_resto=".$id_resto;
+       $sql= "select * from v_historique_commande_restaurant_avec_nom_client_avec_status where DATE(date)='".$date."' and id_resto=".$id_resto;
        $query= $this->db->query($sql);
        return $query->result_array();
    }
@@ -328,11 +340,17 @@ public function getRestaurantByIdWithNote($id){
       $query = $this->db->get();
       return $query->result_array();
    }
-
-  
-  
-  
-
+   
+   public function ableToTakeCommand($id_resto,$heur){
+      $query = "SELECT ableToTakeCommand(?, ?) AS able";
+      $result = $this->db->query($query, array($id_resto, $heur));
+      
+      if ($result->num_rows() > 0) {
+         return $result->row()->able;
+      } else {
+         return null; 
+      }
+   }
 }
 
 

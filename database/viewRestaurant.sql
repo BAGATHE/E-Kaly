@@ -3,6 +3,7 @@ create or replace view  v_resto_plat AS
 select 
     r.id as id_resto,
     p.id as id_plat,
+    p.image as image,
     r.id_adresse,
     p.description ,
     p.prix
@@ -118,6 +119,14 @@ from v_historique_commande_restaurant as hcr
 join Client 
 on Client.id=hcr.id_client;
 
+create or replace view v_historique_commande_restaurant_avec_nom_client_avec_status as 
+select 
+    hcrn.*,
+    lpc.paye
+from v_historique_commande_restaurant_avec_nom_client as hcrn 
+join Livraison_payement_commande lpc
+on lpc.id_commande=hcrn.id_commande;
+
 -- liste des detaisl de tout les commandes effectuer sur plateform
 create or replace view v_details_commande as
 select 
@@ -135,7 +144,8 @@ select
     quantite,
     Plat.description,
     Plat.prix as prix_unitaire,
-    (quantite*Plat.prix) as total
+    (quantite*Plat.prix) as total,
+    Plat.image
 from Commande_plat
 join Plat 
 on Plat.id=Commande_plat.id_plat;
@@ -149,7 +159,7 @@ select
     cqp.production
 from 
     v_resto_plat as  vrp
-join 
+left join 
     Change_quantite_plat as cqp
 on 
     vrp.id_plat = cqp.id_plat
@@ -160,6 +170,7 @@ GROUP BY
 create or replace view v_info_global_plat_resto as 
 select 
     vcqp.*,
+    -- vcqp.image as images,
     coalesce(avg(note),0) as note
 FROM   
     v_changement_quantite_plat as vcqp
@@ -244,3 +255,35 @@ select
     id_prix
 from Mise_en_avant;
 
+
+CREATE OR REPLACE VIEW v_mise_en_avant_dates_with_info_resto AS 
+SELECT
+    msv.id,
+    msv.id_resto, 
+    msv.date AS date_debut,
+    DATE_ADD(msv.date, INTERVAL msv.duree MONTH) AS date_fin,
+    msv.duree,
+    msv.prix AS prix_par_mois, 
+    msv.id_prix,
+    ir.nom
+FROM Mise_en_avant AS msv
+JOIN Info_resto ir
+ON msv.id_resto = ir.id_resto;
+
+
+DELIMITER //
+
+CREATE OR REPLACE FUNCTION ableToTakeCommand (idResto INT, heure TIME)
+RETURNS INT
+BEGIN
+    DECLARE countCommands INT;
+    
+    SELECT COUNT(*)
+    INTO countCommands
+    FROM Info_resto
+    WHERE id_resto = idResto
+    AND heure BETWEEN heure_ouverture AND addtime(heure_fermeture, - 1);    
+    RETURN countCommands;
+END //
+
+DELIMITER ;

@@ -4,12 +4,6 @@
         <nav>
             <form action="#">
                 <div class="form-input">
-                    <input type="search" placeholder="Search...">
-                    <button class="search-btn" type="submit">
-                        <span class="material-icons-sharp">
-                            troubleshoot
-                        </span>
-                    </button>
                 </div>
             </form>
             <input type="checkbox" id="theme-toggle" hidden>
@@ -20,14 +14,13 @@
                 </span>
                 <span class="count">0</span>
             </a>
-            <a href="#" class="profile">
-                <p><?=$current_resto["nom"]?></p>
-                <img src="<?php echo base_url()?>assets/images/Logo.png">
+            <a href="<?= site_url('RestoController/infoProfil')?>" class="profile">
+                <p><?=$profil["nom"]?></p>
+                <img src="<?php echo base_url()?>assets/images/<?=$profil['image'] ?>">
             </a>
         </nav>
 
         <!-- End of Navbar -->
-
         <main>
             <div>
                 <h5>Date et heure Reception de Commande : <?=$commande['date'] ?> </h5>

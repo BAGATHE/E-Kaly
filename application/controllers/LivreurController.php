@@ -19,7 +19,7 @@ class LivreurController extends CI_Controller {
         $data['solde']=$this->LivreurModel->getCommissionDuJour($current_livreur['id'],date("Y-m-d"));
         $data['livraison']=$this->LivreurModel->algoCommandeLivreur($current_livreur['id'],date("Y-m-d"));
         $data['contents'] = "livreurPage/LivreurAccueil";
-        $this->load->view('templates_livreur/template', $data);
+       $this->load->view('templates_livreur/template', $data);
     }
 
  
@@ -107,11 +107,11 @@ class LivreurController extends CI_Controller {
             }
         $data['current_livreur'] = $current_livreur;
         $data['date'] = date('Y-m-d');
-        //$data['date'] = '2024-06-03';
+        $data['solde']=$this->LivreurModel->getCommissionDuJour($current_livreur['id'],date("Y-m-d"));
         $data["livraison_du_jours"] = $this->LivreurModel->getLivraisonLivreurEnUneJourneAvecGain($current_livreur["id"],$data['date']);
         $data['contents'] = "livreurPage/LivraisonJournalier";
         $this->load->view('templates_livreur/template', $data);
-
+      
     }
 
     /*redirection vers la page  statistique*/ 
@@ -146,8 +146,10 @@ class LivreurController extends CI_Controller {
             $current_livreur = $this->session->userdata('livreur_session');
             }
         $this->LivreurModel->updateLivraisonPayementCommande($id_commande,1);
+        $this->LivreurModel->updateStatus($current_livreur["id"],"dispo");
         $data['current_livreur'] = $current_livreur;
         $data['date'] = date('Y-m-d');
+        $data['solde']=$this->LivreurModel->getCommissionDuJour($current_livreur['id'],date("Y-m-d"));
         $data["livraison_du_jours"] = $this->LivreurModel->getLivraisonLivreurEnUneJourneAvecGain($current_livreur["id"],$data['date']);
         $data['contents'] = "livreurPage/LivraisonJournalier";
         $this->load->view('templates_livreur/template', $data);
@@ -169,8 +171,14 @@ class LivreurController extends CI_Controller {
         }
         
         $this->LivreurModel->insert_livraison_payement_commande($id_commande, $current_livreur['id']);
-
+        $this->LivreurModel->updateStatus($current_livreur["id"],"non-dispo");
         redirect('LivreurController');
+    }
+
+    public function livreurLogout() {
+    $this->session->unset_userdata('livreur_session');
+    $this->session->sess_destroy();
+    $this->load->view('login');
     }
 
 

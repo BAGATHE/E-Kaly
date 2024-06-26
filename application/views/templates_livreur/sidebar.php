@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="<?= site_url('LivreurController') ?>" class="active"> 
+                <a href="<?= site_url('LivreurController') ?>"> 
                     <span class="material-symbols-sharp">home</span>
                     <h3>Accueil</h3>
                 </a>
@@ -21,7 +21,7 @@
                     <span class="material-symbols-sharp">insights</span>
                     <h3>Performance</h3>
                 </a>
-                <a href="<?= site_url('LivreurController/') ?>">
+                <a href="<?= site_url('LivreurController/livreurLogout') ?>">
                     <span class="material-symbols-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>

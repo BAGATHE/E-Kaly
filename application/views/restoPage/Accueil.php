@@ -4,12 +4,6 @@
         <nav>
             <form action="#">
                 <div class="form-input">
-                    <input type="search" placeholder="Search...">
-                    <button class="search-btn" type="submit">
-                        <span class="material-icons-sharp">
-                            troubleshoot
-                        </span>
-                    </button>
                 </div>
             </form>
             <input type="checkbox" id="theme-toggle" hidden>
@@ -20,9 +14,9 @@
                 </span>
                 <span class="count">0</span>
             </a>
-            <a href="" class="profile">
-                <p><?=$current_resto["nom"]?></p>
-                <img src="<?php echo base_url()?>assets/images/Logo.png">
+            <a href="<?= site_url('RestoController/infoProfil')?>" class="profile">
+                <p><?=$profil["nom"]?></p>
+                <img src="<?php echo base_url()?>assets/images/<?= $profil["image"]?>">
             </a>
         </nav>
 
@@ -34,7 +28,7 @@
             
             <?php foreach($list_plat_resto as $plat){ ?>
             <div class="card">
-                    <img src="<?php echo base_url()?>assets/images/plat.png" alt="">
+                    <img src="<?php echo base_url()?>assets/images/<?= $plat['image'] ?>" alt="">
                     <div class="info">
                         <h2><?=$plat["description"] ?></h2>
                         <p class="price"><?=$plat["prix"] ?></p>
@@ -44,7 +38,7 @@
                             <p>
                                 Note : 
                                 <span class="etoile">
-                                <?=$plat["note"] ?>
+                                <?=number_format($plat["note"] ,0, '.', ',') ?>
                                     <span class="material-icons-sharp">
                                         star
                                     </span>

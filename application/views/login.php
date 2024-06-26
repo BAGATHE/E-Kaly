@@ -16,22 +16,26 @@
             </div>
         </div>
         <div class="form-container" id="register-container">
-            <form >
+            <form id="inscription_client" action="<?php echo site_url('AuthentificationController/create');?>" method="POST" >
                 <h1>Inscription.</h1>
                 <div class="input-group">
                     <input type="text" name="nom" class="input">
                     <label class="label">Nom</label>
                 </div>
                 <div class="input-group">
-                    <input type="email" name="mail" class="input">
+                    <input type="text" name="prenom" class="input">
+                    <label class="label">Prenom</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" name="email" class="input">
                     <label class="label">Email</label>
                 </div>
                 <div class="input-group">
-                    <input type="text" name="phone" class="input">
+                    <input type="text" name="telephone" class="input">
                     <label class="label">Telephone</label>
                 </div>
                 <div class="input-group">
-                    <input type="password" name="mdp" class="input">
+                    <input type="password" name="mot_de_pass" class="input">
                     <label class="label">Mot de passe</label>
                 </div>
                 <button type="submit">S'inscrir</button>
@@ -54,8 +58,37 @@
             </form>
             <p>ou</p>
             <label id="register">Inscription</label>
+            <p style="color:red"><?php if(isset($error)) echo $error;?></p>
         </div>
     </div>
 </body>
-<script src="<?=base_url()?>assets/js/script.js"></script>
+<script src="<?=base_url()?>assets/js/login.js"></script>
+<script src="<?=base_url()?>assets/jquery/jquery.min.js"></script>
+<script src="<?=base_url()?>assets/jquery/jquery-3.7.1.js"></script>
+<script>
+ $(document).ready(function() {
+    $('#inscription_client').submit(function(event){
+        event.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+         var formData = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data:formData ,
+        success: function(response) {
+          alert("success");
+          window.location.href="<?php site_url("EntryPoint/index2")?>";
+        },
+        error: function(error) {
+            console.log(error);
+            alert('Erreur lors de la récupération de la note');
+        }
+    })
+
+    });
+
+
+    });
+</script>
 </html>

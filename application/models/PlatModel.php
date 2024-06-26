@@ -157,6 +157,35 @@ class PlatModel extends CI_Model {
       $query = $this->db->get();
       return $query->result_array();
    }
+   
+   public function getQuantitePlatRestant($id,$jour,$mois,$annee) {
+      $this->db->where('id_plat', $id);
+      $this->db->where('day', $jour);
+      $this->db->where('month', $mois);
+      $this->db->where('year', $annee);
+      $query = $this->db->get('v_quantite_plat_restant');
+      return $query->row_array();
+   }
+
+public function getConsommationJournalierePLat($date, $idplat) {
+    $this->db->select("id_plat, description, COALESCE(SUM(quantite), 0) as consommation");
+    $this->db->where("DATE(date)", $date);
+    $this->db->group_by("id_plat");
+    $this->db->having("id_plat", $idplat);
+    $query = $this->db->get("v_jointure_commande_commandeplat");
+
+    return $query->row_array();
+}
+
+
+public function getProductionJournalierePlat($idplat){
+   $this->db->where("id_plat",$idplat);
+   $query  = $this->db->get("Change_quantite_plat");
+   return $query->row_array();
+}
+
+
+
 }
 
 ?>

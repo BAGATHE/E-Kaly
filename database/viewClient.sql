@@ -154,6 +154,7 @@ BEGIN
     SELECT
         r.id AS id_resto,
         r.nom AS nom_resto,
+        ir.image, 
         fc.id_client,
         r.id_adresse,
         ir.repere,
@@ -167,3 +168,45 @@ BEGIN
     WHERE fc.id_client = idClient;
 END //
 DELIMITER ;
+
+
+create or replace view v_quantite_plat_restant AS
+select 
+    cqp.id_plat,
+    vrpcpc.description,
+    production,
+    coalesce(sum(quantite),0)as nombre_vendu,
+    production - coalesce(sum(quantite),0)as quantite_restant,
+    day(cqp.date) as day,
+    month(cqp.date) as month,
+    year(cqp.date) as year
+from 
+    Change_quantite_plat as cqp
+left join 
+    v_resto_plat_Commande_plat_Commande as vrpcpc
+on 
+    vrpcpc.id_plat = cqp.id_plat 
+and
+    cqp.date = (select max(date) from Change_quantite_plat where date <= vrpcpc.date)
+group by
+    id_plat,day(date),month(date),year(date);
+
+    /*modif */
+
+
+CREATE OR REPLACE VIEW v_jointure_commande_commandeplat AS
+SELECT 
+    cmd.id AS id_commande,
+    cmd.id_client,
+    cmd.adresse,
+    cmd.repere,
+    cmd.date,
+    cmdplat.id AS id_commande_plat,
+    cmdplat.id_plat,
+    plat.description,
+    cmdplat.quantite,
+    cmdplat.prix
+FROM Commande AS cmd
+JOIN Commande_plat AS cmdplat ON cmd.id = cmdplat.id_commande
+JOIN Plat AS plat ON cmdplat.id_plat = plat.id;
+

@@ -9,7 +9,7 @@
                            <form action="<?=site_url("LivreurController/updateStatus")?>" method="post">
                         <select name="status" id="status">
                             <option value="dispo" <?= $status == "dispo" ? "selected" : "" ?>>Actif</option>
-                            <option value="non dispo" <?= $status == "non dispo" ? "selected" : "" ?>>Inactif</option>
+                            <option value="non dispo" <?= $status == "non-dispo" ? "selected" : "" ?>>Inactif</option>
                         </select>
                               <button type="submit">Valider</button>
                            </form>
@@ -21,7 +21,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Argent du jour</h3>
-                            <h1 class="ekaly"><?= number_format($solde['somme_commission'])?> Ar</h1>
+                            <h1 class="ekaly"><?= number_format($solde['somme_frais_livraison'])?> Ar</h1>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,6 @@
                             <th>Adresse de livraison</th>
                             <th>Prix de la livraison</th>
                             <th>Commission</th>
-                            <th>Livrée</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -78,11 +77,11 @@
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <p>Bonjour, <b>John Doe</b></p>
+                        <p>Bonjour, <b><?=$current_livreur["nom_complet"]; ?></b></p>
                         <small class="text-muted">Livreur</small>
                     </div>
                     <div class="profile-photo">
-                        <img src="assets/images/profile.jpg" alt="profile photo">
+                        <img src="<?=base_url()?>assets/images/Logo.png" alt="logotipo">
                     </div>
                 </div>
             </div>

@@ -28,8 +28,8 @@
   <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-banner.png" media="min-width(768px)">
   <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-banner-bg.png" media="min-width(768px)">
   <link rel="preload" as="image" href="<?php echo base_url()?>assets/images/hero-bg.jpg">
-
-</head>
+    
+  </head>
 
 <body id="top">
 
@@ -65,7 +65,7 @@
       <?php if(!isset($client) || $client == null){ ?>
         <a href="<?php echo site_url('AuthentificationController/checkUserLogin');?>"><button class="btn btn-hover">Login</button></a>
       <?php  }else{?>
-        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">deconnection</button></a>
+        <a href="<?=site_url('ClientController/clientLogout') ?>"><button class="btn btn-hover">Déconnection</button></a>
       <?php } ?>
         <button class="nav-toggle-btn" aria-label="Toggle Menu" data-menu-toggle-btn>
           <span class="line top"></span>
@@ -159,12 +159,11 @@
 
           <ul class="food-menu-list">
             <!-- php boucle de liste de plat du resto -->
-           <?php foreach($list_plat_resto as $plat){ ?>
+           <?php foreach($list_plat_resto as $plat){  ?>
             <li>
-              <div class="food-menu-card">
+              <div class="food-menu-card plat">
                 <div class="card-banner">
-                  <img src="<?php echo base_url()?>assets/images/food-menu-1.png" width="300" height="300" loading="lazy"
-                    alt="Fried Chicken Unlimited" class="w-100">
+                   <img src="<?php if($plat['image'] != null) { echo base_url('assets/images/').$plat['image']; } else { echo base_url('assets/images/Logo.png'); } ?>" width="600" height="390" loading="lazy" alt="<?php echo $plat['description']; ?>" class="w-100">
 
                     <button class="btn food-menu-btn">
                       <span class="material-icons-sharp">
@@ -186,7 +185,9 @@
 
                   <a href="#" class="btn-link">
                     <span style="display: flex;">
-                        <p><?=$plat["note"]?></p>
+                        <p>
+                          <?=number_format($plat["note"],1, '.', ',') ?>
+                        </p>
                         <span class="material-icons-sharp">
                             star
                         </span>
@@ -237,12 +238,14 @@
             </div>
         
         <section id="info_complementaire">
+
         <div class="input-adresse">
         <select name="adresse" id="optionsAdresse" >
-            <option value="0" selected>choisir quartier</option>
-            <option value="1">Analakely</option>
-            <option value="20">Isotry</option>
-            <option value="32">andoram 102</option>
+           <option value="0" selected>Choisir quartier</option>
+
+              <?php foreach ($adresses as $adresse ){ ?>
+                <option value="<?=$adresse["id"] ?>"><?=$adresse["nom"] ?></option>
+          <?php }  ?>
         </select>
         <input type="text" placeholder="repere" id="repere" name="repere">
         </div>
@@ -252,6 +255,8 @@
           <p style="text-align:center;" id="livraison_prix"></p>
       
         <h3 style="text-align:center;" >Total a payer : <span id="total_payement"></span></h3>
+        <input type="hidden" name="latitude" id="latitude" val="">
+        <input type="hidden" name="longitude" val="" id="longitude">
         <button type="submit" class="bouton-continuer" id="">Valider</button>
         </div>
         </section>
@@ -266,17 +271,17 @@
     - #FOOTER
   -->
 
-  <footer class="footer" style="border:solid 2px yellow;" >
+  <footer class="footer">
 
     <div class="footer-top" style="background-image: url('<?php echo base_url()?>assets/images/footer-illustration.png')">
       <div class="container">
 
         <div class="footer-brand">
-        
-          <a href="" class="logo">BOGOTA by pass<span class="span">.</span></a>
+
+          <a href="" class="logo">E-Kaly<span class="span">.</span></a>
 
           <p class="footer-text">
-            Financial experts support or help you to to find out which way you can raise your funds more.
+            Des experts financiers vous soutiennent ou vous aident à découvrir de quelle manière vous pouvez lever davantage de fonds.
           </p>
 
         </div>
@@ -284,19 +289,19 @@
         <ul class="footer-list">
 
           <li>
-            <p class="footer-list-title">Contact Info</p>
+            <p class="footer-list-title">Contact</p>
           </li>
 
           <li>
-            <p class="footer-list-item">+1 (062) 109-9222</p>
+            <p class="footer-list-item">+261 34 84 520 18</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Info@YourGmail24.com</p>
+            <p class="footer-list-item">ekaly@gmail.com</p>
           </li>
 
           <li>
-            <address class="footer-list-item">153 Williamson Plaza, Maggieberg, MT 09514</address>
+            <address class="footer-list-item">Lot 201-E420, Andoharanofotsy,Antananarivo.</address>
           </li>
 
         </ul>
@@ -304,33 +309,30 @@
         <ul class="footer-list">
 
           <li>
-            <p class="footer-list-title">Opening Hours</p>
+            <p class="footer-list-title">Heure d'ouverture</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Monday-Friday: 08:00-22:00</p>
+            <p class="footer-list-item">Lundi-Vendredi: 06:00-22:00</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Tuesday 4PM: Till Mid Night</p>
+            <p class="footer-list-item">Samedi 05:00-00:00</p>
           </li>
 
           <li>
-            <p class="footer-list-item">Saturday: 10:00-16:00</p>
+            <p class="footer-list-item">Dimanche: 10:00-22:00</p>
           </li>
 
         </ul>
 
-      
-     
       </div>
-
     </div>
 
     <div class="footer-bottom">
       <div class="container">
         <p class="copyright-text">
-          &copy; 2024 Devellopeurs : <a href="#" class="copyright-link">Antonio - Matthieu - Angelo - Naly - Zo - Ando - Mahery - Tsanta - Rova - Joshua</a>
+          &copy; 2024 - Devellopeurs : <a href="#" class="copyright-link">Antonio - Matthieu - Angelo - Naly - Zo - Ando - Mahery - Tsanta - Rova - Joshua</a>
         </p>
       </div>
     </div>
@@ -386,12 +388,58 @@
             }).addTo(map);
 
             // Dictionnaire des quartiers avec leurs coordonnées
-            var districts = {
-                '20': [-18.9033, 47.5182],
-                '1': [-18.9137, 47.5252],
-                '32': [-18.98609417455635, 47.532829187957816]
-                // Ajoutez d'autres quartiers avec leurs coordonnées
-            };
+           var districts = {
+                '1': [-18.9083181,47.5262845],
+                '2': [-18.8978735,47.5255695],
+                '3': [-18.9242775,47.5287731],
+                '4': [-18.9159866,47.5657712],
+                '5': [-18.9275742,47.5130896],
+                '6': [-18.9292156,47.4981480],
+                '7': [-18.8986092,47.5200540],
+                '8': [-18.9037134,47.5293499],
+                '9': [-18.9174615,47.5313719],
+                '10': [-18.89448418947927,47.53698412925651],
+                '11': [-18.901680627902227,47.52448532473487],
+                '12': [-18.8958717,47.5384325],
+                '13': [-18.907098495007926,47.54324913024902],
+                '14': [-18.90901682721876,47.530953884124756],
+                '15': [-18.912961421892753, 47.52077161787855],
+                '16': [-18.9104394,47.5306336],
+                '17': [-18.918620207528782,47.524999695225425],
+                '18': [-18.9104247,47.5168708],
+                '19': [-18.9191141,47.5243646],
+                '20': [-18.9097086,47.5288741],
+                '21': [-18.90678942925861,47.52314691133188],
+                '22': [-18.93085143600485,47.52670472468013],
+                '23': [-18.9073725,47.5210871],
+                '24': [-18.95954527856256,47.52689838409424],
+                '25':[-18.91652310113871,47.518611337278706],
+                '26': [-18.91310272102047,47.51723804626308],
+                '27':[-18.90621927845529,47.507488166595785],
+                '28': [ -18.98646088259979,47.53251561668927],
+                '29': [-18.943350235590103, 47.528743743896484],
+                '30': [ -18.940184103694182, 47.52213478088379],
+                '31': [-18.996786490994886, 47.53537993995851],
+                '32': [-18.878676182424343,47.521705627441406],
+                '33': [-18.904415749692024,47.51896917237658],
+                '34': [-18.8867581,47.5212986],
+                '35': [ -18.875038705033933, 47.52220928086657],
+                '36': [ -18.87833793598639, 47.50934595328599],
+                '37': [-18.876036722911692,47.543463706970215],
+                '38': [-18.901065704812094, 47.545494647470306],
+                '39': [-18.892644321876908,47.529215812683105],
+                '40': [-18.9005783,47.5450308],
+                '41': [-18.8889, 47.5983],
+                '42': [-18.9032, 47.5546],
+                '43': [ -18.876222592072118,47.5250453192824],
+                '44': [-18.8711, 47.5401],
+                '45': [-18.8635, 47.5300],
+                '46': [-18.910285553366148, 47.5248384475708],
+                '47': [-18.92484855294493, 47.55489265323119],
+                '48': [-18.9115, 47.5378],
+                '49': [-18.91424188705639, 47.530543699347966],
+                '50': [ -18.918143239683832,  47.53097783327222]
+                };
             var currentMarker = null;
             // Gestionnaire de l'événement de changement de sélection
             var adresse_target = null;
@@ -415,6 +463,8 @@
                 currentMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
                 var url = $("#url").text();
                 var adresseResto = $("#adresse_resto").text();
+                $("#latitude").val(e.latlng.lat);
+                $("#longitude").val(e.latlng.lng);
 
 
                 $.ajax({
@@ -445,6 +495,13 @@
               console.log(infoElement);
               if (infoElement.style.display === "none" || infoElement.style.display === "") {
                 infoElement.style.display = "block";} else { infoElement.style.display = "none";}
+
+                 var prix_livraison =  $("#livraison_prix").text();
+                 if(prix_livraison== null || ""){
+                  prix_livraison = 0;
+                 }
+                  var total = parseInt($(".prix-sous-total").text()) + parseInt(prix_livraison);
+                  $("#total_payement").text(total);
               });         
     </script>
     <script>
@@ -459,12 +516,16 @@
             url: url ,
             data: formData,
             success: function(response) {
+              console.log(response);
               var result = JSON.parse(response);
-              if(result === "success") {
+              if(result.status === "success") {
                 alert("Votre commande sera livrée le plus tôt possible, à tout à l'heure.");
-                window.location.href = "<?php echo site_url('ClientController/PlatClientPage'); ?>";
+                window.location.href = "<?php echo site_url('ClientController'); ?>";
               } else {
-                alert("Erreur lors de la validation du formulaire.");
+                console.log(response);
+                 console.log(result.response);
+                 var errorMessages = result.response;
+                 alert(errorMessages);
               }
             },
             /*error: function(xhr, status, error) {

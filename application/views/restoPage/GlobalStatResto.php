@@ -5,12 +5,6 @@
         <nav>
             <form action="#">
                 <div class="form-input">
-                    <input type="search" placeholder="Search...">
-                    <button class="search-btn" type="submit">
-                        <span class="material-icons-sharp">
-                            troubleshoot
-                        </span>
-                    </button>
                 </div>
             </form>
             <input type="checkbox" id="theme-toggle" hidden>
@@ -21,9 +15,9 @@
                 </span>
                 <span class="count">0</span>
             </a>
-            <a href="#" class="profile">
-                <p><?=$current_resto["nom"]?></p>
-                <img src="<?php echo base_url()?>assets/images/Logo.png">
+            <a href="<?= site_url('RestoController/infoProfil')?>" class="profile">
+                <p><?=$profil["nom"]?></p>
+                <img src="<?php echo base_url()?>assets/images/<?=$profil['image'] ?>">
             </a>
         </nav>
 
@@ -53,18 +47,18 @@
                             <option value="0">choisir  année</option>
                             <option value="2024">2024</option>
                         </select>
-                        <button class="btn btn-primary" type="submit">voir</button>
+                        <button class="btn btn-primary" style="width: 5em; height: 3em; color: var(--white-clr); border-radius: 5px; background: var(--green-clr); cursor: pointer;" type="submit">voir</button>
                         </form>
                     </div>
             
         
             <div id="containerchart_1">
-                <h1 id="stat_annuel">statistique Annuel</h1>
+                <h1 id="stat_annuel">Statistique Annuel</h1>
                 <canvas id="chartannuel" width="400" height="150"></canvas>
             </div>
 
             <div id="containerchart_2" >
-                <h1 id="stat_mensuel" >statistique Mensuel</h1>
+                <h1 id="stat_mensuel" >Statistique Mensuel</h1>
                 <canvas id="chartmensuel" width="400" height="150"></canvas> 
             </div>
             
@@ -80,7 +74,7 @@
                 <div class="orders">
                     <div class="header">
                         <i class='bx bx-receipt'></i>
-                        <h3 style="text-align: center;">nombre de vente par plat</h3>
+                        <h3 style="text-align: center;">Nombre de vente par plat</h3>
                         <i class='bx bx-filter'></i>
                         <i class='bx bx-search'></i>
                     </div>
