@@ -249,9 +249,9 @@ INSERT INTO Info_resto (id_resto, nom, adresse, repere,description, heure_ouvert
 (9,'O zone',15,'Isoraka','ozone','10:00:00','20:00:00',-18.912212391314878,47.52065225505948,'ozone.jpeg');
 
 -- Insertion dans la table Livreur
-INSERT INTO Livreur (id,email, mot_de_pass) VALUES ('livreur1@gmail.com', 'livreur1');
-INSERT INTO Livreur (id,email, mot_de_pass) VALUES ('livreur3@gmail.com', 'livreur2');
-INSERT INTO Livreur (id,email, mot_de_pass) VALUES ('livreur2@gmail.com', 'livreur3');
+INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur1@gmail.com', 'livreur1');
+INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur3@gmail.com', 'livreur2');
+INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur2@gmail.com', 'livreur3');
 INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur4@gmail.com', 'livreur4');
 INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur5@gmail.com', 'livreur5');
 INSERT INTO Livreur (email, mot_de_pass) VALUES ('livreur6@gmail.com', 'livreur6');
